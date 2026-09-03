@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en" data-view="vet">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Semester Pay Planner</title>
+<meta name="description" content="Enter your classes; see, for each stretch of the term, whether you are above half time, whether you keep the in-person housing rate, and the monthly figure that follows — every rule cited where it is used.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap">
+<style>
+/* D2 DRAFTING TABLE — tokens verbatim from departments/design/DIRECTIONS.md (2026-08-21). Series: BW-07. */
+:root{
+  --canvas:#E9EDEF;--field:#FFFFFF;--ink:#16202B;--ink-muted:#5A6874;--line:#74828C;
+  --accent:#2B5CA8;--accent-quiet:#79868F;--signal:#B4412E;
+  --s1:6px;--s2:12px;--s3:18px;--s4:30px;--s5:48px;--s6:78px;--margin:96px;
+  --t-figure:30px;--t-title:26px;--t-head:18px;--t-body:16px;--t-label:12px;
+  --sans:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"Fira Code","Cascadia Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-family:var(--serif);font-size:var(--t-body);line-height:1.55;
+  padding:var(--s4) var(--s3) var(--s6) var(--margin);-webkit-font-smoothing:antialiased}
+.sheet{max-width:72ch;margin:0 auto}
+section{position:relative;margin-top:var(--s5);padding-top:var(--s3)}
+section:first-of-type{margin-top:var(--s4)}
+section::before{content:"";position:absolute;top:0;left:calc(var(--s2) * -1);right:0;height:1px;background:var(--accent)}
+section::after{content:"";position:absolute;top:calc(var(--s1) * -1);left:calc(var(--s2) * -1);width:1px;height:var(--s2);background:var(--accent)}
+section>.coord{position:absolute;top:calc(var(--s2) * -1);right:calc(100% + var(--s3));font-family:var(--mono);
+  font-size:var(--t-label);letter-spacing:.06em;color:var(--accent);white-space:nowrap}
+@media (max-width:720px){
+  body{padding:var(--s3) var(--s2) var(--s5) var(--s3)}
+  section>.coord{position:static;display:block;margin-bottom:var(--s1)}
+  section::before,section::after{left:0}
+}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-muted);margin-bottom:var(--s1);line-height:1.7}
+h1{font-family:var(--sans);font-weight:600;font-size:var(--t-title);line-height:1.1;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+h2{font-family:var(--sans);font-weight:600;font-size:var(--t-head);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s2);text-wrap:balance}
+h3{font-family:var(--sans);font-weight:600;font-size:var(--t-body);letter-spacing:.02em;margin-bottom:var(--s1)}
+p{margin-bottom:var(--s2)} p:last-child{margin-bottom:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.red{color:var(--signal)} .muted{color:var(--ink-muted)}
+.lead{font-size:18px;line-height:1.5}
+.note{margin-top:var(--s2);color:var(--ink-muted);font-size:14px}
+.cite{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--accent);white-space:nowrap;border-bottom:1px solid var(--accent-quiet);padding-bottom:1px;text-decoration:none}
+.cite:hover{border-bottom-color:var(--accent)}
+.stop{border-left:3px solid var(--signal);padding:var(--s2) var(--s3);background:var(--field);margin:var(--s2) 0}
+.stop b{color:var(--signal);font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em;font-size:14px}
+table{width:100%;border-collapse:collapse;margin-top:var(--s2);font-variant-numeric:tabular-nums}
+th{font-family:var(--mono);font-size:var(--t-label);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);
+  text-align:left;padding:var(--s1);border-bottom:1px solid var(--accent-quiet);line-height:1.6;vertical-align:bottom}
+td{padding:var(--s1);border-bottom:1px solid var(--line);vertical-align:top;font-size:14px;line-height:1.5}
+td.fig,th.fig{font-family:var(--mono);text-align:right;white-space:nowrap}
+.tablewrap{overflow-x:auto}
+.asof{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.04em;color:var(--ink);line-height:1.7;
+  margin-top:var(--s2);padding-top:var(--s1);border-top:1px solid var(--accent-quiet)}
+.asof.expired{color:var(--signal);border-top-color:var(--signal)}
+footer{margin-top:var(--s6);padding-top:var(--s2);border-top:1px solid var(--line);font-size:13px;color:var(--ink-muted);line-height:1.6}
+footer .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.04em;margin-top:var(--s2)}
+/* form — drafting-table fields: flat, ruled, labelled in mono */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s2) var(--s3)}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted)}
+.field input,.field select{font-family:var(--mono);font-size:15px;color:var(--ink);background:var(--field);border:1px solid var(--line);
+  border-radius:0;padding:var(--s1) var(--s2);min-height:38px;width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+.field select{font-size:14px;padding-right:var(--s3);text-overflow:ellipsis}
+.field{min-width:0}
+.field input[type=checkbox]{width:18px;height:18px;min-height:0}
+.hint{font-size:13px;color:var(--ink-muted);line-height:1.45}
+.hint b{color:var(--ink)}
+.req{color:var(--signal);font-family:var(--mono);font-size:11px;letter-spacing:.04em;white-space:nowrap}
+.rows{display:flex;flex-direction:column;gap:var(--s2);margin-top:var(--s2)}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:var(--s2);align-items:end;padding:var(--s2);background:var(--field);border:1px solid var(--line)}
+.row>*{min-width:0}
+.row.ses{grid-template-columns:repeat(3,minmax(0,1fr)) auto}
+.row.ses .field.name{grid-column:2/-1}
+.row.brk{grid-template-columns:repeat(3,minmax(0,1fr)) auto}
+.row.brk .field:first-child{grid-column:1/-1}
+.row.ses .del{grid-column:4;justify-self:end}
+.row .kindtag{grid-column:1/-1;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border-left:3px solid var(--accent);padding-left:var(--s1);line-height:1.4}
+.row.kind-first .kindtag{border-left-style:dotted}
+.row.kind-second .kindtag{border-left-style:dashed}
+.row.kind-other .kindtag{color:var(--ink-muted);border-left-color:var(--line)}
+.row.ses .field[data-gradonly]{grid-column:3/4}
+.row.cls{grid-template-columns:repeat(2,minmax(0,1fr))}
+.row.cls .field.campus{grid-column:1/-1}
+.row.cls .field.whatif{grid-column:1/2}
+.row.cls .del{grid-column:2;justify-self:end}
+.row.cls .field.whatif .chk{min-height:0}
+@media (max-width:720px){.row,.row.cls,.row.ses{grid-template-columns:1fr 1fr} .row.ses .field.name{grid-column:2/3} .row.ses .field[data-gradonly]{grid-column:1/-1} .row.ses .del{grid-column:2;justify-self:end} .row.cls .field.campus{grid-column:1/-1} .row.cls .field.whatif{grid-column:1/2} .row.cls .del{grid-column:2}}
+button{font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);
+  background:var(--field);border:1px solid var(--accent);border-radius:0;padding:var(--s1) var(--s2);min-height:38px;cursor:pointer}
+button.quiet{color:var(--ink-muted);border-color:var(--line)}
+button.del{color:var(--signal);border-color:var(--line);font-family:var(--mono);text-transform:none;min-width:38px}
+.preset{display:flex;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s1)}
+.preset button{font-size:12px;min-height:32px;padding:4px var(--s2)}
+.chk{display:flex;align-items:center;gap:var(--s1);font-family:var(--mono);font-size:12px;color:var(--ink-muted);min-height:38px}
+/* results */
+.period{background:var(--field);border:1px solid var(--line);padding:var(--s2) var(--s3);margin-top:var(--s2)}
+.period .hd{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--accent-quiet);padding-bottom:var(--s1);margin-bottom:var(--s2)}
+.period .when{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.04em;color:var(--ink-muted)}
+.period .wks{font-family:var(--mono);font-size:var(--t-label);color:var(--ink-muted)}
+.reg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--s2) var(--s3)}
+.fig{font-family:var(--mono);font-size:var(--t-figure);font-weight:500;line-height:1.1;letter-spacing:-.02em;display:block}
+.fig.small{font-size:22px}
+.fig.off{color:var(--ink-muted)} .fig.stop{color:var(--signal);border:none;padding:0;background:none;margin:0}
+.figlab{font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);display:block;margin-top:var(--s1);line-height:1.6}
+.why{font-size:14px;color:var(--ink-muted);margin-top:var(--s2);line-height:1.5}
+.why b{color:var(--ink)}
+.flag{border-left:3px solid var(--accent);padding:var(--s1) var(--s2);background:var(--field);margin-top:var(--s2);font-size:14px}
+.flag.warn{border-left-color:var(--signal)}
+.gap{font-family:var(--mono);font-size:12px;color:var(--ink-muted);padding:var(--s1) 0;letter-spacing:.03em}
+dl.rules{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:var(--s1) var(--s3)}
+dl.rules dd{min-width:0;overflow-wrap:anywhere}
+dl.rules .cite,.why .cite,.hint .cite{white-space:normal;overflow-wrap:anywhere}
+@media (max-width:720px){dl.rules{grid-template-columns:minmax(0,1fr)} dl.rules dt{white-space:normal}}
+dl.rules dt{font-family:var(--mono);font-size:var(--t-label);color:var(--accent);letter-spacing:.04em;padding-top:3px;white-space:nowrap}
+dl.rules dd{font-size:15px;line-height:1.5}
+@media (max-width:720px){dl.rules{grid-template-columns:1fr}dl.rules dt{padding-top:var(--s1)}}
+[hidden]{display:none!important}
+@media print{
+  html,body{background:#fff}
+  body{padding:12mm 14mm 14mm 26mm;font-size:10.5pt;color:#000}
+  a{color:inherit} .cite{color:#000;border-bottom-color:#999}
+  section{break-inside:avoid} .noprint,button{display:none!important}
+  .row,.period,.stop,.flag{border-color:#999}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ---- three layers on one page: the answer (veteran), the why (one tap), the role view (SCO / counselor) ---- */
+.roles{display:flex;gap:var(--s1);flex-wrap:wrap;margin-top:var(--s2)}
+.roles button{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);background:var(--field);color:var(--ink-muted);padding:var(--s1) var(--s2);cursor:pointer}
+.roles button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);box-shadow:inset 0 -2px 0 var(--accent)}
+.roles button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rolenote{font-family:var(--mono);font-size:var(--t-label);color:var(--ink-muted);margin-top:var(--s1);letter-spacing:.03em}
+html[data-view="vet"] .hint,html[data-view="vet"] .lead-long,html[data-view="vet"] header .asof,html[data-view="vet"] .figlab-cite,html[data-view="vet"] .sco-only{display:none}
+html[data-view="vet"] .field label{font-size:15px}
+.prefill{display:block;margin-top:var(--s1);font-family:var(--mono);font-size:11px;line-height:1.6;letter-spacing:.03em;color:var(--accent);border:1px dashed var(--accent-quiet);padding:3px var(--s1);max-width:100%}
+@media (max-width:480px){.grid{grid-template-columns:1fr} .row{grid-template-columns:1fr}}
+html[data-view="vet"] .rolenote{font-family:var(--serif);font-size:14px;letter-spacing:0;color:var(--ink-muted)}
+.prefill b{font-family:var(--mono);font-weight:500}
+.prefill button{font:inherit;color:var(--signal);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.prefill:empty{display:none}
+details.whyd{margin-top:var(--s2);border-top:1px solid var(--line);padding-top:var(--s1)}
+details.whyd>summary{cursor:pointer;font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.02em;color:var(--accent);list-style:none;display:flex;align-items:center;gap:var(--s1)}
+details.whyd>summary::-webkit-details-marker{display:none}
+details.whyd>summary::before{content:"+";font-family:var(--mono);font-size:15px;width:1.2em;display:inline-block}
+details[open].whyd>summary::before{content:"−"}
+details.whyd>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+details#rulesD>summary{cursor:pointer;font-family:var(--sans);font-weight:600;font-size:var(--t-head);text-transform:uppercase;letter-spacing:.05em;list-style:none}
+details#rulesD>summary::-webkit-details-marker{display:none}
+details#rulesD>summary::after{content:" — tap to open";font-size:12px;text-transform:none;letter-spacing:.02em;color:var(--ink-muted);font-weight:400}
+details#rulesD[open]>summary::after{content:" — tap to close"}
+.stepnum{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.06em;color:var(--accent)}
+.period .answer{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s1) var(--s3);margin-top:var(--s2)}
+.period .answer .fig{font-size:34px}
+.period .answer .figlab{max-width:38ch}
+#printSummary{display:none}
+@media print{
+  .roles,.rolenote,.noprint,#secC>details>summary::after{display:none!important}
+  #printSummary{display:block;font-family:var(--mono);font-size:9pt;line-height:1.5;margin:6pt 0 10pt;border:1px solid #999;padding:6pt}
+  #secA .grid,#secB .rows,#secB .preset,#secB h3,#secB .hint,#secB #whatif{display:none!important}
+  details.whyd{display:block} details.whyd>summary{display:none} details.whyd:not([open])>*:not(summary){display:block}
+  details#rulesD:not([open])>*:not(summary){display:none}
+  .period{break-inside:avoid}
+}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="sheet">
+<header>
+  <div class="eyebrow">BW-07 · Post-9/11 GI Bill and VR&amp;E · planning a term at ODU</div>
+  <h1>Semester Pay Planner</h1>
+  <div class="roles noprint" role="group" aria-label="Who is reading"><button type="button" data-view="vet" aria-pressed="true">Veteran · just the number</button><button type="button" data-view="sco" aria-pressed="false">Certifying official · the rules</button><button type="button" data-view="vrc" aria-pressed="false">Counselor · Chapter 31</button></div>
+  <p class="rolenote noprint" id="roleNote">Veteran view: your benefit, your classes, the monthly rate. ODU's usual values are offered one tap away, never filled in for you. Every number has "where this comes from" one tap away; the certifying-official view opens all of it.</p>
+  <p class="lead" style="margin-top:var(--s2)">Pick your benefit, tick your sessions, add your classes. For each stretch of the term you get the <b>full-month rate</b> — a rate, not your deposit: VA pays at month end and prorates a partial month.</p>
+  <p class="lead lead-long" style="margin-top:var(--s2)">Enter your classes. For each stretch of the term you see whether you are above half time, whether a class in residence keeps you on the ZIP-code housing rate (the certifying official decides how a class is certified), and the <b>full-month rate</b> that follows. <b>It is a rate, not your deposit:</b> VA pays at month end and prorates any month you are enrolled for only part of. Every rule is cited where it is used. Every dollar carries the date it is good until.</p>
+  <div class="asof" id="asofTop">
+    Housing figures: national average <span class="mono">$2,522</span>, online-only maximum <span class="mono">$1,261</span> — effective <span class="mono">2026-08-01</span> to <span class="mono">2027-07-31</span>, VA rates page updated 2026-07-31.
+    Chapter 31 subsistence table — effective <span class="mono">2025-10-01</span>, superseded <span class="mono">2026-10-01</span>.
+    <span id="expiryLine"></span>
+  </div>
+  <div class="asof">Definitions of "distance learning" and "resident learning" are under a pending VA rule (RIN 2900-AQ89, proposed 2025-09-03, comments closed 2025-11-03). As checked 2026-09-02 no final rule had issued. Re-check by <span class="mono" id="recheck">2026-12-01</span>; if a final rule has issued, the in-person rule on this page may have moved.</div>
+</header>
+
+<noscript><div class="stop" style="margin-top:var(--s3)"><b>Scripting is off.</b> The planner needs it to calculate. The rules it applies are written out in plain language in section C below and stand on their own.</div></noscript>
+
+<section id="secA">
+  <span class="coord">A · YOU</span>
+  <h2><span class="stepnum">STEP 1</span> Your benefit, and you</h2>
+  <div class="grid">
+    <div class="field">
+      <label for="chapter">Benefit you are using</label>
+      <select id="chapter">
+        <option value="" selected>— choose your benefit —</option>
+        <option value="33">Post-9/11 GI Bill or Fry Scholarship — Chapter 33</option>
+        <option value="31s">VR&amp;E, Chapter 31 — standard subsistence allowance</option>
+        <option value="31p">VR&amp;E, Chapter 31 — Post-9/11 rate elected</option>
+        <option value="other">Something else (Chapter 30, 35, 1606…)</option>
+      </select>
+      <div class="hint">It is on your Certificate of Eligibility or award letter. Chapter 31 students: if you signed VA Form 28-0987 to take the Post-9/11 rate, choose the third option; if you are not sure, your VA counselor knows.</div>
+    </div>
+    <div class="field">
+      <label for="level">Undergraduate or graduate</label>
+      <select id="level"><option value="" selected>— choose —</option><option value="ug">Undergraduate</option><option value="grad">Graduate</option></select>
+      <div class="hint">Graduate short sessions are measured differently: since 2021 VA no longer converts graduate credits — the school reports an <b>adjusted full-time modifier</b> for the term's length and VA divides your credits by it — <a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/Grad_Reporting_Proc_Advisory.pdf">VA Procedural Advisory, Chapter 33 Graduate Training, 2021-08-13</a>; the same procedure applies to Chapter 31 for terms from 2021-09-01 (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § G.4, updated 2025-07-30</a>). This page reproduces VA's chart; your school's own published modifier, if it has one, governs.</div>
+    </div>
+    <div class="field">
+      <label for="ftc">Credits your school calls full time</label>
+      <input type="number" id="ftc" min="1" max="24" step="1" inputmode="numeric" placeholder="enter it — ODU fall/spring: 12 undergraduate, 9 graduate; summer: 9 / 6">
+      <div class="prefill" id="ftcChip"></div>
+      <div class="hint"><b>ODU: 12 for undergraduates, 9 for graduate students</b> (ODU catalog). VA's own default is 14 unless the school certifies 12 or 13 as full-time tuition — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.9750">38 CFR 21.9750(c)</a>. If your program differs, the School Certifying Official has the number.</div>
+    </div>
+    <div class="field">
+      <label for="unit">Credit unit your school grants</label>
+      <select id="unit"><option value="" selected>— choose —</option><option value="18">Semester hours (ODU grants these)</option><option value="12">Quarter hours</option></select>
+      <div class="prefill" id="unitChip"></div>
+      <div class="hint">ODU grants semester hours. A short session converts by <b>× 18</b> for semester hours or <b>× 12</b> for quarter hours, then ÷ whole weeks — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.4272">38 CFR 21.4272(g)(1)</a>. Wrong unit, wrong band.</div>
+    </div>
+    <div class="field" id="tierField">
+      <label for="tier">Your Post-9/11 benefit level</label>
+      <select id="tier">
+        <option value="" selected>— choose your level —</option>
+        <option value="1">100% — 36+ months, or Purple Heart, or 30+ days and a disability discharge</option>
+        <option value="0.9">90% — 30 to 35 months</option>
+        <option value="0.8">80% — 24 to 29 months</option>
+        <option value="0.7">70% — 18 to 23 months</option>
+        <option value="0.6">60% — 6 to 17 months</option>
+        <option value="0.5">50% — 90 days to 5 months</option>
+      </select>
+      <div class="hint">On your Certificate of Eligibility. VA pays "a percentage of that rate (called a 'prorated payment')" by this tier — <a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov rates page, 2026-07-31</a>. Fry Scholarship recipients are paid at 100%.</div>
+    </div>
+    <div class="field" id="adField">
+      <label for="activeDuty">Active duty for the whole of these dates?</label>
+      <select id="activeDuty"><option value="" selected>— choose —</option><option value="no">No</option><option value="yes">Yes, for all of these dates — on active duty, or a spouse using transferred benefits while the Veteran is on active duty</option><option value="changes">It changes during these dates — separating, or entering active duty</option></select>
+      <div class="hint">Post-9/11: VA lists who cannot receive the housing allowance: "You're on active duty", "You're a spouse using transferred benefits while the Veteran is on active duty", "You're in school half time or less than half time" — <a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov rates page, 2026-07-31</a>. Chapter 31: "Service members, who are on active duty and who have been authorized to participate in training under the Chapter 31 program, are not entitled to receive subsistence allowance" — <a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § F.3</a>. Tuition and fees are still paid; the monthly figure is not.</div>
+    </div>
+    <div class="field" id="finalTermField">
+      <label for="finalTerm">Is this your last term — the classes you need to finish your program?</label>
+      <select id="finalTerm"><option value="" selected>— choose —</option><option value="no">No</option><option value="yes">Yes — this term completes my program</option><option value="unsure">Not sure</option></select>
+      <div class="hint">Since 2025-01-01 the law treats a Post-9/11 (or STEM) student in the last term as full time for the housing allowance, if the rate of pursuit is above 50%: VA's handbook — Section 208 of the Dole Act "allows Post-9/11 GI Bill (chapter 33) and STEM students at institutions of higher learning (IHL)… to receive full-time Monthly Housing Allowance (MHA) during their last term, provided they initially enroll at, or round out to, more than 50% Rate of Pursuit (RoP)"; the SCO "checks the 'Rounding out last term' box"; "The 'last term' designation can be indicated only once for a specific program and facility combination" (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000149088/School-Certifying-Official-Handbook-On-line">SCO Handbook (On-line), Dole Rounding Out, Revision 8.00, 2026-08-13</a>; <a class="cite" href="https://uscode.house.gov/view.xhtml?req=(title:38%20section:3680%20edition:prelim)">38 U.S.C. 3680(a)(3)</a>). At 50% or less nothing changes — no housing allowance — unless you add a course from your program to get above half time. "Not sure" shows no figure: the SCO knows whether this term completes the program.</div>
+    </div>
+    <div class="field" id="firstUseField">
+      <label for="firstUse">First used Post-9/11 GI Bill benefits</label>
+      <select id="firstUse"><option value="" selected>— choose —</option><option value="after">On or after January 1, 2018</option><option value="before">Before January 1, 2018</option></select>
+      <div class="hint">VA's rates page states its online and foreign maximums for use "on or after January 1, 2018"; students who first used the benefit before that date can be on an earlier housing basis, which VA's GI Bill Comparison Tool lists separately. If that is you, this page shows no housing figure — ask the certifying office which basis VA has you on. (The pre-2018 basis itself was not re-read at the issuer this round; the refusal is the safe side.)</div>
+    </div>
+    <div class="field" id="depsField" hidden>
+      <label for="deps">Dependents (Chapter 31 standard rate only)</label>
+      <input type="number" id="deps" min="0" max="12" step="1" inputmode="numeric" placeholder="enter 0 if none">
+      <div class="hint">Your dependents as VA has them on file — <b>enter 0 if none; left blank, no standard-rate figure is shown</b>. This changes the standard Chapter 31 rate and nothing else — the Post-9/11 rate is not adjusted for dependents.</div>
+    </div>
+    <div class="field" id="bahField">
+      <label for="bah">Monthly housing figure for the school's ZIP code <span class="req">· required for an in-person figure</span></label>
+      <input type="number" id="bah" min="0" step="1" inputmode="numeric" placeholder="no figure until you enter one">
+      <label for="bahAsOf" style="margin-top:var(--s1)">Date you read that figure <span class="req">· required with it</span></label>
+      <input type="date" id="bahAsOf">
+      <label for="bahSrc" style="margin-top:var(--s1)">Where you read it <span class="req">· required with it</span></label>
+      <select id="bahSrc"><option value="" selected>— choose —</option><option value="tool">VA's GI Bill Comparison Tool (the figure VA pays this year)</option><option value="other">Military BAH calculator, a letter, or somewhere else</option></select>
+      <div class="prefill" id="bahChip"></div>
+      <div class="hint">The monthly housing figure VA pays for <b>the campus where you attend most of your in-person classes</b> — VA: "The location where you physically attend most of your classes. We call this 'location-based housing allowance.'" (<a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov rates page</a>) — the Basic Allowance for Housing for an <b>E-5 with dependents</b> at that ZIP code. The result names the campus the figure must be for; if your in-person classes are split across ODU locations with no majority, no figure is shown. <b>Look the school up in VA's own <a class="cite" href="https://www.va.gov/education/gi-bill-comparison-tool/">GI Bill Comparison Tool</a></b>, which shows the housing figure VA uses for a full-time in-person student at the 100% tier, or ask the certifying office. (For the Post-9/11 GI Bill VA draws the figure from the Department of Defense housing table and locks it each August 1; the military calculator shows the current-year table, which is not always the figure VA is paying. For Chapter 31's elected Post-9/11 rate the figure is instead "adjusted each year, effective January 1st" — <a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § F.2</a>.) <b>Whole dollars.</b> Leave it blank and this page shows no in-person figure rather than a guess. <b>VA pays the figure it locked on August 1 for the whole academic year</b>, while the military calculator moves to a new table every January 1 — so a figure read in spring from the calculator can be the wrong year's. From January 1 on, this page uses a figure only if it came from VA's own Comparison Tool; from any other source it shows UNKNOWN rather than guess.</div>
+    </div>
+  </div>
+  <div class="flag warn" id="otherFlag" hidden><b>This planner measures Chapter 33 and Chapter 31 only.</b> For Chapter 30, 35 and 1606 the monthly rate is set by the training-time band your School Certifying Official certifies (full, ¾, ½), not by a percentage. The Which-Benefit sheet lists those rates with their dates; the SCO confirms the band.</div>
+</section>
+
+<section id="secB">
+  <span class="coord">B · TERM</span>
+  <h2><span class="stepnum">STEP 2</span> Your term: sessions and classes</h2>
+  <h3>Sessions</h3>
+  <p class="hint">A session is a stretch of dates classes run in. A full semester is one session; an 8-week class is another. Add every session one of your classes uses. <b>Graduate students:</b> for a session that is not standard length, VA divides your credits by the full-time modifier the SCO certifies for that session — the school's own published modifier if it has one, otherwise a value the SCO determines from VA's chart (VA Procedural Advisory, 2021-08-13: "Schools without individually defined full time modifiers… will be required to determine an adjusted FT modifier"). Enter the modifier the SCO gives you in the session row; without it the page shows no graduate figure for that stretch, and only says what VA's chart would give a school with no modifier of its own. <b>First day</b> is the first day of classes; <b>term end</b> is the date the school certifies as the end of the term — on ODU's calendar that is the "term ends" date after exams, not the last day of lectures. Both dates are inclusive, and they decide whether the session counts as standard length.</p>
+  <div class="preset noprint">
+    <button type="button" data-preset="f26full">ODU Fall 2026 full term · Aug 24 – Dec 11</button>
+    <button type="button" data-preset="f26a">Fall 2026 first 8 weeks · Aug 24 – Oct 16</button>
+    <button type="button" data-preset="f26b">Fall 2026 second 8 weeks · Oct 19 – Dec 11</button>
+    <button type="button" data-preset="s27full">ODU Spring 2027 full term · Jan 11 – May 7</button>
+    <button type="button" class="quiet" data-preset="blank">Blank session</button>
+  </div>
+  <p class="hint" id="presetNote">Preset dates are ODU's published Fall 2026 and Spring 2027 calendars (read 2026-09-02; the presets retire 2027-05-08 when that term ends). ODUGlobal and 8-week deadlines differ from the campus full-term column — check the calendar for your own cohort.</p>
+  <div class="rows" id="sessions"></div>
+
+  <h3 style="margin-top:var(--s4)" class="sco-only">Breaks of 7 days or more</h3>
+  <p class="hint">Only breaks <b>inside a nonstandard session</b> (shorter than the standard length) change anything: VA removes a vacation of 7 days or more before counting weeks — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.4272">38 CFR 21.4272(g)(2)</a>. A standard-length term is not affected by its breaks. <b>Enter each break under the session it belongs to</b>; a break counts only against that session, overlapping entries are merged, and a 6-day break is ignored on purpose.</p>
+  <div class="rows sco-only" id="breaks"></div>
+  <div class="noprint sco-only" style="margin-top:var(--s1)"><button type="button" class="quiet" id="addBreak">Add a break</button></div>
+
+  <h3 style="margin-top:var(--s4)">Classes</h3>
+  <p class="hint"><b>Credit hours</b> are the credits on your registration for the class, not billing hours or contact hours. <b>How taken</b> decides the housing rate. VA certifies a hybrid class — any required on-campus meeting during the term, including in-person midterms or finals, or an exam proctored on campus by university staff — as <b>in residence</b>. A class you watch live from off campus is distance learning; one you watch live <em>on</em> campus with the class is in residence. A single in-person meeting <em>before</em> the term starts does not count. Source: VA Education Service, Hybrid Training Updates, Sept 2019. <b>Your School Certifying Official makes the call on the certification</b> — if a class is borderline, ask before you count on it.</p>
+  <div class="rows" id="classes"></div>
+  <datalist id="campusList"><option value="Main campus"><option value="Regional center"><option value="Other location"></datalist>
+  <div class="noprint" style="margin-top:var(--s1)"><button type="button" id="addClass">Add a class</button></div>
+  <div class="flag warn" id="whatif" hidden></div>
+</section>
+
+<section id="secR">
+  <span class="coord">R · RESULT</span>
+  <h2><span class="stepnum">STEP 3</span> What you would get, stretch by stretch</h2>
+  <div id="printSummary"></div>
+  <p class="hint">Three things can appear for a stretch: a <b>dollar rate</b> (the full-month rate VA would pay for a whole month at this enrollment), <b>$0 / NOT PAYABLE</b> (the rule says nothing is payable at this enrollment), or <b>UNKNOWN</b> (an input is missing or stale — the page will not guess). They are never the same thing. VA: "If your enrollment starts after the first of the month or ends before the last day of the month, we'll pay you a prorated housing payment for the part of the month you're enrolled in classes." — <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, 2026-08-05</a>. Debts VA is collecting and enrollment changes after the award also reduce a payment.</p>
+  <div id="results"></div>
+  <div class="note" id="resultNote"></div>
+</section>
+
+<section id="secC">
+  <span class="coord">C · RULES</span>
+  <details id="rulesD"><summary>The rules behind every number, in order</summary>
+  <dl class="rules">
+    <dt>1 · Rate of pursuit</dt>
+    <dd>Your credits divided by the credits your school calls full time, "rounded to the nearest hundredth", never above 100% — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.9505">38 CFR 21.9505</a>. Classes in overlapping sessions are combined for the period they overlap — VA's current <a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000149088/School-Certifying-Official-Handbook-On-line">School Certifying Official Handbook (On-line), Revision 8.00, 2026-08-13</a> (KnowVA article 554400000149088, updated 2026-09-01, read 2026-09-02 in a browser — the page is script-rendered): "When enrollment periods overlap, credit hour equivalents for the period of overlap are combined"; and in its overlapping-terms section, "If a student has a period during which their individual or combined RoP drops to 50% or less, no MHA is payable during that period." The same handbook: "SCOs should always report actual credit hours to VA, not equivalent credit hours (ECH)" — VA makes the conversion; this page only previews it.</dd>
+    <dt>2 · Short sessions</dt>
+    <dd><b>Undergraduate:</b> a session outside the standard length (15–19 weeks for semester hours, 10–13 for quarter hours — the windows VA prints in its own <a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/Grad_Reporting_Proc_Advisory.pdf">2021 advisory charts</a>) is converted first: credits × 18 (semester hours) or × 12 (quarter hours) ÷ whole weeks, fraction dropped; weeks are days ÷ 7 with a remainder of 3 or fewer disregarded and 4 or more counted as a week — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.4272">38 CFR 21.4272(g)</a>. VA makes this conversion, not the school. <b>Graduate:</b> no conversion since 2021 — "VA will no longer convert the credit certified to an equivalent credit hour (ECH)"; the SCO reports a full-time modifier for the term — the school's own if it has one, otherwise an adjusted modifier the SCO determines from VA's chart — and rate of pursuit is credits ÷ that certified modifier; this page uses the modifier you enter from the SCO and computes nothing without it — <a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/Grad_Reporting_Proc_Advisory.pdf">VA Procedural Advisory, 2021-08-13</a>; extended to Chapter 31 by the <a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § G.4</a>.</dd>
+    <dt>3 · More than half time</dt>
+    <dd>Housing allowance is paid only for a month "on more than a half-time basis" — <a class="cite" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title38-section3313">38 U.S.C. 3313(c)(1)(B)(i)</a>. VA: "your rate of pursuit must be more than 50%." Exactly 50% is not more than half. <b>Last term:</b> since 2025-01-01, a Chapter 33 or STEM student above half time in the last term of the program is paid the <em>full-time</em> housing allowance — VA's handbook: Section 208 of the Dole Act "allows Post-9/11 GI Bill (chapter 33) and STEM students… to receive full-time Monthly Housing Allowance (MHA) during their last term, provided they initially enroll at, or round out to, more than 50% Rate of Pursuit (RoP)"; "Under Dole Rounding Out, students' entitlement is charged based on the actual number of credits they are enrolled in, not on the full-time housing payment they receive"; the SCO "checks the 'Rounding out last term' box"; once "for a specific program and facility combination" (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000149088/School-Certifying-Official-Handbook-On-line">SCO Handbook (On-line), Dole Rounding Out, Revision 8.00, 2026-08-13</a>; <a class="cite" href="https://uscode.house.gov/view.xhtml?req=(title:38%20section:3680%20edition:prelim)">38 U.S.C. 3680(a)(3)</a>; <a class="cite" href="https://www.benefits.va.gov/GIBILL/office_hours/february-education-office-hours-fiscal-year-2025-questions-and-answers.asp">VA Education office hours Q&amp;A, FY2025 February, updated 2025-06-04</a>). This page applies it only when you say this is your last term; the SCO's box on the certification is what pays it.</dd>
+    <dt>4 · The in-person rule</dt>
+    <dd>Entirely online, the stipend is "50 percent" of the national-average amount — <a class="cite" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title38-section3313">38 U.S.C. 3313(c)(1)(B)(iii)</a>; the location-based rate: "An individual, other than one on active duty, who is pursuing a program of education with at least one in-residence course and who has a rate of pursuit of greater than 50 percent at an IHL located in a State, may receive a monthly housing allowance" — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.9641">38 CFR 21.9641(c)(1)</a> (the current section; 21.9640 covers periods before August 1, 2011). VA's own words are conditional: with at least one in-person course you "may be eligible" for the location rate — the School Certifying Official's certification of that class as in residence is what decides it. This page shows the location-rate figure only as <b>the figure you would be eligible for if the class is certified in residence</b>; it awards nothing.</dd>
+    <dt>5 · The multiplier</dt>
+    <dd>The housing figure is multiplied by your rate of pursuit "rounded to the nearest multiple of 10" — same statute. VA's own example: 9 of 12 credits is 75%, paid as 80%. Then your benefit tier applies. Figures here are shown to the cent from whole-dollar inputs; VA's own final rounding of the payment is not published on the pages cited.</dd>
+    <dt>6 · Months and breaks</dt>
+    <dd>Paid "at the end of each month"; a partial month is prorated — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.9641">38 CFR 21.9641(c)</a> — by a day-count method this page does not reproduce, so it shows monthly rates, not partial months. No housing allowance between terms: "In 2011, Congress passed a law that prohibits VA from paying MHA during school breaks" (va.gov, 2024-04-11) — on this page a gap between sessions is shown as a non-payable stretch. A vacation <em>inside</em> a session (spring break) is different: you are still enrolled, and this page uses it only to count weeks under 21.4272(g)(2); whether VA treats a particular within-term break as a break from school is the SCO's certification, not this page's.</dd>
+    <dt>7 · Chapter 31</dt>
+    <dd>Training time comes from the printed table at <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.4270">38 CFR 21.4270(c)</a> — 14 hours full time, 10–13 three-quarter, 7–9 half — and from its footnote where a school certifies 13 (¾ = 10–12) or 12 hours ("9 through 11 hours as 3/4 time, 6 through 8 hours as 1/2 time"); graduate standards are "as certified by a responsible official of the school", proportional. Active-duty service members in Chapter 31 training are not paid subsistence — "Service members, who are on active duty and who have been authorized to participate in training under the Chapter 31 program, are not entitled to receive subsistence allowance" (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § F.3</a>); the page asks and refuses accordingly. Standard subsistence is the FY2026 table; the elected Post-9/11 rate is entire / ¾ / ½ of the ZIP figure, or ½ / ⅜ / ¼ of the national average when solely online — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.260">38 CFR 21.260(c)</a>, footnote 5 — and for Chapter 31 the ZIP is that of the "institution, agency, or employer providing the rehabilitation program", the parent institution if you attend more than one (not Chapter 33's majority-of-classes rule). Below half time subsistence "is not payable" — <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.314">38 CFR 21.314</a> — with two exceptions VA decides, not you: reduced work tolerance and quarter-time under an extended evaluation plan. Ask your counselor.</dd>
+    <dt>8 · Dropping a class</dt>
+    <dd>A class dropped <em>before its first day</em> was never attended; the school removes it — and if it had already been certified or paid on, the SCO reviews for a debt (VA lists "Student withdrew on or before the first day of term" among the causes of a school debt — <a class="cite" href="https://benefits.va.gov/gibill/resources/education_resources/debt_info.asp">VA, GI Bill Overpayments and Debts, updated 2026-05-18</a>). A class dropped <em>after it has started</em> — even inside the school's add/drop period — is a reduction from the drop date, not "never enrolled": VA to certifying officials, "The charges for the original credit load must be reported (using the 'Amend' function) even if the student reduces during the drop/add period. SCOs will follow with an adjusted certification that includes the reduced credits" — "The law entitles the student to a prorated T&amp;Fs payment" (<a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/December2021_Office_Hours_Presentation.pdf">VA Education Service, December 2021 office hours, slide 20</a>); "If this reduction happened during drop/add, the 6-credit hour does not apply"; "A drop that occurs after the 1st day of the term doesn't create any books and supplies debt, but there may be housing debt, dependent on whether VA makes the reduction in credit hours before the affected housing payment is released" (<a class="cite" href="https://benefits.va.gov/GIBILL/docs/presentations/August2021_Office_Hours_Presentation.pdf">VA Education Service, August 2021 office hours, slide 35</a>). The housing rate is recomputed from the drop date; the SCO determines the reporting (<a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.4200">38 CFR 21.4200(l)</a>, 21.9636(b)). After the add/drop period, a withdrawal with a non-punitive grade sends benefits back to "the first day of the term" unless there are mitigating circumstances, and VA "automatically grants mitigating circumstances for up to 6 credits the first time, and only the first time" (VA, Changes or Withdrawal of Classes, 2021). Money already paid becomes a debt. <b>ODU Fall 2026 full term: add/drop ends Sep 2, 2026; last day to withdraw Nov 13, 2026. Spring 2027: Jan 20 and Apr 9, 2027.</b> Talk to the SCO before you drop, not after.</dd>
+  </dl>
+  </details>
+</section>
+
+<footer>
+  <p><strong>Not an official VA document and not a VA determination.</strong> It applies published rules to what you type. Your School Certifying Official's certification and VA's award govern; where this page and they disagree, they win. Your VR&amp;E counselor governs anything Chapter 31. Nothing you enter is stored or sent anywhere.</p>
+  <p>Companion sheet in this kit: <em>Which Benefit Am I On</em> (the chapters compared, and who to ask — <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/</a>, published 2026-09-02). This page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>.</p>
+  <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/vetkit/planner/">ferrelldevin.github.io/vetkit/planner/</a> — the same page, hosted for sharing; this copy is the review copy.</p>
+<p class="stamp">BW-07 Semester Pay Planner · revision 25 · prepared 2026-09-02 · &copy; 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id);};
+
+  // GATE-A:CORE START
+  // Every constant here can be superseded, so every constant carries asOf and nextChange (GATES.md A2)
+  // and the page checks the clock against nextChange at runtime (A3).
+  var RATES={
+    // va.gov/education/benefit-rates/post-9-11-gi-bill-rates/ — "Last updated: July 31, 2026";
+    // "Effective August 1, 2026, to July 31, 2027." National average $2,522; online-only "up to $1,261".
+    // nextChange is VA's annual cadence (1 Aug), not a date VA has published for 2027 — stated as such.
+    nat:{asOf:"2026-08-01",nextChange:"2027-08-01",avg:2522,onlineMax:1261},
+    // Chapter 31's elected Post-9/11 subsistence allowance follows the DoD table on a calendar-year cadence —
+    // VR&E SCO Handbook § F.2: "adjusted each year, effective January 1st". Its national-average figure for the
+    // online-only fraction is DoD's calendar-year average, which this page does not carry: that path is UNKNOWN.
+    p911ch31:{asOf:"2026-01-01",nextChange:"2027-01-01"},
+    // benefits.va.gov/vocrehab/vrerates26.asp — FY2026 CH31SA, effective 2025-10-01, updated each 1 Oct
+    // (M28C.V.B.7 §7.05). All three rows (full, ¾, ½ — every dependents column) re-read at the issuer
+    // 2026-09-02 after the reviewer flagged the ¾/½ rows as inherited from BW-02; they match to the cent.
+    ch31:{asOf:"2025-10-01",nextChange:"2026-10-01",
+      full:{base:812.84,one:1008.24,two:1188.15,add:86.58},
+      three:{base:610.76,one:757.28,two:888.32,add:66.60},
+      half:{base:408.66,one:506.32,two:595.16,add:44.42}}
+  };
+  // Regulatory constants below (standard-term windows, 21.4270(c) bands, 21.260(c) fractions, ×18/×12) were read at the
+  // issuer on RULES.asOf. They have no scheduled change, but VA's pending rule RIN 2900-AQ89 may move the resident /
+  // distance definitions: after RULES.recheck the money paths that fork on that distinction refuse until re-verified.
+  var RULES={asOf:"2026-09-02",nextChange:"unscheduled — re-read each round",recheck:"2026-12-01"};
+  // 38 CFR 21.260(c) — Post-9/11 subsistence allowance for Chapter 31, by training time.
+  // Institutional (any local course): entire / 3/4 / 1/2 of ZIP BAH. Solely distance: 1/2, 3/8, 1/4 of national average.
+  var P911={full:{res:1,dist:0.5},three:{res:0.75,dist:0.375},half:{res:0.5,dist:0.25}};
+
+  function d(s){ var p=String(s||"").split("-"); if(p.length!==3) return null;
+    var t=Date.UTC(+p[0],+p[1]-1,+p[2]); return isNaN(t)?null:t; }
+  function days(a,b){ return Math.round((b-a)/86400000)+1; }                       // inclusive
+  // 38 CFR 21.4272(g)(2): divide by 7; disregard a remainder of 3 days or less; 4 or more is a week
+  function weeksOf(a,b){ var n=days(a,b); var w=Math.floor(n/7), r=n%7; return r>=4?w+1:w; }
+  function money(n){ return "$"+n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,","); }
+  function expired(nextChange){ var p=String(nextChange).split("-"); return Date.now()>=Date.UTC(+p[0],+p[1]-1,+p[2]); }
+
+  var breaks=[];
+  // 38 CFR 21.4272(g)(2)(i): subtract "any vacation period of 7 days or more" before dividing by 7.
+  // A break belongs to ONE session (sesId); overlapping entries are merged so nothing is subtracted twice.
+  function breakDaysInside(a,b,sesId){
+    var iv=[];
+    breaks.forEach(function(v){
+      if(sesId!==undefined && v.ses!==sesId) return;
+      var x=d(v.start), y=d(v.end);
+      if(x===null||y===null||y<x) return;
+      if(days(x,y)<7) return;
+      var lo=Math.max(a,x), hi=Math.min(b,y);
+      if(hi>=lo) iv.push([lo,hi]);
+    });
+    iv.sort(function(p,q){return p[0]-q[0];});
+    var n=0, cur=null;
+    iv.forEach(function(p){
+      if(cur===null){ cur=p.slice(); return; }
+      if(p[0]<=cur[1]+86400000){ if(p[1]>cur[1]) cur[1]=p[1]; }
+      else { n+=days(cur[0],cur[1]); cur=p.slice(); }
+    });
+    if(cur!==null) n+=days(cur[0],cur[1]);
+    return n;
+  }
+  // Equivalent credit hours for a session — 38 CFR 21.4272(g)(1): credits × 18 ÷ whole weeks, fraction
+  // dropped (the Handbook's worked example floors: 3 × 12 ÷ 8 = 4). 15–19 weeks is standard: no conversion.
+  // A standard term is not converted. VA SCO Handbook, "Rate of Pursuit / Training Time" (Rev 4.1 §, read via a
+  // hosted copy 2026-09-02; the current KnowVA edition was not reachable): a standard semester is 15–19 weeks, a
+  // standard quarter 10–13 weeks; only nonstandard terms convert under 21.4272(g). Inherited from BW-01/BW-02,
+  // whose Gate B runs did not dispute the window.
+  // Standard-length windows as printed in VA's own charts (Procedural Advisory 2021-08-13, Figures 1–2: "15 to 19 (Standard)"
+  // semester hours, "10 to 13 (Standard)" quarter hours) and in the SCO Handbook's Rate of Pursuit section. A standard-length
+  // term is judged on its calendar weeks and is not affected by its breaks (Handbook, same section); only nonstandard terms
+  // have vacations of 7+ days removed under 21.4272(g)(2)(i).
+  var STD={18:{lo:15,hi:19},12:{lo:10,hi:13}};
+  function ech(cr,s,mult){
+    var k=(mult===12)?12:18;                      // 21.4272(g)(1): ×18 semester hours, ×12 quarter hours
+    var a=d(s.start), b=d(s.end);
+    if(a===null||b===null||b<a) return {v:cr,w:null,note:"dates missing — counted as registered",conv:false};
+    var w=weeksOf(a,b), std=STD[k];
+    if(w>=std.lo&&w<=std.hi) return {v:cr,w:w,note:w+" weeks — standard "+(k===12?"quarter":"semester")+" ("+std.lo+"–"+std.hi+" weeks), no conversion",conv:false};
+    var bd=breakDaysInside(a,b,s.id), n=days(a,b)-bd;
+    if(bd>0){ var wr=Math.floor(n/7), rr=n%7; w=(rr>=4)?wr+1:wr; }
+    if(w<=0) return {v:cr,w:w,note:"session shorter than a week — not measurable; check the dates",conv:false,invalid:true};
+    var raw=cr*k/w, v=Math.floor(raw);
+    return {v:v,w:w,note:cr+" × "+k+" ÷ "+w+" weeks = "+raw.toFixed(2)+" → "+v+" (fraction dropped)",conv:true};
+  }
+  // Graduate nonstandard terms — VA Procedural Advisory 2021-08-13 (Grad_Reporting_Proc_Advisory.pdf): "VA will no longer
+  // convert the credit certified to an equivalent credit hour (ECH)"; the school reports an Adjusted Full Time Modifier from
+  // VA's chart. The chart reduces to floor(FT × weeks ÷ 18) for semester hours (÷ 12 for quarter hours), never below 1;
+  // standard-length terms keep the published FT. Rate of pursuit = credits ÷ that modifier (Advisory § A).
+  function adjFT(ftc,w,mult){
+    var k=(mult===12)?12:18, std=STD[k];
+    if(!(ftc>0)||!(w>0)) return null;
+    if(w>=std.lo&&w<=std.hi) return ftc;
+    return Math.max(1,Math.floor(ftc*w/k));
+  }
+  // 38 CFR 21.9505: credits ÷ full-time credits, "rounded to the nearest hundredth", "not to exceed 100 percent"
+  function rop(credits,ftc){ if(!(ftc>0)) return null; var r=Math.round(credits/ftc*100)/100; return r>1?1:r; }
+  // 38 CFR 21.9505: "any rate of pursuit higher than 50 percent" is more than half time. Exactly 50% is not.
+  function moreThanHalf(r){ return r!==null && r>0.5; }
+  // 38 U.S.C. 3313(c)(1)(B)(i): the housing figure is multiplied by the rate of pursuit "rounded to the
+  // nearest multiple of 10". VA's own example: 9 ÷ 12 = 75%, paid as 80% — so the half rounds up.
+  function mhaMult(r){ return Math.round(r*10)/10; }
+  // The ZIP housing figure is the one constant the user supplies, so it carries the user's own asOf.
+  // VA locks it 1 Aug – 31 Jul (RATES.nat window); DoD's table changes 1 Jan. A read outside the window is flagged.
+  function bahWindow(asOf,now,basis){
+    if(!asOf) return "missing";
+    var win=(basis==="31p")?RATES.p911ch31:RATES.nat;
+    var t=d(asOf), a=d(win.asOf), b=d(win.nextChange), nowT=(now===undefined)?Date.now():now;
+    if(t===null) return "missing";
+    if(t>nowT) return "future";
+    if(!(t>=a&&t<b)) return "out-of-year";
+    if(basis==="31p") return "in-year";              // calendar-year cadence: no mid-year table change to warn about
+    // DoD publishes a new BAH table each 1 Jan; VA keeps paying the figure it locked on 1 Aug. A figure
+    // read on or after the 1 Jan inside the rate year may be the new table, not VA's — flag it.
+    var jan1=Date.UTC(new Date(b).getUTCFullYear(),0,1);
+    return t>=jan1 ? "after-jan1" : "in-year";
+  }
+  // The ZIP figure is usable only with the date it was read (A2): undated → NaN, and the page says why.
+  // Usable only when the read date is inside VA's current rate year (in-year, or after-jan1 with a warning).
+  // missing, future, and out-of-year all refuse: a stale or impossible date is not a figure this page will show.
+  // A figure read after 1 January is usable only when it came from VA's own Comparison Tool (src "tool"); from any other
+  // source it may be the new DoD table rather than VA's locked figure, and is refused.
+  function datedBah(bah,asOf,now,basis,src){ var w=bahWindow(asOf,now,basis); if(!(bah>0)) return NaN; if(w==="in-year") return bah; if(w==="after-jan1" && src==="tool") return bah; return NaN; }
+  // Chapter 33 monthly housing allowance for one period.
+  //   resident=true  → ZIP BAH (21.9640(b)(1)(ii): everyone except programs "entirely through distance learning")
+  //   resident=false → 50% of the national-average amount (3313(c)(1)(B)(iii))
+  //   tier: the individual's Post-9/11 percentage (3313(c)(2)–(5); va.gov "prorated payment")
+  // Returns pay:null with a reason rather than a number whenever a number is not supportable.
+  // 38 U.S.C. 3313(c)(1)(B)(i) / va.gov: the housing figure is for "The location where you physically attend most of your
+  // classes". The unit is CLASSES, not credits: one campus must hold a strict majority of the stretch's in-person classes;
+  // otherwise the campus is unknown.
+  function majorityCampus(byCampus){
+    var names=Object.keys(byCampus); if(!names.length) return null;
+    var tot=0; names.forEach(function(n){ tot+=byCampus[n]; }); if(!(tot>0)) return null;
+    var best=null; names.forEach(function(n){ if(best===null||byCampus[n]>byCampus[best]) best=n; });
+    return (byCampus[best]*2>tot) ? best : null;
+  }
+  // Every result carries a STATE: "pay" (a full-month rate), "none" (the rule pays nothing at this enrollment),
+  // "unknown" (an input is missing), "expired" (a table is past its date). Summaries read the state, never null alone.
+  // finalTerm===true: Dole Act §208 / 38 U.S.C. 3680(a)(3) — above half time in the last term, the housing allowance is paid at
+  // the FULL-TIME rate (multiplier 1) on the same basis; at or below half time nothing changes (Handbook, Dole Rounding Out:
+  // "provided they initially enroll at, or round out to, more than 50% Rate of Pursuit"). Entitlement is still charged on actual credits.
+  function ch33Monthly(r,resident,bahZip,tier,finalTerm){
+    if(r===null) return {pay:null,state:"unknown",reason:"no full-time standard"};
+    if(!moreThanHalf(r)) return {pay:null,state:"none",reason:"not more than half time — no housing allowance this period (38 U.S.C. 3313(c)(1)(B)(i))"};
+    if(expired(RATES.nat.nextChange)) return {pay:null,state:"expired",reason:"EXPIRED — housing figures superseded "+RATES.nat.nextChange};
+    if(expired(RULES.recheck)) return {pay:null,state:"expired",reason:"RE-CHECK OVERDUE — the in-person / online distinction this figure depends on was to be re-verified against RIN 2900-AQ89 by "+RULES.recheck+"; no figure until it is"};
+    var m=(finalTerm===true)?1:mhaMult(r), t=(tier>0&&tier<=1)?tier:null;
+    if(t===null) return {pay:null,state:"unknown",reason:"choose your Post-9/11 benefit level in section A — the page will not assume 100%"};
+    if(resident){
+      if(!(bahZip>0)) return {pay:null,state:"unknown",reason:"no housing figure for the school's ZIP — enter one in section A; this page will not guess"};
+      return {pay:Math.round(bahZip*m*t*100)/100,state:"pay",base:bahZip,mult:m,tier:t,basis:"ZIP"};
+    }
+    return {pay:Math.round(RATES.nat.avg*0.5*m*t*100)/100,state:"pay",base:RATES.nat.avg*0.5,mult:m,tier:t,basis:"NAT"};
+  }
+  // Chapter 31 training time — 38 CFR 21.4270(c) prints a table at the 14-hour standard: 14 full, 10–13
+  // three-quarter, 7–9 half. Where the school certifies a lower standard the table stops describing it and
+  // proportion applies (the footnote: the certification "will establish the criteria for full-time measurement").
+  // The regulation's footnote supplies the 13- and 12-hour cases verbatim: "When 12 hours is properly certified as full
+  // time, VA will measure 9 through 11 hours as 3/4 time, 6 through 8 hours as 1/2 time"; at 13 hours "3/4 time will be
+  // 10 through 12 hours" (half time 7–9). Other certified standards (graduate "as certified by a responsible official",
+  // proportional) fall to proportion.
+  function bandFor(total,ftc){
+    if(ftc===14){
+      if(total>=14) return {k:"full",label:"FULL TIME"};
+      if(total>=10) return {k:"three",label:"¾ TIME"};
+      if(total>=7)  return {k:"half",label:"½ TIME"};
+      return {k:"sub",label:"UNDER ½ TIME"};
+    }
+    if(ftc===13){
+      if(total>=13) return {k:"full",label:"FULL TIME"};
+      if(total>=10) return {k:"three",label:"¾ TIME"};
+      if(total>=7)  return {k:"half",label:"½ TIME"};
+      return {k:"sub",label:"UNDER ½ TIME"};
+    }
+    if(ftc===12){
+      if(total>=12) return {k:"full",label:"FULL TIME"};
+      if(total>=9)  return {k:"three",label:"¾ TIME"};
+      if(total>=6)  return {k:"half",label:"½ TIME"};
+      return {k:"sub",label:"UNDER ½ TIME"};
+    }
+    var ratio=ftc>0?total/ftc:0;
+    if(ratio>=1) return {k:"full",label:"FULL TIME"};
+    if(ratio>=0.75) return {k:"three",label:"¾ TIME"};
+    if(ratio>=0.5) return {k:"half",label:"½ TIME"};
+    return {k:"sub",label:"UNDER ½ TIME"};
+  }
+  // CH31SA by dependents (FY2026 table): none / one / two / each additional
+  function stdPay(k,deps){
+    var r=RATES.ch31[k]; if(!r) return null;
+    if(deps<=0) return r.base; if(deps===1) return r.one; if(deps===2) return r.two;
+    return Math.round((r.two+(deps-2)*r.add)*100)/100;
+  }
+  function ch31Monthly(band,basis,deps,resident,bahZip,activeDuty){
+    if(activeDuty===true) return {pay:null,state:"none",reason:"no subsistence allowance while on active duty — \"Service members, who are on active duty and who have been authorized to participate in training under the Chapter 31 program, are not entitled to receive subsistence allowance\" (VR&E SCO Handbook § F.3)"};
+    if(band.k==="sub") return {pay:null,state:"none",reason:"below half time — subsistence \"is not payable\" (38 CFR 21.314); two exceptions exist and VA decides them — ask your counselor"};
+    if(basis==="31s"){
+      if(deps===null) return {pay:null,state:"unknown",reason:"answer the dependents question in section A (enter 0 if none) — the standard Chapter 31 rate changes with dependents, and this page will not assume none"};
+      if(expired(RATES.ch31.nextChange)) return {pay:null,state:"expired",reason:"EXPIRED — Chapter 31 table superseded "+RATES.ch31.nextChange};
+      return {pay:stdPay(band.k,deps),state:"pay",basis:"CH31SA"};
+    }
+    var f=P911[band.k];
+    if(expired(RULES.recheck)) return {pay:null,state:"expired",reason:"RE-CHECK OVERDUE — the in-person / online distinction this rate depends on was to be re-verified against RIN 2900-AQ89 by "+RULES.recheck+"; no figure until it is"};
+    if(resident){
+      if(!(bahZip>0)) return {pay:null,state:"unknown",reason:"no housing figure for the school's ZIP — enter one in section A; this page will not guess"};
+      return {pay:Math.round(bahZip*f.res*100)/100,state:"pay",base:bahZip,mult:f.res,basis:"ZIP"};
+    }
+    // Solely online on the Chapter 31 Post-9/11 rate uses the national-average figure on VA's January cadence
+    // (Handbook § F.2), which is not the August-locked $2,522 this page carries. Not shown rather than guessed.
+    return {pay:null,state:"unknown",reason:"entirely online on the Chapter 31 Post-9/11 rate: the fraction ("+f.dist+") applies to the calendar-year national average, which this page does not carry — your counselor has the figure"};
+  }
+  // Split the term into the distinct stretches where the same set of sessions is running, then combine the
+  // equivalent credits of every counted class active in each stretch (SCO Handbook: "When enrollment periods
+  // overlap, credit hour equivalents for the period of overlap are combined.").
+  function periods(sessions,classes,mult,ftc,level){
+    var pts={};
+    sessions.forEach(function(s){ var a=d(s.start), b=d(s.end); if(a===null||b===null||b<a) return; pts[a]=1; pts[b+86400000]=1; });
+    var ks=Object.keys(pts).map(Number).sort(function(x,y){return x-y;});
+    var out=[];
+    for(var i=0;i<ks.length-1;i++){
+      var a=ks[i], b=ks[i+1]-86400000;
+      var active=sessions.filter(function(s){ var x=d(s.start), y=d(s.end); return x!==null&&y!==null&&x<=a&&y>=b; });
+      if(!active.length){ out.push({start:a,end:b,gap:true}); continue; }
+      var total=0, resident=false, parts=[], anyClass=false, incomplete=false, gradRop=0, byCampus={}, gradMissingMod=false;
+      classes.forEach(function(c){
+        if(!c.count) return;
+        var s=null; for(var j=0;j<active.length;j++) if(active[j].id===c.ses) s=active[j];
+        if(!s) return;
+        anyClass=true;
+        if(!(c.credits>0)) incomplete=true;
+        if(c.resident===null) incomplete=true;                 // "how taken" not chosen — the in-person fork is not assumed
+        var e;
+        if(level==="grad"){
+          // no ECH conversion for graduate training: credits ÷ the full-time modifier the SCO certifies for that session.
+          // A standard-length session uses the published full-time standard; a nonstandard one needs the SCO's certified
+          // modifier (s.mod) — the school's own if it has one, else the SCO's chart value. Without it: not computed.
+          var sa=d(s.start), sb=d(s.end), w=(sa!==null&&sb!==null&&sb>=sa)?weeksOf(sa,sb):null, chart=adjFT(ftc,w,mult), std=STD[(mult===12)?12:18];
+          var isStd=(w!==null&&w>=std.lo&&w<=std.hi), af=isStd?ftc:(s.mod>0?s.mod:null);
+          e={v:c.credits,w:w,conv:false,grad:true,adjFT:af,chart:chart,note:(w===null?"dates missing":(isStd?w+" weeks — standard length, full-time modifier "+ftc:(af?w+" weeks — SCO-certified full-time modifier "+af+" for this session":w+" weeks — nonstandard: the SCO's certified full-time modifier for this session is needed (VA's chart would give "+chart+" for a school with no modifier of its own)")))};
+          if(af) gradRop+=c.credits/af; else if(!isStd) gradMissingMod=true;
+        } else { e=ech(c.credits,s,mult); }
+        if(e.invalid) incomplete=true;
+        total+=e.v; if(c.resident) resident=true;
+        if(c.resident===true){ var cn=(c.campus||"").trim(); if(!cn) incomplete=true; else byCampus[cn]=(byCampus[cn]||0)+1; }   // one class, one count
+        parts.push({c:c,e:e});
+      });
+      var ropGrad=(level==="grad")?Math.min(1,Math.round(gradRop*100)/100):null;
+      out.push({start:a,end:b,gap:false,total:total,resident:resident,parts:parts,anyClass:anyClass,incomplete:incomplete,gradMissingMod:gradMissingMod,ropGrad:ropGrad,campus:majorityCampus(byCampus),campusList:Object.keys(byCampus),sessions:active});
+    }
+    return out;
+  }
+  // GATE-A:CORE END
+
+  var sessions=[], classes=[], sid=0, cid=0, bid=0;
+  // ---- who is reading: veteran (answer only) / certifying official / counselor. CSS hides hints and rules in the veteran
+  // view; nothing is removed from the page, and the same inputs and the same core produce the same number in every view.
+  var VIEW="vet";
+  var ROLE_NOTE={vet:"Veteran view: your benefit, your classes, the monthly rate. ODU's usual values are offered one tap away, never filled in for you. Every number has \"where this comes from\" one tap away; the certifying-official view opens all of it.",
+    sco:"Certifying-official view: every hint, every citation, the breaks tool, the graduate modifier, the rules in order. The numbers are the same as the veteran sees.",
+    vrc:"Counselor view: the same page with every rule open — Chapter 31 bands (21.4270(c)), the elected Post-9/11 fractions (21.260(c)), below-half exceptions (21.314), the January cadence (Handbook § F.2)."};
+  function setView(v){ VIEW=v; document.documentElement.setAttribute("data-view",v); document.querySelectorAll(".roles button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.view===v ? "true":"false"); }); var rn=$("roleNote"); if(rn) rn.textContent=ROLE_NOTE[v]; var rd=$("rulesD"); if(rd) rd.open=(v!=="vet"); document.querySelectorAll("details.whyd").forEach(function(d){ d.open=(v!=="vet"); }); }
+  // ---- ODU prefills: shown as a chip with the source and its date, never silent, gone the moment the reader types.
+  // A prefill is offered only into an EMPTY field; an entered value is never overwritten.
+  var PREFILL={ftcUg:12,ftcGrad:9,ftcSrc:"ODU catalogs 2026–27, fall and spring (summer is 9 / 6)", unit:"18", unitSrc:"ODU grants semester hours",
+    bah:2430,bahAsOf:"2026-09-02",bahSrc:"tool",bahText:"ODU main campus, VA's Comparison Tool estimate for a full-time in-person student at the 100% tier, read 2026-09-02"};
+  var touched={ftc:false,unit:false,bah:false};
+  function chip(id,html){ var c=$(id); if(c) c.innerHTML=html; }
+  function clearPrefill(k){ touched[k]=true; if(k==="ftc"){ $("ftc").value=""; chip("ftcChip",""); } if(k==="unit"){ $("unit").value=""; chip("unitChip",""); } if(k==="bah"){ $("bah").value=""; $("bahAsOf").value=""; $("bahSrc").value=""; chip("bahChip",""); } update(); }
+  // OFFERS, not entries (Gate B r9 on the answer layer: "money-determining facts presented as entered data"). The chip shows
+  // ODU's value with its source and date and a "use it" button; the field stays empty until the reader taps. A tap is the
+  // reader's entry, and it clears the offer.
+  function useOffer(k){
+    if(k==="ftc"){ var level=$("level").value; $("ftc").value=(level==="grad"?PREFILL.ftcGrad:PREFILL.ftcUg); }
+    if(k==="unit"){ $("unit").value=PREFILL.unit; }
+    if(k==="bah"){ $("bah").value=PREFILL.bah; $("bahAsOf").value=PREFILL.bahAsOf; $("bahSrc").value=PREFILL.bahSrc; }
+    touched[k]=true; chip(k+"Chip",""); update();
+  }
+  function offerPrefills(){
+    var chapter=$("chapter").value, level=$("level").value;
+    if(!touched.ftc && level && $("ftc").value===""){ chip("ftcChip",'ODU: <b>'+(level==="grad"?PREFILL.ftcGrad:PREFILL.ftcUg)+' credits</b> is full time this term — '+PREFILL.ftcSrc+' · <button type="button" data-use="ftc">use it</button>'); } else if($("ftc").value!=="") chip("ftcChip","");
+    if(!touched.unit && chapter && $("unit").value===""){ chip("unitChip",'ODU grants <b>semester hours</b> · <button type="button" data-use="unit">use it</button>'); } else if($("unit").value!=="") chip("unitChip","");
+    if(!touched.bah && (chapter==="33"||chapter==="31p") && $("bah").value===""){ chip("bahChip",'ODU main campus: <b>'+money(PREFILL.bah)+'</b> — '+PREFILL.bahText+' · <button type="button" data-use="bah">use it</button>'); } else if($("bah").value!=="") chip("bahChip","");
+    document.querySelectorAll(".prefill [data-use]").forEach(function(b){ b.onclick=function(){ useOffer(b.dataset.use); }; });
+  }
+  // typing into a prefilled field makes it the reader's; the chip goes away
+  ["ftc","unit"].forEach(function(k){ $(k).addEventListener("input",function(){ touched[k]=true; chip(k+"Chip",""); }); $(k).addEventListener("change",function(){ touched[k]=true; chip(k+"Chip",""); }); });
+  ["bah","bahAsOf","bahSrc"].forEach(function(k){ $(k).addEventListener("input",function(){ touched.bah=true; chip("bahChip",""); }); $(k).addEventListener("change",function(){ touched.bah=true; chip("bahChip",""); }); });
+  // ODU academic calendars, read 2026-09-02: catalog.odu.edu/undergraduate/academiccalendar/academiccalendar.pdf (Fall 2026)
+  // and odu.edu/sites/default/files/2026/documents/spring-2027-academic-calendar.pdf (Spring 2027). They expire with the
+  // Spring 2027 term; after nextChange the preset buttons are disabled and say so.
+  var CAL={asOf:"2026-09-02",nextChange:"2027-05-08",addDropFall:"2026-09-02",addDropSpring:"2027-01-20",withdrawFall:"2026-11-13",withdrawSpring:"2027-04-09"};
+  var PRESETS={
+    f26full:{name:"Fall 2026 full term",start:"2026-08-24",end:"2026-12-11",kind:"full"},
+    f26a:{name:"Fall 2026 first 8 weeks",start:"2026-08-24",end:"2026-10-16",kind:"first"},
+    f26b:{name:"Fall 2026 second 8 weeks",start:"2026-10-19",end:"2026-12-11",kind:"second"},
+    s27full:{name:"Spring 2027 full term",start:"2027-01-11",end:"2027-05-07",kind:"full"},
+    blank:{name:"",start:"",end:"",kind:"other"}
+  };
+  var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function fmtD(t){ var x=new Date(t); return MON[x.getUTCMonth()]+" "+x.getUTCDate()+", "+x.getUTCFullYear(); }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;"); }
+
+  var KIND={full:"Full term",first:"First 8 weeks",second:"Second 8 weeks",other:"Other session"};
+  function kindOf(s){ return KIND[s.kind]||KIND.other; }
+  function sesLabel(s){ var n=s.name||("Session "+s.id); var k=kindOf(s); if(!s.kind||s.kind==="other") return n; return n.toLowerCase().indexOf(k.split(" ")[0].toLowerCase())>=0 ? n : k+" · "+n; }
+  function addSession(p){ sessions.push({id:++sid,name:p.name,start:p.start,end:p.end,kind:p.kind||"other"}); renderSessions(); renderClasses(); renderBreaks(); update(); }
+  function renderSessions(){
+    var box=$("sessions"); box.innerHTML="";
+    if(!sessions.length){ box.innerHTML='<div class="gap">No sessions yet — pick a preset above or add a blank one.</div>'; return; }
+    sessions.forEach(function(s){
+      var r=document.createElement("div"); r.className="row ses kind-"+(KIND[s.kind]?s.kind:"other");
+      var kopts=Object.keys(KIND).map(function(k){ return '<option value="'+k+'"'+((s.kind||"other")===k?' selected':'')+'>'+KIND[k]+'</option>'; }).join("");
+      r.innerHTML='<div class="kindtag">'+esc(kindOf(s))+'</div>'+
+        '<div class="field kind"><label>Session type</label><select data-k="kind">'+kopts+'</select></div>'+
+        '<div class="field name"><label>Session name</label><input type="text" value="'+esc(s.name)+'" data-k="name" placeholder="e.g. Fall full term"></div>'+
+        '<div class="field"><label>First day of classes</label><input type="date" value="'+esc(s.start)+'" data-k="start"></div>'+
+        '<div class="field"><label>Term end (last exam day, as certified)</label><input type="date" value="'+esc(s.end)+'" data-k="end"></div>'+
+        '<div class="field" data-gradonly'+($("level").value==="grad"?'':' hidden')+'><label>Graduate: full-time modifier the SCO reports for this session</label><input type="number" min="1" max="24" step="1" inputmode="numeric" value="'+(s.mod||"")+'" data-k="mod" placeholder="from the SCO"></div>'+
+        '<button type="button" class="del" aria-label="Remove this session">&times;</button>';
+      r.querySelectorAll("input").forEach(function(i){ i.addEventListener("input",function(){ s[i.dataset.k]=(i.dataset.k==="mod")?(+i.value>0?+i.value:null):i.value; if(i.dataset.k==="name"){ renderClasses(); renderBreaks(); } update(); }); });
+      r.querySelector('[data-k="kind"]').addEventListener("change",function(ev){ s.kind=ev.target.value; renderSessions(); renderClasses(); renderBreaks(); update(); });
+      r.querySelector(".del").addEventListener("click",function(){ sessions=sessions.filter(function(x){return x!==s;}); renderSessions(); renderClasses(); update(); });
+      box.appendChild(r);
+    });
+  }
+  function addBreak(){ breaks.push({id:++bid,start:"",end:"",ses:sessions.length?sessions[0].id:0}); renderBreaks(); update(); }
+  function renderBreaks(){
+    var box=$("breaks"); box.innerHTML="";
+    if(!breaks.length){ box.innerHTML='<div class="gap">No breaks entered. Only needed for a session shorter than 15 weeks that contains a break of 7 days or more.</div>'; return; }
+    breaks.forEach(function(v){
+      var r=document.createElement("div"); r.className="row brk";
+      var opts=sessions.map(function(s){ return '<option value="'+s.id+'"'+(s.id===v.ses?' selected':'')+'>'+esc(sesLabel(s))+'</option>'; }).join("");
+      r.innerHTML='<div class="field"><label>In which session</label><select data-k="ses">'+(opts||'<option value="0">add a session first</option>')+'</select></div>'+
+        '<div class="field"><label>Break starts</label><input type="date" value="'+esc(v.start)+'" data-k="start"></div>'+
+        '<div class="field"><label>Break ends</label><input type="date" value="'+esc(v.end)+'" data-k="end"></div>'+
+        '<div class="field"><label>Length</label><div class="hint" data-len style="min-height:38px;display:flex;align-items:center">—</div></div>'+
+        '<button type="button" class="del" aria-label="Remove this break">&times;</button>';
+      var lenEl=r.querySelector("[data-len]");
+      var show=function(){ var x=d(v.start), y=d(v.end); lenEl.textContent=(x!==null&&y!==null&&y>=x)?(days(x,y)+" days"+(days(x,y)<7?" — under 7, ignored":"")):"—"; };
+      r.querySelector('[data-k="ses"]').addEventListener("change",function(ev){ v.ses=+ev.target.value; update(); });
+      r.querySelectorAll("input").forEach(function(i){ i.addEventListener("input",function(){ v[i.dataset.k]=i.value; show(); update(); }); });
+      show();
+      r.querySelector(".del").addEventListener("click",function(){ breaks=breaks.filter(function(z){return z!==v;}); renderBreaks(); update(); });
+      box.appendChild(r);
+    });
+  }
+  function addClass(){ classes.push({id:++cid,name:"",credits:0,ses:sessions.length?sessions[0].id:0,resident:null,count:true}); renderClasses(); update(); }   // credits 0 = not entered = incomplete (Gate B r7: a seeded 3 was a silent default)
+  function reconcile(){ if(!sessions.length) return; var live={}; sessions.forEach(function(s){live[s.id]=true;}); classes.forEach(function(c){ if(!live[c.ses]) c.ses=sessions[0].id; }); breaks.forEach(function(v){ if(!live[v.ses]) v.ses=sessions[0].id; }); }
+  function renderClasses(){
+    reconcile();
+    var box=$("classes"); box.innerHTML="";
+    if(!classes.length){ box.innerHTML='<div class="gap">No classes yet.</div>'; return; }
+    classes.forEach(function(c){
+      var r=document.createElement("div"); r.className="row cls";
+      var opts=sessions.map(function(s){ return '<option value="'+s.id+'"'+(s.id===c.ses?' selected':'')+'>'+esc(sesLabel(s))+'</option>'; }).join("");
+      r.innerHTML='<div class="field"><label>Class</label><input type="text" value="'+esc(c.name)+'" placeholder="e.g. MATH 211" data-k="name"></div>'+
+        '<div class="field"><label>Credit hours (as registered) <span class="req">· required</span></label><input type="number" min="1" max="24" step="1" value="'+(c.credits>0?c.credits:"")+'" placeholder="type the credits" data-k="credits" inputmode="numeric"></div>'+
+        '<div class="field fmt"><label>How taken</label><select data-k="fmt"><option value=""'+(c.resident===null?' selected':'')+'>— choose —</option><option value="res"'+(c.resident===true?' selected':'')+'>In person or hybrid</option><option value="dist"'+(c.resident===false?' selected':'')+'>Online only</option></select></div>'+
+        '<div class="field ses"><label>Session</label><select data-k="ses">'+(opts||'<option value="0">add a session first</option>')+'</select></div>'+
+        '<div class="field campus"'+(c.resident===true?'':' hidden')+'><label>Campus (in-person meetings)</label><input type="text" list="campusList" value="'+esc(c.campus||"")+'" data-k="campus" placeholder="the location, as your schedule names it">'+((c.resident===true && !c.campus)?'<div class="prefill">Most ODU classes meet on the <b>Main campus</b> · <button type="button" data-usecampus>use it</button></div>':'')+'</div>'+
+        '<div class="field whatif"><label>What if</label><label class="chk"><input type="checkbox" data-k="drop"'+(c.count?'':' checked')+'> schedule without this class</label></div>'+
+        '<button type="button" class="del" aria-label="Remove this class">&times;</button>';
+      r.querySelector('[data-k="name"]').addEventListener("input",function(ev){ c.name=ev.target.value; update(); });
+      r.querySelector('[data-k="credits"]').addEventListener("input",function(ev){ c.credits=Math.max(0,+ev.target.value||0); update(); });
+      r.querySelector('[data-k="ses"]').addEventListener("change",function(ev){ c.ses=+ev.target.value; update(); });
+      r.querySelector('[data-k="fmt"]').addEventListener("change",function(ev){ c.resident=ev.target.value===""?null:(ev.target.value==="res"); renderClasses(); update(); });
+      var uc=r.querySelector("[data-usecampus]"); if(uc) uc.addEventListener("click",function(){ c.campus="Main campus"; renderClasses(); update(); });
+      r.querySelector('[data-k="campus"]').addEventListener("input",function(ev){ c.campus=ev.target.value.trim(); update(); });
+      r.querySelector('[data-k="drop"]').addEventListener("change",function(ev){ c.count=!ev.target.checked; update(); });
+      r.querySelector(".del").addEventListener("click",function(){ classes=classes.filter(function(x){return x!==c;}); renderClasses(); update(); });
+      box.appendChild(r);
+    });
+  }
+
+  function pct(r){ return (Math.round(r*10000)/100).toFixed(0)+"%"; }
+
+  function update(){
+    reconcile();
+    offerPrefills();
+    var chapter=$("chapter").value;
+    var ftc=+$("ftc").value; if(!(ftc>0)) ftc=0;               // 0 = no standard → UNKNOWN, never a silent 12
+    var tier=parseFloat($("tier").value)||0;                    // 0 = not chosen → UNKNOWN, never a silent 100%
+    var depsRaw=$("deps").value, deps=(depsRaw==="")?null:Math.max(0,Math.floor(+depsRaw)||0);   // blank = unanswered = UNKNOWN, never 0 (Gate B r7)
+    var mult=(+$("unit").value===12)?12:18;                    // read the control directly — never a variable declared later (Gate B r4)
+    var levelRaw=$("level").value, level=levelRaw==="grad"?"grad":"ug";
+    var activeDuty=$("activeDuty").value, firstUse=$("firstUse").value, bahSrc=$("bahSrc").value, finalTerm=$("finalTerm").value;
+    $("adField").hidden = !(chapter==="33"||chapter==="31s"||chapter==="31p"); $("firstUseField").hidden = chapter!=="33"; $("finalTermField").hidden = chapter!=="33";
+    var unitRaw=$("unit").value;                                 // read BEFORE mult is derived from it (Gate B r4: it was read after)
+    var bah=Math.round(parseFloat($("bah").value)); if(!(bah>0)) bah=NaN;   // whole dollars — BAH tables carry none
+    var bahAsOf=$("bahAsOf").value, bahWin=bahWindow(bahAsOf,undefined,chapter);
+    var bahEff=datedBah(bah,bahAsOf,undefined,chapter,bahSrc); // NaN unless the figure carries a usable read date (and, after 1 Jan, VA's tool as its source)
+    var bahUndated=(bah>0)&&isNaN(bahEff);
+    var bahRefuse = bahWin==="missing" ? "enter the date you read the ZIP figure (section A) — an undated housing figure is not shown"
+                  : bahWin==="future"  ? "the ZIP figure's read date is in the future — check the date"
+                  : (bahWin==="after-jan1" && bahSrc!=="tool") ? "the ZIP figure was read after January 1 from a source other than VA's Comparison Tool — it may be the new military table, not the figure VA locked; re-read it in VA's Comparison Tool, or ask the certifying office"
+                  : (bahSrc==="") ? "say where you read the ZIP figure (section A)"
+                  : bahWin==="out-of-year" ? "the ZIP figure was read outside the current rate year ("+(chapter==="31p"?RATES.p911ch31.asOf+" to "+RATES.p911ch31.nextChange+", Chapter 31's January cadence":RATES.nat.asOf+" to "+RATES.nat.nextChange)+") — re-read it; a stale housing figure is not shown"
+                  : "";
+    var today=Date.now();
+
+    $("tierField").hidden = chapter!=="33";
+    $("depsField").hidden = chapter!=="31s";
+    $("bahField").hidden  = chapter==="31s"||chapter==="other"||chapter==="";
+    $("otherFlag").hidden = chapter!=="other";
+
+    var expLine=[];
+    if(expired(RATES.nat.nextChange)) expLine.push("HOUSING FIGURES EXPIRED "+RATES.nat.nextChange+" — this page will not show a Post-9/11 dollar figure until its table is replaced.");
+    if(expired(RATES.ch31.nextChange)) expLine.push("CHAPTER 31 TABLE EXPIRED "+RATES.ch31.nextChange+" — no standard subsistence figure until the FY2027 table is entered.");
+    $("expiryLine").innerHTML = expLine.length ? '<br><span class="red">'+esc(expLine.join(" "))+'</span>' : "";
+    $("asofTop").className = "asof"+(expLine.length?" expired":"");
+    // the calendar presets expire with the Spring 2027 term
+    if(expired(CAL.nextChange)){ document.querySelectorAll("[data-preset]:not([data-preset=blank])").forEach(function(b){ b.disabled=true; b.title="ODU calendar presets expired "+CAL.nextChange+" — enter dates from the current calendar"; }); var pn=$("presetNote"); if(pn) pn.innerHTML='<span class="red">Preset dates expired '+CAL.nextChange+'. Enter your sessions from the current ODU calendar.</span>'; }
+    // the rulemaking re-check date is compared against the clock, not just printed
+    var rc=$("recheck"); if(today>=d(rc.textContent.trim())){ rc.parentNode.classList.add("expired"); if(!/OVERDUE/.test(rc.parentNode.textContent)) rc.insertAdjacentHTML("afterend",' <span class="red">— RE-CHECK OVERDUE: verify whether RIN 2900-AQ89 has gone final before trusting the in-person rule here</span>'); }
+
+    var dropped=classes.filter(function(c){return !c.count;});
+    var wi=$("whatif");
+    if(dropped.length){
+      wi.hidden=false;
+      var adFall=d(CAL.addDropFall), adSpring=d(CAL.addDropSpring), adLine;
+      if(today<=adFall+86399999) adLine='inside add/drop (ODU Fall 2026 full term: through <span class="mono">Sep 2, 2026</span> — still open today)';
+      else if(today<=adSpring+86399999) adLine='inside add/drop (<span class="mono">Fall 2026 add/drop ended Sep 2, 2026</span>; Spring 2027 full term runs through <span class="mono">Jan 20, 2027</span>)';
+      else adLine='inside add/drop (<span class="mono">both ODU deadlines on this page have passed</span> — check the current calendar)';
+      var dropSes=dropped.map(function(c){ var s=null; sessions.forEach(function(x){ if(x.id===c.ses) s=x; }); return s?(s.name||("Session "+s.id)):"?"; }).filter(function(v,i,a){return a.indexOf(v)===i;});
+      wi.innerHTML='<b>Schedule-without-this-class view — not a drop calculation:</b> '+dropped.length+' class'+(dropped.length>1?'es':'')+' excluded ('+esc(dropSes.join(", "))+'). The figures below are the full-month rates for a schedule that never included '+(dropped.length>1?'them':'it')+'. What VA actually does after a real drop depends on the drop date, the grade (punitive or not), mitigating circumstances and the one-time 6-credit exclusion, and can include payment through the last date of attendance — none of which this view models. <b>Whether a drop is inside add/drop depends on that class\'s own session</b> — 8-week and ODUGlobal sessions have their own deadlines on ODU\'s calendar, and this page knows only the full-term ones: '+adLine+' a drop of a class that has started is a reduction from the drop date — VA has the school report the original credits, then the reduction, and pays a prorated amount; housing already paid on the old number can come back as a debt (VA Education Service office hours, August and December 2021). Only a class dropped before its first day was never attended — and even then, if it was already certified or paid on, the SCO reviews for a debt. After add/drop, a W can send benefits back to the first day of the term and turn money already paid into a debt — VA excuses up to 6 credits once, and only once, and not for a reduction inside drop/add. Rule 8 below has the cites. <b>Talk to the School Certifying Official first.</b>';
+    } else { wi.hidden=true; wi.innerHTML=""; }
+
+    var box=$("results"); box.innerHTML="";
+    var note=$("resultNote"); note.textContent="";
+    if(chapter===""){ box.innerHTML='<div class="gap">UNKNOWN — choose your benefit in section A. Nothing is assumed.</div>'; return; }
+    if(chapter==="other"){ box.innerHTML='<div class="gap">Choose Chapter 33 or Chapter 31 above to see a per-period figure.</div>'; return; }
+    if(levelRaw===""){ box.innerHTML='<div class="gap">UNKNOWN — say whether you are an undergraduate or graduate student (section A); graduate short terms are measured differently.</div>'; return; }
+    if(unitRaw===""){ box.innerHTML='<div class="gap">UNKNOWN — say whether your school grants semester or quarter hours (section A); the conversion multiplier depends on it.</div>'; return; }
+    if(!sessions.length||!classes.length){ box.innerHTML='<div class="gap">Add at least one session and one class.</div>'; return; }
+    if(!ftc){ box.innerHTML='<div class="gap">UNKNOWN — enter the credits your school calls full time for this term (section A; ODU catalogs 2026–27: fall and spring 12 undergraduate / 9 graduate, summer 9 / 6 — the SCO certifies which applies). Nothing can be measured against a missing standard, and none is assumed.</div>'; return; }
+
+    var ps=periods(sessions,classes,mult,ftc,level);
+    var lows=[], highs=[], summ=[];
+    ps.forEach(function(p){
+      var el=document.createElement("div");
+      if(p.gap){
+        el.className="gap"; el.textContent="No session running "+fmtD(p.start)+" – "+fmtD(p.end)+" — no housing allowance between terms (2011 law; va.gov, 2024-04-11).";
+        box.appendChild(el); return;
+      }
+      el.className="period";
+      var nd=days(p.start,p.end), span=nd<7?(nd+" day"+(nd===1?"":"s")):(weeksOf(p.start,p.end)+" wk");
+      var head='<div class="hd"><div><span class="when">'+fmtD(p.start)+" – "+fmtD(p.end)+'</span></div><span class="wks">'+span+' · '+p.sessions.map(function(s){return esc(sesLabel(s));}).join(" + ")+'</span></div>';
+      if(!p.anyClass){ el.innerHTML=head+'<div class="gap">No counted class in this stretch — nothing is payable for it.</div>'; box.appendChild(el); return; }
+      var PARTS_SLOT="\u0000PARTS\u0000";
+      var partsTxt=p.parts.map(function(x){ var fmt=x.c.resident===null?'<span class="red">how taken not chosen</span>':(x.c.resident?'in residence':'online only'); var w=x.e.w; var short=(w!==null&&w!==undefined&&w<4&&!x.e.invalid)?' <span class="red">— very short session ('+w+' wk): check the dates</span>':''; return '<div>'+esc(x.c.name||"class")+' — '+x.c.credits+' cr'+(x.e.conv?' → '+x.e.v+' equivalent':'')+(x.e.note?' ('+esc(x.e.note)+')':'')+short+' · '+fmt+'</div>'; }).join("");
+      var body="";
+      if(chapter==="33"){
+        var r=(level==="grad")?p.ropGrad:rop(p.total,ftc), res=ch33Monthly(r,p.resident,bahEff,tier,finalTerm==="yes");
+        if(res.pay!==null && finalTerm==="") res={pay:null,state:"unknown",reason:"answer the last-term question in step 1 — in the last term of a program the housing allowance is paid at the full-time rate above half time (Dole Act §208), so the answer changes the figure"};
+        if(res.pay!==null && finalTerm==="unsure") res={pay:null,state:"unknown",reason:"not sure whether this is your last term — the SCO knows whether these classes complete your program; above half time the answer moves the figure to the full-time rate (Dole Act §208), so no figure is shown until it is settled"};
+        if(res.pay===null && res.state==="none" && finalTerm==="yes" && r!==null && r>0 && !moreThanHalf(r)) res={pay:null,state:"none",reason:res.reason+" — the last-term rule does not reach 50% or less: VA pays full-time housing in the last term only \"provided they initially enroll at, or round out to, more than 50% Rate of Pursuit\" (SCO Handbook, Dole Rounding Out); adding a course from your program to get above half time would change this — ask the SCO"};
+        if(res.pay!==null && activeDuty==="") res={pay:null,state:"unknown",reason:"answer the active-duty question in section A — VA pays no housing allowance to a student on active duty, or to a spouse using transferred benefits while the Veteran is on active duty"};
+        if(activeDuty==="yes" && moreThanHalf(r)) res={pay:null,state:"none",reason:"no housing allowance while on active duty (or as a spouse using transferred benefits while the Veteran is on active duty) — VA rates page, 2026-07-31; tuition and fees are still paid"};
+        if(res.pay!==null && activeDuty==="changes") res={pay:null,state:"unknown",reason:"active-duty status changes during these dates — VA pays the housing allowance only for the days not on active duty, and this page does not split a schedule by duty dates; the certifying office and VA have the effective date"};
+        if(res.pay!==null && firstUse==="") res={pay:null,state:"unknown",reason:"answer when you first used Post-9/11 benefits (section A) — students who began before 2018-01-01 can be on an earlier housing basis"};
+        if(res.pay!==null && firstUse==="before") res={pay:null,state:"unknown",reason:"you first used Post-9/11 benefits before 2018-01-01: your housing basis may follow the earlier rules, which this page does not carry — VA's Comparison Tool lists that figure separately; ask the certifying office"};
+        if(res.pay!==null && res.basis==="ZIP" && !p.campus) res={pay:null,state:"unknown",reason:"no single campus has most of your in-person classes in this stretch (or a campus is missing) — VA pays the figure for the location where you attend most classes; ask the SCO which location VA uses"};
+        if(res.pay!==null && res.basis==="ZIP" && bahSrc==="") res={pay:null,state:"unknown",reason:"say where you read the ZIP figure (section A) — VA's Comparison Tool or somewhere else; the page will not label a source it was not told"};
+        if(res.pay===null&&p.resident&&bahUndated&&moreThanHalf(r)&&tier>0){ res={pay:null,state:"unknown",reason:bahRefuse}; }
+        if(p.incomplete){ res={pay:null,state:"unknown",reason:"a counted class is incomplete — credit hours missing, 'how taken' not chosen, campus missing, or a session shorter than a week — fill it in or remove it"}; }
+        if(level==="grad" && p.gradMissingMod){ res={pay:null,state:"unknown",reason:"graduate, nonstandard session: enter the full-time modifier the SCO certifies for that session (session row) — VA divides your credits by that, not by a value this page can safely assume"}; }
+        var regTiles='<div class="reg">'+
+          (level==="grad"?'<div><span class="fig small">'+p.total+'</span><span class="figlab">graduate credits · ÷ adjusted full-time modifier</span></div>':'<div><span class="fig small">'+p.total+' / '+ftc+'</span><span class="figlab">credits counted / full time</span></div>')+
+          '<div><span class="fig small">'+(r===null?'—':pct(r))+'</span><span class="figlab">rate of pursuit · 21.9505</span></div>'+
+          '<div><span class="fig small '+(moreThanHalf(r)?'':'stop')+'">'+(moreThanHalf(r)?'YES':'NO')+'</span><span class="figlab">more than half time</span></div>'+
+          '<div><span class="fig small '+(p.incomplete?'stop':(p.resident?'':'off'))+'">'+(p.incomplete?'—':(p.resident?'ZIP RATE':'ONLINE RATE'))+'</span><span class="figlab">'+(p.incomplete?'format or campus not settled':(p.resident?('if certified in residence · '+(p.campus?esc(p.campus):'campus: no majority')):'entirely online'))+'</span></div>'+
+          '</div>';
+        if(res.pay!==null){
+          body+='<div class="answer"><span class="fig">'+money(res.pay)+'</span><span class="figlab">'+(res.basis==="ZIP"?'full-month location rate you would be eligible for, if the SCO certifies the class in residence · paid at month end':'per full month · paid at month end')+'</span></div>'+
+            '<details class="whyd"'+(VIEW!=="vet"?' open':'')+'><summary>Where this number comes from</summary>'+regTiles+'<div class="why">'+(res.basis==="ZIP"?'<b>'+money(res.base)+'</b> (your ZIP figure — must be for '+esc(p.campus||"")+' — from '+(bahSrc==="tool"?"VA's Comparison Tool":"a non-VA source")+', read '+esc(bahAsOf)+(bahWin==="out-of-year"?' — <span class="red">outside VA\'s current rate year '+RATES.nat.asOf+' to '+RATES.nat.nextChange+'; confirm it is the figure VA locked</span>':(bahWin==="after-jan1"?' — <span class="red">read after January 1: the military table has changed since VA locked its figure on '+RATES.nat.asOf+'; make sure this is the earlier figure, or ask the certifying office</span>':''))+')':'<b>'+money(res.base)+'</b> (half the national average '+money(RATES.nat.avg)+', effective '+RATES.nat.asOf+')')+' × <b>'+pct(res.mult)+'</b> '+(finalTerm==="yes"&&res.mult===1&&r!==null&&r<1?'(<b>full time by the last-term rule</b> — Dole Act §208, 38 U.S.C. 3680(a)(3): your rate of pursuit is '+pct(r)+', above half time, and this term completes your program; the SCO must check "Rounding out last term" on the certification — usable once per program; entitlement is charged on your actual credits)':'(rate of pursuit rounded to the nearest 10)')+' × <b>'+pct(res.tier)+'</b> (your benefit level) = '+money(res.pay)+'. Shown to the cent from whole-dollar inputs; VA\'s final rounding of the payment is not published here. Partial months are prorated by VA; this page does not compute them.</div>'+PARTS_SLOT+'</details>';
+          lows.push(res.pay); highs.push(res.pay); summ.push({n:nd,pay:res.pay,state:"pay",rop:r});
+        } else {
+          body+='<div class="answer"><span class="fig stop">'+(res.state==="expired"?'EXPIRED':(res.state==="none"?'$0':'UNKNOWN'))+'</span><span class="figlab">'+(res.state==="none"?'housing allowance — not payable at this enrollment':(res.state==="expired"?'housing allowance — table expired':'housing allowance — not shown'))+'</span></div><div class="why">'+esc(res.reason)+'</div>'+
+            '<details class="whyd"'+(VIEW!=="vet"?' open':'')+'><summary>Where this comes from</summary>'+regTiles+PARTS_SLOT+'</details>';
+          summ.push({n:nd,pay:null,state:res.state,rop:r,reason:res.reason});
+        }
+      } else {
+        var band=(level==="grad")?bandFor(Math.round((p.ropGrad||0)*ftc*100)/100,ftc):bandFor(p.total,ftc), res31=ch31Monthly(band,chapter,deps,p.resident,bahEff,activeDuty==="yes");
+        if(level==="grad" && res31.pay!==null) res31={pay:null,state:"unknown",reason:"graduate Chapter 31 training time is measured \"as certified by a responsible official of the school\" (38 CFR 21.4270(c)) — the school's certified band governs and this page will not construct one; the SCO and your counselor have it"};
+        if(res31.pay!==null && activeDuty==="") res31={pay:null,state:"unknown",reason:"answer the active-duty question in section A — a service member on active duty in Chapter 31 training is not paid subsistence (VR&E SCO Handbook § F.3)"};
+        if(res31.pay!==null && activeDuty==="changes") res31={pay:null,state:"unknown",reason:"active-duty status changes during these dates — subsistence is not paid for the days on active duty (VR&E SCO Handbook § F.3), and this page does not split a schedule by duty dates; your counselor has the effective date"};
+        if(res31.pay===null&&chapter==="31p"&&p.resident&&bahUndated&&band.k!=="sub"){ res31={pay:null,state:"unknown",reason:bahRefuse}; }
+        if(p.incomplete){ res31={pay:null,state:"unknown",reason:"a counted class is incomplete — credit hours missing, 'how taken' not chosen, campus missing, or a session shorter than a week — fill it in or remove it"}; }
+        // 38 CFR 21.260(c): the Chapter 31 Post-9/11 rate uses the ZIP of the "institution, agency, or employer providing the
+        // rehabilitation program"; attendance at more than one institution uses the parent institution's ZIP — not Chapter 33's
+        // majority-of-classes test. So: one institution named → that ZIP; several → UNKNOWN until the counselor names the parent.
+        if(res31.pay!==null && res31.basis==="ZIP" && p.campusList && p.campusList.length>1) res31={pay:null,state:"unknown",reason:"in-person classes at more than one location: for Chapter 31 the figure is the ZIP of the institution providing the rehabilitation program (the parent institution if you attend more than one) — 38 CFR 21.260(c); your counselor names it, this page does not choose"};
+        if(res31.pay!==null && res31.basis==="ZIP" && bahSrc==="") res31={pay:null,state:"unknown",reason:"say where you read the ZIP figure (section A) — the page will not label a source it was not told"};
+        var regTiles='<div class="reg">'+
+          '<div><span class="fig small">'+p.total+' / '+ftc+'</span><span class="figlab">credits counted / full time</span></div>'+
+          '<div><span class="fig small '+(band.k==="sub"?'stop':'')+'">'+band.label+'</span><span class="figlab">training time · 21.4270(c)</span></div>'+
+          (chapter==="31p"?'<div><span class="fig small '+(p.resident?'':'off')+'">'+(p.resident?'ZIP RATE':'ONLINE RATE')+'</span><span class="figlab">'+(p.resident?'a class in residence':'entirely online')+'</span></div>':'<div><span class="fig small'+(deps===null?' off':'')+'">'+(deps===null?'?':deps)+'</span><span class="figlab">'+(deps===null?'dependents — not entered':'dependents')+'</span></div>')+
+          '</div>';
+        if(res31.pay!==null){
+          body+='<div class="answer"><span class="fig">'+money(res31.pay)+'</span><span class="figlab">per full month · subsistence allowance</span></div>'+
+            '<details class="whyd"'+(VIEW!=="vet"?' open':'')+'><summary>Where this number comes from</summary>'+regTiles+'<div class="why">'+(res31.basis==="CH31SA"?'FY2026 Chapter 31 table, '+band.label.toLowerCase()+', '+(deps===null?'— (dependents not entered)':deps+' dependent'+(deps===1?'':'s'))+' — 38 CFR 21.260(a), M28C; prorated on days attended each month.':(res31.basis==="ZIP"?'<b>'+money(res31.base)+'</b> (your ZIP figure for the institution providing the program'+(p.campusList&&p.campusList.length===1?' — '+esc(p.campusList[0]):'')+', read '+esc(bahAsOf)+(bahWin==="out-of-year"?' — <span class="red">outside VA\'s current rate year; confirm it is the figure VA locked</span>':(bahWin==="after-jan1"?' — <span class="red">read after January 1: the military table has changed since VA locked its figure; make sure this is the earlier figure</span>':''))+') × <b>'+res31.mult+'</b> — 38 CFR 21.260(c), footnote 5.':'<b>'+money(res31.base)+'</b> (national average) × <b>'+res31.mult+'</b> — 38 CFR 21.260(c), solely distance learning.'))+'</div>'+PARTS_SLOT+'</details>';
+          lows.push(res31.pay); highs.push(res31.pay); summ.push({n:nd,pay:res31.pay,state:"pay"});
+        } else {
+          summ.push({n:nd,pay:null,state:res31.state,reason:res31.reason});
+          body+='<div class="answer"><span class="fig stop">'+(res31.state==="expired"?'EXPIRED':(res31.state==="none"?'NOT PAYABLE':'UNKNOWN'))+'</span><span class="figlab">'+(res31.state==="none"?'subsistence allowance — not payable at this enrollment':(res31.state==="expired"?'subsistence allowance — table expired':'subsistence allowance — not shown'))+'</span></div><div class="why">'+esc(res31.reason)+'</div>'+
+            '<details class="whyd"'+(VIEW!=="vet"?' open':'')+'><summary>Where this comes from</summary>'+regTiles+PARTS_SLOT+'</details>';
+        }
+      }
+      el.innerHTML=head+body.split(PARTS_SLOT).join('<div class="why" style="border-top:1px solid var(--line);padding-top:var(--s1)">'+partsTxt+'</div>');
+      box.appendChild(el);
+    });
+    // The summary reads the long stretches (a week or more) as the plan, and names any short stretch between
+    // sessions separately: VA prorates those days, so a two-day dip to 50% is real but small.
+    // Calendar months that straddle two stretches: VA prorates "for a partial month" (21.9641(c)); the method is not
+    // published on the pages cited, so this shows the days at each rate and no combined dollar figure.
+    var straddle=[];
+    ps.filter(function(p){return !p.gap;}).forEach(function(p,i,arr){
+      if(i===0) return; var prev=arr[i-1]; var pe=new Date(prev.end), cs=new Date(p.start);
+      if(pe.getUTCFullYear()===cs.getUTCFullYear() && pe.getUTCMonth()===cs.getUTCMonth()){
+        var mStart=Date.UTC(cs.getUTCFullYear(),cs.getUTCMonth(),1), mEnd=Date.UTC(cs.getUTCFullYear(),cs.getUTCMonth()+1,0);
+        var dPrev=days(Math.max(mStart,prev.start),prev.end), dCur=days(p.start,Math.min(mEnd,p.end));
+        straddle.push(MON[cs.getUTCMonth()]+" "+cs.getUTCFullYear()+": "+dPrev+" day"+(dPrev===1?"":"s")+" at the earlier stretch's rate, "+dCur+" at the later one"+(days(prev.end,p.start)>2?", with "+(days(prev.end,p.start)-2)+" day"+((days(prev.end,p.start)-2)===1?"":"s")+" between sessions":""));
+      }
+    });
+    // Three states, kept apart: a rate, a rule that pays nothing, and an unknown. "Pays nothing" is said only for "none".
+    var longS=summ.filter(function(x){return x.n>=7;}), shortS=summ.filter(function(x){return x.n<7;});
+    var txt="";
+    var allowance = chapter==="33" ? "housing allowance" : "subsistence allowance";
+    if(longS.length){
+      var paid=longS.filter(function(x){return x.state==="pay";}).map(function(x){return x.pay;});
+      var none=longS.filter(function(x){return x.state==="none";}).length;
+      var unk=longS.filter(function(x){return x.state==="unknown"||x.state==="expired";}).length;
+      if(paid.length===longS.length){
+        var lo=Math.min.apply(null,paid), hi=Math.max.apply(null,paid);
+        txt = lo===hi ? "One full-month rate applies across the term: "+money(lo)+" for each whole month a session is running." : "The full-month rate moves during the term: from "+money(lo)+" to "+money(hi)+", depending on which sessions are running. Plan on the lower one for the months it applies.";
+      } else {
+        var bits=[];
+        if(paid.length) bits.push((paid.length===1?"one stretch has a full-month rate of "+money(paid[0]):paid.length+" stretches have full-month rates between "+money(Math.min.apply(null,paid))+" and "+money(Math.max.apply(null,paid))));
+        if(none) bits.push(none+" stretch"+(none>1?"es pay":" pays")+" nothing under the rule (at or below half time)");
+        if(unk) bits.push(unk+" stretch"+(unk>1?"es are":" is")+" UNKNOWN — an input is missing or a table has expired, so no figure is shown");
+        txt = bits.join("; ")+". Read each stretch above.";
+      }
+    }
+    shortS.forEach(function(x){
+      var tail = x.state==="pay" ? " — "+money(x.pay)+" a month, prorated to those days"
+               : x.state==="none" ? " — no "+allowance+" for those days under the rule"
+               : " — no figure shown for those days (an input is missing or a table has expired)";
+      txt += " For the "+x.n+"-day stretch"+(summ.length>1?" between sessions":"")+(x.rop!=null?" the rate of pursuit is "+pct(x.rop):"")+tail+". VA prorates by day, so the effect is small but real; confirm with the School Certifying Official how your sessions are certified.";
+    });
+    if(straddle.length) txt += " Months that change rate part-way: "+straddle.join("; ")+". VA prorates such a month between the two rates by the part of the month enrolled at each (38 CFR 21.9641(c)); the day-count method is not published on the pages cited, so no combined figure is shown for those months.";
+    note.textContent = txt;
+    // a printed copy carries what was entered, in one block, above the stretches
+    var ps_=$("printSummary"); if(ps_){
+      var chLabel=$("chapter").options[$("chapter").selectedIndex]?$("chapter").options[$("chapter").selectedIndex].text:"";
+      var lines=["Benefit: "+chLabel, "Level: "+(levelRaw||"—")+" · full time "+(ftc||"—")+" credits · "+(unitRaw==="12"?"quarter hours":(unitRaw==="18"?"semester hours":"—"))];
+      if(chapter==="33") lines.push("Benefit level: "+($("tier").value?pct(tier):"—")+" · active duty: "+(activeDuty||"—")+" · first use: "+(firstUse||"—")+" · last term: "+(finalTerm||"—"));
+      if(chapter==="31s") lines.push("Dependents: "+(deps===null?"—":deps)+" · active duty: "+(activeDuty||"—"));
+      if(chapter==="33"||chapter==="31p") lines.push("Housing figure: "+(bah>0?"$"+bah+" read "+bahAsOf+" ("+(bahSrc==="tool"?"VA Comparison Tool":(bahSrc||"source —"))+")":"—"));
+      lines.push("Sessions: "+sessions.map(function(s){return (s.name||"session")+" "+s.start+" to "+s.end;}).join("; "));
+      lines.push("Classes: "+classes.map(function(c){var s=null; sessions.forEach(function(x){if(x.id===c.ses)s=x;}); return (c.name||"class")+" "+(c.credits||"?")+" cr, "+(s?(s.name||"session"):"?")+", "+(c.resident===null?"how taken?":(c.resident?"in person"+(c.campus?" at "+c.campus:""):"online"))+(c.count?"":" (excluded)");}).join("; "));
+      lines.push("Printed "+new Date().toISOString().slice(0,10)+" — a rate, not a deposit; the SCO's certification and VA's award govern.");
+      ps_.textContent=lines.join("\n");
+    }
+  }
+
+  document.querySelectorAll("[data-preset]").forEach(function(b){ b.addEventListener("click",function(){ addSession(PRESETS[b.dataset.preset]); }); });
+  $("addBreak").addEventListener("click",addBreak);
+  $("addClass").addEventListener("click",addClass);
+  ["chapter","level","ftc","unit","tier","deps","bah","bahAsOf","bahSrc","activeDuty","firstUse","finalTerm"].forEach(function(i){ $(i).addEventListener("input",update); $(i).addEventListener("change",update); });
+  $("level").addEventListener("change",function(){ renderSessions(); renderClasses(); renderBreaks(); update(); });
+  document.querySelectorAll(".roles button").forEach(function(b){ b.addEventListener("click",function(){ setView(b.dataset.view); }); });
+  setView("vet");
+
+  // Start with ODU's Fall 2026 full term and one blank class so the first screen already shows the shape.
+  sessions.push({id:++sid,name:PRESETS.f26full.name,start:PRESETS.f26full.start,end:PRESETS.f26full.end,kind:"full"});
+  classes.push({id:++cid,name:"",credits:0,ses:sid,resident:null,count:true});
+  renderSessions(); renderBreaks(); renderClasses(); update();
+})();
+</script>
+
+</body>
+</html>

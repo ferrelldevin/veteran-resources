@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" data-view="vet">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Veteran Benefits Kit · ODU</title>
+<meta name="description" content="The front door to the BW-07 kit: the three pages a veteran student, a work-study desk, or a counselor at ODU needs, and the handful of VA and ODU pages behind them. One link to bookmark.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap">
+<style>
+/* D2 DRAFTING TABLE — tokens verbatim from departments/design/DIRECTIONS.md (2026-08-21). Series: BW-07. */
+:root{
+  --canvas:#E9EDEF;--field:#FFFFFF;--ink:#16202B;--ink-muted:#5A6874;--line:#74828C;
+  --accent:#2B5CA8;--accent-quiet:#79868F;--signal:#B4412E;
+  --s1:6px;--s2:12px;--s3:18px;--s4:30px;--s5:48px;--s6:78px;--margin:96px;
+  --t-title:26px;--t-head:18px;--t-body:16px;--t-label:12px;
+  --sans:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"Fira Code","Cascadia Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-family:var(--serif);font-size:var(--t-body);line-height:1.5;padding:var(--s4) var(--s3) var(--s6) var(--margin);-webkit-font-smoothing:antialiased}
+.sheet{max-width:78ch;margin:0 auto}
+@media (max-width:720px){body{padding:var(--s3) var(--s2) var(--s5) var(--s3)}}
+.eyebrow{font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-muted);margin-bottom:var(--s1);line-height:1.7}
+h1{font-family:var(--sans);font-weight:600;font-size:var(--t-title);line-height:1.1;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+h2{font-family:var(--sans);font-weight:600;font-size:var(--t-head);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s2);text-wrap:balance}
+p{margin-bottom:var(--s2)} p:last-child{margin-bottom:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lead{font-size:18px;line-height:1.5;margin-top:var(--s2)}
+section{position:relative;margin-top:var(--s5);padding-top:var(--s3)}
+section::before{content:"";position:absolute;top:0;left:calc(var(--s2) * -1);right:0;height:1px;background:var(--accent)}
+section::after{content:"";position:absolute;top:calc(var(--s1) * -1);left:calc(var(--s2) * -1);width:1px;height:var(--s2);background:var(--accent)}
+@media (max-width:720px){section::before,section::after{left:0}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s2)}
+.tile{display:block;background:var(--field);border:1px solid var(--line);padding:var(--s3);text-decoration:none;color:var(--ink);border-left:3px solid var(--accent)}
+.tile:hover{border-color:var(--accent)}
+.tile .who{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.tile h3{font-family:var(--sans);font-weight:600;font-size:20px;line-height:1.15;margin:var(--s1) 0}
+.tile p{font-size:15px;color:var(--ink);margin:0}
+.tile .go{display:block;margin-top:var(--s2);font-family:var(--sans);font-weight:600;letter-spacing:.02em;color:var(--accent)}
+.cite{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--accent);border-bottom:1px solid var(--accent-quiet);padding-bottom:1px;text-decoration:none}
+@media (max-width:720px){.cite{white-space:normal;overflow-wrap:anywhere}}
+ul.links{list-style:none}
+ul.links li{padding:var(--s1) 0;border-bottom:1px solid var(--line);font-size:15px;display:flex;gap:var(--s2);flex-wrap:wrap;align-items:baseline}
+ul.links li b{font-family:var(--sans);font-weight:600;letter-spacing:.02em;min-width:16ch}
+table{width:100%;border-collapse:collapse;margin-top:var(--s2)}
+th{font-family:var(--mono);font-size:var(--t-label);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);text-align:left;padding:var(--s1);border-bottom:1px solid var(--accent-quiet)}
+td{padding:var(--s1);border-bottom:1px solid var(--line);vertical-align:top;font-size:14px;line-height:1.5}
+td:first-child{font-family:var(--sans);font-weight:600;letter-spacing:.02em}
+.asof{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.04em;color:var(--ink);line-height:1.7;margin-top:var(--s2);padding-top:var(--s1);border-top:1px solid var(--accent-quiet)}
+.never{border-left:3px solid var(--signal);background:var(--field);padding:var(--s2) var(--s3);margin-top:var(--s3);font-size:15px}
+.never b{color:var(--signal);font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em;font-size:13px}
+footer{margin-top:var(--s6);padding-top:var(--s2);border-top:1px solid var(--line);font-size:13px;color:var(--ink-muted);line-height:1.6}
+footer .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.04em;margin-top:var(--s2)}
+@media print{
+  @page{size:letter;margin:12mm}
+  html,body{background:#fff} body{padding:0;font-size:10pt;color:#000} .sheet{max-width:none}
+  a{color:inherit} .tile{border-color:#999;break-inside:avoid} .tile .go::after,a.cite::after{content:" ‹" attr(href) "›";font-family:var(--mono);font-size:7.5pt;color:#333;word-break:break-all;font-weight:400}
+  section{margin-top:12pt;padding-top:6pt}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="sheet">
+<header>
+  <div class="eyebrow">BW-07 · VA education benefits at ODU · the front door</div>
+  <h1>Veteran Benefits Kit</h1>
+  <p class="lead">Three pages. Start with the one that matches your question. Each shows the answer first and puts the rule behind it one tap away; each prints. Nothing here is a VA decision — the School Certifying Official's certification and VA's award govern your case.</p>
+</header>
+
+<section>
+  <h2>Which page do you need?</h2>
+  <div class="tiles">
+    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">
+      <span class="who">Veteran · planning a term</span>
+      <h3>Semester Pay Planner</h3>
+      <p>Pick your benefit, tick your sessions, add your classes. One full-month housing or subsistence figure per stretch of the term, with where it comes from one tap away.</p>
+      <span class="go">Open the planner →</span>
+    </a>
+    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">
+      <span class="who">Veteran · which benefit, what it pays</span>
+      <h3>Which Benefit Am I On</h3>
+      <p>First, how to find which benefit you <em>already have</em> — your award letter, VA's online tool, the phone. Then the programs side by side in one line each: who each is for, what it pays and to whom, the rate with its dates, the role to ask. It compares; it does not decide eligibility — VA does.</p>
+      <span class="go">Open the comparison →</span>
+    </a>
+    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">
+      <span class="who">The desk · work-study staff</span>
+      <h3>Front-Desk Map</h3>
+      <p>Fourteen situations a student brings up, on one printed sheet (front: the grid; back: every line's sources): they say this, you check this, then this, hand it to this role. The full rows fold below for the trainer.</p>
+      <span class="go">Open the desk map →</span>
+    </a>
+    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">
+      <span class="who">Counselor · Chapter 31</span>
+      <h3>The counselor's view</h3>
+      <p>Open the planner and tap <b>Counselor · Chapter 31</b>: the same page with every rule open — training-time bands, the elected Post-9/11 fractions, below-half exceptions, the January cadence. On the comparison sheet, the Chapter 31 row and section C; on the desk map, lines 2, 9, 11 and 12 are the office's Chapter 31 rows.</p>
+      <span class="go">Open the planner, then the counselor view →</span>
+    </a>
+  </div>
+  <div class="never" style="border-left-color:var(--accent)"><b style="color:var(--accent)">If a kit page will not open</b> — the link is private until the operator shares it, the network is down, or an issuer has moved a page: use the roles table below and do not estimate money; the printed set is the three sheets together, and each carries its sources on paper. A date on this page that has passed means re-read the source it names.</div>
+  <div class="never"><b>The one rule</b> — for everyone at the desk who is <em>not</em> the designated School Certifying Official (work-study students, SCO assistants, read-only users): <strong>You may assist. You never certify to VA.</strong> Certification is the designated SCO's act alone — VA: work-study students "may assist with the certification process; however… they cannot certify information to VA." <a class="cite" href="https://www.benefits.va.gov/GIBILL/resources/education_resources/school_certifying_officials/SCO_Training_FAQS.asp">VA SCO Training FAQs, updated 2026-04-28</a></div>
+</section>
+
+<section>
+  <h2>Who does what — by role, never by name</h2>
+  <table>
+    <thead><tr><th>Ask</th><th>About</th></tr></thead>
+    <tbody>
+      <tr><td>School Certifying Official (SCO) — ODU Military Benefits &amp; Certification Services</td><td>Certifying your enrollment to VA; the Veterans Clearance Form; what a drop, add or change does to your certification; whether a class is certified as in residence (VA to certifying officials: "SCOs will certify all courses which combine Classroom Instruction and Distance Learning (Hybrid) as In-Residence training" — <a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/Hybrid_Training_Updates_FAQs.pdf">VA Education Service, Hybrid Training Updates FAQs, 2019</a> — for terms beginning on or after 2019-08-15; remedial and deficiency courses are the stated exception). Contact by function on <a class="cite" href="https://www.odu.edu/military/va-certifying-official">odu.edu/military</a>.</td></tr>
+      <tr><td>VR&amp;E counselor (VRC) — VA</td><td>Everything Chapter 31: your plan, authorizations to the school, subsistence, books and equipment, switching. Cannot reach them: VA's handbook for schools — "call or visit your VA Regional Office and ask to speak to the VR&amp;E Supervisor. Someone will assist you in your VRC's absence." (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § M, on VA's KnowVA — the page renders in a browser only, a plain fetch returns its shell; read there 2026-09-02</a>); the office itself is found at <a class="cite" href="https://www.va.gov/find-locations/">va.gov/find-locations</a>.</td></tr>
+      <tr><td>Accredited Veterans Service Officer (VSO)</td><td>Disability claims and ratings, appeals, other VA benefits — "always free". <a class="cite" href="https://www.va.gov/get-help-from-accredited-representative/">va.gov, 2025-01-23</a></td></tr>
+      <tr><td>VA Education Call Center</td><td>Payment status, remaining entitlement, letters, debts, for the GI Bill chapters. <b>888-442-4551</b> (TTY 711), Mon–Fri 8 a.m.–7 p.m. ET — VA's published line, quoted from the <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, updated 2026-08-05</a>, read 2026-09-02; re-read there by 2027-08-01.</td></tr>
+      <tr><td><a class="cite" href="https://www.va.gov/contact-us/ask-va/">Ask VA</a></td><td>VA: "You can use Ask VA to ask a question online. You can ask about education, disability compensation, health care and many other topics." "You should receive a reply within 7 business days." Sign in to ask about yourself. (Practical advice, not a VA rule: name the school and the term dates.) <a class="cite" href="https://www.va.gov/contact-us/ask-va/">va.gov/contact-us/ask-va, read 2026-09-02</a></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>The VA and ODU pages behind the kit</h2>
+  <ul class="links">
+    <li><b>Post-9/11 rates</b><a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov, Post-9/11 GI Bill rates — housing, tiers, the more-than-50% rule, exclusions (2026-08-01 → 2027-07-31)</a></li>
+    <li><b>Verify enrollment</b><a class="cite" href="https://www.va.gov/education/verify-school-enrollment/">va.gov, verify your school enrollment — Post-9/11, Montgomery GI Bill (Active Duty and Selected Reserve), VET TEC 2.0 and Chapter 35 verify monthly (updated 2026-07-27)</a> · <a class="cite" href="https://benefits.va.gov/gibill/">benefits.va.gov/gibill: "As of January 2026, all education beneficiaries, including Survivors' and Dependents' Educational Assistance (Chapter 35) students, must verify their enrollment each month" (updated 2026-08-06)</a> — Chapter 31 is not on VA's verification list</li>
+    <li><b>Benefits left</b><a class="cite" href="https://www.va.gov/education/check-remaining-benefits/">va.gov, check remaining GI Bill and other education benefits</a></li>
+    <li><b>VR&amp;E eligibility</b><a class="cite" href="https://www.va.gov/careers-employment/vocational-rehabilitation/eligibility/">va.gov, Veteran Readiness and Employment eligibility — apply with a 10% rating; the VRC decides</a></li>
+    <li><b>Chapter 31 rates</b><a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates26.asp">VA, FY2026 Chapter 31 subsistence rates (2025-10-01 → 2026-09-30)</a></li>
+    <li><b>Other rates</b><a class="cite" href="https://www.va.gov/education/benefit-rates/">va.gov, education benefit rates — Chapters 30, 1606, 35, STEM</a></li>
+    <li><b>Comparison tool</b><a class="cite" href="https://www.va.gov/education/gi-bill-comparison-tool/institution/11900146">VA GI Bill Comparison Tool, ODU-Norfolk — the housing figure VA uses here, Yellow Ribbon</a></li>
+    <li><b>ODU checklist</b><a class="cite" href="https://www.odu.edu/military-connection/veteran-student-checklist">ODU veteran student checklist — the clearance form, 30–45 business days</a></li>
+    <li><b>ODU FAQ</b><a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU military FAQs — who files the clearance form and when; Chapter 31 exception</a></li>
+    <li><b>ODU calendar</b><a class="cite" href="https://catalog.odu.edu/undergraduate/academiccalendar/academiccalendar.pdf">ODU academic calendar — session dates, add/drop, withdrawal</a></li>
+  </ul>
+  <p class="asof">Rates on the three pages carry their own dates and mark themselves expired when the date passes. The fiscal-year rates (Chapters 30, 1606, 35, 31) change on <span class="mono">2026-10-01</span>; Post-9/11 figures run to <span class="mono">2027-07-31</span>. Links read 2026-09-02.</p>
+</section>
+
+<footer>
+  <p><strong>Not an official VA document.</strong> The three pages quote VA, the statute and ODU as read on 2026-09-02, and say where; the sources govern where they and the pages differ. The pages are private until the operator shares them; a printed set is the three sheets together.</p>
+  <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/vetkit/">ferrelldevin.github.io/vetkit/</a> — the same page, hosted for sharing; this copy is the review copy.</p>
+<p class="stamp">BW-07 Veteran Benefits Kit · front door · revision 11 · prepared 2026-09-02 · &copy; 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.</p>
+</footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+{
+  "generated": "2026-09-03T18:34:13.310Z",
+  "errorCorrection": "Q",
+  "margin": "4 modules",
+  "items": [
+    {
+      "id": "front-door",
+      "audience": "students",
+      "title": "Veteran Benefits Kit — the front door",
+      "use": "Start here. Picks the right page for the question: planning a term, finding your benefit, or working the desk.",
+      "url": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/",
+      "decoded": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/",
+      "exact": true,
+      "modules": 45,
+      "pngPx": 1200,
+      "svgBytes": 3514,
+      "decodeAt300px": true,
+      "decodeAt150px": true
+    },
+    {
+      "id": "planner",
+      "audience": "students",
+      "title": "Semester Pay Planner",
+      "use": "Enter sessions, classes and credits; see the monthly housing or subsistence figure per stretch of the term, with the VA rule behind it one tap away.",
+      "url": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/",
+      "decoded": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/",
+      "exact": true,
+      "modules": 45,
+      "pngPx": 1200,
+      "svgBytes": 3443,
+      "decodeAt300px": true,
+      "decodeAt150px": true
+    },
+    {
+      "id": "which-benefit",
+      "audience": "students",
+      "title": "Which Benefit Am I On",
+      "use": "How to find the benefit you already have; the programs side by side; who to ask. Compares, does not decide.",
+      "url": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/",
+      "decoded": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/",
+      "exact": true,
+      "modules": 45,
+      "pngPx": 1200,
+      "svgBytes": 3435,
+      "decodeAt300px": true,
+      "decodeAt150px": true
+    },
+    {
+      "id": "desk-map",
+      "audience": "office",
+      "title": "Benefits Front-Desk Map",
+      "use": "For whoever is at the desk: fourteen situations, one check each, the branch, the hand-over, the source. Office sheet, not the student handout.",
+      "url": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/",
+      "decoded": "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/",
+      "exact": true,
+      "modules": 45,
+      "pngPx": 1200,
+      "svgBytes": 3549,
+      "decodeAt300px": true,
+      "decodeAt150px": true
+    }
+  ],
+  "restrictedScan": {
+    "allowedUrls": [
+      "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/",
+      "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/",
+      "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/",
+      "https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/"
+    ],
+    "note": "The package encodes and lists only these four addresses; the student sheet carries only the three student-facing ones. No repository path, brief, transcript, harness, ADR or Drive address appears anywhere in the package."
+  }
+}

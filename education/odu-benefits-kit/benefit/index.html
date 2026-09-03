@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en" data-view="vet">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Which Benefit Am I On</title>
+<meta name="description" content="VA education benefits for a veteran student at ODU, side by side: who each chapter is for in VA's words, what it pays and to whom, the current rate with its dates, and the role to ask — never a person's name.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap">
+<style>
+/* D2 DRAFTING TABLE — tokens verbatim from departments/design/DIRECTIONS.md (2026-08-21). Series: BW-07. */
+:root{
+  --canvas:#E9EDEF;--field:#FFFFFF;--ink:#16202B;--ink-muted:#5A6874;--line:#74828C;
+  --accent:#2B5CA8;--accent-quiet:#79868F;--signal:#B4412E;
+  --s1:6px;--s2:12px;--s3:18px;--s4:30px;--s5:48px;--s6:78px;--margin:96px;
+  --t-title:26px;--t-head:18px;--t-body:16px;--t-label:12px;
+  --sans:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"Fira Code","Cascadia Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-family:var(--serif);font-size:var(--t-body);line-height:1.5;
+  padding:var(--s4) var(--s3) var(--s6) var(--margin);-webkit-font-smoothing:antialiased}
+.sheet{max-width:84ch;margin:0 auto}
+section{position:relative;margin-top:var(--s5);padding-top:var(--s3)}
+section:first-of-type{margin-top:var(--s4)}
+section::before{content:"";position:absolute;top:0;left:calc(var(--s2) * -1);right:0;height:1px;background:var(--accent)}
+section::after{content:"";position:absolute;top:calc(var(--s1) * -1);left:calc(var(--s2) * -1);width:1px;height:var(--s2);background:var(--accent)}
+section>.coord{position:absolute;top:calc(var(--s2) * -1);right:calc(100% + var(--s3));font-family:var(--mono);font-size:var(--t-label);letter-spacing:.06em;color:var(--accent);white-space:nowrap}
+@media (max-width:720px){
+  body{padding:var(--s3) var(--s2) var(--s5) var(--s3)}
+  section>.coord{position:static;display:block;margin-bottom:var(--s1)}
+  section::before,section::after{left:0}
+}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-muted);margin-bottom:var(--s1);line-height:1.7}
+h1{font-family:var(--sans);font-weight:600;font-size:var(--t-title);line-height:1.1;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+h2{font-family:var(--sans);font-weight:600;font-size:var(--t-head);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s2);text-wrap:balance}
+h3{font-family:var(--sans);font-weight:600;font-size:var(--t-body);letter-spacing:.02em;margin-bottom:var(--s1)}
+p{margin-bottom:var(--s2)} p:last-child{margin-bottom:0}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lead{font-size:18px;line-height:1.5}
+.cite{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--accent);white-space:nowrap;border-bottom:1px solid var(--accent-quiet);padding-bottom:1px;text-decoration:none}
+.cite:hover{border-bottom-color:var(--accent)}
+.q{font-family:var(--sans);font-weight:600;font-size:17px;letter-spacing:.01em}
+.steps{display:grid;grid-template-columns:auto 1fr;gap:var(--s1) var(--s3);margin-top:var(--s2)}
+.steps dt{font-family:var(--mono);font-size:var(--t-label);color:var(--accent);letter-spacing:.04em;padding-top:3px;white-space:nowrap}
+.steps dd{font-size:15px;line-height:1.5}
+@media (max-width:720px){.steps{grid-template-columns:1fr} .cite{white-space:normal;overflow-wrap:anywhere} td.fig,td.ch{white-space:normal}}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin-top:var(--s2);font-variant-numeric:tabular-nums}
+th{font-family:var(--mono);font-size:var(--t-label);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);text-align:left;padding:var(--s1);border-bottom:1px solid var(--accent-quiet);vertical-align:bottom;line-height:1.5}
+td{padding:var(--s1);border-bottom:1px solid var(--line);vertical-align:top;font-size:14px;line-height:1.5}
+td.ch{font-family:var(--sans);font-weight:600;letter-spacing:.02em;white-space:nowrap}
+td.fig{font-family:var(--mono);white-space:nowrap}
+td .as{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:.03em;margin-top:2px}
+/* the table fits the sheet on screen the way it fits the page in print: fixed columns, wrapping cells, wrapping cites (operator's sweep, 2026-09-02) */
+@media screen and (min-width:721px){table{table-layout:fixed} th:nth-child(1),td:nth-child(1){width:18%} th:nth-child(2),td:nth-child(2){width:24%} th:nth-child(3),td:nth-child(3){width:24%} th:nth-child(4),td:nth-child(4){width:20%} th:nth-child(5),td:nth-child(5){width:14%} td,th{overflow-wrap:anywhere;min-width:0} td.fig{white-space:normal} td.ch,td.ch *{white-space:normal} td .mono{white-space:normal} td .cite,.steps .cite,.cmp .cite,.rule .cite,.asof .cite{white-space:normal;overflow-wrap:anywhere}}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s3);margin-top:var(--s2)}
+.cmp>div{background:var(--field);border:1px solid var(--line);padding:var(--s2) var(--s3)}
+.cmp h3{color:var(--accent);text-transform:uppercase;letter-spacing:.05em;font-size:14px;border-bottom:1px solid var(--accent-quiet);padding-bottom:var(--s1);margin-bottom:var(--s2)}
+.cmp p{font-size:14px;line-height:1.5}
+.cmp p b{font-family:var(--sans);letter-spacing:.02em}
+@media (max-width:720px){.cmp{grid-template-columns:1fr;gap:var(--s2)}}
+.rule{background:var(--field);border:1px solid var(--line);padding:var(--s2) var(--s3);margin-top:var(--s2)}
+.rule .n{font-family:var(--mono);font-size:var(--t-label);color:var(--accent);letter-spacing:.06em}
+.rule p{font-size:15px}
+.asof{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.04em;color:var(--ink);line-height:1.7;margin-top:var(--s2);padding-top:var(--s1);border-top:1px solid var(--accent-quiet)}
+.asof.expired{color:var(--signal);border-top-color:var(--signal)}
+/* a rate whose own date range has passed reads as expired, not as current */
+.as.expired{color:var(--signal)}
+td.expired{color:var(--ink-muted)}
+td.expired{text-decoration:line-through}
+.as-range.expired{color:var(--signal)}
+.offline-banner{display:none;border-left:3px solid var(--signal);background:var(--field);padding:var(--s2) var(--s3);margin-top:var(--s2);color:var(--signal);font-family:var(--mono);font-size:var(--t-label)}
+html[data-offline="true"] .offline-banner{display:block}
+.datecheck-failed{border-left:3px solid var(--signal);background:var(--field);padding:var(--s2) var(--s3);margin-top:var(--s2);color:var(--signal);font-family:var(--mono);font-size:var(--t-label)}
+.stop{border-left:3px solid var(--signal);padding:var(--s2) var(--s3);background:var(--field);margin:var(--s2) 0;font-size:15px}
+.stop b{color:var(--signal);font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em;font-size:13px}
+footer{margin-top:var(--s6);padding-top:var(--s2);border-top:1px solid var(--line);font-size:13px;color:var(--ink-muted);line-height:1.6}
+footer .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.04em;margin-top:var(--s2)}
+
+/* narrow screens: tables stack into labelled rows; the label comes from the header the cell sat under */
+@media screen and (max-width:720px){
+  table.stack thead{display:none}
+  table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
+  table.stack tr{border:1px solid var(--line);background:var(--field);margin-top:var(--s2);padding:var(--s1) var(--s2)}
+  table.stack td{border-bottom:0;padding:var(--s1) 0;white-space:normal}
+  table.stack td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
+  table.stack td.ch,table.stack td:first-child{white-space:normal;font-size:16px}
+  table.stack td.fig{text-align:left}
+}
+@media print{
+  html,body{background:#fff} body{padding:10mm 12mm 12mm 22mm;font-size:10pt;color:#000}
+  a{color:inherit} .cite{color:#000;border-bottom-color:#999;white-space:normal}
+  /* a printed copy must be followable without a screen: every cite prints its address */
+  a.cite::after{content:" ‹" attr(href) "›";font-family:var(--mono);font-size:7.5pt;color:#333;word-break:break-all}
+  .cmp>div,.rule,.stop{border-color:#999} .rule,.cmp>div,tr{break-inside:avoid} section{break-inside:auto}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ---- three layers: the answer (veteran), VA's words one tap deeper, the SCO / counselor view with everything open ---- */
+.roles{display:flex;gap:var(--s1);flex-wrap:wrap;margin-top:var(--s2)}
+.roles button{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);background:var(--field);color:var(--ink-muted);padding:var(--s1) var(--s2);cursor:pointer}
+.roles button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);box-shadow:inset 0 -2px 0 var(--accent)}
+.roles button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rolenote{font-size:14px;color:var(--ink-muted);margin-top:var(--s1)}
+td .short{display:block;font-size:14px;line-height:1.5}
+details.more{margin-top:4px}
+details.more>summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--accent);list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"+ "} details.more[open]>summary::before{content:"− "}
+details.more>div{margin-top:var(--s1);font-size:13px;line-height:1.5;color:var(--ink-2, var(--ink))}
+details.layer>summary{cursor:pointer;font-family:var(--sans);font-weight:600;font-size:var(--t-head);text-transform:uppercase;letter-spacing:.05em;list-style:none;margin-bottom:var(--s2)}
+details.layer>summary::-webkit-details-marker{display:none}
+details.layer>summary::after{content:" — tap to open";font-size:12px;text-transform:none;letter-spacing:.02em;color:var(--ink-muted);font-weight:400}
+details.layer[open]>summary::after{content:" — tap to close"}
+html[data-view="vet"] .sco-only{display:none}
+#sources{display:none}
+@media print{
+  .roles,.rolenote,.offline-banner,#sources-toggle{display:none!important}
+  details.more:not([open])>div{display:none} details.more>summary{display:none}
+  details.layer:not([open]){display:none} details.layer>summary::after{content:none}
+  /* page 1 is the sheet: the addresses print once, on page 2, from the sources list */
+  table a.cite::after,.steps a.cite::after,.cmp a.cite::after,.rule a.cite::after,.asof a.cite::after{content:none}
+  #sources{display:block;break-before:page;font-family:var(--mono);font-size:6.5pt;line-height:1.4;columns:2;column-gap:14pt}
+  #sources h2{font-size:12pt;margin-bottom:6pt}
+  #sources li{margin-bottom:2pt;word-break:break-all;break-inside:avoid} #sources h2{column-span:all}
+  td{font-size:8.5pt;padding:3pt 4pt} td .short{font-size:8.5pt} th{font-size:7pt;padding:3pt 4pt} td .as{font-size:7pt}
+  table{table-layout:fixed;width:100%} td.fig,td.ch{white-space:normal} th:nth-child(1),td:nth-child(1){width:15%} th:nth-child(2),td:nth-child(2){width:25%} th:nth-child(3),td:nth-child(3){width:26%} th:nth-child(4),td:nth-child(4){width:20%} th:nth-child(5),td:nth-child(5){width:14%}
+  .lead{font-size:11pt} .steps dd{font-size:9pt} .steps dt{font-size:8pt} h2{font-size:12pt} .asof{font-size:8pt} footer{font-size:8pt}
+  section{margin-top:12pt;padding-top:6pt}
+}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="sheet">
+<header>
+  <div class="eyebrow">BW-07 · VA education benefits for a veteran student at ODU · start here</div>
+  <h1>Which Benefit Am I On</h1>
+  <div class="roles noprint" role="group" aria-label="Who is reading"><button type="button" data-view="vet" aria-pressed="true">Veteran · the short version</button><button type="button" data-view="sco" aria-pressed="false">Certifying official · VA's words</button><button type="button" data-view="vrc" aria-pressed="false">Counselor · Chapter 31</button></div>
+  <p class="rolenote noprint" id="roleNote">One line per program. VA's own words are one tap away under each; the certifying-official view opens all of them.</p>
+  <p class="lead" style="margin-top:var(--s2)">Find out which benefit you are on (section A), then see the programs side by side: who each is for, what it pays and to whom, the rate with its dates, and the role to ask.</p>
+  <p class="lead sco-only" style="margin-top:var(--s2)">Six VA education programs and two supplements pay for school here, under different rules, from different people. This sheet puts them side by side in VA's own words: who each one is for, what it pays and to whom, the current rate with the date it is good until, and the <em>role</em> to ask. Nobody here is named — roles outlast people.</p>
+  <div class="offline-banner" role="status">OFFLINE — the browser reports no network. The PHONE and CHAPTER 31 routes in section A need their linked pages and are unavailable from this screen; use the LETTER route, ask the SCO, or call the VA Education Call Center at 888-442-4551 (TTY 711) — the number is on this page, in section E. (This banner cannot detect a blocked or unreachable VA page while the browser reports online — a link that will not open is the real test.)</div>
+  <div class="asof" id="validity"><strong>PRINTED COPY VALID THROUGH 2026-09-30</strong> — four of the dated rates change on 2026-10-01. <span class="sco-only">Reprint from the source of record after that. Rates on this page carry their own dates. Post-9/11 figures run <span class="mono">2026-08-01</span> to <span class="mono">2027-07-31</span>. Chapters 30, 1606, 35 and 31 run <span class="mono">2025-10-01</span> to <span class="mono">2026-09-30</span> and change on <span class="mono">2026-10-01</span>. A rate read after its date is a rate to re-check, not to repeat. Prepared 2026-09-02.</span></div>
+</header>
+
+<section>
+  <span class="coord">A · FIND IT</span>
+  <h2>A · How to find out which one you are on</h2>
+  <dl class="steps">
+    <dt>NO NETWORK?</dt><dd class="offline-note"><span class="short">If a linked page will not open: your letter, the SCO, or the VA Education Call Center — 888-442-4551 (TTY 711), also printed in section E. <b>Do not guess a chapter from this screen alone.</b></span><details class="more"><summary>why, and what still works offline</summary><div><b>This screen carries the VA Education Call Center number and ODU's office phone and email (section E), read from the institutions' own pages on 2026-09-02; it carries no office address, and every route below that says "sign in" or "find" still needs the linked page.</b> If the links will not open, chapter identification from this screen is <b>unavailable</b>. The banner above appears only when the browser itself reports no network — <b>a browser can report "online" while VA or ODU pages are unreachable</b> (a blocked domain, a captive portal, an outage), so the banner's absence proves nothing. The test that counts is the link: if a linked page will not open, treat this screen as offline for that route. What still works without a network: the LETTER route (your COE or award letter names the chapter); the desk's SCO, who can read your current benefit type in Enrollment Manager — VA: "The remaining entitlement for a student's current benefit type displays in months and days on the student's Profile and Benefits tab" (<a class="cite" href="https://www.benefits.va.gov/GIBILL/office_hours/april-education-office-hours-fiscal-year-2023.asp">VA Education Office Hours, Enrollment Manager quick tips, updated 2025-06-04</a>); and a printed copy of this sheet, which carries the numbers on its contact line in section E. Do not guess a chapter from this screen alone.</div></details></dd>
+    <dt>LETTER</dt><dd>Your <b>Certificate of Eligibility (COE)</b> or award letter names the chapter and, for the GI Bill chapters, your months of entitlement. VA issues one when it approves a claim; VR&amp;E students have a counselor's plan and authorization instead.</dd>
+    <dt>ONLINE</dt><dd>Post-9/11 GI Bill only: <a class="cite" href="https://www.va.gov/education/check-post-9-11-gi-bill-benefits/">va.gov/education/check-post-9-11-gi-bill-benefits</a> shows "how much of your benefits you've used and how much you have remaining." The letters tool is the same scope — VA: "Right now, you can use this tool only to get your decision letter for Post-9/11 GI Bill benefits" (<a class="cite" href="https://www.va.gov/education/download-letters/">va.gov, 2024-11-29</a>).</dd>
+    <dt>PHONE</dt><dd>GI Bill chapters (33, 30, 1606, 35, Fry): VA Education Call Center (TTY 711), "Monday through Friday, 8:00 a.m. to 7:00 p.m. ET" (read 2026-09-02) — <b>888-442-4551</b> (TTY 711), quoted from the <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, updated 2026-08-05</a>; the same number is on the contact line in section E.</dd>
+    <dt>CHAPTER 31</dt><dd>VR&amp;E questions do not go to the GI Bill call center: they go to your assigned counselor (VRC). VA's handbook for schools, for a student who cannot reach the counselor: "call or visit your VA Regional Office and ask to speak to the VR&amp;E Supervisor. Someone will assist you in your VRC's absence." (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § M, updated 2025-07-30</a>). Find the regional office at <a class="cite" href="https://www.va.gov/find-locations/">va.gov/find-locations</a>. If you do not know whether you have a Chapter 31 case at all, that same office can tell you.</dd>
+    <dt>ONE TELL</dt><dd>If a <b>VR&amp;E counselor (VRC)</b> approved a rehabilitation plan for your degree and the school receives a training authorization for you, you are on <b>VR&amp;E (Chapter 31)</b>. A VetSuccess on Campus counselor or VA career counseling (Chapter 36) does not make you Chapter 31. The clearance form you file with the school does not tell you which GI Bill chapter you are on — your COE does; if you have none, the call center can tell you, and the certifying office can tell you what has been certified for you at this school (a Chapter 31 authorization reaches it from your counselor, not from you).</dd>
+    <dt>ANOTHER ONE?</dt><dd><b>Could you qualify for a benefit you are not using?</b> <details class="more"><summary>the four screens, in VA's terms</summary><div>Four screens, each in VA's terms, each ending in the form to file: a service-connected rating of 10% or more (or the active-duty routes on VA's eligibility page) → you may <em>apply</em> for VR&amp;E, and a VRC decides entitlement — with a VA rating on <a class="cite" href="https://www.va.gov/careers-employment/vocational-rehabilitation/how-to-apply/">VA Form 28-1900</a>; a service member without a rating yet (PEB, IDES, or a 20% memorandum rating) on VA Form 28-0588, "Getting Ahead After You Get Out" (same page, updated 2026-04-09); active duty after 9/10/2001 — 90 days or more for a tier, "36+ months" for 100%, or a Purple Heart since 9/11, or "30+ continuous days" followed by a service-connected disability discharge (va.gov rates page) → Post-9/11 GI Bill, <a class="cite" href="https://www.va.gov/education/how-to-apply/">VA Form 22-1990</a>; you paid into the Montgomery GI Bill on active duty, or you have a six-year Selected Reserve obligation → Chapter 30 or 1606, <a class="cite" href="https://www.va.gov/education/how-to-apply/">VA Form 22-1990</a>; you are the child or spouse of a Veteran or service member "who has died, is captured or missing, or is permanently and totally disabled due to a service-connected disability" (VA's sentence; the statute also reaches a Veteran who "died while a disability so evaluated was in existence" — a permanent and total service-connected rating at the time of death, whatever the cause — <a class="cite" href="https://uscode.house.gov/view.xhtml?req=(title:38%20section:3501%20edition:prelim)">38 U.S.C. 3501(a)(1)(A), (D)</a>; VA decides, row B lists the routes) → Chapter 35, or Fry for a qualifying death on or after 9/11/2001 (row B for both lists), <a class="cite" href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/apply-dea-fry-form-22-5490/">VA Form 22-5490</a>. VA: "Average time to process education claims: 30 days" (<a class="cite" href="https://www.va.gov/education/how-to-apply/">va.gov how to apply, 2026-08-17</a>). The screens are signposts, not the full rule: answering "no" here does not mean "not eligible" — VA decides, and the eligibility pages linked in section B carry the routes these lines compress.</div></details></dd>
+  </dl>
+</section>
+
+<section>
+  <span class="coord">B · SIDE BY SIDE</span>
+  <h2>B · The programs, side by side</h2>
+  <div class="tablewrap"><table class="stack">
+    <thead><tr><th>Program</th><th>Who it is for — VA's words</th><th>What it pays, and to whom</th><th>Full-time monthly rate — before proration, tier and offsets</th><th>Check or apply</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="ch" data-l="Program">Post-9/11 GI Bill<br><span class="mono">Chapter 33</span></td>
+        <td data-l="Who it is for"><span class="short">Served on active duty after 9/10/2001 — 90 days or more for a tier; 36 months, a Purple Heart, or 30 days with a disability discharge for 100%.</span><details class="more"><summary>VA's words</summary><div>Active duty after 9/10/2001. "36+ months" of service, a Purple Heart, or "30+ continuous days" with a disability discharge pays 100%; shorter service pays a tier from 90% down to 50%. <a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov rates, 2026-07-31</a></div></details></td>
+        <td data-l="What it pays, and to whom">Tuition and fees <b>to the school</b> (in-state public rate). A monthly housing allowance <b>to you</b> — the E-5-with-dependents housing rate for the location where you attend most classes, only above half time, and only the location rate if at least one class is not entirely online. <details class="more"><summary>exclusions, books</summary><div>Not paid while "You're on active duty" or as "a spouse using transferred benefits while the Veteran is on active duty" (<a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov rates page</a>). Books "up to $1,000 each academic year", prorated by tier.</div></details></td>
+        <td class="fig" data-l="Full-time monthly rate">ODU main campus, tool estimate $2,430<br><span class="as">2026-08-01 → 2027-07-31 (the MHA rate year this estimate belongs to) · <a class="cite" href="https://www.va.gov/education/gi-bill-comparison-tool/institution/11900146">VA Comparison Tool, ODU-Norfolk (facility 11900146)</a>, read 2026-09-02</span><details class="more"><summary>how to reproduce this figure</summary><div>The tool shows "Housing allowance: $2,430 per month", its default full-time in-person 100% estimate, read 2026-09-02 in a browser. Reproducible without a browser from the tool's own data feed, VA's institutions API (plain JSON): <a class="cite" href="https://api.va.gov/v1/gi/institutions/11900146">api.va.gov/v1/gi/institutions/11900146</a> — "dodBah": 2430 (the basis for students who first used the benefit on or after 2018-01-01), "bah": 2556 (the higher pre-2018 VA basis — see the planner's first-use question), data version created 2026-09-01, read 2026-09-02.</div></details>online-only up to $1,261<br>(½ of the $2,522 national average)<span class="as">2026-08-01 → 2027-07-31</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/education/check-post-9-11-gi-bill-benefits/">check remaining</a><br><a class="cite" href="https://www.va.gov/education/eligibility/">eligibility</a><br><a class="cite" href="https://www.va.gov/education/how-to-apply/">apply · VA Form 22-1990</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Veteran Readiness &amp; Employment<br><span class="mono">Chapter 31 · VR&amp;E</span></td>
+        <td data-l="Who it is for"><span class="short">A service-connected disability rating of 10% or more lets you apply; a VA counselor decides entitlement. No time limit if discharged on or after 2013-01-01.</span><details class="more"><summary>VA's words</summary><div>"You have a service-connected disability rating of at least 10% from VA" — that makes you eligible to <em>apply</em>; then "The VRC will determine if you're entitled to receive VR&amp;E benefits and services." Discharged on or after 2013-01-01: "There's no time limit on your eligibility." <a class="cite" href="https://www.va.gov/careers-employment/vocational-rehabilitation/eligibility/">va.gov VR&amp;E eligibility, 2025-11-07</a> · <a class="cite" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title38-section3103">38 U.S.C. 3103(g)</a></div></details></td>
+        <td data-l="What it pays, and to whom">Under a plan your counselor approves: "tuition, fees, books, supplies, handling charges, licensing fees, and equipment" <b>to the school or vendor</b>, plus a monthly subsistence allowance <b>to you</b> — the standard table by dependents, or the Post-9/11 housing rate if you elect it. <a class="cite" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title38-section3104">38 U.S.C. 3104(a)(7)</a> · <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.260">38 CFR 21.260</a></td>
+        <td class="fig" data-l="Full-time monthly rate">institutional training:<br>$812.84 no dependents<br>$1,008.24 one · $1,188.15 two<br>+$86.58 each more<br>or the Post-9/11 ZIP rate (moves each Jan 1)<span class="as">2025-10-01 → 2026-09-30</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/careers-employment/vocational-rehabilitation/how-to-apply/">apply · VA Form 28-1900 (with a rating) · 28-0588 (service member, no rating yet)</a><br><a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates26.asp">FY2026 rates</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Montgomery GI Bill — Active Duty<br><span class="mono">Chapter 30</span></td>
+        <td data-l="Who it is for"><span class="short">Paid into the Montgomery GI Bill on active duty, generally two years or more; VA has four eligibility categories.</span><details class="more"><summary>VA's words</summary><div>"If you've served at least 2 years on active duty, find out if you qualify for the MGIB-AD program." VA sets out <b>four eligibility categories</b> (by when you entered service and how your pay was reduced — $100 a month for 12 months, or $1,200); common to the usual one: "You didn't decline enrollment in MGIB-AD when you started active duty," an honorable discharge, and a high school diploma or equivalent. Which category, if any, is VA's finding — this cell is a signpost to the page, not the rule. <a class="cite" href="https://www.va.gov/education/about-gi-bill-benefits/montgomery-active-duty/">va.gov MGIB-AD, updated 2026-07-24</a> · <a class="cite" href="https://www.va.gov/education/eligibility/">va.gov eligibility, 2026-04-03</a></div></details></td>
+        <td data-l="What it pays, and to whom">A monthly payment <b>to you</b>; you pay the school. Rate by training-time band (full, ¾, ½) as the school certifies.</td>
+        <td class="fig" data-l="Full-time monthly rate">$2,518.00<span class="as">if you "served at least 3 continuous years (without a break) on active duty"</span>$2,043.00<span class="as">if you "served between 2 and 3 years on active duty" — two separate VA tables, not a tier; VA decides which is yours</span><span class="as">2025-10-01 → 2026-09-30 · <a class="cite" href="https://www.va.gov/education/benefit-rates/montgomery-active-duty-rates/">va.gov MGIB-AD rates, updated 2026-06-23</a></span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/education/benefit-rates/montgomery-active-duty-rates/">rates</a> · <a class="cite" href="https://www.va.gov/education/how-to-apply/">apply · VA Form 22-1990</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Montgomery GI Bill — Selected Reserve<br><span class="mono">Chapter 1606</span></td>
+        <td data-l="Who it is for"><span class="short">Selected Reserve: a six-year obligation (or the officer alternative), initial training complete, a diploma before it, good standing.</span><details class="more"><summary>VA's words</summary><div>In VA's structure — "One of these must be true": "You have a 6-year service obligation (you agreed to serve 6 years) in the Selected Reserve, or" "You're an officer in the Selected Reserve who agreed to serve 6 years in addition to your initial service obligation"; "And all of these must be true": "You complete your initial active duty for training (IADT)", "You get a high school diploma or certificate of equal value, like a High School Equivalency Diploma or GED, before finishing IADT", "You stay in good standing while serving in an active Selected Reserve unit". <a class="cite" href="https://www.va.gov/education/eligibility/">va.gov eligibility, 2026-04-03</a></div></details></td>
+        <td data-l="What it pays, and to whom">A monthly payment <b>to you</b>; you pay the school. By training-time band.</td>
+        <td class="fig" data-l="Full-time monthly rate">$493.00<span class="as">2025-10-01 → 2026-09-30</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/education/benefit-rates/montgomery-selected-reserve-rates/">rates</a> · <a class="cite" href="https://www.va.gov/education/how-to-apply/">apply · VA Form 22-1990</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Survivors' &amp; Dependents' Educational Assistance<br><span class="mono">Chapter 35 · DEA</span></td>
+        <td data-l="Who it is for"><span class="short">Child or spouse of a Veteran with a permanent and total service-connected disability — including when that rating was in place at the Veteran's death, whatever the cause (38 U.S.C. 3501) — or who died of a service-connected disability; or of a service member who died in the line of duty, or is missing, captured or detained. VA's six routes and the statute's seventh are one tap away.</span><details class="more"><summary>VA's words</summary><div>"If you're the child or spouse of a Veteran or service member who has died, is captured or missing, or is permanently and totally disabled due to a service-connected disability, you may be eligible" — and one of VA's six must be true of the Veteran or service member: "The Veteran is permanently and totally disabled due to a service-connected disability"; "The Veteran died as a result of a service-connected disability"; "The service member died in the line of duty"; "The service member is missing in action or was captured in the line of duty by a hostile force for more than 90 days"; "The service member was forcibly detained (held) or interned in the line of duty by a foreign entity for more than 90 days"; "The service member is in the hospital or getting outpatient treatment for a service-connected permanent and total disability and is likely to be discharged for that disability". The statute behind the page adds a route VA's summary compresses: a child or surviving spouse of a person who "has a total disability permanent in nature resulting from a service-connected disability, or who died while a disability so evaluated was in existence" — so a death from an unrelated cause <em>can</em> qualify if the permanent and total service-connected rating existed at death (<a class="cite" href="https://uscode.house.gov/view.xhtml?req=(title:38%20section:3501%20edition:prelim)">38 U.S.C. 3501(a)(1)(A), (D)</a>). Whether a particular death qualifies is VA's determination on VA Form 22-5490, not a reading of this cell. <a class="cite" href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/dependents-education-assistance/">va.gov DEA, updated 2025-12-18</a></div></details></td>
+        <td data-l="What it pays, and to whom">"A monthly payment to help you cover the cost of school or your expenses" <b>to you</b>. By training-time band.</td>
+        <td class="fig" data-l="Full-time monthly rate">$1,574.00<span class="as">2025-10-01 → 2026-09-30</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/education/benefit-rates/chapter-35-rates/">rates</a> · <a class="cite" href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/apply-dea-fry-form-22-5490/">apply · VA Form 22-5490</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Fry Scholarship<br><span class="mono">under Chapter 33</span></td>
+        <td data-l="Who it is for"><span class="short">Child or surviving spouse of a service member who died on or after 9/11/2001 in the line of duty or from a service-connected disability — four VA routes.</span><details class="more"><summary>VA's words</summary><div>"The child or surviving spouse of a service member or member of the Selected Reserve who died on or after September 11, 2001" — and VA: "1 of these must be true of the service member or member of the Selected Reserve": "The service member died in the line of duty while serving on active duty"; "The member of the Armed Services died from a service-connected disability within 120 days of being discharged from active duty or released from duty"; "The member of the Selected Reserve died in the line of duty other than active duty"; "The member of the Selected Reserve died from a service-connected disability". All four routes, in VA's order; the page adds the child's age-or-diploma condition and the remarriage rule. <a class="cite" href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/fry-scholarship/">va.gov Fry Scholarship, updated 2026-05-12</a></div></details></td>
+        <td data-l="What it pays, and to whom">Post-9/11 GI Bill benefits at the 100% tier: "We'll send your tuition and fees directly to your school"; housing and books <b>to you</b>, same rules as Chapter 33.</td>
+        <td class="fig" data-l="Full-time monthly rate">Post-9/11 table<span class="as">2026-08-01 → 2027-07-31</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/fry-scholarship/rates">rates</a> · <a class="cite" href="https://www.va.gov/family-and-caregiver-benefits/education-and-careers/apply-dea-fry-form-22-5490/">apply · 22-5490</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Rogers STEM Scholarship<br><span class="mono">extension of Chapter 33</span></td>
+        <td data-l="Who it is for"><span class="short">Post-9/11 or Fry students near the end of entitlement in a STEM program: up to 9 more months or $30,000.</span><details class="more"><summary>VA's words</summary><div>Post-9/11 or Fry students near the end of entitlement in a qualifying STEM program. "We'll pay 9 months, or $30,000, of total benefits through the STEM Scholarship, whichever comes first" (a statutory cap, read 2026-09-02, no scheduled change). <a class="cite" href="https://www.va.gov/education/benefit-rates/stem-scholarship-rates/">va.gov STEM rates</a></div></details></td>
+        <td data-l="What it pays, and to whom">"We'll pay your tuition and mandatory fees to your school first," then books and housing <b>to you</b>.</td>
+        <td class="fig" data-l="Full-time monthly rate">Post-9/11 table<span class="as">2026-08-01 → 2027-07-31</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/education/benefit-rates/stem-scholarship-rates/">rates &amp; apply</a></td>
+      </tr>
+      <tr>
+        <td class="ch" data-l="Program">Yellow Ribbon Program<br><span class="mono">with Chapter 33 at 100%</span></td>
+        <td data-l="Who it is for"><span class="short">Post-9/11 at the 100% tier (or Fry), at a school in the program, with entitlement left; the school decides how many students it funds.</span><details class="more"><summary>VA's words</summary><div>Post-9/11 at the 100% tier (or Fry), at a school that signed the agreement, while "you have money left in your Post-9/11 GI Bill benefits", "you make acceptable progress… and you stay enrolled in the school without a break." The school decides how many students it funds each year. <a class="cite" href="https://www.va.gov/resources/yellow-ribbon-program-faqs/">va.gov Yellow Ribbon FAQ</a></div></details></td>
+        <td data-l="What it pays, and to whom">The school waives part of any tuition above the Post-9/11 cap and VA matches it — <b>to the school</b>. Matters mainly for out-of-state or private tuition.</td>
+        <td class="fig" data-l="Full-time monthly rate">no monthly rate<span class="as">per-school agreement</span></td>
+        <td data-l="Check or apply"><a class="cite" href="https://www.va.gov/education/gi-bill-comparison-tool/institution/11900146">VA Comparison Tool: ODU-Norfolk "Yellow Ribbon Program: Yes", read 2026-09-02</a> (same fact as plain JSON, "yr": true — <a class="cite" href="https://api.va.gov/v1/gi/institutions/11900146">api.va.gov/v1/gi/institutions/11900146</a>, data version 2026-09-01) · <a class="cite" href="https://www.va.gov/education/yellow-ribbon-participating-schools/">participating schools list</a></td>
+      </tr>
+    </tbody>
+  </table></div>
+  <p class="asof sco-only">"Full-time monthly rate" is the figure VA publishes for a whole month at full time. What arrives is often less: "If your enrollment starts after the first of the month or ends before the last day of the month, we'll pay you a prorated housing payment for the part of the month you're enrolled in classes"; "If you stopped taking some of your classes—or reduced your training time—after you received your award letter, we'll need to adjust the benefit payment amount"; "If we discover an overpayment, we'll need to pay you less for one or more payments" — <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, 2026-08-05</a>. Post-9/11 housing is also scaled by your rate of pursuit and your tier; the Chapter 31 rows are for institutional training (apprenticeship and on-the-job rates differ).</p>
+  <p class="asof">In-state tuition: ODU cites 38 U.S.C. §3679, which "requires institutions of higher education to charge covered individuals in-state tuition… Chapters 30, 31, 33 or 35" (<a class="cite" href="https://www.odu.edu/tuition/military">odu.edu/tuition/military</a>). Ask the certifying office how to be coded as a covered individual.</p>
+</section>
+
+<section>
+  <span class="coord">C · VR&amp;E vs GI BILL</span>
+  <details class="layer" id="layerC"><summary>C · VR&amp;E and the Post-9/11 GI Bill — the differences that decide things</summary>
+  <div class="cmp">
+    <div><h3>VR&amp;E · Chapter 31</h3>
+      <p><b>Doorway:</b> a service-connected rating of 10% or more lets you <em>apply</em>; "The VRC will determine if you're entitled" — and the standard depends on the rating. Rated 10%: VA must find a <em>serious</em> employment handicap — "For Veterans rated at 10 percent and Veterans beyond their 12-year basic period of eligibility, the finding of a SEH is necessary to establish entitlement to VR&amp;E services." Rated 20% or more, within that period: "a finding of employment handicap results in entitlement to VR&amp;E services." VA defines the serious one as "a significant impairment" of the ability "to prepare for, obtain, or retain employment consistent with his or her abilities, aptitudes, and interests" (<a class="cite" href="https://www.benefits.va.gov/vocrehab/program_definitions.asp">VA VR&amp;E program definitions, 2024-01-22</a>). Not months of service.</p>
+      <p><b>Shape:</b> a rehabilitation plan a VA counselor approves — the degree, the school, the timeline. The counselor is a named VA employee assigned to your case.</p>
+      <p><b>Pays for:</b> tuition, fees, books, supplies, required equipment, licensing fees — with no in-state cap logic — plus a monthly subsistence allowance that <em>does</em> rise with dependents (about $195 a month from none to one on the FY2026 table, 2025-10-01 → 2026-09-30).</p>
+      <p><b>Monthly money:</b> the standard table, or the Post-9/11 housing rate if you are also Chapter 33 eligible and elect it (VA Form 28-0987). Paid in bands — full, three-quarter and half time (exactly half time <em>is</em> paid). <em>Less than</em> half time: "is not payable," with two exceptions VA decides. <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.314">38 CFR 21.314</a></p>
+    </div>
+    <div><h3>Post-9/11 GI Bill · Chapter 33</h3>
+      <p><b>Doorway:</b> months of qualifying service after 9/10/2001; the tier is fixed by service length, a Purple Heart, or a disability discharge.</p>
+      <p><b>Shape:</b> you choose a school and a program VA has approved for GI Bill use (VA's Comparison Tool lists each school's "Approved programs of study"); the school certifies your enrollment in it; no VA counselor approves your plan.</p>
+      <p><b>Pays for:</b> tuition and fees to the in-state public cap (Yellow Ribbon above it), a books stipend "up to $1,000 each academic year" (va.gov rates page, 2026-08-01 → 2027-07-31), and a housing allowance that is "not adjusted to include dependents."</p>
+      <p><b>Monthly money:</b> the E-5-with-dependents housing rate for the school's ZIP, times your rate of pursuit rounded to the nearest 10%, times your tier — only above half time; half the national average if every class is online. <a class="cite" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title38-section3313">38 U.S.C. 3313(c)</a></p>
+    </div>
+  </div>
+  <div class="rule"><span class="n">ORDER OF USE — VA'S WORDS</span>
+    <p>"If you use VR&amp;E benefits, we won't deduct entitlement from your other VA education benefits, like the Post-9/11 GI Bill or the Montgomery GI Bill." And the reverse: "If you've used benefits under any other VA education program and then you use VR&amp;E benefits, we'll have to deduct from your remaining VR&amp;E entitlement the amount of time used under the other VA education program." Two limits, kept apart. GI Bill side — VA: "Generally, if you're eligible for more than 1 education benefit, you may be able to get up to a maximum of 48 months (or 4 years) of VA education benefits." and "This doesn't include Veteran Readiness and Employment (VR&amp;E) benefits (Chapter 31)." VR&amp;E side — months used under another program are deducted from VR&amp;E entitlement, and a retroactive induction can restore them: "we may retroactively approve your previous months of entitlement and return them to the other VA education program." <a class="cite" href="https://www.va.gov/careers-employment/vocational-rehabilitation/eligibility/">va.gov VR&amp;E eligibility, 2025-11-07</a> · <a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § G.5</a> · <a class="cite" href="https://www.va.gov/education/eligibility/">va.gov eligibility</a> · <a class="cite" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title38-section3695">38 U.S.C. 3695</a></p></div>
+  <div class="rule"><span class="n">SWITCHING</span>
+    <p>You cannot draw both for the same period. <b>One choice is permanent:</b> VA: "If you have only 1 period of service that begins on or after August 1, 2011, and you qualify for other VA education benefits, you can use only 1 education benefit." "If you choose to use the Post-9/11 GI Bill instead of the Montgomery GI Bill Active Duty (MGIB-AD, or Chapter 30), you can't switch at some later date to use MGIB-AD" — and the reverse (<a class="cite" href="https://www.va.gov/education/eligibility/">va.gov education eligibility, 2026-04-03</a>). Otherwise, between GI Bill chapters a switch happens "at the start of your next enrollment period"; into Chapter 31, VA's handbook for schools: "A change in the election of VA benefits in the middle of a semester or term is not allowed." Practical advice, not a VA rule: tell your counselor and the certifying office before the term starts. <a class="cite" href="https://www.va.gov/education/change-gi-bill-benefits/">va.gov change benefits</a> · <a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § G.3, 2025-07-30</a></p></div>
+  <div class="stop"><b>Not sure you have a rating?</b> A rating comes from a disability claim. An accredited Veterans Service Officer files it with you for free. That is a different office from this one, and a different benefit from any on this page — but it is the doorway to VR&amp;E.</div>
+  </details>
+</section>
+
+<section>
+  <span class="coord">D · TWO RULES</span>
+  <details class="layer" id="layerD"><summary>D · The two rules that move the housing money on Chapter 33 — and why Chapter 31 is different</summary>
+  <div class="rule"><span class="n">1 · MORE THAN HALF TIME (CHAPTER 33 ONLY)</span>
+    <p><b>Chapter 33 housing allowance:</b> "To be eligible for MHA, your rate of pursuit must be more than 50%." Rate of pursuit is your credits divided by what the school calls full time <b>for that term</b> — and at ODU the divisor changes in summer. Undergraduate: "12 or more credit hours during the fall and spring semesters" is full time; "During the summer term, an undergraduate student is considered to be full time if he or she is enrolled in nine hours" (<a class="cite" href="https://catalog.odu.edu/undergraduate/registrationrequirementsandprocedures/">ODU undergraduate catalog, 2026–27</a>). Graduate: "A minimum of nine credit hours is considered to be a full-time course load for graduate students per fall and spring semesters"; "In summer semesters, six (6) credit hours constitute a full-time load" (<a class="cite" href="https://catalog.odu.edu/graduate/policies/graduatepolicies/">ODU graduate policies, 2026–27</a>) — both read 2026-09-02; ODU republishes each academic year. Sessions shorter than the standard term (eight-week, six-week, Maymester, winter) are converted by VA to equivalent credits before the division — the planner does that arithmetic; the SCO certifies which full-time standard applies to your term, so ask before you plan on a divisor. Exactly half is not more than half — on Chapter 33. <a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov rates page</a> · <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.9505">38 CFR 21.9505</a></p>
+    <p><b>Chapter 31 does not use this rule.</b> Its subsistence follows <em>training time</em> in bands — full, three-quarter, half — and <b>exactly half time is paid</b>: the FY2026 table has a half-time row ("½ Time" $408.66 / $506.32 / $595.16 / +$44.42, 2025-10-01 → 2026-09-30, <a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates26.asp">VA FY2026 Chapter 31 rates</a>), and the elected Post-9/11 rate pays the entire, three-quarter or half ZIP figure in residence, or half, three-eighths or one-quarter of the national average when solely online (<a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.260">38 CFR 21.260(c)</a>). Only <em>less than</em> half time is unpaid — subsistence "is not payable" below half time, with two exceptions VA decides (<a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.314">38 CFR 21.314</a>). Which band you are in depends on the full-time standard the school certifies (38 CFR 21.4270(c)) — the planner shows it stretch by stretch.</p></div>
+  <div class="rule"><span class="n">2 · ONE CLASS NOT ENTIRELY ONLINE</span>
+    <p>"If you take at least 1 in-person course, we'll pay the standard housing allowance." A term that is entirely distance learning pays half the national average instead — up to $1,261 (2026-08-01 → 2027-07-31) rather than the ZIP rate. VA treats a hybrid class, or an on-campus proctored exam, as in residence — "SCOs will certify all courses which combine Classroom Instruction and Distance Learning (Hybrid) as In-Residence training" (<a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/Hybrid_Training_Updates_FAQs.pdf">VA Education Service, Hybrid Training Updates, 2019</a>); the School Certifying Official certifies which column a class is in. <a class="cite" href="https://www.va.gov/education/about-gi-bill-benefits/how-to-use-benefits/online-distance-learning/">va.gov online learning, 2025-06-11</a> · <a class="cite" href="https://www.ecfr.gov/current/title-38/section-21.9640">38 CFR 21.9640(b)(1)(ii)</a></p></div>
+  <p class="asof">To see your own term stretch by stretch — credits, rate of pursuit, in-person status, the monthly figure with the rule beside it — use the <em>Semester Pay Planner</em> in this kit — published 2026-09-02 after its Gate B PASS at <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a> (private link; the operator shares it).</p>
+  </details>
+</section>
+
+<section>
+  <span class="coord">E · WHO</span>
+  <h2>E · Who does what — by role</h2>
+  <div class="tablewrap"><table class="stack">
+    <thead><tr><th>Ask</th><th>About</th><th>Not about</th></tr></thead>
+    <tbody>
+      <tr><td class="ch" data-l="Ask">School Certifying Official (SCO)<br><span class="mono">Military Benefits &amp; Certification Services, ODU</span></td><td data-l="About">Certifying your enrollment to VA each term; the Veterans Clearance Form; what happens to your certification if you drop, add, or change a class; whether a class is certified as in residence.</td><td data-l="Not about">Whether VA approves you for a benefit; your disability rating.</td></tr>
+      <tr><td class="ch" data-l="Ask">Military Connection Center (MCC)<br><span class="mono">ODU</span></td><td data-l="About">Orientation, general support, VA work-study, getting pointed to the right person.</td><td data-l="Not about">Certification.</td></tr>
+      <tr><td class="ch" data-l="Ask">VR&amp;E counselor (VRC)<br><span class="mono">VA</span></td><td data-l="About">Everything Chapter 31: your plan, authorizations to the school, subsistence, books and equipment, exceptions below half time, switching.</td><td data-l="Not about">The school's paperwork.</td></tr>
+      <tr><td class="ch" data-l="Ask">Accredited Veterans Service Officer (VSO)</td><td data-l="About">Disability claims and ratings, appeals, other VA benefits. VA: "the services an accredited VSO representative provides on your VA benefit claims are always free." <a class="cite" href="https://www.va.gov/get-help-from-accredited-representative/">va.gov, 2025-01-23</a></td><td data-l="Not about">Education certification.</td></tr>
+      <tr><td class="ch" data-l="Ask">VA Education Call Center<br><span class="mono">888-442-4551 · TTY 711</span></td><td data-l="About">Payment status, remaining entitlement, letters, debts. Mon–Fri 8 a.m.–7 p.m. ET.</td><td data-l="Not about">Anything the school has not certified yet.</td></tr>
+      <tr><td class="ch" data-l="Ask">ask.va.gov</td><td data-l="About">Any question you want answered in writing — name the school and the term dates.</td><td data-l="Not about">Speed.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="asof"><details class="more"><summary>the clearance form, the deadlines, the contact lines</summary><div><b>Contacts, by function — the institutions' own published routes, not a person's:</b> ODU Military Benefits &amp; Certification Services — office phone <b>757-683-7153</b> · office email <b>military@odu.edu</b> (<a class="cite" href="https://www.odu.edu/military-benefits/va-certifying-official">ODU, VA education benefits (Military Benefits &amp; Certification Services), read 2026-09-02</a>) · VA Education Call Center <b>888-442-4551</b> (TTY 711), Mon–Fri 8 a.m.–7 p.m. ET (<a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, updated 2026-08-05</a>). Read 2026-09-02; re-read at the linked pages by 2027-08-01 (ADR-005). Your first term here, or after a change: "submit a Veterans Clearance Form (VCF) with an uploaded copy of your Certificate of Eligibility (COE) after registering for courses" — ODU's FAQ lists the chapters as 1606, 30, 33 and 35, and three groups file it every semester: "Active duty military, MEM Ashore, and certificate students using GI Bill® benefits must complete the Veterans Clearance Form EACH semester AFTER registering for ODU classes." Then allow "30-45 business days for initial certification processing" (<a class="cite" href="https://www.odu.edu/military-connection/veteran-student-checklist">ODU veteran student checklist, read 2026-09-02</a>). Continuing students, ODU's FAQ: "If you have not made any changes and were certified for VA Benefits in the prior semester, you DO NOT need to submit a Veterans Clearance Form. You will be certified automatically and receive a confirmation email"; a new one is required "when there is a change in major, duty status (Active Duty/Veteran), selected Chapter benefit, a break in enrollment, or after a student has requested not to be certified for a term"; file it "at least 30 days before the start of the semester" (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU military FAQs, read 2026-09-02</a>). Chapter 31: "Chapter 31 students DO NOT need to complete the Veterans Clearance Form. Chapter 31 students will coordinate with their assigned VA Educational Counselor."</div></details></div>
+</section>
+
+<footer>
+  <p><strong>Not an official VA document.</strong> Every line above is quoted or cited from VA, the statute, or ODU as read on 2026-09-02; the sources govern where they and this page differ, and the School Certifying Official and your VR&amp;E counselor govern your own case. Rates change on the dates shown — a figure past its date is a figure to re-check.</p>
+  <p>Companion sheet: the <em>Semester Pay Planner</em> (your term, computed, cited — <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>, published 2026-09-02). The link is private until the operator shares it — on a printed copy it is an address a student cannot open, so print the two sheets together.</p>
+  <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/vetkit/benefit/">ferrelldevin.github.io/vetkit/benefit/</a> — the same page, hosted for sharing; this copy is the review copy.</p>
+<p class="stamp">BW-07 Which Benefit Am I On · revision 32 · prepared 2026-09-02 · &copy; 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.</p>
+</footer>
+<section id="sources" aria-label="Sources"><h2>Sources — every page this sheet quotes, for the printed copy</h2><ol id="sourceList"></ol></section>
+</div>
+<script>
+// The only script on this page. It compares today's date with EVERY date range printed on the page — in the table and in
+// the prose — and marks the expired ones (GATES.md A3/A4). It also switches the reading view (veteran / certifying official /
+// counselor — CSS hides, nothing is removed) and builds the printed sources list from the cite links already on the page. It also announces when the browser reports it is offline, because
+// the PHONE and CHAPTER 31 routes need the linked pages (Gate B r11). navigator.onLine is interface state only — it can read true
+// while VA or ODU are unreachable — so the page also says, in text that is always visible, that a link that will not open is the test (Gate B r13). It reads nothing of the user, stores nothing, sends
+// nothing. If it cannot run, it says so on the page instead of failing silently. Printed copies rely on the validity line.
+(function(){
+  try{
+    var setOff=function(){ var off=(typeof navigator!=="undefined" && navigator.onLine===false); document.documentElement.setAttribute("data-offline", off?"true":"false"); };
+    setOff(); window.addEventListener("offline",setOff); window.addEventListener("online",setOff);
+  }catch(e0){ try{ document.documentElement.setAttribute("data-offline","unknown"); }catch(e1){} }
+  try{
+    var ROLE={vet:"One line per program. VA's own words are one tap away under each; the certifying-official view opens all of them.",
+      sco:"Certifying-official view: every quoted VA sentence open, the clearance-form rules, both money rules, the printed-copy conditions.",
+      vrc:"Counselor view: the same page with everything open — the VR&E doorway and the serious-employment-handicap standard, order of use, switching, Chapter 31 bands."};
+    var setView=function(v){ document.documentElement.setAttribute("data-view",v); document.querySelectorAll(".roles button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.view===v?"true":"false"); }); var rn=document.getElementById("roleNote"); if(rn) rn.textContent=ROLE[v]; document.querySelectorAll("details.more, details.layer").forEach(function(d){ d.open=(v!=="vet"); }); };
+    document.querySelectorAll(".roles button").forEach(function(b){ b.addEventListener("click",function(){ setView(b.dataset.view); }); });
+    setView("vet");
+    // the printed sources page: every cite link on the page, once, in page order
+    var ol=document.getElementById("sourceList"); if(ol){ var seen={}; document.querySelectorAll("a.cite").forEach(function(a){ var h=a.getAttribute("href"); if(!h||seen[h]||a.closest("#sources")) return; seen[h]=1; var li=document.createElement("li"); li.textContent=a.textContent.replace(/\s+/g," ").trim()+" — "+h; ol.appendChild(li); }); }
+  }catch(e3){ try{ document.documentElement.setAttribute("data-view","sco"); }catch(e4){} }
+  var fail=function(msg){ try{ var b=document.createElement("div"); b.className="datecheck-failed"; b.textContent="DATE CHECK DID NOT RUN ("+msg+") — treat every rate on this page as unverified and re-check it at the source."; var h=document.querySelector("header"); (h||document.body).appendChild(b); }catch(e2){} };
+  try{
+    var n=new Date(), today=n.getUTCFullYear()*10000+(n.getUTCMonth()+1)*100+n.getUTCDate();
+    var key=function(y,m,d){ return (+y)*10000+(+m)*100+(+d); };
+    var re=/(\d{4})-(\d{2})-(\d{2}) → (\d{4})-(\d{2})-(\d{2})/g;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null), nodes=[], t;
+    while((t=walker.nextNode())){ re.lastIndex=0; if(re.test(t.nodeValue)) nodes.push(t); }
+    var checked=0, expiredN=0;
+    nodes.forEach(function(node){
+      var text=node.nodeValue, m, last=0, frag=document.createDocumentFragment(); re.lastIndex=0;
+      while((m=re.exec(text))){ checked++;
+        frag.appendChild(document.createTextNode(text.slice(last,m.index)));
+        var span=document.createElement("span"); span.className="as-range"; span.textContent=m[0];
+        if(today>key(m[4],m[5],m[6])){ expiredN++; span.classList.add("expired"); span.textContent="EXPIRED "+m[4]+"-"+m[5]+"-"+m[6]+" — re-check at the source · "+m[0]; var td=(node.parentNode&&node.parentNode.closest)?node.parentNode.closest("td"):null; if(td) td.classList.add("expired"); }
+        frag.appendChild(span); last=m.index+m[0].length; }
+      frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag,node);
+    });
+    var v=document.getElementById("validity"); if(v){ var mv=v.textContent.match(/VALID THROUGH (\d{4})-(\d{2})-(\d{2})/); if(mv && today>key(mv[1],mv[2],mv[3])){ v.classList.add("expired"); v.insertAdjacentText("afterbegin","THIS COPY HAS EXPIRED — "); } }
+    if(checked===0) fail("no date ranges found");
+    document.documentElement.setAttribute("data-datecheck", checked+" ranges checked, "+expiredN+" expired");
+  }catch(e){ fail(e && e.message ? e.message : "error"); }
+})();
+</script>
+
+</body>
+</html>
