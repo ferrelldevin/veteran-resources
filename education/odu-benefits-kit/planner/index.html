@@ -130,6 +130,22 @@ dl.rules dd{font-size:15px;line-height:1.5}
   section{break-inside:avoid} .noprint,button{display:none!important}
   .row,.period,.stop,.flag{border-color:#999}
 }
+
+/* ---- the phone pass (2026-09-03): real device metrics, 390 / 360 / 320, touch. The planner is the page a veteran opens
+   on a phone, so at ≤720px every control is at least 44px tall (Apple HIG and Material both publish 44–48px as the
+   minimum touch target), no text in the flow is under 12px, and nothing may push the page sideways. ---- */
+@media (max-width:720px){
+  .cite,.pubaddr,.pubaddr .cite{white-space:normal;overflow-wrap:anywhere}
+  .field input,.field select{min-height:44px;font-size:16px}          /* 16px also stops iOS zooming the page on focus */
+  .field input[type=checkbox]{width:24px;height:24px;min-height:24px}
+  .chk{min-height:44px;font-size:13px}
+  button{min-height:44px}
+  .preset button{min-height:40px;font-size:13px}
+  button.del{min-width:44px;min-height:44px;font-size:18px}
+  summary{min-height:44px;display:flex;align-items:center}
+  .req,.kindtag,footer .stamp,.field label{font-size:12px}
+  .prefill{font-size:12.5px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* ---- three layers on one page: the answer (veteran), the why (one tap), the role view (SCO / counselor) ---- */
 .roles{display:flex;gap:var(--s1);flex-wrap:wrap;margin-top:var(--s2)}
@@ -335,7 +351,7 @@ details#rulesD[open]>summary::after{content:" — tap to close"}
   <p><strong>Not an official VA document and not a VA determination.</strong> It applies published rules to what you type. Your School Certifying Official's certification and VA's award govern; where this page and they disagree, they win. Your VR&amp;E counselor governs anything Chapter 31. Nothing you enter is stored or sent anywhere.</p>
   <p>Companion sheet in this kit: <em>Which Benefit Am I On</em> (the chapters compared, and who to ask — <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/</a>, published 2026-09-02). This page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>.</p>
   <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a> — the same page, hosted for sharing; this copy is the review copy.</p>
-<p class="stamp">BW-07 Semester Pay Planner · revision 26 · prepared 2026-09-02 · &copy; 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.</p>
+<p class="stamp">BW-07 Semester Pay Planner · revision 27 · prepared 2026-09-02 · &copy; 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 

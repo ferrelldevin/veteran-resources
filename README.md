@@ -28,6 +28,35 @@ Which VA education benefit you are on, what a semester pays, and what the school
 - [ODU academic calendar](https://catalog.odu.edu/undergraduate/academiccalendar/academiccalendar.pdf) — Session dates, add/drop, withdrawal.
 - [VR&E School Certifying Official Handbook (KnowVA)](https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook) — For certifying officials. Renders in a browser only.
 
+## Health care
+
+Enrolling in VA health care, what it covers, and where to go — including mental health, which does not wait for enrollment.
+
+- [VA health care](https://www.va.gov/health-care/) — The program: what VA health care covers, costs, and how it works.
+- [Health care eligibility](https://www.va.gov/health-care/eligibility/) — Who qualifies, and the priority groups VA sorts enrollment into.
+- [Apply for VA health care](https://www.va.gov/health-care/how-to-apply/) — VA Form 10-10EZ, online or on paper.
+- [Mental health care](https://www.va.gov/health-care/health-needs-conditions/mental-health/) — What VA offers, and how to get care without being enrolled first.
+- [Find VA locations](https://www.va.gov/find-locations/) — Medical centers, clinics and Vet Centers by address.
+
+## Home loans
+
+The VA-backed home loan: what it is, whether you qualify, and the Certificate of Eligibility the lender asks for.
+
+- [VA-backed home loans](https://www.va.gov/housing-assistance/home-loans/) — The loan types VA backs — purchase, refinance, Native American Direct Loan.
+- [Home loan eligibility](https://www.va.gov/housing-assistance/home-loans/eligibility/) — Service requirements, and what VA needs to see.
+- [How to apply for a VA-backed home loan](https://www.va.gov/housing-assistance/home-loans/how-to-apply/) — The steps, and where the lender fits.
+- [Check your Certificate of Eligibility status](https://www.va.gov/housing-assistance/home-loans/check-coe-status/) — The COE a lender asks for, and where its status shows.
+
+## Transition assistance
+
+Leaving service, or recently out: the programs that run before and after the last day, and the counseling that is free either way.
+
+- [Transition Assistance Program (TAP)](https://benefits.va.gov/transition/) — VA's side of TAP — benefits briefings before separation (page updated 2026-02-09).
+- [DoD TAP](https://www.dodtap.mil/) — The Department of Defense program itself: curriculum, timelines, and the installation contact.
+- [Benefits for service members](https://www.va.gov/service-member-benefits/) — What is available while still serving, and what to start before the last day.
+- [Educational and career counseling (Chapter 36)](https://www.va.gov/careers-employment/education-and-career-counseling/) — Free counseling on choosing a program or a career. Chapter 36 is counseling; it does not make you Chapter 31.
+- [Careers and employment](https://www.va.gov/careers-employment/) — VA's employment programs in one place.
+
 ## Careers and employment
 
 Getting from service to work: VA's employment programs, and tools for the paperwork.
