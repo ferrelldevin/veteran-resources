@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>QR codes · Veteran Benefits Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap">
+<style>
+:root{--canvas:#E9EDEF;--field:#FFFFFF;--ink:#16202B;--ink-muted:#5A6874;--line:#74828C;--accent:#2B5CA8;--accent-quiet:#79868F;--signal:#B4412E;
+--s1:6px;--s2:12px;--s3:18px;--s4:30px;--s5:48px;--s6:78px;--sans:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;--serif:"Source Serif 4",Georgia,"Times New Roman",serif;--mono:"Fira Code","Cascadia Mono",Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--canvas)}
+body{background:var(--canvas);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.5;padding:var(--s4) var(--s3) var(--s6)}
+.sheet{max-width:82ch;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-muted);margin-bottom:var(--s1);line-height:1.7}
+h1{font-family:var(--sans);font-weight:600;font-size:26px;line-height:1.1;text-transform:uppercase;letter-spacing:.01em;text-wrap:balance}
+h2{font-family:var(--sans);font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.05em;margin:0 0 var(--s2)}
+h3{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.02em;margin:var(--s3) 0 var(--s1)}
+p{margin-bottom:var(--s2)} p:last-child{margin-bottom:0}
+.lead{font-size:18px;margin-top:var(--s2)}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+section{position:relative;margin-top:var(--s5);padding-top:var(--s3)} section::before{content:"";position:absolute;top:0;left:calc(var(--s2) * -1);right:0;height:1px;background:var(--accent)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--s2)}
+.card{display:block;background:var(--field);border:1px solid var(--line);border-left:3px solid var(--accent);padding:var(--s3);color:var(--ink);text-decoration:none;min-width:0}
+.card:hover{border-color:var(--accent)} .card h3{margin:0 0 var(--s1);font-size:18px} .card p{font-size:14.5px;overflow-wrap:anywhere} .card .go{display:block;margin-top:var(--s2);font-family:var(--sans);font-weight:600;color:var(--accent)}
+.tablewrap{overflow-x:auto}
+table.hand{width:100%;border-collapse:collapse;margin-top:var(--s2)}
+table.hand th{font-family:var(--mono);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);text-align:left;padding:var(--s1);border-bottom:1px solid var(--accent-quiet);vertical-align:bottom}
+table.hand td{padding:var(--s2) var(--s1);border-bottom:1px solid var(--line);vertical-align:top;font-size:14.5px;min-width:0;overflow-wrap:anywhere}
+table.hand td.t{font-family:var(--sans);font-weight:600;letter-spacing:.02em;font-size:15px}
+table.hand td.act{white-space:nowrap;font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em}
+table.hand td.act a{display:inline-block;border:1px solid var(--accent);padding:3px 8px;margin:0 4px 4px 0;text-decoration:none}
+table.hand td.act a:hover{background:var(--accent);color:var(--field)}
+@media (max-width:720px){table.hand,table.hand tbody,table.hand tr,table.hand td{display:block;width:100%} table.hand thead{display:none} table.hand tr{border:1px solid var(--line);background:var(--field);margin-top:var(--s2);padding:var(--s1) var(--s2)} table.hand td{border-bottom:0;padding:3px 0} table.hand td.act{white-space:normal}}
+ul.links{list-style:none} ul.links li{padding:var(--s2) 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);gap:2px}
+ul.links b{font-family:var(--sans);font-weight:600} ul.links .iss{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-muted);text-transform:uppercase} ul.links .note{font-size:14.5px} ul.links a.u{font-family:var(--mono);font-size:11px;overflow-wrap:anywhere}
+.empty{font-size:14.5px;color:var(--ink-muted);border-left:3px solid var(--line);padding:var(--s1) var(--s2)}
+.never{border-left:3px solid var(--signal);background:var(--field);padding:var(--s2) var(--s3);margin-top:var(--s3);font-size:15px} .never b{color:var(--signal);font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em;font-size:13px}
+.note-box{border-left:3px solid var(--accent);background:var(--field);padding:var(--s2) var(--s3);margin-top:var(--s3);font-size:15px} .note-box b{font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em;font-size:13px;color:var(--accent)}
+.crumbs{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-muted);margin-bottom:var(--s2)}
+.printbar{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.02em;margin-top:var(--s2)}
+.printbar a,.printbar button{display:inline-block;border:1px solid var(--accent);background:var(--field);color:var(--accent);padding:4px 10px;margin:0 6px 6px 0;text-decoration:none;font:inherit;cursor:pointer}
+.printbar a:hover,.printbar button:hover{background:var(--accent);color:var(--field)}
+footer{margin-top:var(--s6);padding-top:var(--s2);border-top:1px solid var(--line);font-size:13px;color:var(--ink-muted);line-height:1.6}
+footer .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.04em;margin-top:var(--s2)}
+@media print{@page{size:letter;margin:14mm} html,body{background:#fff} body{padding:0;color:#000;font-size:10.5pt} .noprint{display:none!important}
+a{color:inherit} .card,tr{break-inside:avoid} a.u::after,.card .go::after{content:" ‹" attr(href) "›";font-family:var(--mono);font-size:7.5pt;word-break:break-all;font-weight:400}
+section{margin-top:14pt;padding-top:8pt}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body><div class="sheet">
+<div class="crumbs noprint"><a href="https://ferrelldevin.github.io/veteran-resources/">Veteran Resources</a> · QR codes</div>
+<header><div class="eyebrow">Veteran Resources · the kit</div><h1>QR codes</h1><p class="lead">One code per page. Take the SVG for anything large — a poster or a door sign — and the PNG for a document or a slide. The card PDF is a ready-made page: the code, what the page does, and the address typed out underneath.</p><div class="printbar noprint"><button type="button" onclick="window.print()">Print this page</button><a href="https://ferrelldevin.github.io/veteran-resources/print/">All printouts →</a></div></header>
+<section><h2>The codes</h2><div class="tablewrap"><table class="hand"><thead><tr><th>Page</th><th>Where it goes</th><th>Files</th></tr></thead><tbody><tr><td class="t">Veteran Benefits Kit — front door</td><td><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/</a></td><td class="act"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/front-door.png">PNG</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/front-door.svg">SVG</a><a href="https://ferrelldevin.github.io/veteran-resources/print/card-front-door.pdf">Card PDF</a></td></tr><tr><td class="t">Semester Pay Planner</td><td><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a></td><td class="act"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/planner.png">PNG</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/planner.svg">SVG</a><a href="https://ferrelldevin.github.io/veteran-resources/print/card-planner.pdf">Card PDF</a></td></tr><tr><td class="t">Which Benefit Am I On</td><td><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/</a></td><td class="act"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/which-benefit.png">PNG</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/which-benefit.svg">SVG</a><a href="https://ferrelldevin.github.io/veteran-resources/print/card-benefit.pdf">Card PDF</a></td></tr><tr><td class="t">Benefits Front-Desk Map</td><td><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/</a></td><td class="act"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/desk-map.png">PNG</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/desk-map.svg">SVG</a><a href="https://ferrelldevin.github.io/veteran-resources/print/card-desk-map.pdf">Card PDF</a></td></tr></tbody></table></div></section>
+<section><h2>Ready-made sheets</h2><div class="tablewrap"><table class="hand"><thead><tr><th>Sheet</th><th>Who for</th><th>Get it</th></tr></thead><tbody>
+<tr><td class="t">Scan sheet — students</td><td>A handout rack, an orientation packet, a corkboard</td><td class="act"><a href="https://ferrelldevin.github.io/veteran-resources/print/scan-sheet-students.pdf">Save PDF</a></td></tr>
+<tr><td class="t">Scan card — office</td><td>The desk drawer</td><td class="act"><a href="https://ferrelldevin.github.io/veteran-resources/print/scan-card-office.pdf">Save PDF</a></td></tr>
+</tbody></table></div>
+<div class="note-box"><b>Printing a code</b> Keep it at least 25mm across, never crop the white margin around it, and print black on white. The address is under every code on purpose: a reader with a broken camera types it.</div></section>
+<footer>
+<p><strong>Not an official VA document.</strong> Links go to the issuer — VA, the statute, or the school — or to pages built from those sources with the source beside each line. Where a page here and VA or the school disagree, they govern. Links read 2026-09-02.</p>
+<p class="stamp">Veteran Resources · built 2026-09-03 · ferrelldevin.github.io/veteran-resources · &copy; 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.</p>
+</footer>
+</div></body>
+</html>
