@@ -84,4 +84,4 @@ https://ferrelldevin.github.io/veteran-resources/print/ — every page as a PDF,
 
 Built from a catalog and the source of record by scripts in a private workshop repository; every page that computes a figure passed an independent judge before it was published here. The ODU Veteran Benefits Kit was first published at https://ferrelldevin.github.io/vetkit/, which now redirects here.
 
-Not an official VA document. © 2026 Devin Ferrell. Use and share freely within a veterans or military benefits office; not for resale.
+Not an official VA document. Selection, arrangement and editorial content © 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.
