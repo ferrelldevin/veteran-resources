@@ -77,6 +77,7 @@ Where a disability claim, a rating question, or any question in writing goes —
 Not veteran-specific, but built for the same students: printable study sheets, on the syllabus, every figure checked.
 
 - [studykit](https://github.com/ferrelldevin/studykit) — Free, printable study sheets for ODU courses. Repository and pages.
+- [Chapter 9 Field Guide (MATH 212)](https://ferrelldevin.github.io/veteran-resources/study/calc2-ch9/) — Sequences and series, 9.1 to 9.10: plain-words terms, cited rules, a worked example and answer-first practice cards for every section, a mixed deck and a one-screen test map. Every answer machine-checked.
 
 ## Printouts
 
