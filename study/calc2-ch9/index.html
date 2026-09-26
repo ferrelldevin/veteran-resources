@@ -162,9 +162,6 @@ td.src{white-space:nowrap;font-family:var(--mono);font-size:12.5px}
 .missed li{border-left:3px solid var(--signal);padding-left:10px;overflow-x:auto}
 
 /* start */
-.plan{margin:0;padding:0;list-style:none;display:grid;gap:10px;max-width:66ch}
-.plan li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline}
-.plan li b{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);min-width:64px}
 .progress{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
 .ptile{background:var(--field);border:1px solid var(--hair);border-radius:3px;padding:8px 10px;text-align:left;cursor:pointer;display:grid;gap:3px}
 .ptile .n{font-family:var(--mono);font-size:12.5px;color:var(--ink-muted)}
@@ -208,9 +205,9 @@ td.src{white-space:nowrap;font-family:var(--mono);font-size:12.5px}
   .quiz td.ans[data-l]:not(.shown)::after{top:26px}
 }
 footer.foot{border-top:1px solid var(--line);margin-top:10px}
-footer .sheet{padding-block:16px 30px;font-size:13.5px;color:var(--ink-muted);display:grid;gap:6px}
+footer .sheet{padding-block:12px 20px;font-size:12px;line-height:1.45;color:var(--ink-muted);display:grid;gap:6px}
 footer p{margin:0;max-width:80ch}
-footer .mono{font-family:var(--mono);font-size:12px}
+footer .mono{font-family:var(--mono);font-size:11px}
 @media (prefers-reduced-motion:no-preference){.reveal{animation:rise .18s ease-out}@keyframes rise{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
 </style>
 
@@ -228,12 +225,8 @@ footer .mono{font-family:var(--mono);font-size:12px}
 <main id="view" class="sheet" aria-live="polite"></main>
 
 <footer class="foot"><div class="sheet">
-  <p><strong>Section numbers</strong> follow <em>University Calculus: Early Transcendentals</em>, 4th ed. (Hass, Heil, Bogacki, Weir; Pearson), Chapter 9, the textbook ODU's MATH 212 uses in Fall 2026. No text, problem or figure from that book is reproduced here.</p>
-  <p><strong>Rules</strong> are stated in this page's own words and linked to the free textbook <a href="https://openstax.org/books/calculus-volume-2/pages/1-introduction" target="_blank" rel="noopener">OpenStax Calculus Volume 2</a> (CC BY-NC-SA 4.0), sections 5.1–6.4, where you can check each one.</p>
-  <p>Not affiliated with Old Dominion University, Pearson or OpenStax. Your instructor decides what your test covers, so check your section's syllabus. Your progress is stored in this browser only.</p>
-  <p>Math typeset with KaTeX 0.16.22 (MIT licence). Fonts: Barlow Semi Condensed, Source Serif 4, Fira Code (SIL Open Font License 1.1), included in the page.</p>
-  <p>© 2026 Devin Ferrell. Selection, arrangement and editorial content by Devin Ferrell, produced with AI assistance.</p>
-  <p class="mono">86 cards · build 30d6099433</p>
+  <p>A study aid, not affiliated with ODU, Pearson or OpenStax. Your syllabus decides what's on your test. Rules link to <a href="https://openstax.org/books/calculus-volume-2/pages/1-introduction" target="_blank" rel="noopener">OpenStax Calculus Volume 2</a> (CC BY-NC-SA 4.0). Progress stays in this browser.</p>
+  <p>© 2026 Devin Ferrell. Selection, arrangement and editorial content by Devin Ferrell, produced with AI assistance. <span class="mono">KaTeX 0.16.22 (MIT) · fonts SIL OFL 1.1 · 86 cards · build 760dd6a9ae</span></p>
 </div></footer>
 
 <script>
@@ -417,12 +410,6 @@ const DATA = {"tests":{"nth":"nth-term test","geo":"Geometric series","p":"p-ser
       <h1>Chapter 9 Field Guide</h1>
       <p class="lede">All ten sections, 9.1 to 9.10, numbered as in <em>University Calculus</em>. Each one has the words, the rules, a worked example, and cards that make you commit to an answer before you see it.</p>
       <div class="block"><h3>Warm-up · five cards · about three minutes</h3><div id="warm"></div></div>
-      <div class="block"><h3>How to use it</h3>
-        <ul class="plan">
-          <li><b>When</b><span>you finish a homework section, do that section's cards here before you close the book.</span></li>
-          <li><b>Then</b><span>do ten cards in <a href="#mixed">Mixed</a>. Mixed practice is what trains the "which test?" choice a test asks for.</span></li>
-          <li><b>Before a test</b><span>run Mixed until you score 8 out of 10, then go through the <a href="#map">Map</a> with <em>Quiz me</em> on.</span></li>
-        </ul></div>
       <div class="block"><h3>Your sections</h3><div class="progress" id="prog"></div>
         <p class="small muted">A section's count is the cards you got right on your last try.</p></div>
       <div class="block note" id="course"></div>`;
