@@ -528,7 +528,7 @@ footer .stamp{font-size:12px}
   <div class="result-actions"><button type="button" class="btn btn--primary" id="printBtn">Print or save as PDF</button><button type="button" class="btn" id="showAll" aria-pressed="false">Show all the working</button></div>
   <details class="fold" id="statesFold"><summary>A rate, $0 and UNKNOWN — what each means</summary><div class="fold-body"><p><b>A rate, not your deposit:</b> VA pays at month end and prorates a month you are enrolled for only part of.</p><p>Three things can appear for a stretch: a <b>dollar rate</b> (the full-month rate VA would pay for a whole month at this enrollment), <b>$0 / NOT PAYABLE</b> (the rule says nothing is payable at this enrollment), or <b>UNKNOWN</b> (an input is missing or stale — the page will not guess). They are never the same thing. VA: "If your enrollment starts after the first of the month or ends before the last day of the month, we'll pay you a prorated housing payment for the part of the month you're enrolled in classes." — <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, 2026-08-05</a>. Debts VA is collecting and enrollment changes after the award also reduce a payment.</p></div></details>
   <details class="fold" id="datesFold"><summary>The dates these figures run on</summary><div class="fold-body"><div class="asof" id="asofTop">
-    Housing figures: national average <span class="mono">$2,522</span>, online-only maximum <span class="mono">$1,261</span> — effective <span class="mono">2026-08-01</span> to <span class="mono">2027-07-31</span>, VA rates page updated 2026-07-31.
+    Housing figures: national average <span class="mono">$2,396</span>, online-only maximum <span class="mono">$1,198</span> — effective <span class="mono">2026-08-01</span> to <span class="mono">2027-07-31</span>, VA rates page updated 2026-10-13.
     Chapter 31 subsistence tables — FY2026, effective <span class="mono">2025-10-01</span> to <span class="mono">2026-09-30</span> (<a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates26.asp">VA FY2026 Chapter 31 subsistence rates, updated 2025-08-29, read 2026-09-16</a>); FY2027, effective <span class="mono">2026-10-01</span>, superseded <span class="mono">2027-10-01</span> (<a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates27.asp">VA FY2027 Chapter 31 subsistence rates, updated 2026-08-27, read 2026-09-16</a>). A Chapter 31 term that runs across <span class="mono">2026-10-01</span> is split there, and each stretch is priced by the table in force on its own dates. A Post-9/11 GI Bill (Chapter 33) term that runs past <span class="mono">2027-07-31</span> is split there, and days from <span class="mono">2027-08-01</span> show UNKNOWN until VA publishes the next housing figures and this page carries them.
     <span id="expiryLine"></span>
   </div>
@@ -570,7 +570,7 @@ footer .stamp{font-size:12px}
   <p><strong>Not an official VA document and not a VA determination.</strong> It applies published rules to what you type. Your School Certifying Official's certification and VA's award govern; where this page and they disagree, they win. Your VR&amp;E counselor governs anything Chapter 31. Nothing you enter is stored or sent anywhere.</p>
   <p>Companion sheet in this kit: <em>Which Benefit Am I On</em> (the chapters compared, and who to ask — <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/</a>, published 2026-09-02). This page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>.</p>
   <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a> — the same page, hosted for sharing; this copy is the review copy.</p>
-<p class="stamp">BW-07 Semester Pay Planner · revision 39 · prepared 2026-09-02 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+<p class="stamp">BW-07 Semester Pay Planner · revision 40 · prepared 2026-09-02 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 
@@ -598,10 +598,10 @@ footer .stamp{font-size:12px}
   // Every constant here can be superseded, so every constant carries asOf and nextChange (GATES.md A2)
   // and the page checks the clock against nextChange at runtime (A3).
   var RATES={
-    // va.gov/education/benefit-rates/post-9-11-gi-bill-rates/ — "Last updated: July 31, 2026";
-    // "Effective August 1, 2026, to July 31, 2027." National average $2,522; online-only "up to $1,261".
+    // va.gov/education/benefit-rates/post-9-11-gi-bill-rates/ — "Last updated: October 13, 2026" (read 2026-10-14);
+    // "Effective August 1, 2026, to July 31, 2027." National average $2,396; online-only "up to $1,198" (rev 40: VA lowered both from $2,522 / $1,261).
     // nextChange is VA's annual cadence (1 Aug), not a date VA has published for 2027 — stated as such.
-    nat:{asOf:"2026-08-01",nextChange:"2027-08-01",avg:2522,onlineMax:1261},
+    nat:{asOf:"2026-08-01",nextChange:"2027-08-01",avg:2396,onlineMax:1198},
     // Chapter 31's elected Post-9/11 subsistence allowance follows the DoD table on a calendar-year cadence —
     // VR&E SCO Handbook § F.2: "adjusted each year, effective January 1st". Its national-average figure for the
     // online-only fraction is DoD's calendar-year average, which this page does not carry: that path is UNKNOWN.
@@ -846,7 +846,7 @@ footer .stamp{font-size:12px}
       return {pay:Math.round(bahZip*f.res*100)/100,state:"pay",base:bahZip,mult:f.res,basis:"ZIP"};
     }
     // Solely online on the Chapter 31 Post-9/11 rate uses the national-average figure on VA's January cadence
-    // (Handbook § F.2), which is not the August-locked $2,522 this page carries. Not shown rather than guessed.
+    // (Handbook § F.2), which is not the August-locked $2,396 this page carries. Not shown rather than guessed.
     return {pay:null,state:"unknown",reason:"entirely online on the Chapter 31 Post-9/11 rate: the fraction ("+f.dist+") applies to the calendar-year national average, which this page does not carry — your counselor has the figure"};
   }
   // Split the term into the distinct stretches where the same set of sessions is running, then combine the
