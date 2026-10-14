@@ -238,6 +238,21 @@ ul.plain li+li{margin-top:4px}
   ol.todo-steps li,.who{box-shadow:none;break-inside:avoid;border-color:#999;background:#fff}
   .who a::after{content:" ‹" attr(href) "›";font-size:8pt;word-break:break-all}
 }
+/* printed from the first screen: every situation and its answers, compact, instead of a blank page */
+#printAll{display:none}
+@media print{
+  html.print-all .stage,html.print-all .lede,html.print-all .onerule span{display:none!important}
+  html.print-all #printAll{display:block}
+  #printAll{font-size:9pt;line-height:1.35;columns:2;column-gap:18pt}
+  #printAll h3{break-after:avoid;font-size:10pt;text-transform:uppercase;letter-spacing:.06em;margin:8pt 0 4pt;column-span:none}
+  #printAll .pa{break-inside:avoid;margin-bottom:8pt}
+  #printAll h4{font-size:10pt;margin:0 0 2pt}
+  #printAll p{margin:1pt 0;max-width:none}
+  #printAll ul{margin:1pt 0 1pt 10pt;padding:0;list-style:none}
+  #printAll li{max-width:none}
+  #printAll .pa-o{font-weight:600}
+  #printAll i{color:#333}
+}
 </style>
 <style>body{margin:0}</style>
 </head>
@@ -298,6 +313,7 @@ ul.plain li+li{margin-top:4px}
     </div>
   </section>
 </main>
+<section id="printAll" aria-hidden="true"></section>
 
 <div class="nav noprint" id="nav" hidden>
   <button type="button" class="btn" id="back">Back</button>
@@ -348,8 +364,8 @@ ul.plain li+li{margin-top:4px}
   var SRC={
     payFaq:cite("https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/","va.gov payments FAQ, updated 2026-08-05"),
     verify:cite("https://www.va.gov/education/verify-school-enrollment/","va.gov, Verify your school enrollment, updated 2026-07-27"),
-    gibill:cite("https://benefits.va.gov/gibill/","benefits.va.gov/gibill, updated 2026-08-06"),
-    rates:cite("https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/","va.gov Post-9/11 rates, 2026-07-31"),
+    gibill:cite("https://benefits.va.gov/gibill/","benefits.va.gov/gibill, updated 2026-01-06"),
+    rates:cite("https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/","va.gov Post-9/11 rates, updated 2026-10-13"),
     online:cite("https://www.va.gov/education/about-gi-bill-benefits/how-to-use-benefits/online-distance-learning/","va.gov online learning, 2025-06-11"),
     hybrid:cite("https://www.benefits.va.gov/GIBILL/docs/presentations/Hybrid_Training_Updates_FAQs.pdf","VA Education Service, Hybrid Training Updates FAQs, 2019"),
     withdraw:cite("https://benefits.va.gov/gibill/docs/Changes_Withdrawl_Article_Aug2021.pdf","VA, Changes or Withdrawal of Classes, 2021"),
@@ -437,12 +453,12 @@ ul.plain li+li{margin-top:4px}
       steps:[["Allow 7 to 10 business days after you verify","By paper check, about 14 days."],
              ["Past that, call VA","Ask whether your award is processed and your direct deposit is right."]],
       who:["va","askva"],tools:[],
-      why:"VA: “we'll deposit your payment into your bank account 7 to 10 business days after you verify your school enrollment”; by check “about 14 days after you verify” ("+SRC.payFaq+"). ODU’s 30–45 days is the school’s certification window, not VA’s payment clock ("+SRC.desk+" line 4)."},
-    A_paidMonthly:{a:1,t:"The school’s part is done. It’s VA’s clock now.",sub:"VA processes Post-9/11 housing on the 1st of each month. Chapters 30, 1606 and 35 pay after that month’s verification.",
-      steps:[["Allow up to 5 days after processing","VA: “It can take up to 5 days to arrive.”"],
-             ["Past that, call VA","Ask whether a payment is paused or your direct deposit changed."]],
-      who:["va","askva"],tools:[],
-      why:"VA: “We process your benefit payment on the first day of every month. It can take up to 5 days to arrive” (Post-9/11); Montgomery and DEA pay after verification ("+SRC.desk+" line 4, quoting "+SRC.verify+")."},
+      why:"VA: “we'll deposit your payment into your bank account 7 to 10 business days after you verify your school enrollment”; by check “about 14 days after you verify” ("+SRC.payFaq+"). ODU’s checklist puts first-time processing at roughly 30–45 business days ("+SRC.checklist+")."},
+    A_paidMonthly:{a:1,t:"The school’s part is done. It’s VA’s clock now.",sub:"VA pays housing at the end of each month for the month just finished, once that month is verified.",
+      steps:[["Verify this month first","No verification, no payment, on every GI Bill chapter and DEA."],
+             ["Past 7 to 10 business days after verifying, call VA","Ask whether a payment is paused or your direct deposit changed."]],
+      who:["va","askva"],tools:["verify"],
+      why:"VA: “If you're eligible for monthly housing allowance (MHA), we'll pay you at the end of each month” ("+SRC.rates+"); “7 to 10 business days after you verify your school enrollment” ("+SRC.payFaq+")."},
 
     // ---------- how much
     Q_howBen:{q:"Which benefit are you using?",
@@ -585,7 +601,7 @@ ul.plain li+li{margin-top:4px}
     A_desk:{a:1,t:"Use the Front-Desk Map",eyebrow:"For the office",sub:"Fourteen situations a student brings up: one check, then who to hand it to. Say the line number out loud when you hand off.",
       steps:[["Find the situation, do the one check, follow the branch",""],
              ["The one rule: you may assist. You never certify to VA.","Certification is the designated School Certifying Official’s act alone."]],
-      who:["sco"],tools:["desk"],why:"VA: work-study students “may assist with the certification process; however… they cannot certify information to VA” ("+cite("https://www.benefits.va.gov/GIBILL/resources/education_resources/school_certifying_officials/SCO_Training_FAQS.asp","VA SCO Training FAQs, updated 2026-04-28")+")."}
+      who:["sco"],tools:["desk"],why:"VA: work-study students “may assist with the certification process; however… they cannot certify information to VA” ("+cite("https://www.benefits.va.gov/GIBILL/resources/education_resources/school_certifying_officials/SCO_Training_FAQS.asp","VA SCO Training FAQs, updated 2026-09-23")+")."}
   };
 
   // ---- state: the topic, then each answer in order. Back pops one; a rail chip jumps to that question.
@@ -682,6 +698,16 @@ ul.plain li+li{margin-top:4px}
     var pre=document.createElement("pre"); pre.id="gate-walk"; pre.hidden=true; pre.textContent=JSON.stringify(rep); document.body.appendChild(pre);
     S.topic=""; S.path=[];
   }
+
+  // Printing from the first screen prints every situation and its answers, compact (an office keeps a paper copy);
+  // printing from an answer prints that answer with its sources.
+  function tree(id){ var n=N[id];
+    if(n.a) return '<p><b>'+n.t+(/[.?!]$/.test(n.t)?'':'.')+'</b> '+n.steps.map(function(s){ return s[0]; }).join(" · ")+(n.who.length?' <i>→ '+n.who.map(function(w){ return C[w].r; }).join(", ")+'</i>':'')+'</p>';
+    return '<p>'+n.q+'</p><ul>'+n.o.map(function(o){ return '<li><span class="pa-o">'+o.t+':</span> '+tree(o.n)+'</li>'; }).join("")+'</ul>'; }
+  function digest(){ return GROUPS.map(function(g){ return '<h3>'+g.h+'</h3>'+g.items.map(function(k){ var t=TOPICS[k];
+    return '<div class="pa"><h4>'+(t.n?t.n+' · ':'')+t.t+'</h4>'+tree(t.start)+'</div>'; }).join(""); }).join("")+'<p>Every answer’s sources and contact details are on the page itself, at the address below.</p>'; }
+  window.addEventListener("beforeprint",function(){ if(!$("step-topic").hidden){ $("printAll").innerHTML=digest(); document.documentElement.classList.add("print-all"); } });
+  window.addEventListener("afterprint",function(){ document.documentElement.classList.remove("print-all"); });
 
   renderTopics(); render();
   $("step-topic").querySelector("[data-qh]").blur();
