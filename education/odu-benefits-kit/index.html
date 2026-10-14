@@ -4,147 +4,689 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Veteran Benefits Kit · ODU</title>
-<meta name="description" content="The front door to the BW-07 kit: the three pages a veteran student, a work-study desk, or a counselor at ODU needs, and the handful of VA and ODU pages behind them. One link to bookmark.">
+<title>Veteran Benefits Kit</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Pick what is going on: an unpaid month, a class to drop, which benefit you have. One or two questions, then the next step and exactly who to contact. ODU, VA education benefits and beyond.">
+<script>
+/* Theme bootstrap, before anything paints: light unless this browser saved dark. data-theme is always set explicitly, so the device never decides. */
+(function(){ var t="light"; try{ if(localStorage.getItem("bw07.theme")==="dark") t="dark"; }catch(e){} document.documentElement.setAttribute("data-theme",t); document.documentElement.style.colorScheme=t; })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap">
 <style>
-/* D2 DRAFTING TABLE — tokens verbatim from departments/design/DIRECTIONS.md (2026-08-21). Series: BW-07. */
-:root{color-scheme:light;
-  --canvas:#E9EDEF;--field:#FFFFFF;--ink:#16202B;--ink-muted:#5A6874;--line:#74828C;
-  --accent:#2B5CA8;--accent-quiet:#79868F;--signal:#B4412E;
-  --s1:6px;--s2:12px;--s3:18px;--s4:30px;--s5:48px;--s6:78px;--margin:96px;
-  --t-title:26px;--t-head:18px;--t-body:16px;--t-label:12px;
-  --sans:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
-  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
-  --mono:"Fira Code","Cascadia Mono",Consolas,monospace;
+/* ── House style tokens (premium system, house-style/tokens.css), inlined: the review copy and the Pages site serve one file. ── */
+:root{
+  --font-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-display:var(--font-body);
+  --font-mono:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
+  --step--1:0.875rem;
+  --step-0:clamp(1.0625rem,1.0380rem + 0.1087vw,1.1250rem);
+  --step-1:clamp(1.2750rem,1.1871rem + 0.3907vw,1.4996rem);
+  --step-2:clamp(1.5300rem,1.3465rem + 0.8157vw,1.9990rem);
+  --step-3:clamp(1.8360rem,1.5117rem + 1.4412vw,2.6647rem);
+  --step-4:clamp(2.2032rem,1.6754rem + 2.3457vw,3.5520rem);
+  --leading-body:1.55;--leading-heading:1.12;--leading-display:0.98;
+  --tracking-display:-0.03em;--tracking-heading:-0.015em;--tracking-caps:0.08em;
+  --weight-body:400;--weight-strong:560;--weight-display:640;--measure:66ch;
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-5:1.5rem;--space-6:2rem;--space-7:3rem;--space-8:4rem;--space-9:6rem;
+  --gutter:clamp(1rem,0.6rem + 1.8vw,2rem);
+  --radius-sm:6px;--radius:10px;--radius-lg:16px;--radius-pill:999px;
+  --paper:#fafaf8;--surface:#ffffff;--surface-sunk:#f2f2ef;
+  --ink:#0e0e10;--ink-2:#4a4a50;--ink-3:#6b6b72;
+  --line:rgba(14,14,16,0.10);--line-strong:rgba(14,14,16,0.22);
+  --primary:#0e0e10;--on-primary:#fafaf8;--accent:#2748d8;--on-accent:#ffffff;
+  --focus-ring:0 0 0 2px var(--paper),0 0 0 4px var(--accent);
+  --shadow-1:0 1px 2px rgba(14,14,16,0.06),0 4px 16px rgba(14,14,16,0.06);
+  --shadow-2:0 2px 4px rgba(14,14,16,0.06),0 16px 48px rgba(14,14,16,0.12);
+  color-scheme:light;
+  --dur-press:160ms;--dur-hover:180ms;--dur-tip:150ms;--dur-menu:200ms;--dur-enter:300ms;--dur-exit:200ms;--dur-page:400ms;--stagger:60ms;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1);--ease-in:cubic-bezier(0.3,0,0.8,0.15);--ease-hover:ease;
+  --rise:24px;--rise-sm:8px;--press-scale:0.97;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--canvas)}
-body{background:var(--canvas);color:var(--ink);font-family:var(--serif);font-size:var(--t-body);line-height:1.5;padding:var(--s4) var(--s3) var(--s6) var(--margin);-webkit-font-smoothing:antialiased}
-.sheet{max-width:78ch;margin:0 auto}
-@media (max-width:720px){body{padding:var(--s3) var(--s2) var(--s5) var(--s3)}}
-.eyebrow{font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.09em;color:var(--ink-muted);margin-bottom:var(--s1);line-height:1.7}
-h1{font-family:var(--sans);font-weight:600;font-size:var(--t-title);line-height:1.1;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
-h2{font-family:var(--sans);font-weight:600;font-size:var(--t-head);text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--s2);text-wrap:balance}
-p{margin-bottom:var(--s2)} p:last-child{margin-bottom:0}
-a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.lead{font-size:18px;line-height:1.5;margin-top:var(--s2)}
-section{position:relative;margin-top:var(--s5);padding-top:var(--s3)}
-section::before{content:"";position:absolute;top:0;left:calc(var(--s2) * -1);right:0;height:1px;background:var(--accent)}
-section::after{content:"";position:absolute;top:calc(var(--s1) * -1);left:calc(var(--s2) * -1);width:1px;height:var(--s2);background:var(--accent)}
-@media (max-width:720px){section::before,section::after{left:0}}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s2)}
-.tile{display:block;background:var(--field);border:1px solid var(--line);padding:var(--s3);text-decoration:none;color:var(--ink);border-left:3px solid var(--accent)}
-.tile:hover{border-color:var(--accent)}
-.tile .who{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
-.tile h3{font-family:var(--sans);font-weight:600;font-size:20px;line-height:1.15;margin:var(--s1) 0}
-.tile p{font-size:15px;color:var(--ink);margin:0}
-.tile .go{display:block;margin-top:var(--s2);font-family:var(--sans);font-weight:600;letter-spacing:.02em;color:var(--accent)}
-.cite{font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--accent);border-bottom:1px solid var(--accent-quiet);padding-bottom:1px;text-decoration:none}
-@media (max-width:720px){.cite{white-space:normal;overflow-wrap:anywhere}}
-ul.links{list-style:none}
-ul.links li{padding:var(--s1) 0;border-bottom:1px solid var(--line);font-size:15px;display:flex;gap:var(--s2);flex-wrap:wrap;align-items:baseline}
-ul.links li b{font-family:var(--sans);font-weight:600;letter-spacing:.02em;min-width:16ch}
-table{width:100%;border-collapse:collapse;margin-top:var(--s2)}
-th{font-family:var(--mono);font-size:var(--t-label);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);text-align:left;padding:var(--s1);border-bottom:1px solid var(--accent-quiet)}
-td{padding:var(--s1);border-bottom:1px solid var(--line);vertical-align:top;font-size:14px;line-height:1.5}
-td:first-child{font-family:var(--sans);font-weight:600;letter-spacing:.02em}
-.asof{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.04em;color:var(--ink);line-height:1.7;margin-top:var(--s2);padding-top:var(--s1);border-top:1px solid var(--accent-quiet)}
-.never{border-left:3px solid var(--signal);background:var(--field);padding:var(--s2) var(--s3);margin-top:var(--s3);font-size:15px}
-.never b{color:var(--signal);font-family:var(--sans);text-transform:uppercase;letter-spacing:.05em;font-size:13px}
-footer{margin-top:var(--s6);padding-top:var(--s2);border-top:1px solid var(--line);font-size:13px;color:var(--ink-muted);line-height:1.6}
-footer .stamp{font-family:var(--mono);font-size:11px;letter-spacing:.04em;margin-top:var(--s2)}
+[data-theme="dark"]{
+  --paper:#0c0c0e;--surface:#151518;--surface-sunk:#08080a;--ink:#f2f2ee;--ink-2:#b4b4bb;--ink-3:#8c8c94;
+  --line:rgba(242,242,238,0.10);--line-strong:rgba(242,242,238,0.22);--primary:#f2f2ee;--on-primary:#0c0c0e;--accent:#8ea2ff;--on-accent:#0c0c0e;
+  --shadow-1:0 1px 2px rgba(0,0,0,0.4),0 4px 16px rgba(0,0,0,0.3);--shadow-2:0 2px 4px rgba(0,0,0,0.4),0 16px 48px rgba(0,0,0,0.5);
+  color-scheme:dark;
+}
+@media (prefers-reduced-motion: reduce){ :root{ --rise:0px;--rise-sm:0px;--press-scale:1;--dur-enter:200ms;--dur-page:200ms;--stagger:0ms; } }
+
+/* ── House style base (house-style/base.css). Only transform and opacity ever animate. ── */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--paper)}
+body{min-height:100svh;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--step-0);font-weight:var(--weight-body);line-height:var(--leading-body);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,select,textarea{font:inherit;color:inherit}
+p,li{max-width:var(--measure);text-wrap:pretty}
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--weight-display);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);text-wrap:balance}
+a{color:inherit;text-decoration-color:var(--line-strong);text-underline-offset:0.2em;text-decoration-thickness:1px}
+a:hover{text-decoration-color:currentColor}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-sm)}
+::selection{background:var(--accent);color:var(--on-accent)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:0 var(--space-5);border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:var(--weight-strong);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out),opacity var(--dur-hover) var(--ease-hover)}
+.btn:hover{opacity:0.86}
+.btn:active{transform:scale(var(--press-scale))}
+.btn--primary{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* ── BW-07 taste layer: the kit's blue (#2B5CA8), cool calm paper, generous space. Tokens only, plus the planner's own parts. ── */
+:root{
+  --paper:#f6f7f9;--surface:#ffffff;--surface-sunk:#eef1f5;
+  --ink:#0f1722;--ink-2:#3f4b5c;--ink-3:#5b6676;
+  --line:rgba(15,23,34,0.10);--line-strong:rgba(15,23,34,0.24);
+  --primary:#2B5CA8;--on-primary:#ffffff;--accent:#2B5CA8;--on-accent:#ffffff;
+  --accent-soft:#e9f0fa;--accent-line:rgba(43,92,168,0.40);
+  --danger:#a3302a;--danger-soft:#fbeceb;--warn:#7a4b05;--warn-soft:#fbf2e1;
+  --tl-pay:#2B5CA8;--tl-none:#98a3b1;--tl-unk:#c58a1e;
+}
+[data-theme="dark"]{
+  --paper:#0d1117;--surface:#161c26;--surface-sunk:#0a0e14;
+  --ink:#eef2f7;--ink-2:#bac4d1;--ink-3:#93a0b1;
+  --line:rgba(238,242,247,0.10);--line-strong:rgba(238,242,247,0.24);
+  --primary:#8fb2ec;--on-primary:#0b1220;--accent:#8fb2ec;--on-accent:#0b1220;
+  --accent-soft:rgba(143,178,236,0.13);--accent-line:rgba(143,178,236,0.50);
+  --danger:#ff9e95;--danger-soft:rgba(255,120,110,0.12);--warn:#f0c470;--warn-soft:rgba(240,196,112,0.11);
+  --tl-pay:#8fb2ec;--tl-none:#5b6676;--tl-unk:#d9a440;
+}
+.app{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto;padding:var(--space-5) 0 var(--space-8)}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4)}
+.eyebrow{font-size:var(--step--1);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--ink-3);font-weight:var(--weight-strong)}
+.top h1{font-size:var(--step-3);margin-top:var(--space-2)}
+.lede{color:var(--ink-2);margin-top:var(--space-3)}
+.nosave{font-size:var(--step--1);color:var(--ink-3);margin-top:var(--space-3)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer;font-size:var(--step--1);font-weight:var(--weight-strong);flex:0 0 auto;transition:transform var(--dur-press) var(--ease-out)}
+.iconbtn:active{transform:scale(var(--press-scale))}
+.iconbtn svg{width:18px;height:18px}
+.cite{color:var(--accent);text-decoration-color:var(--accent-line);overflow-wrap:anywhere}
+.mono{font-family:var(--font-mono);font-size:.92em}
+.red{color:var(--danger)}
+b,strong{font-weight:var(--weight-strong)}
+
+/* progress line and the answers rail */
+.progress{margin-top:var(--space-6)}
+.plabel{font-size:var(--step--1);color:var(--ink-3);font-weight:var(--weight-strong)}
+.pbar{display:flex;gap:4px;margin-top:var(--space-2)}
+.pbar span{flex:1;height:4px;border-radius:2px;background:var(--line-strong);opacity:.6}
+.pbar span.on{background:var(--accent);opacity:1}
+.rail{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-3)}
+.rail:empty{display:none}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font-size:var(--step--1);cursor:pointer;transition:transform var(--dur-press) var(--ease-out)}
+.chip:active{transform:scale(var(--press-scale))}
+.chip[aria-current="step"]{border-color:var(--accent-line);color:var(--accent);background:var(--accent-soft)}
+.chip .pen{opacity:.6}
+
+/* one question per screen */
+.stage{margin-top:var(--space-6)}
+.step.enter{animation:stepIn var(--dur-enter) var(--ease-out) both}
+.step[data-dir="back"]{--dir:-1}
+@keyframes stepIn{from{opacity:0;transform:translate3d(calc(var(--rise) * var(--dir,1)),0,0)}to{opacity:1;transform:none}}
+fieldset{border:0;padding:0;min-width:0}
+legend{padding:0;display:block;width:100%}
+.qh{font-size:var(--step-2);outline:none}
+.qh:focus-visible{box-shadow:none}
+.qh2{font-size:var(--step-1)}
+.sub{color:var(--ink-2);margin-top:var(--space-2)}
+.cards{display:grid;gap:var(--space-3);margin-top:var(--space-5)}
+.cards.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.card{position:relative;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;min-height:56px;border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out)}
+.card:active{transform:scale(var(--press-scale))}
+.card input{position:absolute;top:12px;left:12px;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.card .dot{flex:0 0 22px;height:22px;margin-top:1px;border-radius:50%;border:2px solid var(--line-strong);background:var(--surface)}
+.card.box .dot{border-radius:6px}
+.card:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.card:has(input:checked) .dot{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 0 5px,transparent 5.5px)}
+.card.box:has(input:checked) .dot{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.card:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+.card:has(input:disabled){opacity:.5;cursor:not-allowed}
+.card-t{display:block;font-weight:var(--weight-strong)}
+.card-s{display:block;font-size:var(--step--1);color:var(--ink-3);margin-top:2px}
+.qrow{padding:var(--space-5) 0;border-top:1px solid var(--line);margin-top:var(--space-5)}
+.qrow:first-of-type{margin-top:var(--space-4)}
+.qrow .qlabel{font-weight:var(--weight-strong);font-size:var(--step-0)}
+.seg{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:6px;margin-top:var(--space-3)}
+.seg label{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);cursor:pointer;font-size:var(--step--1);font-weight:500;line-height:1.25;transition:transform var(--dur-press) var(--ease-out)}
+.seg label:active{transform:scale(var(--press-scale))}
+.seg input{position:absolute;top:50%;left:50%;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.seg label:has(input:focus-visible){outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){ .seg.four{--n:2} }
+.field{display:flex;flex-direction:column;gap:6px;min-width:0;margin-top:var(--space-4)}
+.field label,.flabel{font-size:var(--step--1);font-weight:var(--weight-strong);color:var(--ink-2)}
+.field input[type=text],.field input[type=number],.field input[type=date],.field select{width:100%;max-width:100%;min-width:0;min-height:48px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);font-size:max(16px,var(--step-0))}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:0 var(--space-3)}
+.hint{font-size:var(--step--1);color:var(--ink-3);line-height:1.5}
+.err{display:flex;gap:8px;align-items:flex-start;color:var(--danger);font-weight:var(--weight-strong);font-size:var(--step--1);margin-top:var(--space-3)}
+.err::before{content:"!";flex:0 0 20px;height:20px;border-radius:50%;background:var(--danger);color:var(--surface);display:grid;place-items:center;font-size:13px;line-height:1}
+.err[hidden]{display:none}
+.has-err{border-left:3px solid var(--danger);padding-left:var(--space-4)}
+.stop{margin-top:var(--space-5);padding:var(--space-5);border-radius:var(--radius-lg);background:var(--accent-soft);border:1px solid var(--accent-line)}
+.stop p+p{margin-top:var(--space-3)}
+.flag{margin-top:var(--space-4);padding:var(--space-4);border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);font-size:var(--step--1);color:var(--ink-2)}
+.flag.warn{background:var(--warn-soft);border-color:transparent;color:var(--ink)}
+.notice{margin-top:var(--space-4);padding:var(--space-3) var(--space-4);border-radius:var(--radius);background:var(--accent-soft);font-size:var(--step--1)}
+.notice:empty{display:none}
+
+/* folds: one tap for the why */
+details.fold{margin-top:var(--space-4);border-top:1px solid var(--line)}
+details.fold>summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:10px;color:var(--accent);font-weight:var(--weight-strong);font-size:var(--step--1)}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"";flex:0 0 8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform var(--dur-menu) var(--ease-out)}
+details.fold[open]>summary::before{transform:rotate(45deg)}
+details.fold[open]>.fold-body{animation:foldIn var(--dur-menu) var(--ease-out)}
+@keyframes foldIn{from{opacity:0;transform:translate3d(0,calc(var(--rise-sm) * -1),0)}to{opacity:1;transform:none}}
+.fold-body{padding:0 0 var(--space-4);color:var(--ink-2);font-size:var(--step--1);line-height:1.6}
+.fold-body p+p{margin-top:var(--space-3)}
+
+/* Back / Next — a sticky bar on a phone */
+.nav{display:flex;gap:var(--space-3);justify-content:space-between;align-items:center;margin-top:var(--space-7);position:sticky;bottom:0;z-index:20;padding:12px 0 calc(12px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+html{scroll-padding-bottom:96px}
+.nav .btn{min-width:8rem;white-space:nowrap}
+.nav .spacer{flex:1}
+@media (max-width:640px){
+  .nav{margin:var(--space-6) calc(-1 * var(--gutter)) 0;padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom))}
+  .nav .btn{flex:1;min-width:0}
+}
+footer{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--line);font-size:var(--step--1);color:var(--ink-3);line-height:1.6}
+footer p+p{margin-top:var(--space-3)}
+footer .stamp{font-size:12px}
+.pubaddr .cite,footer .cite{overflow-wrap:anywhere}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){ .step.enter,details.fold[open]>.fold-body{animation-duration:var(--dur-exit)} }
+/* ── the kit's own parts: a topic picker, one question per screen, one answer card ── */
+html,body{overflow-x:clip} .stage{overflow-x:clip;overflow-clip-margin:8px} /* the step slide-in never opens a sideways scroll on a phone */
+.group{margin-top:var(--space-5)}
+.group:first-of-type{margin-top:var(--space-4)}
+.ghd{font-size:var(--step--1);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--ink-3);font-weight:var(--weight-strong)}
+.group .cards{margin-top:var(--space-3)}
+.card .ico{flex:0 0 22px;height:22px;margin-top:1px;color:var(--accent)}
+.card .ico svg{width:22px;height:22px}
+button.card{width:100%;text-align:left;font:inherit;color:inherit}
+button.card:focus-visible{outline:3px solid var(--accent);outline-offset:2px;box-shadow:none}
+button.card .go{margin-left:auto;align-self:center;flex:0 0 10px;height:10px;border-right:2px solid var(--ink-3);border-top:2px solid var(--ink-3);transform:rotate(45deg)}
+.lead-ans{font-size:var(--step-2);margin-top:var(--space-2)}
+.ans-sub{color:var(--ink-2);margin-top:var(--space-3)}
+ol.todo-steps{list-style:none;padding:0;margin-top:var(--space-5);display:grid;gap:var(--space-3);counter-reset:s}
+ol.todo-steps li{counter-increment:s;position:relative;padding:var(--space-4) var(--space-4) var(--space-4) 56px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-1);max-width:none}
+ol.todo-steps li::before{content:counter(s);position:absolute;left:16px;top:var(--space-4);width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:14px;font-weight:var(--weight-strong);font-variant-numeric:tabular-nums}
+ol.todo-steps b{display:block}
+ol.todo-steps .d{display:block;font-size:var(--step--1);color:var(--ink-2);margin-top:4px}
+.who{margin-top:var(--space-5);padding:var(--space-5);border-radius:var(--radius-lg);background:var(--accent-soft);border:1px solid var(--accent-line)}
+.who h3{font-size:var(--step-0)}
+.who ul{list-style:none;padding:0;margin-top:var(--space-3);display:grid;gap:var(--space-3)}
+.who li{max-width:none}
+.who .r{display:block;font-weight:var(--weight-strong)}
+.who .c{display:block;font-size:var(--step--1);color:var(--ink-2);margin-top:2px}
+.who .c a{color:var(--accent);text-decoration-color:var(--accent-line)}
+.tools{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-5)}
+.tools .btn{text-align:center}
+.heads{margin-top:var(--space-4)}
+.result-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-6)}
+.crisis{margin-top:var(--space-6);padding:var(--space-4);border-radius:var(--radius);border:1px solid var(--line);font-size:var(--step--1);color:var(--ink-2)}
+.crisis b{color:var(--ink)}
+.rule{margin-top:var(--space-4)}
+ul.plain{padding-left:1.1rem;margin-top:var(--space-2)}
+ul.plain li+li{margin-top:4px}
 @media print{
-  @page{size:letter;margin:12mm}
-  html,body{background:#fff} body{padding:0;font-size:10pt;color:#000} .sheet{max-width:none}
-  a{color:inherit} .tile{border-color:#999;break-inside:avoid} .tile .go::after,a.cite::after{content:" ‹" attr(href) "›";font-family:var(--mono);font-size:7.5pt;color:#333;word-break:break-all;font-weight:400}
-  section{margin-top:12pt;padding-top:6pt}
+  html,body{background:#fff;color:#000}
+  .app{width:auto;padding:0}
+  .noprint,.nav,.rail,.progress,#theme,.result-actions,.tools{display:none!important}
+  .step:not(#step-answer){display:none!important}
+  details.fold>summary{display:none}
+  details.fold:not([open])>.fold-body{display:block}
+  ol.todo-steps li,.who{box-shadow:none;break-inside:avoid;border-color:#999;background:#fff}
+  .who a::after{content:" ‹" attr(href) "›";font-size:8pt;word-break:break-all}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <style>body{margin:0}</style>
 </head>
 <body>
 
-<div class="sheet">
-<header>
-  <div class="eyebrow">BW-07 · VA education benefits at ODU · the front door</div>
-  <h1>Veteran Benefits Kit</h1>
-  <p class="lead">Three pages. Start with the one that matches your question. Each shows the answer first and puts the rule behind it one tap away; each prints. Nothing here is a VA decision — the School Certifying Official's certification and VA's award govern your case.</p>
-</header>
-
-<section>
-  <h2>Which page do you need?</h2>
-  <div class="tiles">
-    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">
-      <span class="who">Veteran · planning a term</span>
-      <h3>Semester Pay Planner</h3>
-      <p>Pick your benefit, tick your sessions, add your classes. One full-month housing or subsistence figure per stretch of the term, with where it comes from one tap away.</p>
-      <span class="go">Open the planner →</span>
-    </a>
-    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">
-      <span class="who">Veteran · which benefit, what it pays</span>
-      <h3>Which Benefit Am I On</h3>
-      <p>First, how to find which benefit you <em>already have</em> — your award letter, VA's online tool, the phone. Then the programs side by side in one line each: who each is for, what it pays and to whom, the rate with its dates, the role to ask. It compares; it does not decide eligibility — VA does.</p>
-      <span class="go">Open the comparison →</span>
-    </a>
-    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">
-      <span class="who">The desk · work-study staff</span>
-      <h3>Front-Desk Map</h3>
-      <p>Fourteen situations a student brings up, on one printed page (the grid), with every line's sources on the pages after it: they say this, you check this, then this, hand it to this role. Among them: which benefit a student is on, a payment that has not come, full time, dropping a class, and switching benefits. The full rows fold below for the trainer.</p>
-      <span class="go">Open the desk map →</span>
-    </a>
-    <a class="tile" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">
-      <span class="who">Counselor · Chapter 31</span>
-      <h3>The counselor's view</h3>
-      <p>Open the planner and tap <b>Counselor · Chapter 31</b>: the same page with every rule open — training-time bands, the elected Post-9/11 fractions, below-half exceptions, the January cadence. On the comparison sheet, the Chapter 31 row and section C; on the desk map, lines 2, 9, 11 and 12 are the office's Chapter 31 rows.</p>
-      <span class="go">Open the planner, then the counselor view →</span>
-    </a>
+<div class="app" id="app">
+<header class="top">
+  <div>
+    <div class="eyebrow">VA benefits at ODU · for veteran students and their families</div>
+    <h1>Veteran Benefits Kit</h1>
   </div>
-  <div class="never" style="border-left-color:var(--accent)"><b style="color:var(--accent)">If a kit page will not open</b> — the link is private until the operator shares it, the network is down, or an issuer has moved a page: use the roles table below and do not estimate money; the printed set is the three sheets together, and each carries its sources on paper. A date on this page that has passed means re-read the source it names.</div>
-  <div class="never"><b>The one rule</b> — for everyone at the desk who is <em>not</em> the designated School Certifying Official (work-study students, SCO assistants, read-only users): <strong>You may assist. You never certify to VA.</strong> Certification is the designated SCO's act alone — VA: work-study students "may assist with the certification process; however… they cannot certify information to VA." <a class="cite" href="https://www.benefits.va.gov/GIBILL/resources/education_resources/school_certifying_officials/SCO_Training_FAQS.asp">VA SCO Training FAQs, updated 2026-04-28</a></div>
-</section>
+  <button type="button" class="iconbtn noprint" id="theme" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="tlabel">Dark</span></button>
+</header>
+<p class="lede">Tell us what is going on. One or two quick questions, then the next step to take and exactly who to contact.</p>
+<p class="nosave noprint">Nothing you pick here is saved or sent anywhere.</p>
 
-<section>
-  <h2>Who does what — by role, never by name</h2>
-  <table>
-    <thead><tr><th>Ask</th><th>About</th></tr></thead>
-    <tbody>
-      <tr><td>School Certifying Official (SCO) — ODU Military Benefits &amp; Certification Services</td><td>Certifying your enrollment to VA; the Veterans Clearance Form; what a drop, add or change does to your certification; whether a class is certified as in residence (VA to certifying officials: "SCOs will certify all courses which combine Classroom Instruction and Distance Learning (Hybrid) as In-Residence training" — <a class="cite" href="https://www.benefits.va.gov/GIBILL/docs/presentations/Hybrid_Training_Updates_FAQs.pdf">VA Education Service, Hybrid Training Updates FAQs, 2019</a> — for terms beginning on or after 2019-08-15; remedial and deficiency courses are the stated exception). Contact by function on <a class="cite" href="https://www.odu.edu/military/va-certifying-official">odu.edu/military</a>.</td></tr>
-      <tr><td>VR&amp;E counselor (VRC) — VA</td><td>Everything Chapter 31: your plan, authorizations to the school, subsistence, books and equipment, switching. Cannot reach them: VA's handbook for schools — "call or visit your VA Regional Office and ask to speak to the VR&amp;E Supervisor. Someone will assist you in your VRC's absence." (<a class="cite" href="https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook">VR&amp;E SCO Handbook § M, on VA's KnowVA — the page renders in a browser only, a plain fetch returns its shell; read there 2026-09-02</a>); the office itself is found at <a class="cite" href="https://www.va.gov/find-locations/">va.gov/find-locations</a>.</td></tr>
-      <tr><td>Accredited Veterans Service Officer (VSO)</td><td>Disability claims and ratings, appeals, other VA benefits — "always free". <a class="cite" href="https://www.va.gov/get-help-from-accredited-representative/">va.gov, 2025-01-23</a></td></tr>
-      <tr><td>VA Education Call Center</td><td>Payment status, remaining entitlement, letters, debts, for the GI Bill chapters. <b>888-442-4551</b> (TTY 711), Mon–Fri 8 a.m.–7 p.m. ET — VA's published line, quoted from the <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, updated 2026-08-05</a>, read 2026-09-02; re-read there by 2027-08-01.</td></tr>
-      <tr><td><a class="cite" href="https://www.va.gov/contact-us/ask-va/">Ask VA</a></td><td>VA: "You can use Ask VA to ask a question online. You can ask about education, disability compensation, health care and many other topics." "You should receive a reply within 7 business days." Sign in to ask about yourself. (Practical advice, not a VA rule: name the school and the term dates.) <a class="cite" href="https://www.va.gov/contact-us/ask-va/">va.gov/contact-us/ask-va, read 2026-09-02</a></td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section>
-  <h2>The VA and ODU pages behind the kit</h2>
-  <ul class="links">
-    <li><b>Post-9/11 rates</b><a class="cite" href="https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/">va.gov, Post-9/11 GI Bill rates — housing, tiers, the more-than-50% rule, exclusions (2026-08-01 → 2027-07-31)</a></li>
-    <li><b>Verify enrollment</b><a class="cite" href="https://www.va.gov/education/verify-school-enrollment/">va.gov, verify your school enrollment — Post-9/11, Montgomery GI Bill (Active Duty and Selected Reserve), VET TEC 2.0 and Chapter 35 verify monthly (updated 2026-07-27)</a> · <a class="cite" href="https://benefits.va.gov/gibill/">benefits.va.gov/gibill: "As of January 2026, all education beneficiaries, including Survivors' and Dependents' Educational Assistance (Chapter 35) students, must verify their enrollment each month" (updated 2026-08-06)</a> — Chapter 31 is not on VA's verification list</li>
-    <li><b>Benefits left</b><a class="cite" href="https://www.va.gov/education/check-remaining-benefits/">va.gov, check remaining GI Bill and other education benefits</a></li>
-    <li><b>VR&amp;E eligibility</b><a class="cite" href="https://www.va.gov/careers-employment/vocational-rehabilitation/eligibility/">va.gov, Veteran Readiness and Employment eligibility — apply with a 10% rating; the VRC decides</a></li>
-    <li><b>Chapter 31 rates</b><a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates27.asp">VA, FY2027 Chapter 31 subsistence rates (2026-10-01 → 2027-09-30)</a></li>
-    <li><b>Other rates</b><a class="cite" href="https://www.va.gov/education/benefit-rates/">va.gov, education benefit rates — Chapters 30, 1606, 35, STEM</a></li>
-    <li><b>Comparison tool</b><a class="cite" href="https://www.va.gov/education/gi-bill-comparison-tool/institution/11900146">VA GI Bill Comparison Tool, ODU-Norfolk — the housing figure VA uses here, Yellow Ribbon</a></li>
-    <li><b>ODU checklist</b><a class="cite" href="https://www.odu.edu/military-connection/veteran-student-checklist">ODU veteran student checklist — the clearance form, 30–45 business days</a></li>
-    <li><b>ODU FAQ</b><a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU military FAQs — who files the clearance form and when; Chapter 31 exception</a></li>
-    <li><b>ODU calendar</b><a class="cite" href="https://catalog.odu.edu/undergraduate/academiccalendar/academiccalendar.pdf">ODU academic calendar — session dates, add/drop, withdrawal</a></li>
+<noscript><div class="stop">
+  <p><b>Scripting is off, so the guided steps cannot run.</b> The three kit pages work on their own:</p>
+  <ul class="plain">
+    <li><a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Semester Pay Planner</a> — what VA would pay each month this term</li>
+    <li><a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">Which Benefit Am I On</a> — find your benefit, the programs side by side</li>
+    <li><a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Front-Desk Map</a> — fourteen common situations and who handles each</li>
   </ul>
-  <p class="asof">Rates on the three pages carry their own dates and mark themselves expired when the date passes. The fiscal-year rates (Chapters 30, 1606, 35, 31) change on <span class="mono">2027-10-01</span>; Post-9/11 figures run to <span class="mono">2027-07-31</span>. Links read 2026-09-02; the FY2027 rate pages read 2026-09-16.</p>
-</section>
+  <p>School certification: ODU Military Benefits &amp; Certification Services, 757-683-7153, military@odu.edu. Payments and remaining benefits: VA Education Call Center, 888-442-4551 (TTY 711).</p>
+</div></noscript>
+
+<div class="progress noprint" id="progress" hidden>
+  <div class="plabel" id="plabel">What do you need?</div>
+  <div class="pbar" id="pbar" aria-hidden="true"></div>
+</div>
+<nav class="rail noprint" id="rail" aria-label="Your answers — tap one to change it"></nav>
+
+<main class="stage" id="stage">
+  <section class="step" id="step-topic">
+    <h2 class="qh" tabindex="-1" data-qh>What do you need help with?</h2>
+    <p class="sub">Pick the one closest to your situation.</p>
+    <div id="topics"></div>
+  </section>
+  <section class="step" id="step-q" hidden>
+    <fieldset>
+      <legend><h2 class="qh" tabindex="-1" data-qh id="qText"></h2></legend>
+      <p class="sub" id="qSub"></p>
+      <div class="cards" id="qCards"></div>
+    </fieldset>
+    <details class="fold" id="qFold" hidden><summary id="qFoldT"></summary><div class="fold-body" id="qFoldB"></div></details>
+  </section>
+  <section class="step" id="step-answer" hidden>
+    <div class="eyebrow" id="aEyebrow"></div>
+    <h2 class="qh lead-ans" tabindex="-1" data-qh id="aTitle"></h2>
+    <p class="ans-sub" id="aSub"></p>
+    <ol class="todo-steps" id="aSteps"></ol>
+    <div class="who" id="aWho"></div>
+    <div class="tools" id="aTools"></div>
+    <details class="fold" id="aFold"><summary>Where this comes from</summary><div class="fold-body" id="aWhy"></div></details>
+    <div class="result-actions noprint">
+      <button type="button" class="btn btn--primary" id="again">Something else</button>
+      <button type="button" class="btn" id="print">Print this</button>
+    </div>
+  </section>
+</main>
+
+<div class="nav noprint" id="nav" hidden>
+  <button type="button" class="btn" id="back">Back</button>
+  <span class="spacer"></span>
+</div>
+
+<p class="crisis">In crisis, or worried about a Veteran? <b>Dial 988, then press 1</b>, or text 838255 — the Veterans Crisis Line, free and confidential, 24/7 (<a class="cite" href="https://www.veteranscrisisline.net/">veteranscrisisline.net</a>).</p>
 
 <footer>
-  <p><strong>Not an official VA document.</strong> The three pages quote VA, the statute and ODU as read on 2026-09-02 (the fiscal-year rate tables re-read 2026-09-16), and say where; the sources govern where they and the pages differ. The pages are private until the operator shares them; a printed set is the three sheets together.</p>
-  <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/</a> — the same page, hosted for sharing; this copy is the review copy.</p>
-<p class="stamp">BW-07 Veteran Benefits Kit · front door · revision 14 · prepared 2026-09-02 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+  <p><strong>Not an official VA document and not a VA decision.</strong> It points you to the right step and the right person. The School Certifying Official's certification and VA's award govern your case; your VR&amp;E counselor governs anything Chapter 31. Rates and dates carry their own dates on the pages they come from.</p>
+  <p>The kit's three pages: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Semester Pay Planner</a> · <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">Which Benefit Am I On</a> · <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Front-Desk Map</a> (for the office). Every page prints.</p>
+    <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/</a></p>
+  <p class="stamp">BW-07 Veteran Benefits Kit · front door · revision 14 · prepared 2026-10-14 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
+<div class="sr-only" id="live" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+  // ---- who to contact, by role, never by name (the institutions' own published routes)
+  var KIT="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/";
+  var C={
+    sco:{r:"ODU certifying office (SCO)",c:'Military Benefits &amp; Certification Services · <a href="tel:+17576837153">757-683-7153</a> · <a href="mailto:military@odu.edu">military@odu.edu</a>'},
+    va:{r:"VA Education Call Center",c:'<a href="tel:+18884424551">888-442-4551</a> (TTY 711) · Mon–Fri 8 a.m.–7 p.m. ET'},
+    askva:{r:"Ask VA, in writing",c:'<a href="https://www.va.gov/contact-us/ask-va/">va.gov/contact-us/ask-va</a> · sign in; name the school and the term dates'},
+    vrc:{r:"Your VR&amp;E counselor",c:'Can’t reach them? Call your VA Regional Office and ask for the VR&amp;E Supervisor · <a href="https://www.va.gov/find-locations/">find your office</a>'},
+    vso:{r:"An accredited Veterans Service Officer (VSO)",c:'Free help with claims and ratings · <a href="https://www.va.gov/get-help-from-accredited-representative/">find one near you</a>'},
+    vahealth:{r:"Your nearest VA clinic or Vet Center",c:'<a href="https://www.va.gov/find-locations/">va.gov/find-locations</a> · search by address'}
+  };
+  var T={
+    planner:{t:"Open the Semester Pay Planner",h:KIT+"planner/",p:1},
+    benefit:{t:"Open Which Benefit Am I On",h:KIT+"benefit/",p:1},
+    desk:{t:"Open the Front-Desk Map",h:KIT+"desk/",p:1},
+    verify:{t:"Verify your enrollment",h:"https://www.va.gov/education/verify-school-enrollment/",p:1},
+    left:{t:"Check remaining benefits",h:"https://www.va.gov/education/check-remaining-benefits/"},
+    checklist:{t:"ODU veteran student checklist",h:"https://www.odu.edu/military-connection/veteran-student-checklist"},
+    calendar:{t:"ODU academic calendar",h:"https://catalog.odu.edu/undergraduate/academiccalendar/academiccalendar.pdf"},
+    vreApply:{t:"How to apply for VR&amp;E",h:"https://www.va.gov/careers-employment/vocational-rehabilitation/how-to-apply/",p:1},
+    vreElig:{t:"VR&amp;E eligibility",h:"https://www.va.gov/careers-employment/vocational-rehabilitation/eligibility/"},
+    rudisill:{t:"VA on Rudisill and Perkins",h:"https://benefits.va.gov/gibill/rudisill.asp"},
+    change:{t:"Change your GI Bill benefit",h:"https://www.va.gov/education/change-gi-bill-benefits/"}
+  };
+  function cite(h,t){ return '<a class="cite" href="'+h+'">'+t+'</a>'; }
+  var SRC={
+    payFaq:cite("https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/","va.gov payments FAQ, updated 2026-08-05"),
+    verify:cite("https://www.va.gov/education/verify-school-enrollment/","va.gov, Verify your school enrollment, updated 2026-07-27"),
+    gibill:cite("https://benefits.va.gov/gibill/","benefits.va.gov/gibill, updated 2026-08-06"),
+    rates:cite("https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/","va.gov Post-9/11 rates, 2026-07-31"),
+    online:cite("https://www.va.gov/education/about-gi-bill-benefits/how-to-use-benefits/online-distance-learning/","va.gov online learning, 2025-06-11"),
+    hybrid:cite("https://www.benefits.va.gov/GIBILL/docs/presentations/Hybrid_Training_Updates_FAQs.pdf","VA Education Service, Hybrid Training Updates FAQs, 2019"),
+    withdraw:cite("https://benefits.va.gov/gibill/docs/Changes_Withdrawl_Article_Aug2021.pdf","VA, Changes or Withdrawal of Classes, 2021"),
+    debt:cite("https://benefits.va.gov/gibill/resources/education_resources/debt_info.asp","VA, GI Bill overpayments and debts, updated 2026-05-18"),
+    checklist:cite("https://www.odu.edu/military-connection/veteran-student-checklist","ODU veteran student checklist"),
+    faqs:cite("https://www.odu.edu/military-connection/faqs","ODU military FAQs, read 2026-09-16"),
+    oduVa:cite("https://www.odu.edu/military-benefits/va-certifying-official","ODU, VA education benefits, read 2026-09-16"),
+    calendar:cite("https://catalog.odu.edu/undergraduate/academiccalendar/academiccalendar.pdf","ODU academic calendar"),
+    remaining:cite("https://www.va.gov/education/check-remaining-benefits/","va.gov, Check remaining benefits, updated 2026-08-17"),
+    vreElig:cite("https://www.va.gov/careers-employment/vocational-rehabilitation/eligibility/","va.gov VR&amp;E eligibility, updated 2025-11-07"),
+    vreApply:cite("https://www.va.gov/careers-employment/vocational-rehabilitation/how-to-apply/","va.gov, How to apply for VR&amp;E, updated 2026-04-09"),
+    vso:cite("https://www.va.gov/get-help-from-accredited-representative/","va.gov accredited representatives, 2025-01-23"),
+    vreHb:cite("https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook","VR&amp;E SCO Handbook, updated 2025-07-30"),
+    elig:cite("https://www.va.gov/education/eligibility/","va.gov education eligibility, 2026-04-03"),
+    rudisill:cite("https://benefits.va.gov/gibill/rudisill.asp","VA, Rudisill and Perkins, updated 2026-02-27"),
+    desk:cite(KIT+"desk/","Front-Desk Map")
+  };
+
+  // ---- the topics. Each answer is a short plan; the full rule, quoted, lives in the Front-Desk Map row it names.
+  var GROUPS=[
+    {h:"School and the GI Bill",items:["which","paid","howmuch","registered","drop","inperson","left","switch","vre"]},
+    {h:"Beyond school",items:["claim","health","home","leaving","job"]},
+    {h:"Working the benefits desk",items:["desk"]}
+  ];
+  var BEN=[{v:"gi",t:"GI Bill or DEA",s:"Post-9/11, Montgomery (30 or 1606), Fry, or Chapter 35"},{v:"vre",t:"VR&amp;E",s:"Chapter 31 · you have a VA counselor"},{v:"unsure",t:"Not sure"}];
+  var YNU=function(y,n,u){ return [{v:"yes",t:y||"Yes"},{v:"no",t:n||"No"},{v:"unsure",t:u||"Not sure"}]; };
+
+  var TOPICS={
+    which:{t:"I don’t know which benefit I have",start:"A_which"},
+    paid:{t:"I haven’t been paid",s:"Housing, subsistence or a monthly payment is late",start:"Q_paidBen"},
+    howmuch:{t:"How much will VA pay me?",s:"Monthly housing or subsistence this term",start:"Q_howBen"},
+    registered:{t:"I registered. How do I get certified?",s:"What to send so VA pays",start:"Q_regBen"},
+    drop:{t:"I want to drop or withdraw from a class",start:"Q_dropBen"},
+    inperson:{t:"Does my class count as in person?",s:"Hybrid, online with an exam on campus, live video",start:"Q_remedial"},
+    left:{t:"How much benefit do I have left?",start:"Q_leftBen"},
+    switch:{t:"Can I switch benefits?",s:"GI Bill to VR&amp;E, or between GI Bill chapters",start:"Q_switchTerm"},
+    vre:{t:"Do I qualify for VR&amp;E?",s:"Veteran Readiness and Employment, Chapter 31",start:"Q_vreWho"},
+    claim:{t:"A disability claim or rating",start:"A_claim"},
+    health:{t:"VA health care, including mental health",start:"A_health"},
+    home:{t:"A VA home loan",start:"A_home"},
+    leaving:{t:"I’m leaving the military, or just got out",start:"A_leaving"},
+    job:{t:"Finding work",start:"A_job"},
+    desk:{t:"I work at the desk and a student needs help",s:"Work-study, SCO assistants, anyone covering the inbox",start:"A_desk"}
+  };
+
+  var N={
+    // ---------- which benefit
+    A_which:{a:1,t:"Find it on paper, online, or by phone",sub:"The pay rules differ by benefit, so find out before planning money.",
+      steps:[["Look at your Certificate of Eligibility or award letter","It names your benefit (the “chapter”)."],
+             ["Or check online with your own sign-in","va.gov’s remaining-benefits page works for the GI Bill, DEA (Chapter 35) and transferred Post-9/11."],
+             ["Have a VA counselor? You are on VR&amp;E (Chapter 31)","Everything about your plan and your monthly money goes to that counselor."]],
+      who:["va","sco"],tools:["benefit","left"],
+      why:"How to tell which lane you are in, and why the desk never guesses the chapter: "+SRC.desk+" line 1. Self-service check by form (22-1990 GI Bill · 22-5490 DEA · 22-1990e transferred): "+SRC.remaining+". Call center: "+SRC.payFaq+"."},
+
+    // ---------- not paid
+    Q_paidBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_paidVre":(b.v==="unsure"?"A_which":"Q_paidCert")}; })},
+    A_paidVre:{a:1,t:"Ask your VR&amp;E counselor",sub:"Chapter 31 is not on VA’s monthly verification list, so your counselor answers payment questions.",
+      steps:[["Ask the certifying office one question","“Has my enrollment been certified this term, and did my counselor’s authorization arrive?”"],
+             ["Then contact your counselor","Ask whether your award is processed and your subsistence is set up."]],
+      who:["sco","vrc"],tools:[],
+      why:"Chapter 31 is not on VA’s verification list ("+SRC.verify+"); the counselor answers a Chapter 31 payment question ("+SRC.desk+" line 4). The counselor’s authorization goes to the school (line 3)."},
+    Q_paidCert:{q:"Has the certifying office certified your classes for this term?",sub:"Not sure is fine. The certifying office can tell you in one call.",
+      o:[{v:"yes",t:"Yes, and it matches my schedule",n:"Q_paidVerify"},{v:"wrong",t:"Yes, but something is wrong",s:"Wrong credits, dates, or in person versus online",n:"A_paidWrong"},{v:"no",t:"No, or I’m not sure",n:"A_paidCert"}]},
+    A_paidCert:{a:1,t:"Start with the certifying office",sub:"Nothing reaches VA until the school certifies you. This is the most common hold-up.",
+      steps:[["Contact the certifying office","Ask: “Has my enrollment been certified for this term?”"],
+             ["If not, ask what is missing","Usually the Veterans Clearance Form with your Certificate of Eligibility attached."],
+             ["Expect a wait on a first certification","ODU says allow 30 to 45 business days."]],
+      who:["sco"],tools:["checklist"],
+      why:"Check certification first, then match, then verification ("+SRC.desk+" line 4). Clearance form and timing: "+SRC.checklist+"."},
+    A_paidWrong:{a:1,t:"Get the certification fixed first",sub:"If the certification does not match your real schedule, the money will be wrong too.",
+      steps:[["Tell the certifying office exactly what is wrong","Credits, dates, or which classes are in person or online."],
+             ["They amend it with VA","Nothing else moves until this does."]],
+      who:["sco"],tools:[],
+      why:"VA’s guidance to students with incorrect enrollment information is to ask the School Certifying Official to update it ("+SRC.desk+" line 4)."},
+    Q_paidVerify:{q:"Have you verified your enrollment with VA this month?",sub:"Since January 2026 every GI Bill and DEA student verifies monthly, online, by text, by email or by phone.",
+      o:[{v:"yes",t:"Yes",n:"Q_paidFirst"},{v:"no",t:"No, or I’m not sure",n:"A_paidVerify"}]},
+    A_paidVerify:{a:1,t:"Verify your enrollment now",sub:"VA holds monthly payments until you verify.",
+      steps:[["Verify on va.gov, or by text, email or phone","STEM Scholarship students can’t verify by email; use another way on VA’s page."],
+             ["Then give it a few days","A monthly payment usually arrives within 5 days of being processed."]],
+      who:["va"],tools:["verify"],
+      why:"VA: “As of January 2026, all education beneficiaries, including Survivors' and Dependents' Educational Assistance (Chapter 35) students, must verify their enrollment each month to receive benefit payments” ("+SRC.gibill+"). How to verify, and the STEM exception: "+SRC.verify+"."},
+    Q_paidFirst:{q:"Is this your first payment of the term?",
+      o:[{v:"first",t:"Yes, the first one",n:"A_paidFirst"},{v:"monthly",t:"No, a regular monthly payment",n:"A_paidMonthly"}]},
+    A_paidFirst:{a:1,t:"The school’s part is done. It’s VA’s clock now.",sub:"Housing is paid at the end of each month for the month just finished, so the first one usually lands the month after classes start.",
+      steps:[["Allow 7 to 10 business days after you verify","By paper check, about 14 days."],
+             ["Past that, call VA","Ask whether your award is processed and your direct deposit is right."]],
+      who:["va","askva"],tools:[],
+      why:"VA: “we'll deposit your payment into your bank account 7 to 10 business days after you verify your school enrollment”; by check “about 14 days after you verify” ("+SRC.payFaq+"). ODU’s 30–45 days is the school’s certification window, not VA’s payment clock ("+SRC.desk+" line 4)."},
+    A_paidMonthly:{a:1,t:"The school’s part is done. It’s VA’s clock now.",sub:"VA processes Post-9/11 housing on the 1st of each month. Chapters 30, 1606 and 35 pay after that month’s verification.",
+      steps:[["Allow up to 5 days after processing","VA: “It can take up to 5 days to arrive.”"],
+             ["Past that, call VA","Ask whether a payment is paused or your direct deposit changed."]],
+      who:["va","askva"],tools:[],
+      why:"VA: “We process your benefit payment on the first day of every month. It can take up to 5 days to arrive” (Post-9/11); Montgomery and DEA pay after verification ("+SRC.desk+" line 4, quoting "+SRC.verify+")."},
+
+    // ---------- how much
+    Q_howBen:{q:"Which benefit are you using?",
+      o:[{v:"33",t:"Post-9/11 GI Bill or Fry",s:"Chapter 33",n:"A_howPlanner"},{v:"31",t:"VR&amp;E",s:"Chapter 31",n:"A_howPlanner"},{v:"other",t:"Montgomery (30 or 1606) or DEA (35)",n:"A_howOther"},{v:"unsure",t:"Not sure",n:"A_which"}]},
+    A_howPlanner:{a:1,t:"Use the Semester Pay Planner",sub:"It asks one thing at a time, then shows the monthly rate for each stretch of your term with the rule behind it.",
+      steps:[["Have your term and classes handy","Credits, and whether each class is in person or online."],
+             ["Post-9/11: two things decide housing","More than half time, and at least one class not entirely online for the full campus rate."],
+             ["Confirm with the certifying office","They certify what counts as full time for you."]],
+      who:["sco"],tools:["planner"],
+      why:"VA: housing needs a rate of pursuit “more than 50%”; an all-online term pays “50% of the national average” ("+SRC.rates+"; "+SRC.online+"). Full time at ODU and the rest: "+SRC.desk+" line 5."},
+    A_howOther:{a:1,t:"Your rate is set by your training time",sub:"Chapters 30, 1606 and 35 pay a monthly rate by band: full, three-quarter or half time.",
+      steps:[["Ask the certifying office which band they certify","That is the school’s answer, not a guess from your credits."],
+             ["Look up that band’s rate","Which Benefit Am I On lists the rates with their dates."]],
+      who:["sco"],tools:["benefit"],
+      why:"Rates by training-time band; below half time the chapters differ ("+SRC.desk+" lines 5 and 7)."},
+
+    // ---------- registered
+    Q_regBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_regVre":(b.v==="unsure"?"A_which":"Q_regNew")}; })},
+    A_regVre:{a:1,t:"Nothing for you to send",sub:"Chapter 31 students don’t file the Veterans Clearance Form. Your counselor sends the school an authorization.",
+      steps:[["Ask the certifying office if it arrived","If it hasn’t, contact your counselor."]],
+      who:["sco","vrc"],tools:[],
+      why:"ODU: “Chapter 31 students DO NOT need to complete the Veterans Clearance Form. Chapter 31 students will coordinate with their assigned VA Educational Counselor” ("+SRC.faqs+")."},
+    Q_regNew:{q:"Is this your first term at ODU, or did something change?",sub:"A change means your major, your benefit, active duty or veteran status, a break in enrollment, or a term you asked not to be certified.",
+      o:[{v:"yes",t:"Yes, first term or something changed",n:"A_regVcf"},{v:"no",t:"No, I’m continuing with no changes",n:"A_regCont"}]},
+    A_regVcf:{a:1,t:"Send the Veterans Clearance Form",sub:"Do it after you register, with your Certificate of Eligibility attached.",
+      steps:[["Register for your classes first",""],
+             ["Submit the Veterans Clearance Form with your COE","At least 30 days before the semester starts, if you can."],
+             ["Allow 30 to 45 business days","That is ODU’s window for a first certification."]],
+      who:["sco"],tools:["checklist"],
+      why:"Who files and when: "+SRC.faqs+"; "+SRC.checklist+". DEA (Chapter 35) students: ODU’s pages disagree on whether the form is needed, so ask the certifying office ("+SRC.desk+" line 3)."},
+    A_regCont:{a:1,t:"Ask the certifying office if a form is due",sub:"ODU’s two pages disagree on who files again each semester, so their answer is the one that counts.",
+      steps:[["Ask: “Do I need a new clearance form this term?”","If not, you should get a confirmation email when you’re certified."],
+             ["Active duty, MEM Ashore, or a certificate program?","Mention it. ODU’s FAQ says those students file every semester."]],
+      who:["sco"],tools:[],
+      why:"ODU’s FAQ (every-semester groups) against ODU’s VA benefits page (“You do not need to submit a new form each semester”): "+SRC.faqs+"; "+SRC.oduVa+"; both compared at "+SRC.desk+" line 3."},
+
+    // ---------- drop
+    Q_dropBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_dropVre":(b.v==="unsure"?"A_which":"Q_dropStart")}; })},
+    A_dropVre:{a:1,t:"Talk to your counselor before you drop",sub:"Changes to a VR&amp;E plan go through your counselor.",
+      steps:[["Contact your VR&amp;E counselor first",""],["Tell the certifying office the same day you drop","So the certification changes before VA pays on the old number."]],
+      who:["vrc","sco"],tools:[],why:"Chapter 31 changes are the counselor’s ("+SRC.desk+" line 8)."},
+    Q_dropStart:{q:"Has the class started yet?",
+      o:[{v:"no",t:"Not yet",n:"A_dropNot"},{v:"yes",t:"Yes, it has started",n:"Q_dropWindow"}]},
+    A_dropNot:{a:1,t:"Tell the certifying office the same day",sub:"A class dropped before its first day is treated as never attended.",
+      steps:[["Drop it, then tell the certifying office that day","If it was already certified, they fix the certification."],
+             ["Ask whether any money was already paid on it","Books or housing paid on that class can become a debt."]],
+      who:["sco"],tools:[],
+      why:"VA lists “Student withdrew on or before the first day of term” among school-debt causes ("+SRC.debt+"); full row: "+SRC.desk+" line 8."},
+    Q_dropWindow:{q:"Is it still inside the add/drop period?",sub:"Fall 2026 full term: by Sep 2, 2026. Spring 2027 full term: by Jan 20, 2027. Eight-week sessions have their own dates.",
+      o:[{v:"yes",t:"Yes, still inside add/drop",n:"A_dropInside"},{v:"no",t:"No, it’s past add/drop",n:"A_dropAfter"},{v:"unsure",t:"Not sure",n:"A_dropAfter"}]},
+    A_dropInside:{a:1,t:"Drop it, and tell the certifying office that day",sub:"Your pay is reduced from a date VA sets. Housing already paid on the old credits can come back as a debt.",
+      steps:[["Tell the certifying office the day you drop","Before VA pays on the old number."],
+             ["Don’t plan money on it yet","Wait until the office tells you the new credits and the date."]],
+      who:["sco"],tools:["planner"],
+      why:"VA: “A drop that occurs after the 1st day of the term doesn't create any books and supplies debt, but there may be housing debt” (VA office hours, August 2021, quoted at "+SRC.desk+" line 8)."},
+    A_dropAfter:{a:1,t:"Stop. Talk to the certifying office before you drop.",sub:"After add/drop, VA can take back benefits to the first day of the term unless you give reasons.",
+      steps:[["Contact the certifying office first","Before you drop, not after."],
+             ["Give your reasons in writing when you drop","That is how you ask VA for “mitigating circumstances”. Nothing is automatic until you ask."],
+             ["Know the deadline","Last day to withdraw: Nov 13, 2026 (Fall) · Apr 9, 2027 (Spring), full term."]],
+      who:["sco"],tools:["calendar"],
+      why:"VA: the easiest way to submit mitigating circumstances “is to tell your School Certifying Official (SCO)”; VA grants up to 6 credits “the first time, and only the first time, you reduce or terminate and ask for mitigating circumstances” ("+SRC.withdraw+"). Dates: "+SRC.calendar+". Full row: "+SRC.desk+" line 8."},
+
+    // ---------- in person
+    Q_remedial:{q:"Is it a remedial or developmental class?",sub:"A below-college-level class the school requires before the degree-level one.",
+      o:[{v:"yes",t:"Yes",n:"A_ipRemedial"},{v:"no",t:"No",n:"Q_ipCampus"},{v:"unsure",t:"Not sure",n:"A_ipAsk"}]},
+    A_ipRemedial:{a:1,t:"Ask the certifying office",sub:"The hybrid rule doesn’t apply to remedial classes. Whether it can be certified is their call.",
+      steps:[["Write down the course number","Send it to the certifying office with your question."]],
+      who:["sco"],tools:[],why:"VA: hybrid changes “do not apply to Remedial/Deficiency courses” ("+SRC.hybrid+"; "+SRC.desk+" line 6)."},
+    Q_ipCampus:{q:"Does the class require you on campus at any point during the term?",sub:"Class meetings, an in-person midterm or final, or an exam proctored on campus. A meeting before the term starts doesn’t count.",
+      o:[{v:"yes",t:"Yes",n:"A_ipYes"},{v:"no",t:"No, never",n:"A_ipNo"},{v:"unsure",t:"Not sure",n:"A_ipAsk"}]},
+    A_ipYes:{a:1,t:"It counts as in person",sub:"VA treats a class with any required on-campus part as in residence.",
+      steps:[["The certifying office certifies it","If anything about the class is unusual, confirm with them."]],
+      who:["sco"],tools:["planner"],why:"VA: “SCOs will certify all courses which combine Classroom Instruction and Distance Learning (Hybrid) as In-Residence training” ("+SRC.hybrid+")."},
+    A_ipNo:{a:1,t:"It counts as online",sub:"Watching live from home is online. Post-9/11 only: one online class among in-person ones changes nothing, but an all-online term pays the online housing rate.",
+      steps:[["Want at least one in-person class?","For Post-9/11, that keeps the full campus housing rate."],
+             ["Check the money in the planner",""]],
+      who:["sco"],tools:["planner"],why:"VA: all online courses pay housing “based on 50% of the national average” ("+SRC.online+"). Other chapters pay by training time and have no online rate."},
+    A_ipAsk:{a:1,t:"Write it down and ask the certifying office",sub:"How a class is certified is their decision, not yours or the desk’s.",
+      steps:[["Send the course number and how it meets",""]],
+      who:["sco"],tools:[],why:SRC.desk+" line 6."},
+
+    // ---------- left
+    Q_leftBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_leftVre":(b.v==="unsure"?"A_which":"A_leftGi")}; })},
+    A_leftGi:{a:1,t:"Check it yourself on va.gov",sub:"If VA awarded you benefits, the remaining months and days are online. Sign in on your own device.",
+      steps:[["Open VA’s remaining-benefits page","It works for the GI Bill, DEA, and transferred Post-9/11."],
+             ["Won’t show, or the number looks wrong?","The certifying office can read it in VA’s system; VA settles a dispute."]],
+      who:["sco","va"],tools:["left"],why:"VA: “If we awarded you VA education benefits, you can check online to find out how much of your benefits you've used and how much you have remaining” ("+SRC.remaining+")."},
+    A_leftVre:{a:1,t:"Ask your VR&amp;E counselor",sub:"VR&amp;E months aren’t on VA’s online check. Your counselor has them.",
+      steps:[["Contact your counselor",""]],who:["vrc"],tools:[],why:SRC.desk+" line 10."},
+
+    // ---------- switch
+    Q_switchTerm:{q:"Is your term already under way?",o:[{v:"yes",t:"Yes",n:"A_switchMid"},{v:"no",t:"No, I’m between terms",n:"A_switchBetween"}]},
+    A_switchMid:{a:1,t:"Not in the middle of a term",sub:"A switch takes effect at the start of your next term.",
+      steps:[["Into VR&amp;E: start with a VR&amp;E counselor",""],["Between GI Bill chapters: ask the certifying office","They know when your next enrollment period starts."]],
+      who:["vrc","sco"],tools:["change"],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+"); full row: "+SRC.desk+" line 9."},
+    A_switchBetween:{a:1,t:"Talk it through before you switch",sub:"Using VR&amp;E doesn’t use up your GI Bill. Most GI Bill benefits together cap at 48 months.",
+      steps:[["For VR&amp;E, talk to a VR&amp;E counselor","They explain your own months."],
+             ["Have both Montgomery and Post-9/11?","You may get both (Rudisill). VA reviews files itself; don’t assume an old choice is final."],
+             ["Tell the certifying office","Certification changes with the benefit."]],
+      who:["vrc","sco"],tools:["rudisill"],why:"VA: “If you use VR&amp;E benefits, we won't deduct entitlement from your other VA education benefits” ("+SRC.vreElig+"); 48 months, not counting VR&amp;E ("+SRC.elig+"); "+SRC.rudisill+"."},
+
+    // ---------- VR&E eligibility
+    Q_vreWho:{q:"Are you a veteran, or still serving?",o:[{v:"vet",t:"Veteran",n:"Q_vreBoth"},{v:"ad",t:"Still serving on active duty",n:"A_vreAd"}]},
+    Q_vreBoth:{q:"Do you have both of these?",sub:"A VA disability rating of 10% or more, and a discharge that was not dishonorable.",
+      o:[{v:"yes",t:"Yes, both",n:"A_vreApply"},{v:"no",t:"No, or not yet",n:"A_vreVso"},{v:"unsure",t:"Not sure",n:"A_vreVso"}]},
+    A_vreApply:{a:1,t:"You can apply",sub:"That means you may apply. A VR&amp;E counselor decides whether you’re entitled.",
+      steps:[["Apply on va.gov with VA Form 28-1900",""],["Meet with your counselor","They decide entitlement and build your plan."]],
+      who:["vrc"],tools:["vreApply"],why:"VA: you can apply if you “didn't receive a dishonorable discharge” and have “a service-connected disability rating of at least 10%”; “The VRC will determine if you're entitled” ("+SRC.vreElig+")."},
+    A_vreVso:{a:1,t:"Start with a free Veterans Service Officer",sub:"VR&amp;E needs a rating of 10% or more. A rating comes from a disability claim, and a VSO helps with that for free.",
+      steps:[["Find an accredited VSO","They help with the claim, and with questions about a discharge."],["Come back to VR&amp;E once you have a rating",""]],
+      who:["vso"],tools:["vreElig"],why:"VA: “The services an accredited VSO representative provides on your VA benefit claims are always free” ("+SRC.vso+")."},
+    A_vreAd:{a:1,t:"There’s a different doorway while serving",sub:"You may apply with a 20% or higher pre-discharge rating and a coming separation, or while awaiting discharge for a severe illness or injury.",
+      steps:[["With a VA rating: VA Form 28-1900",""],
+             ["No rating yet: VA Form 28-0588","Only if you’re in the PEB process, have a 20%+ memorandum rating, or are in IDES."],
+             ["Unsure which fits? Ask a VR&amp;E counselor","Don’t assume either way. The counselor decides."]],
+      who:["vrc","vso"],tools:["vreApply"],why:"VA’s active-duty routes and forms: "+SRC.vreApply+"; "+SRC.vreElig+". Full row: "+SRC.desk+" line 2."},
+
+    // ---------- beyond school
+    A_claim:{a:1,t:"Get a free accredited representative",eyebrow:"Disability claims and ratings",sub:"Claims, ratings and appeals aren’t the school’s lane. An accredited VSO helps for free.",
+      steps:[["Find an accredited VSO","Never pay someone to file a claim."],["Want it in writing? Use Ask VA",""]],
+      who:["vso","askva"],tools:[],why:SRC.vso+"."},
+    A_health:{a:1,t:"Apply once, then use any VA clinic",eyebrow:"Health care",sub:"Mental health care doesn’t wait for enrollment.",
+      steps:[["Apply for VA health care","Online or on paper, VA Form 10-10EZ."],["Need mental health care now?","VA offers it without enrolling first. In crisis, dial 988 then press 1."]],
+      who:["vahealth"],tools:[{t:"Apply for VA health care",h:"https://www.va.gov/health-care/how-to-apply/",p:1},{t:"Mental health care",h:"https://www.va.gov/health-care/health-needs-conditions/mental-health/"}],
+      why:cite("https://www.va.gov/health-care/eligibility/","va.gov health care eligibility")+" · "+cite("https://www.va.gov/health-care/health-needs-conditions/mental-health/","va.gov mental health care")+"."},
+    A_home:{a:1,t:"Get your Certificate of Eligibility",eyebrow:"Home loans",sub:"A lender asks for your COE. You can check its status online.",
+      steps:[["Check whether you qualify",""],["Get or check your COE",""],["Then work with a lender","VA backs the loan; the lender makes it."]],
+      who:[],tools:[{t:"Check your COE status",h:"https://www.va.gov/housing-assistance/home-loans/check-coe-status/",p:1},{t:"Home loan eligibility",h:"https://www.va.gov/housing-assistance/home-loans/eligibility/"},{t:"How to apply",h:"https://www.va.gov/housing-assistance/home-loans/how-to-apply/"}],
+      why:cite("https://www.va.gov/housing-assistance/home-loans/","va.gov VA-backed home loans")+"."},
+    A_leaving:{a:1,t:"Use TAP, and free counseling",eyebrow:"Leaving service",sub:"The Transition Assistance Program runs before your last day. Career counseling is free either way.",
+      steps:[["Still serving? Start TAP with your installation","Benefits briefings before separation."],
+             ["Choosing a school or career? Free counseling (Chapter 36)","It’s counseling only; it doesn’t make you VR&amp;E."],
+             ["Planning school? Find your benefit first","Then the Semester Pay Planner."]],
+      who:[],tools:[{t:"VA transition assistance",h:"https://benefits.va.gov/transition/",p:1},{t:"DoD TAP",h:"https://www.dodtap.mil/"},{t:"Education and career counseling",h:"https://www.va.gov/careers-employment/education-and-career-counseling/"}],
+      why:cite("https://benefits.va.gov/transition/","VA, Transition Assistance Program, updated 2026-02-09")+"."},
+    A_job:{a:1,t:"Two places to start",eyebrow:"Careers",sub:"With a disability rating, VR&amp;E can pay for training toward a job. Everyone can use VA’s employment programs.",
+      steps:[["Rated 10% or more? Look at VR&amp;E","See “Do I qualify for VR&amp;E?” in this kit."],["Everyone: VA careers and employment",""]],
+      who:[],tools:[{t:"VA careers and employment",h:"https://www.va.gov/careers-employment/",p:1},{t:"VR&amp;E (Chapter 31)",h:"https://www.va.gov/careers-employment/vocational-rehabilitation/"}],
+      why:cite("https://www.va.gov/careers-employment/","va.gov careers and employment")+"."},
+    A_desk:{a:1,t:"Use the Front-Desk Map",eyebrow:"For the office",sub:"Fourteen situations a student brings up: one check, then who to hand it to. Say the line number out loud when you hand off.",
+      steps:[["Find the situation, do the one check, follow the branch",""],
+             ["The one rule: you may assist. You never certify to VA.","Certification is the designated School Certifying Official’s act alone."]],
+      who:["sco"],tools:["desk"],why:"VA: work-study students “may assist with the certification process; however… they cannot certify information to VA” ("+cite("https://www.benefits.va.gov/GIBILL/resources/education_resources/school_certifying_officials/SCO_Training_FAQS.asp","VA SCO Training FAQs, updated 2026-04-28")+")."}
+  };
+
+  // ---- state: the topic, then each answer in order. Back pops one; a rail chip jumps to that question.
+  var S={topic:"",path:[],dir:1};
+
+  function current(){ if(!S.topic) return null; var id=TOPICS[S.topic].start; S.path.forEach(function(p){ id=p.n; }); return id; }
+  function renderTopics(){
+    $("topics").innerHTML=GROUPS.map(function(g){
+      return '<div class="group"><h3 class="ghd">'+g.h+'</h3><div class="cards">'+g.items.map(function(k){ var t=TOPICS[k];
+        return '<button type="button" class="card" data-topic="'+k+'"><span><span class="card-t">'+t.t+'</span>'+(t.s?'<span class="card-s">'+t.s+'</span>':'')+'</span><span class="go" aria-hidden="true"></span></button>'; }).join("")+'</div></div>';
+    }).join("");
+  }
+  function renderQ(n){
+    $("qText").innerHTML=n.q; $("qSub").innerHTML=n.sub||""; $("qSub").hidden=!n.sub;
+    $("qCards").innerHTML=n.o.map(function(o,i){ return '<button type="button" class="card" data-opt="'+i+'"><span><span class="card-t">'+o.t+'</span>'+(o.s?'<span class="card-s">'+o.s+'</span>':'')+'</span><span class="go" aria-hidden="true"></span></button>'; }).join("");
+    $("qFold").hidden=!n.fold; if(n.fold){ $("qFoldT").textContent=n.fold[0]; $("qFoldB").innerHTML=n.fold[1]; }
+  }
+  function tool(x){ var t=typeof x==="string"?T[x]:x; return '<a class="btn'+(t.p?' btn--primary':'')+'" href="'+t.h+'">'+t.t+'</a>'; }
+  function renderA(n){
+    $("aEyebrow").innerHTML=n.eyebrow||TOPICS[S.topic].t; $("aTitle").innerHTML=n.t; $("aSub").innerHTML=n.sub||"";
+    $("aSteps").innerHTML=n.steps.map(function(s){ return '<li><b>'+s[0]+'</b>'+(s[1]?'<span class="d">'+s[1]+'</span>':'')+'</li>'; }).join("");
+    $("aWho").hidden=!n.who.length;
+    $("aWho").innerHTML='<h3>'+'Who to contact'+'</h3><ul>'+n.who.map(function(k){ return '<li><span class="r">'+C[k].r+'</span><span class="c">'+C[k].c+'</span></li>'; }).join("")+'</ul>';
+    $("aTools").innerHTML=n.tools.map(tool).join(""); $("aTools").hidden=!n.tools.length;
+    $("aWhy").innerHTML='<p>'+n.why+'</p><p>Not a VA decision. The certifying office’s certification and VA’s award govern your case.</p>';
+    $("aFold").open=false;
+  }
+  function chips(){
+    var out=[]; if(!S.topic) return "";
+    out.push('<button type="button" class="chip" data-jump="-1" aria-label="Change your topic: '+esc(TOPICS[S.topic].t.replace(/&amp;/g,"&"))+'">'+TOPICS[S.topic].t+' <span class="pen" aria-hidden="true">✎</span></button>');
+    var id=TOPICS[S.topic].start;
+    S.path.forEach(function(p,i){ var n=N[id], o=n.o[p.i]; out.push('<button type="button" class="chip" data-jump="'+i+'" aria-label="Change your answer: '+esc(o.t.replace(/&amp;/g,"&"))+'">'+o.t+' <span class="pen" aria-hidden="true">✎</span></button>'); id=p.n; });
+    return out.join("");
+  }
+  function render(){
+    var id=current(), n=id?N[id]:null, which=!n?"topic":(n.a?"answer":"q");
+    ["topic","q","answer"].forEach(function(k){ $("step-"+k).hidden=(k!==which); });
+    if(which==="q") renderQ(n); if(which==="answer") renderA(n);
+    var depth=S.topic?1+S.path.length:0;
+    $("progress").hidden=(which==="topic");
+    $("plabel").textContent= which==="answer"?"Your next step":"Question "+depth;
+    $("pbar").innerHTML= which==="topic"?"":Array.apply(null,{length:depth+1}).map(function(_,j){ return '<span class="on"></span>'; }).join("")+(which==="answer"?"":'<span></span>');
+    $("rail").innerHTML=chips();
+    $("nav").hidden=(which==="topic");
+    var st=$("step-"+which); st.setAttribute("data-dir",S.dir<0?"back":"fwd"); st.classList.remove("enter"); void st.offsetWidth; st.classList.add("enter");
+    var top=$("progress").getBoundingClientRect().top; if(top<0||top>innerHeight*0.6) window.scrollTo(0,Math.max(0,window.pageYOffset+top-16));
+    var hd=st.querySelector("[data-qh]"); if(hd) hd.focus({preventScroll:true});
+  }
+  function pick(i){ var id=current(), n=N[id], o=n.o[i]; S.dir=1; S.path.push({i:i,n:o.n}); say(o.t.replace(/<[^>]+>|&amp;/g,"")); render(); }
+  function back(){ S.dir=-1; if(S.path.length) S.path.pop(); else S.topic=""; render(); }
+  function jump(k){ S.dir=-1; if(k<0){ S.topic=""; S.path=[]; } else S.path=S.path.slice(0,k); render(); }
+  function say(t){ var l=$("live"); l.textContent=""; setTimeout(function(){ l.textContent=t; },30); }
+
+  document.addEventListener("click",function(ev){
+    var b=ev.target.closest("button"); if(!b) return;
+    if(b.hasAttribute("data-topic")){ S.dir=1; S.topic=b.getAttribute("data-topic"); S.path=[]; render(); return; }
+    if(b.hasAttribute("data-opt")){ pick(+b.getAttribute("data-opt")); return; }
+    if(b.hasAttribute("data-jump")){ jump(+b.getAttribute("data-jump")); return; }
+    if(b.id==="back"){ back(); return; }
+    if(b.id==="again"){ jump(-1); return; }
+    if(b.id==="print"){ window.print(); return; }
+    if(b.id==="theme"){ setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"); return; }
+  });
+  // Printing opens the "where this comes from" fold so the paper copy carries its sources.
+  window.addEventListener("beforeprint",function(){ $("aFold").open=true; });
+
+  // ---- theme: light by default, a visible toggle, the choice saved in this browser only (the planner's key, so the kit agrees)
+  function setTheme(t){ document.documentElement.setAttribute("data-theme",t); document.documentElement.style.colorScheme=t; syncThemeBtn(); try{ localStorage.setItem("bw07.theme",t); }catch(e){} }
+  function syncThemeBtn(){ var dk=document.documentElement.getAttribute("data-theme")==="dark", b=$("theme"); b.setAttribute("aria-pressed",dk?"true":"false"); b.querySelector(".tlabel").textContent=dk?"Light":"Dark"; b.setAttribute("aria-label",dk?"Light mode":"Dark mode"); }
+  syncThemeBtn();
+
+  // Every path must end in an answer: a broken link in the tree is caught here, loudly, not by a student.
+  Object.keys(TOPICS).forEach(function(k){ if(!N[TOPICS[k].start]) throw new Error("kit: topic "+k+" has no start "+TOPICS[k].start); });
+  Object.keys(N).forEach(function(k){ (N[k].o||[]).forEach(function(o){ if(!N[o.n]) throw new Error("kit: "+k+" → missing "+o.n); }); });
+
+  // Gate A's walk: with #gate-walk in the address, the page walks every topic and every
+  // answer itself and writes what it found into the DOM, so a plain headless --dump-dom can read it on any machine.
+  if(location.hash==="#gate-walk"){
+    var rep={topics:0,answers:0,bad:[]};
+    Object.keys(TOPICS).forEach(function(k){ rep.topics++; (function walk(id,trail,seen){
+      var n=N[id]; if(!n){ rep.bad.push(trail+" → missing "+id); return; }
+      if(seen.indexOf(id)>=0){ rep.bad.push(trail+" loops at "+id); return; }
+      if(n.a){ rep.answers++; S.topic=k; S.path=[]; renderA(n);
+        if(!n.steps.length) rep.bad.push(trail+": no steps");
+        if(!n.who.length&&!n.tools.length) rep.bad.push(trail+": no one to contact and nothing to open");
+        if(!n.why) rep.bad.push(trail+": no source");
+        n.who.forEach(function(w){ if(!C[w]) rep.bad.push(trail+": unknown contact "+w); });
+        n.tools.forEach(function(t){ if(typeof t==="string"&&!T[t]) rep.bad.push(trail+": unknown tool "+t); });
+        if(n.steps.length>3) rep.bad.push(trail+": more than three steps");
+        return; }
+      if(!n.o||n.o.length<2) rep.bad.push(trail+": a question with fewer than two answers");
+      n.o.forEach(function(o){ walk(o.n,trail+" › "+o.t,seen.concat(id)); });
+    })(TOPICS[k].start,k,[]); });
+    var pre=document.createElement("pre"); pre.id="gate-walk"; pre.hidden=true; pre.textContent=JSON.stringify(rep); document.body.appendChild(pre);
+    S.topic=""; S.path=[];
+  }
+
+  renderTopics(); render();
+  $("step-topic").querySelector("[data-qh]").blur();
+})();
+</script>
 
 </body>
 </html>

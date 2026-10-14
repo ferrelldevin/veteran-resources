@@ -8,7 +8,7 @@ The site root is the campus office's hub: every page with a printout beside it. 
 
 Which VA education benefit you are on, what a semester pays, and what the school's certifying office does with each question.
 
-- [Veteran Benefits Kit · ODU](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/) — The front door to four pages: Semester Pay Planner, Which Benefit Am I On, Front-Desk Map, and the scan sheets. Every figure quoted from VA or ODU with the source beside it; each page passed an independent judge.
+- [Veteran Benefits Kit · ODU](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/) — Start here. Pick what is going on (an unpaid month, a class to drop, which benefit you have) and answer one or two questions: you get the next step and exactly who to contact. It leads to the Semester Pay Planner, Which Benefit Am I On and the Front-Desk Map.
 - [Semester Pay Planner](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/) — Sessions, classes, credits → the monthly housing or subsistence figure per stretch of the term.
 - [Which Benefit Am I On](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/) — Find what you have; the programs side by side; who to ask.
 - [Front-Desk Map](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/) — For the office: fourteen situations, one check, the branch, the hand-over, the source.
