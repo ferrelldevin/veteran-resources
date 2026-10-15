@@ -495,7 +495,7 @@ footer .stamp{font-size:12px}
   </fieldset>
   <fieldset class="ticks" id="g-sessions" aria-describedby="err-sessions" hidden>
     <legend class="qh2">Which sessions do you have classes in?</legend>
-    <p class="sub">Tick every one. A full semester is one session; an 8-week class is in another.</p>
+    <p class="sub">Tick every one your classes are in. A full semester is one session; an 8-week class is in another.</p>
     <p class="err" id="err-sessions" role="alert" hidden></p>
     <div class="cards" id="tickCards"></div>
     <div id="customList"></div>
@@ -572,7 +572,7 @@ footer .stamp{font-size:12px}
   <p><strong>Not an official VA document and not a VA determination.</strong> It applies published rules to what you type. Your School Certifying Official's certification and VA's award govern; where this page and they disagree, they win. Your VR&amp;E counselor governs anything Chapter 31. Nothing you enter is stored or sent anywhere.</p>
   <p>Other pages in this kit: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">the front door</a> (start here), <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/"><em>Which Benefit Am I On</em></a> (the chapters compared, and who to ask) and <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">the Front-Desk Map</a> (for the benefits office).</p>
   <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>.</p>
-<p class="stamp">BW-07 Semester Pay Planner · revision 43 · prepared 2026-10-15 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+<p class="stamp">BW-07 Semester Pay Planner · revision 44 · prepared 2026-10-15 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 
@@ -1565,7 +1565,7 @@ footer .stamp{font-size:12px}
         }
       } else {
         res=o.res; var band=o.band||{k:"none",label:"not measured"}, res31=res;
-        if(o.band) facts.push('Training time <b>'+band.label.toLowerCase().replace("½","half").replace("¾","three-quarter")+'</b> — '+fmtCr(p.total)+' of '+ftc+' credits'+(conv.length?' ('+esc(conv.join("; "))+')':'')+(o.r!==null&&o.r!==undefined&&!o.scope&&!(level==="grad"&&ftcRefused())?' · credits ÷ full time <b>'+pct(o.r)+'</b> (a derivation shown for comparison: Chapter 31 measures pursuit by the training-time band above, 38 CFR 21.4270(c), and pays by that band, 21.260(c), not by this percentage rounded to the nearest 10 as the GI Bill housing allowance is)':''));
+        if(o.band) facts.push('Training time <b>'+band.label.toLowerCase().replace("½","half").replace("¾","three-quarter")+'</b> — '+fmtCr(p.total)+' of '+ftc+' credits'+(conv.length?' ('+esc(conv.join("; "))+')':'')+(o.r!==null&&o.r!==undefined&&!o.scope&&!(level==="grad"&&ftcRefused())?' · credits ÷ full time <b>'+pct(o.r)+'</b> (a derivation shown for comparison: Chapter 31 measures pursuit by the training-time band above, 38 CFR 21.4270(c), and pays by that band, 21.260('+(chapter==="31s"?'b':'c')+'), not by this percentage rounded to the nearest 10 as the GI Bill housing allowance is)':''));
         if(bothCounts) facts.push(bothCounts);
         if(chapter==="31s") facts.push('Dependents <b>'+(deps===null?(I.depsUnsure?'not sure':'not answered'):deps)+'</b> — your answer');
         if(chapter==="31p"&&basisFact&&band.k!=="sub") facts.push(basisFact);
@@ -1831,9 +1831,16 @@ footer .stamp{font-size:12px}
     if(n==="depsPick"){ S.deps=(t.value==="4plus")?(S.deps!==""&&S.deps!=="unsure"&&+S.deps>=4?S.deps:"4"):t.value; delete S.err.deps; renderStatic(); renderChrome(); if(t.value==="4plus") $("deps").focus(); return; }
     if(t.getAttribute("data-sf")==="modUnsure"){ var su=sesById(+t.getAttribute("data-sid")); if(su){ su.modUnsure=t.checked; if(t.checked) su.mod=null; delete S.err["s-"+su.id+"-mod"]; renderCards(); var cb=document.querySelector('[data-sf="modUnsure"][data-sid="'+su.id+'"]'); if(cb) cb.focus(); } return; }
     if(t.type==="radio"&&/^(chapter|level|oduGlobal|tier|activeDuty|firstUse|finalTerm|term)$/.test(n)){
-      S[n]=t.value; delete S.err[n];
-      if(n==="term"){ if(!S.ticks.full&&!S.ticks.first&&!S.ticks.second) S.ticks.full=true; syncTerm(); delete S.err.sessions; }
-      renderAll(); return;
+      var prevTerm=S.term; S[n]=t.value; delete S.err[n];
+      if(n==="term"){ syncTerm(); delete S.err.sessions;
+        // Rev 44 (Gate U phone run 15): sessions ticked under another term carry over; say so where the student is looking.
+        var kept=SLOTS.filter(function(k){ return S.ticks[k]; });
+        if(prevTerm&&prevTerm!==S.term&&kept.length) S.notice="Still ticked from "+TERMS[prevTerm].label+": "+kept.map(function(k){ return KIND[k]; }).join(", ")+". Untick any session you don’t have in "+TERMS[S.term].label+"."+(S.notice?" "+S.notice:"");
+      }
+      renderAll();
+      // Rev 44: no session is ticked for you, and the question below is brought into view, so it cannot be missed on a phone.
+      if(n==="term"){ var gs=$("g-sessions"); if(gs&&!gs.hidden){ gs.scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); if(!sessions.length) say("Next, tick the sessions your classes are in."); } }
+      return;
     }
     if(t.name==="tick"){ S.ticks[t.value]=t.checked; S.notice=""; syncTerm(); delete S.err.sessions; renderTerm(); renderStatic(); renderChrome(); var tk=document.querySelector('input[name="tick"][value="'+t.value+'"]'); if(tk) tk.focus(); return; }
     if((m=/^how-(\d+)$/.exec(n))){ var c=clsById(+m[1]); if(c){ c.resident=(t.value==="res"); delete S.err["c-"+c.id+"-how"]; var keep=document.activeElement===t; renderCards(); if(keep){ var r=document.querySelector('input[name="'+n+'"][value="'+t.value+'"]'); if(r) r.focus(); } } return; }
