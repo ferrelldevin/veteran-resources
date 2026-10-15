@@ -253,6 +253,8 @@ details.cmore[open]>summary::after{content:"−"}
 .facts li{padding-left:18px;position:relative}
 .facts li::before{content:"";position:absolute;left:4px;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.6}
 .cmp{margin-top:var(--space-3);font-size:var(--step--1);color:var(--ink-2)}
+.assume{margin-top:var(--space-3);padding:var(--space-3);border:1px dashed var(--ink-2);border-radius:8px;font-size:var(--step--1);color:var(--ink-2)}
+.assume b{color:var(--ink)}
 .updated{display:inline-block;margin-top:var(--space-3);padding:4px 12px;border-radius:var(--radius-pill);background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:var(--weight-strong)}
 .updated.pop{animation:fadeIn var(--dur-enter) var(--ease-out)}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -529,7 +531,7 @@ footer .stamp{font-size:12px}
   <details class="fold" id="statesFold"><summary>A rate, $0 and UNKNOWN — what each means</summary><div class="fold-body"><p><b>A rate, not your deposit:</b> VA pays at month end and prorates a month you are enrolled for only part of.</p><p>Three things can appear for a stretch: a <b>dollar rate</b> (the full-month rate VA would pay for a whole month at this enrollment), <b>$0 / NOT PAYABLE</b> (the rule says nothing is payable at this enrollment), or <b>UNKNOWN</b> (an input is missing or stale — the page will not guess). They are never the same thing. VA: "If your enrollment starts after the first of the month or ends before the last day of the month, we'll pay you a prorated housing payment for the part of the month you're enrolled in classes." — <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ, 2026-08-05</a>. Debts VA is collecting and enrollment changes after the award also reduce a payment.</p></div></details>
   <details class="fold" id="datesFold"><summary>The dates these figures run on</summary><div class="fold-body"><div class="asof" id="asofTop">
     Housing figures: national average <span class="mono">$2,396</span>, online-only maximum <span class="mono">$1,198</span> — effective <span class="mono">2026-08-01</span> to <span class="mono">2027-07-31</span>, VA rates page updated 2026-10-13.
-    Chapter 31 subsistence tables — FY2026, effective <span class="mono">2025-10-01</span> to <span class="mono">2026-09-30</span> (<a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates26.asp">VA FY2026 Chapter 31 subsistence rates, updated 2025-08-29, read 2026-09-16</a>); FY2027, effective <span class="mono">2026-10-01</span>, superseded <span class="mono">2027-10-01</span> (<a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates27.asp">VA FY2027 Chapter 31 subsistence rates, updated 2026-08-27, read 2026-09-16</a>). A Chapter 31 term that runs across <span class="mono">2026-10-01</span> is split there, and each stretch is priced by the table in force on its own dates. A Post-9/11 GI Bill (Chapter 33) term that runs past <span class="mono">2027-07-31</span> is split there, and days from <span class="mono">2027-08-01</span> show UNKNOWN until VA publishes the next housing figures and this page carries them.
+    Chapter 31 subsistence tables — FY2026, effective <span class="mono">2025-10-01</span> to <span class="mono">2026-09-30</span> (<a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates26.asp">VA FY2026 Chapter 31 subsistence rates, updated 2025-08-29, read 2026-09-16</a>); FY2027, effective <span class="mono">2026-10-01</span>, superseded <span class="mono">2027-10-01</span> (<a class="cite" href="https://www.benefits.va.gov/vocrehab/vrerates27.asp">VA FY2027 Chapter 31 subsistence rates, updated 2026-08-27, read 2026-09-16</a>). A Chapter 31 term that runs across <span class="mono">2026-10-01</span> is split there, and each stretch is priced by the table in force on its own dates. A Post-9/11 GI Bill (Chapter 33) term that runs past <span class="mono">2027-07-31</span> is split there, and days from <span class="mono">2027-08-01</span> show UNKNOWN until VA publishes the next housing figures and this page carries them. VA’s future-rates page, checked 2026-10-15, says “Check back in March 2027.” Under any stretch whose rates are not published yet, the page also shows what today’s rates would pay, labeled as an assumption, not a confirmed rate, and never counted as a figure.
     <span id="expiryLine"></span>
   </div>
   <div class="asof">Definitions of "distance learning" and "resident learning" are under a pending VA rule (RIN 2900-AQ89, proposed 2025-09-03, comments closed 2025-11-03). As checked 2026-09-25 (Federal Register, both documents under the RIN are proposed rules) no final rule had issued. Re-check by <span class="mono" id="recheck">2027-01-04</span>; if a final rule has issued, the in-person rule on this page may have moved.</div></div></details>
@@ -570,7 +572,7 @@ footer .stamp{font-size:12px}
   <p><strong>Not an official VA document and not a VA determination.</strong> It applies published rules to what you type. Your School Certifying Official's certification and VA's award govern; where this page and they disagree, they win. Your VR&amp;E counselor governs anything Chapter 31. Nothing you enter is stored or sent anywhere.</p>
   <p>Other pages in this kit: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">the front door</a> (start here), <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/"><em>Which Benefit Am I On</em></a> (the chapters compared, and who to ask) and <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">the Front-Desk Map</a> (for the benefits office).</p>
   <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>.</p>
-<p class="stamp">BW-07 Semester Pay Planner · revision 41 · prepared 2026-10-14 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+<p class="stamp">BW-07 Semester Pay Planner · revision 42 · prepared 2026-10-15 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 
@@ -1199,9 +1201,9 @@ footer .stamp{font-size:12px}
     sessions.forEach(function(s){ if(datesOk(s)&&(last===null||d(s.end)>last)) last=d(s.end); });
     var t="";
     if(last!==null){
-      if(S.chapter==="33"&&last>=d(RATES.nat.nextChange)) t="Heads up: VA sets the Post-9/11 housing rates each August, and the ones for days from "+fmtD(d(RATES.nat.nextChange))+" are not published yet. Your plan will show “no figure yet” (UNKNOWN) for those weeks; the weeks before still get a figure.";
-      if(S.chapter==="31p"&&last>=d(RATES.p911ch31.nextChange)) t="Heads up: VR&E’s Post-9/11 rate follows a rate year VA sets each January, and this page carries the "+RATES.p911ch31.asOf.slice(0,4)+" year only. Your plan will show “no figure yet” (UNKNOWN) for weeks from "+fmtD(d(RATES.p911ch31.nextChange))+"; your counselor has that figure.";
-      if(S.chapter==="31s"&&last>=d(CH31_TABLES[CH31_TABLES.length-1].nextChange)) t="Heads up: VA publishes each fiscal year’s Chapter 31 table shortly before October 1, and the one for days from "+fmtD(d(CH31_TABLES[CH31_TABLES.length-1].nextChange))+" is not on this page yet. Your plan will show “no figure yet” (UNKNOWN) for those weeks.";
+      if(S.chapter==="33"&&last>=d(RATES.nat.nextChange)) t="Heads up: VA sets the Post-9/11 housing rates each August, and the ones for days from "+fmtD(d(RATES.nat.nextChange))+" are not published yet. Your plan will show “no figure yet” (UNKNOWN) for those weeks; the weeks before still get a figure. Under those weeks you will also see what today’s rates would pay, marked as an assumption, not a confirmed rate. Your rate of pursuit shows either way.";
+      if(S.chapter==="31p"&&last>=d(RATES.p911ch31.nextChange)) t="Heads up: VR&E’s Post-9/11 rate follows a rate year VA sets each January, and this page carries the "+RATES.p911ch31.asOf.slice(0,4)+" year only. Your plan will show “no figure yet” (UNKNOWN) for weeks from "+fmtD(d(RATES.p911ch31.nextChange))+"; your counselor has that figure. Under those weeks you will also see what today’s rates would pay, marked as an assumption, not a confirmed rate. Your rate of pursuit shows either way.";
+      if(S.chapter==="31s"&&last>=d(CH31_TABLES[CH31_TABLES.length-1].nextChange)) t="Heads up: VA publishes each fiscal year’s Chapter 31 table shortly before October 1, and the one for days from "+fmtD(d(CH31_TABLES[CH31_TABLES.length-1].nextChange))+" is not on this page yet. Your plan will show “no figure yet” (UNKNOWN) for those weeks. Under those weeks you will also see what today’s rates would pay, marked as an assumption, not a confirmed rate. Your rate of pursuit shows either way.";
     }
     el.textContent=t;
   }
@@ -1351,7 +1353,25 @@ footer .stamp{font-size:12px}
       return b?{res:{pay:null,state:"unknown",reason:bad[b.id]},r:null,band:null,scope:true}:o; })};
   }
   // One stretch, rev 38's refusal chain in rev 38's order. Returns the result and what decided it.
+  // Rev 42 (2026-10-15), on the operator's ask: a stretch past the last rate year this page carries stays UNKNOWN, and it also
+  // shows what today's rates would pay, labeled as an assumption, not a confirmed rate, and never counted as a figure. The core is
+  // untouched: the same stretch is decided a second time with no start date, which the core prices on the rates it carries now,
+  // through every refusal in decideAt (a copy of the stretch with no first day). The estimate is attached only when the real answer is the core's own not-yet-published
+  // result (the same object, so no later refusal replaced it) and the table is not expired.
+  function futureGap(chapter,startT){
+    if(startT===null||startT===undefined) return false;
+    var nx=chapter==="33"?RATES.nat.nextChange:(chapter==="31p"?RATES.p911ch31.nextChange:CH31_TABLES[CH31_TABLES.length-1].nextChange);
+    return startT>=d(nx) && !expired(nx);
+  }
   function decide(p,I){
+    var o=decideAt(p,I);
+    if(o.res && o.res.state==="unknown" && o.coreRes===o.res && futureGap(I.chapter,p.start)){
+      var a=decideAt(Object.assign({},p,{start:null}),I);
+      if(a.res && a.res.pay!==null) o.assumed=a.res;
+    }
+    return o;
+  }
+  function decideAt(p,I){
     var chapter=I.chapter, ftc=I.ftc, tier=I.tier, deps=I.deps, level=I.level, finalTerm=I.finalTerm, activeDuty=I.activeDuty, firstUse=I.firstUse;
     var adUnsure=I.adUnsure, fuUnsure=I.fuUnsure, bahEff=I.bahEff, bahSrc=I.bahSrc, bahUndated=I.bahUndated, bahRefuse=I.bahRefuse;
     var modUnsure=level==="grad"&&p.gradMissingMod&&p.sessions.some(function(s){ return s.modUnsure; });
@@ -1361,7 +1381,7 @@ footer .stamp{font-size:12px}
     if(level==="grad" && S.oduGlobal!=="no" && mine.ftc===null && p.parts.some(function(x){ return x.e.grad && x.e.w!==null && x.e.w>=STD[I.mult].lo && x.e.w<=STD[I.mult].hi; }))
       return {res:{pay:null,state:"unknown",reason:(S.oduGlobal==="yes"?"ODU's catalog sets 9 as the full-term standard for doctoral, EdS and on-campus master's students; an ODUGlobal master's is counted per eight-week term, so for a full-length session the SCO reports the full-time number":"you have not said whether your program is an ODUGlobal master's (or are not sure) — ODU's 9 is the full-term standard only for doctoral, EdS and on-campus master's students")+" — enter the SCO's number under ODU standards (Full time), or answer the ODUGlobal question; this page will not measure anything against 9 until then"},r:null,band:null,scope:true};
     if(chapter==="33"){
-      var r=(level==="grad")?p.ropGrad:rop(p.total,ftc), res=ch33Monthly(r,p.resident,bahEff,tier,finalTerm==="yes",p.start);
+      var r=(level==="grad")?p.ropGrad:rop(p.total,ftc), res=ch33Monthly(r,p.resident,bahEff,tier,finalTerm==="yes",p.start), coreRes=res;
       if(res.pay!==null && finalTerm==="") res={pay:null,state:"unknown",reason:"answer the last-term question (Quick checks) — in the last term of a program the housing allowance is paid at the full-time rate above half time (Dole Act §208), so the answer changes the figure"};
       if(res.pay!==null && finalTerm==="unsure") res={pay:null,state:"unknown",reason:"not sure whether this is your last term — the SCO knows whether these classes complete your program; above half time the answer moves the figure to the full-time rate (Dole Act §208), so no figure is shown until it is settled"};
       // The last-term rule is one term's (Handbook: "during their last term"; "once for a specific program and facility combination"):
@@ -1381,9 +1401,9 @@ footer .stamp{font-size:12px}
       if(res.pay===null&&p.resident&&bahUndated&&moreThanHalf(r)&&tier>0){ res={pay:null,state:"unknown",reason:bahRefuse}; }
       if(p.incomplete){ res={pay:null,state:"unknown",reason:"a counted class is incomplete — credit hours missing, 'how taken' not chosen, campus missing, or a session shorter than a week — fill it in or remove it"}; }
       if(level==="grad" && p.gradMissingMod){ res={pay:null,state:"unknown",reason:modUnsure?"graduate, eight-week or other short session: you are not sure of the full-time number the SCO reports for it — VA divides your credits by that number, and this page will not assume one; ask the SCO, then enter it in that session's card":"graduate, nonstandard session: enter the full-time modifier the SCO certifies for that session (in that session's card) — VA divides your credits by that, not by a value this page can safely assume"}; }
-      return {res:res,r:r};
+      return {res:res,r:r,coreRes:coreRes};
     }
-    var band=(level==="grad")?bandFor(Math.round((p.ropGrad||0)*ftc*100)/100,ftc):bandFor(p.total,ftc), res31=ch31Monthly(band,chapter,deps,p.resident,bahEff,activeDuty==="yes",p.start);
+    var band=(level==="grad")?bandFor(Math.round((p.ropGrad||0)*ftc*100)/100,ftc):bandFor(p.total,ftc), res31=ch31Monthly(band,chapter,deps,p.resident,bahEff,activeDuty==="yes",p.start), coreRes31=res31;
     if(level==="grad" && res31.pay!==null) res31={pay:null,state:"unknown",reason:"graduate Chapter 31 training time is measured \"as certified by a responsible official of the school\" (38 CFR 21.4270(c)) — the school's certified band governs and this page will not construct one; the SCO and your counselor have it"};
     if(res31.pay!==null && activeDuty==="") res31={pay:null,state:"unknown",reason:adUnsure?"you are not sure whether you will be on active duty during these dates — a service member on active duty in Chapter 31 training is not paid subsistence (VR&E SCO Handbook § F.3); settle it and change your answer":"answer the active-duty question (Quick checks) — a service member on active duty in Chapter 31 training is not paid subsistence (VR&E SCO Handbook § F.3)"};
     if(res31.pay!==null && activeDuty==="changes") res31={pay:null,state:"unknown",reason:"active-duty status changes during these dates — subsistence is not paid for the days on active duty (VR&E SCO Handbook § F.3), and this page does not split a schedule by duty dates; your counselor has the effective date"};
@@ -1400,7 +1420,7 @@ footer .stamp{font-size:12px}
     if(res31.pay!==null && res31.basis==="ZIP" && !mine.bah && p.campusList && p.campusList.length===1 && p.campusList[0]!==ODU.campus) res31={pay:null,state:"unknown",reason:"your in-person classes meet at "+p.campusList[0]+"; ODU's standard housing figure is VA's figure for the Main campus, not for this location — enter the figure for the institution providing your program under ODU standards, or ask your counselor"};
     if(res31.pay===null && res31.state==="unknown" && deps===null && I.depsUnsure && chapter==="31s" && /dependents question/.test(res31.reason)) res31={pay:null,state:"unknown",reason:"you are not sure how many dependents VA has on file for you — the standard Chapter 31 rate changes with them, and this page will not assume none; your award letter or your counselor has the number"};
     if(level==="grad" && p.gradMissingMod && modUnsure && res31.pay===null && res31.state==="unknown") res31={pay:null,state:"unknown",reason:"graduate short session: you are not sure of the full-time number the SCO reports for it — ask the SCO, then enter it in that session's card"};
-    return {res:res31,band:band};
+    return {res:res31,band:band,coreRes:coreRes31,r:(level==="grad"?(p.ropGrad===undefined?null:p.ropGrad):rop(p.total,ftc))};
   }
   function stOf(o){ return o.gap?"gap":(o.noclass?"noclass":(o.res.pay!==null?"pay:"+o.res.pay:o.res.state)); }
   // Which stretches an open ("Not sure") answer actually holds back: with every other open answer settled, does any real answer to
@@ -1514,11 +1534,15 @@ footer .stamp{font-size:12px}
       var inPerson=p.parts.filter(function(x){ return x.c.resident===true&&x.c.name; }).map(function(x){ return x.c.name; });
       var basisFact=p.incomplete?null:(p.resident?'<b>Location rate</b> — at least one class'+(inPerson.length?' ('+esc(inPerson.slice(0,2).join(", ")+(inPerson.length>2?"…":""))+')':'')+' is in person':'<b>Online rate</b> — every class in this stretch is online');
       var conv=p.parts.filter(function(x){ return x.e.conv; }).map(function(x){ return x.c.credits+" cr in "+x.e.w+" weeks counts as "+fmtCr(x.e.v); });
+      // Rev 42: the school's count and VA's, side by side, when a short session makes them differ
+      var regCr=p.parts.reduce(function(t,x){ return t+(+x.c.credits||0); },0);
+      var bothCounts=(conv.length&&!o.scope&&level!=="grad")?'<b>ODU</b> counts the '+fmtCr(regCr)+' credits you registered for; <b>VA</b> counts '+fmtCr(p.total)+' for these dates, because it converts a short session to a full-term equivalent (38 CFR 21.4272(g))':null;
       var res, fig, figlab, state, derive, regTiles, facts=[], extra="";
       if(chapter==="33"){
         res=o.res; var r=o.r;
         if(o.scope) facts.push('<b>'+fmtCr(p.total)+' credits</b> — no rate of pursuit: '+(level==="grad"&&ftcRefused()?'the full-time standard is unknown until your SCO confirms it':'ODU’s standards do not apply to these dates')); else facts.push(level==="grad"?'<b>'+fmtCr(p.total)+' graduate credits</b>, each divided by its session’s full-time number':'<b>'+fmtCr(p.total)+' credits counted</b> of '+ftc+' full time'+(conv.length?' ('+esc(conv.join("; "))+')':''));
-        if(r!==null) facts.push('Rate of pursuit <b>'+pct(r)+'</b>'+(!moreThanHalf(r)?' — not more than half time, so no housing allowance':(finalTerm==="yes"&&res.pay!==null&&res.mult===1&&r<1?' → paid as <b>full time</b>: your last term':(mhaMult(r)!==r?' → VA rounds to <b>'+pct(mhaMult(r))+'</b>':''))));
+        if(r!==null) facts.push('Rate of pursuit <b>'+pct(r)+'</b>'+(r===1&&level!=="grad"&&p.total>ftc?' (VA caps it at 100%)':'')+(!moreThanHalf(r)?' — not more than half time, so no housing allowance':(finalTerm==="yes"&&res.pay!==null&&res.mult===1&&r<1?' → paid as <b>full time</b>: your last term':(mhaMult(r)!==r?' → VA rounds to <b>'+pct(mhaMult(r))+'</b>':''))));
+        if(bothCounts) facts.push(bothCounts);
         if(basisFact&&moreThanHalf(r)) facts.push(basisFact);
         if(tier>0) facts.push('Benefit level <b>'+pct(tier)+'</b>');
         regTiles='<div class="tiles">'+
@@ -1537,11 +1561,12 @@ footer .stamp{font-size:12px}
           state=res.state; fig=(res.state==="expired"?'EXPIRED':(res.state==="none"?'$0':'UNKNOWN'));
           figlab=(res.state==="none"?'housing allowance — not payable at this enrollment':(res.state==="expired"?'housing allowance — table expired':'housing allowance — not shown'));
           summ.push({n:nd,pay:null,state:res.state,rop:r,reason:res.reason,start:p.start,end:p.end});
-          html.push(card(p,when,head,state,fig,figlab,plain(res.reason),facts,"",regTiles+oduUsed(p,false,gradModUsed)+parts,"Where this comes from"));
+          html.push(card(p,when,head,state,fig,figlab,plain(res.reason),facts,assumeNote(o,chapter,finalTerm,deps),regTiles+oduUsed(p,false,gradModUsed)+parts,"Where this comes from"));
         }
       } else {
         res=o.res; var band=o.band||{k:"none",label:"not measured"}, res31=res;
-        if(o.band) facts.push('Training time <b>'+band.label.toLowerCase().replace("½","half").replace("¾","three-quarter")+'</b> — '+fmtCr(p.total)+' of '+ftc+' credits'+(conv.length?' ('+esc(conv.join("; "))+')':''));
+        if(o.band) facts.push('Training time <b>'+band.label.toLowerCase().replace("½","half").replace("¾","three-quarter")+'</b> — '+fmtCr(p.total)+' of '+ftc+' credits'+(conv.length?' ('+esc(conv.join("; "))+')':'')+(o.r!==null&&o.r!==undefined&&!o.scope&&!(level==="grad"&&ftcRefused())?' · rate of pursuit <b>'+pct(o.r)+'</b> (Chapter 31 pays by the training-time band, not by this percentage rounded to the nearest 10 as the GI Bill housing allowance is: 38 CFR 21.260(c))':''));
+        if(bothCounts) facts.push(bothCounts);
         if(chapter==="31s") facts.push('Dependents <b>'+(deps===null?(I.depsUnsure?'not sure':'not answered'):deps)+'</b> — your answer');
         if(chapter==="31p"&&basisFact&&band.k!=="sub") facts.push(basisFact);
         regTiles='<div class="tiles">'+
@@ -1560,7 +1585,7 @@ footer .stamp{font-size:12px}
           summ.push({n:nd,pay:null,state:res31.state,reason:res31.reason,start:p.start,end:p.end});
           state=res31.state; fig=(res31.state==="expired"?'EXPIRED':(res31.state==="none"?'NOT PAYABLE':'UNKNOWN'));
           figlab=(res31.state==="none"?'subsistence allowance — not payable at this enrollment':(res31.state==="expired"?'subsistence allowance — table expired':'subsistence allowance — not shown'));
-          html.push(card(p,when,head,state,fig,figlab,plain(res31.reason),facts,"",regTiles+oduUsed(p,false,false)+parts,"Where this comes from"));
+          html.push(card(p,when,head,state,fig,figlab,plain(res31.reason),facts,assumeNote(o,chapter,finalTerm,deps),regTiles+oduUsed(p,false,false)+parts,"Where this comes from"));
         }
       }
       p._fig=state==="pay"?fig:(state==="none"?"$0":"no figure");
@@ -1629,7 +1654,7 @@ footer .stamp{font-size:12px}
       if(x.o.noclass) bl.push(s+": $0 — no counted class."); else if(x.o.res.pay!==null) bl.push(s+": <b>"+money(x.o.res.pay)+" a month</b>.");
       else if(x.o.res.state==="none") bl.push(s+": <b>"+(chapter==="33"?"$0":"not payable")+"</b> — "+(/active duty/.test(x.o.res.reason)?"on active duty":"at or below half time")+".");
       else if(x.o.res.state==="expired") bl.push(s+": no figure — a table this page carries has expired.");
-      else bl.push(s+": no figure yet — "+(/not on this page|publish|rate year|carries the/.test(x.o.res.reason)?"VA has not published the rates for these dates.":"waiting on an answer (see “Still to settle”).")); });
+      else bl.push(s+": no figure yet — "+(/not on this page|publish|rate year|carries the/.test(x.o.res.reason)?"VA has not published the rates for these dates."+(x.o.assumed?" If today’s rates stay the same, about "+money(x.o.assumed.pay)+" a month (an assumption, not a confirmed rate).":""):"waiting on an answer (see “Still to settle”).")); });
     else { var nn=live.filter(function(x){ return x.o.res&&x.o.res.state==="none"; }).length, nu=live.length-payVals.length-nn; bl.push(live.length+" stretches: "+(payVals.length?"rates from "+money(Math.min.apply(null,payVals))+" to "+money(Math.max.apply(null,payVals)):"no rate")+(nn?"; $0 in "+nn:"")+(nu?"; no figure yet in "+nu:"")+" — each card below has its own."); }
     straddleShort.slice(0,1).forEach(function(s){ bl.push(s); });
     $("bullets").innerHTML=bl.slice(0,4).map(function(b){ return "<li>"+b+"</li>"; }).join("");
@@ -1649,6 +1674,22 @@ footer .stamp{font-size:12px}
     lines.push("Classes: "+classes.map(function(c){var s=sesById(c.ses); return (c.name||"class")+" "+(c.credits||"?")+" cr, "+(s?dispName(s):"?")+", "+(c.resident===null?"how taken?":(c.resident?"in person at "+(c.campus||E.campus):"online"))+(c.count?"":" (excluded)");}).join("; "));
     lines.push("Printed "+etDate(Date.now())+" — a rate, not a deposit; the SCO's certification and VA's award govern.");
     $("printSummary").textContent=lines.join("\n");
+  }
+  // Rev 42: what today's rates would pay for a stretch whose rates are not published yet. An assumption, said as one.
+  function assumeNote(o,chapter,finalTerm,deps){
+    var a=o.assumed; if(!a) return "";
+    var how, why;
+    if(chapter==="33"){
+      how=(a.basis==="ZIP"?money(a.base)+" (the housing figure in use now)":money(a.base)+" (half the 2026–27 national average)")+" × "+pct(a.mult)+(finalTerm==="yes"&&a.mult===1?" (last term: full time)":" (your rate of pursuit, rounded)")+" × "+pct(a.tier)+" (your benefit level)";
+      why="VA has not published Post-9/11 rates for dates from "+fmtD(d(RATES.nat.nextChange))+". Its future-rates page says: “Check back in March 2027” (<a class=\"cite\" href=\"https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/future-rates\">va.gov, last updated 2026-07-31, read 2026-10-15</a>).";
+    } else if(chapter==="31p"){
+      how=money(a.base)+" (the housing figure in use now) × "+pct(a.mult)+" (your training time)";
+      why="The elected Post-9/11 rate for dates from "+fmtD(d(RATES.p911ch31.nextChange))+" follows the next year’s military housing table, which was not published when this page was checked on 2026-10-15.";
+    } else {
+      how="the FY"+a.table.fy+" table, "+(deps===1?"1 dependent":deps+" dependents");
+      why="VA has not published the Chapter 31 table for dates from "+fmtD(d(CH31_TABLES[CH31_TABLES.length-1].nextChange))+"; it publishes each fiscal year’s table shortly before October 1.";
+    }
+    return '<div class="assume" data-assume="1"><p><b>If today’s rates stay the same: about '+money(a.pay)+' a month.</b> This is an assumption, not a confirmed rate. '+why+' Worked as '+how+'. It is not counted in any figure on this page, and the figure above stays UNKNOWN until the new rates are published and this page carries them.</p></div>';
   }
   function card(p,when,head,state,fig,figlab,reason,facts,extra,foldBody,foldTitle){
     return '<article class="stretch st-'+state+'" data-when="'+when+'" data-fig="'+fig+'" data-state="'+state+'">'+head+
