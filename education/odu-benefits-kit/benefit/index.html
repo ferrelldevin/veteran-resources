@@ -11,85 +11,99 @@
 /* Theme bootstrap, before anything paints: light unless this browser saved dark. data-theme is always set explicitly, so the device never decides. */
 (function(){ var t="light"; try{ if(localStorage.getItem("bw07.theme")==="dark") t="dark"; }catch(e){} document.documentElement.setAttribute("data-theme",t); document.documentElement.style.colorScheme=t; })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap">
 <style>
-/* ── House style tokens (premium system, house-style/tokens.css), inlined: the review copy and the Pages site serve one file. ── */
+/* ── Kit site shell: U.S. Web Design System (USWDS) 3 default theme, read 2026-10-15 at designsystem.digital.gov/design-tokens.
+   Byte-identical on every kit page except the planner, which keeps its own style until its rev 44 lands. Gate A checks both.
+   Type: Public Sans first (the USWDS face, used when installed; no font is downloaded, so nothing leaves the browser), then the
+   system face. Sizes: USWDS theme sizes only (3xs 13 · 2xs 14 · md 17 · lg 22 · xl 32 · 2xl 40). Spacing: USWDS units (8px).
+   Radius: 2 · 4 · 8. Color: USWDS theme and state tokens. Dark mode is this kit's own mapping (USWDS ships none). ── */
 :root{
-  --font-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --font-display:var(--font-body);
-  --font-mono:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
-  --step--1:0.875rem;
-  --step-0:clamp(1.0625rem,1.0380rem + 0.1087vw,1.1250rem);
-  --step-1:clamp(1.2750rem,1.1871rem + 0.3907vw,1.4996rem);
-  --step-2:clamp(1.5300rem,1.3465rem + 0.8157vw,1.9990rem);
-  --step-3:clamp(1.8360rem,1.5117rem + 1.4412vw,2.6647rem);
-  --step-4:clamp(2.2032rem,1.6754rem + 2.3457vw,3.5520rem);
-  --leading-body:1.55;--leading-heading:1.12;--leading-display:0.98;
-  --tracking-display:-0.03em;--tracking-heading:-0.015em;--tracking-caps:0.08em;
-  --weight-body:400;--weight-strong:560;--weight-display:640;--measure:66ch;
+  --font-mono:ui-monospace,"Roboto Mono",Consolas,monospace;
+  --step--2:0.8125rem;--step--1:0.875rem;--step-0:1.0625rem;--step-1:1.375rem;--step-2:1.375rem;--step-3:2rem;--step-4:2.5rem;
+  --leading-body:1.5;--leading-heading:1.2;--leading-display:1.2;
+  --tracking-display:0;--tracking-heading:0;--tracking-caps:0.06em;
+  --weight-body:400;--weight-strong:600;--weight-display:700;--measure:68ch;
   --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-5:1.5rem;--space-6:2rem;--space-7:3rem;--space-8:4rem;--space-9:6rem;
-  --gutter:clamp(1rem,0.6rem + 1.8vw,2rem);
-  --radius-sm:6px;--radius:10px;--radius-lg:16px;--radius-pill:999px;
-  --paper:#fafaf8;--surface:#ffffff;--surface-sunk:#f2f2ef;
-  --ink:#0e0e10;--ink-2:#4a4a50;--ink-3:#6b6b72;
-  --line:rgba(14,14,16,0.10);--line-strong:rgba(14,14,16,0.22);
-  --primary:#0e0e10;--on-primary:#fafaf8;--accent:#2748d8;--on-accent:#ffffff;
-  --focus-ring:0 0 0 2px var(--paper),0 0 0 4px var(--accent);
-  --shadow-1:0 1px 2px rgba(14,14,16,0.06),0 4px 16px rgba(14,14,16,0.06);
-  --shadow-2:0 2px 4px rgba(14,14,16,0.06),0 16px 48px rgba(14,14,16,0.12);
+  --gutter:1rem;
+  --radius-sm:2px;--radius:4px;--radius-lg:8px;--radius-pill:999px;
+  --paper:#ffffff;--surface:#ffffff;--surface-sunk:#f0f0f0;
+  --ink:#1b1b1b;--ink-2:#3d4551;--ink-3:#565c65;
+  --line:#dfe1e2;--line-strong:#a9aeb1;
+  --primary:#005ea2;--on-primary:#ffffff;--accent:#005ea2;--on-accent:#ffffff;
+  --accent-soft:#d9e8f6;--accent-line:#73b3e7;--link-hover:#1a4480;
+  --danger:#b50909;--danger-soft:#f4e3db;--warn:#936f38;--warn-soft:#faf3d1;
+  --tl-pay:#005ea2;--tl-none:#a9aeb1;--tl-unk:#e5a000;
+  --staff-bar:#162e51;--on-staff:#ffffff;--staff-2:#d9e8f6;
+  --alert-bg:#f4e3db;--alert-edge:#d83933;
+  --focus:#2491ff;--focus-ring:0 0 0 4px #2491ff;
+  --shadow-1:0 1px 4px rgba(0,0,0,0.1);--shadow-2:0 4px 8px rgba(0,0,0,0.1);
   color-scheme:light;
   --dur-press:160ms;--dur-hover:180ms;--dur-tip:150ms;--dur-menu:200ms;--dur-enter:300ms;--dur-exit:200ms;--dur-page:400ms;--stagger:60ms;
   --ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1);--ease-in:cubic-bezier(0.3,0,0.8,0.15);--ease-hover:ease;
   --rise:24px;--rise-sm:8px;--press-scale:0.97;
 }
+@media (min-width:40em){ :root{ --step-3:2.5rem;--gutter:2rem; } }
 [data-theme="dark"]{
-  --paper:#0c0c0e;--surface:#151518;--surface-sunk:#08080a;--ink:#f2f2ee;--ink-2:#b4b4bb;--ink-3:#8c8c94;
-  --line:rgba(242,242,238,0.10);--line-strong:rgba(242,242,238,0.22);--primary:#f2f2ee;--on-primary:#0c0c0e;--accent:#8ea2ff;--on-accent:#0c0c0e;
-  --shadow-1:0 1px 2px rgba(0,0,0,0.4),0 4px 16px rgba(0,0,0,0.3);--shadow-2:0 2px 4px rgba(0,0,0,0.4),0 16px 48px rgba(0,0,0,0.5);
+  --paper:#111418;--surface:#1a1f26;--surface-sunk:#0d1014;
+  --ink:#f0f0f0;--ink-2:#dfe1e2;--ink-3:#a9aeb1;
+  --line:#2c333c;--line-strong:#565c65;
+  --primary:#73b3e7;--on-primary:#162e51;--accent:#73b3e7;--on-accent:#162e51;
+  --accent-soft:#162e51;--accent-line:#2378c3;--link-hover:#d9e8f6;
+  --danger:#f39268;--danger-soft:#3a1714;--warn:#ffbe2e;--warn-soft:#332a10;
+  --tl-pay:#73b3e7;--tl-none:#71767a;--tl-unk:#ffbe2e;
+  --staff-bar:#0b1626;--on-staff:#f0f0f0;--staff-2:#d9e8f6;
+  --alert-bg:#3a1714;--alert-edge:#e8726d;
+  --shadow-1:0 1px 4px rgba(0,0,0,0.5);--shadow-2:0 4px 8px rgba(0,0,0,0.5);
   color-scheme:dark;
 }
 @media (prefers-reduced-motion: reduce){ :root{ --rise:0px;--rise-sm:0px;--press-scale:1;--dur-enter:200ms;--dur-page:200ms;--stagger:0ms; } }
 
-/* ── House style base (house-style/base.css). Only transform and opacity ever animate. ── */
+/* base. Only transform and opacity ever animate. */
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--paper)}
-body{min-height:100svh;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--step-0);font-weight:var(--weight-body);line-height:var(--leading-body);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{min-height:100svh;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--step-0);font-weight:var(--weight-body);line-height:var(--leading-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 button,input,select,textarea{font:inherit;color:inherit}
 p,li{max-width:var(--measure);text-wrap:pretty}
 h1,h2,h3{font-family:var(--font-display);font-weight:var(--weight-display);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);text-wrap:balance}
-a{color:inherit;text-decoration-color:var(--line-strong);text-underline-offset:0.2em;text-decoration-thickness:1px}
-a:hover{text-decoration-color:currentColor}
-:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-sm)}
+a{color:var(--accent);text-underline-offset:0.2em;text-decoration-thickness:1px}
+a:hover{color:var(--link-hover)}
+:focus-visible{outline:4px solid var(--focus);outline-offset:0}
 ::selection{background:var(--accent);color:var(--on-accent)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:0 var(--space-5);border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:var(--weight-strong);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out),opacity var(--dur-hover) var(--ease-hover)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:0 var(--space-5);border:2px solid var(--primary);border-radius:var(--radius);background:var(--surface);color:var(--primary);text-decoration:none;font-weight:var(--weight-display);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out),opacity var(--dur-hover) var(--ease-hover)}
 .btn:hover{opacity:0.86}
 .btn:active{transform:scale(var(--press-scale))}
 .btn--primary{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
 .btn[disabled]{opacity:.45;cursor:not-allowed}
 
-/* ── BW-07 taste layer: the kit's blue (#2B5CA8), cool calm paper, generous space. Tokens only, plus the planner's own parts. ── */
-:root{
-  --paper:#f6f7f9;--surface:#ffffff;--surface-sunk:#eef1f5;
-  --ink:#0f1722;--ink-2:#3f4b5c;--ink-3:#5b6676;
-  --line:rgba(15,23,34,0.10);--line-strong:rgba(15,23,34,0.24);
-  --primary:#2B5CA8;--on-primary:#ffffff;--accent:#2B5CA8;--on-accent:#ffffff;
-  --accent-soft:#e9f0fa;--accent-line:rgba(43,92,168,0.40);
-  --danger:#a3302a;--danger-soft:#fbeceb;--warn:#7a4b05;--warn-soft:#fbf2e1;
-  --tl-pay:#2B5CA8;--tl-none:#98a3b1;--tl-unk:#c58a1e;
-}
-[data-theme="dark"]{
-  --paper:#0d1117;--surface:#161c26;--surface-sunk:#0a0e14;
-  --ink:#eef2f7;--ink-2:#bac4d1;--ink-3:#93a0b1;
-  --line:rgba(238,242,247,0.10);--line-strong:rgba(238,242,247,0.24);
-  --primary:#8fb2ec;--on-primary:#0b1220;--accent:#8fb2ec;--on-accent:#0b1220;
-  --accent-soft:rgba(143,178,236,0.13);--accent-line:rgba(143,178,236,0.50);
-  --danger:#ff9e95;--danger-soft:rgba(255,120,110,0.12);--warn:#f0c470;--warn-soft:rgba(240,196,112,0.11);
-  --tl-pay:#8fb2ec;--tl-none:#5b6676;--tl-unk:#d9a440;
-}
+/* site shell: crisis site alert, extended header (title row, then the only nav), related links */
+.site-in{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto}
+.site-alert{background:var(--alert-bg);border-left:8px solid var(--alert-edge);color:var(--ink);font-size:var(--step--1);padding:var(--space-2) 0}
+.site-alert b{font-weight:var(--weight-display)}
+.site-alert a{color:inherit}
+.site-hdr{background:var(--surface);border-bottom:1px solid var(--line)}
+.site-row{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4) 0 var(--space-2)}
+.site-title{font-size:var(--step-1);font-weight:var(--weight-display);line-height:var(--leading-heading);color:inherit;text-decoration:none;margin-right:auto}
+.site-title small{display:block;font-size:var(--step--1);font-weight:var(--weight-body);color:var(--ink-3)}
+.site-tag{font-size:var(--step--2);font-weight:var(--weight-display);letter-spacing:var(--tracking-caps);text-transform:uppercase;padding:2px var(--space-2);border-radius:var(--radius-sm);background:var(--on-staff);color:var(--staff-bar)}
+.site-nav{display:flex;flex-wrap:wrap;column-gap:var(--space-5)}
+.site-nav a{display:block;min-height:44px;padding:var(--space-2) 0 var(--space-3);color:var(--ink);text-decoration:none;font-weight:var(--weight-strong);font-size:1rem;border-bottom:4px solid transparent}
+.site-nav a:hover{color:var(--accent)}
+.site-nav a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+.site-hdr.staff{background:var(--staff-bar);color:var(--on-staff);border-bottom:0}
+.staff .site-title small{color:var(--staff-2)}
+.staff .site-nav a{color:var(--staff-2)}
+.staff .site-nav a:hover,.staff .site-nav a[aria-current="page"]{color:var(--on-staff);border-bottom-color:var(--on-staff)}
+.related{margin-top:var(--space-7);border-top:4px solid var(--primary);padding-top:var(--space-4)}
+.related h2{font-size:1rem}
+.related ul{list-style:none;padding:0;margin-top:var(--space-2);display:grid;gap:var(--space-3)}
+.related a{font-weight:var(--weight-strong)}
+.related span{display:block;font-size:var(--step--1);color:var(--ink-3)}
+@media print{ .site-hdr{background:none!important;color:#000!important;border-bottom:1px solid #999} .site-nav,.related{display:none!important} .site-alert{background:none;border:1px solid #999;border-left-width:8px} }
+/* ── end kit site shell ── */
 .app{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto;padding:var(--space-5) 0 var(--space-8)}
 .top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4)}
 .eyebrow{font-size:var(--step--1);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--ink-3);font-weight:var(--weight-strong)}
@@ -134,7 +148,7 @@ legend{padding:0;display:block;width:100%}
 .card:active{transform:scale(var(--press-scale))}
 .card input{position:absolute;top:12px;left:12px;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
 .card .dot{flex:0 0 22px;height:22px;margin-top:1px;border-radius:50%;border:2px solid var(--line-strong);background:var(--surface)}
-.card.box .dot{border-radius:6px}
+.card.box .dot{border-radius:4px}
 .card:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
 .card:has(input:checked) .dot{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 0 5px,transparent 5.5px)}
 .card.box:has(input:checked) .dot{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
@@ -146,7 +160,7 @@ legend{padding:0;display:block;width:100%}
 .qrow:first-of-type{margin-top:var(--space-4)}
 .qrow .qlabel{font-weight:var(--weight-strong);font-size:var(--step-0)}
 .seg{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:6px;margin-top:var(--space-3)}
-.seg label{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);cursor:pointer;font-size:var(--step--1);font-weight:500;line-height:1.25;transition:transform var(--dur-press) var(--ease-out)}
+.seg label{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);cursor:pointer;font-size:var(--step--1);font-weight:600;line-height:1.25;transition:transform var(--dur-press) var(--ease-out)}
 .seg label:active{transform:scale(var(--press-scale))}
 .seg input{position:absolute;top:50%;left:50%;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
 .seg label:has(input:checked){background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
@@ -190,7 +204,7 @@ html{scroll-padding-bottom:96px}
 }
 footer{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--line);font-size:var(--step--1);color:var(--ink-3);line-height:1.6}
 footer p+p{margin-top:var(--space-3)}
-footer .stamp{font-size:12px}
+footer .stamp{font-size:13px}
 .pubaddr .cite,footer .cite{overflow-wrap:anywhere}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion: reduce){ .step.enter,details.fold[open]>.fold-body{animation-duration:var(--dur-exit)} }
@@ -258,20 +272,24 @@ ul.plain li+li{margin-top:4px}
 </head>
 <body>
 
-<div class="app" id="app">
-<header class="top">
-  <div>
-    <div class="eyebrow">VA education benefits at ODU · part of the Veteran Benefits Kit</div>
-    <h1>Which Benefit Am I On</h1>
+<div class="site-alert" role="region" aria-label="Veterans Crisis Line"><div class="site-in">In crisis, or worried about a Veteran? <b>Dial 988, then press 1</b>, or text 838255 — the Veterans Crisis Line, free and confidential, 24/7 (<a class="cite" href="https://www.veteranscrisisline.net/">veteranscrisisline.net</a>).</div></div>
+<header class="site-hdr">
+  <div class="site-in site-row">
+    <a class="site-title" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">Veteran Benefits Kit<small>VA education benefits at ODU</small></a>
+    <button type="button" class="iconbtn noprint" id="theme" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="tlabel">Dark</span></button>
   </div>
-  <button type="button" class="iconbtn noprint" id="theme" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="tlabel">Dark</span></button>
+  <nav class="site-in site-nav noprint" aria-label="Kit pages"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">Start here</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Pay planner</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/" aria-current="page">Which benefit</a></nav>
 </header>
+<div class="app" id="app">
+<div class="top">
+  <h1>Which Benefit Am I On</h1>
+</div>
 <p class="lede">Find your benefit, see what it pays this year, and who to ask. A few quick questions each. Every figure carries VA’s own dates.</p>
 <p class="nosave noprint">Nothing you pick here is saved or sent anywhere.</p>
 
 <noscript><div class="stop">
   <p><b>Scripting is off, so the guided steps cannot run.</b> Your COE or award letter names your chapter. Or ask:</p>
-  <p>School certification: ODU Military Benefits &amp; Certification Services, 757-683-7153, military@odu.edu. Payments and months left: VA Education Call Center, 888-442-4551 (TTY 711). VA’s check: <a class="cite" href="https://www.va.gov/education/check-remaining-benefits/">va.gov/education/check-remaining-benefits</a>.</p>
+  <p>VA benefit and certification questions: ODU Military Benefits &amp; Certification Services, 757-683-7153, military@odu.edu. Campus support: ODU Military Connection Center, 757-683-7113, militaryconnectioncenter@odu.edu. Payments and months left: VA Education Call Center, 888-442-4551 (TTY 711). VA’s check: <a class="cite" href="https://www.va.gov/education/check-remaining-benefits/">va.gov/education/check-remaining-benefits</a>.</p>
 </div></noscript>
 
 <div class="progress noprint" id="progress" hidden>
@@ -315,13 +333,19 @@ ul.plain li+li{margin-top:4px}
   <span class="spacer"></span>
 </div>
 
-<p class="crisis">In crisis, or worried about a Veteran? <b>Dial 988, then press 1</b>, or text 838255 — the Veterans Crisis Line, free and confidential, 24/7 (<a class="cite" href="https://www.veteranscrisisline.net/">veteranscrisisline.net</a>).</p>
+
+<aside class="related noprint" aria-labelledby="relH"><h2 id="relH">Learn more</h2>
+  <ul>
+    <li><a href="https://www.va.gov/education/verify-school-enrollment/">Verify your enrollment</a><span>va.gov, every month</span></li>
+    <li><a href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">When VA pays, and how</a><span>va.gov payments FAQ</span></li>
+    <li><a href="https://www.odu.edu/military-connection/veteran-student-checklist">ODU veteran student checklist</a><span>Each term’s to-do list</span></li>
+    <li><a href="https://www.va.gov/education/check-remaining-benefits/">Check remaining benefits</a><span>Sign in with your own account</span></li>
+  </ul></aside>
 
 <footer>
-  <p><strong>Not an official VA document and not a VA decision.</strong> Every figure is quoted from VA or ODU with its source and dates one tap away. VA’s award governs your case, the School Certifying Official’s certification governs your enrollment, and your VR&amp;E counselor governs anything Chapter 31. Post-9/11 figures run to Jul 31, 2027; the others to Sep 30, 2027.</p>
-  <p>The kit: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">front door</a> · <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Semester Pay Planner</a> · <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Front-Desk Map</a> (for the office).</p>
+  <p><strong>Not an official VA document and not a VA decision.</strong> Every figure is quoted from VA or ODU with its source and dates one tap away. VA’s award governs your case, ODU’s certifying officials’ certification governs your enrollment, and your VR&amp;E counselor governs anything Chapter 31. Post-9/11 figures run to Jul 31, 2027; the others to Sep 30, 2027.</p>
     <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/</a></p>
-  <p class="stamp">BW-07 Which Benefit Am I On · revision 56 · prepared 2026-10-14 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+  <p class="stamp">BW-07 Which Benefit Am I On · revision 61 · prepared 2026-10-15 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 <div class="sr-only" id="live" aria-live="polite"></div>
@@ -335,12 +359,12 @@ ul.plain li+li{margin-top:4px}
   // ---- roles, never names (the institutions' own published routes)
   var KIT="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/";
   var C={
-    sco:{r:"School Certifying Official (SCO)",c:'ODU Military Benefits &amp; Certification Services · <a href="tel:+17576837153">757-683-7153</a> · <a href="mailto:military@odu.edu">military@odu.edu</a> · your enrollment, the clearance form, drops, in person or online'},
+    sco:{r:"ODU’s benefits office: Military Benefits &amp; Certification Services",c:'<a href="tel:+17576837153">757-683-7153</a> · <a href="mailto:military@odu.edu">military@odu.edu</a> · ODU: the office “is here to help our military-affiliated students learn more about utilizing VA education benefits at ODU” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>), and its School Certifying Officials certify enrollment to VA (<a class="cite" href="https://www.odu.edu/military-benefits/va-certifying-official">ODU</a>). ODU: “Veterans Clearance Forms (VCF) are processed in the order they are received” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>).'},
     va:{r:"VA Education Call Center",c:'<a href="tel:+18884424551">888-442-4551</a> (TTY 711) · Mon–Fri 8 a.m.–7 p.m. ET · payment status, months left, letters, debts'},
     askva:{r:"Ask VA, in writing",c:'<a href="https://www.va.gov/contact-us/ask-va/">va.gov/contact-us/ask-va</a> · name the school and the term dates'},
     vrc:{r:"Your VR&amp;E counselor (VRC)",c:'Everything Chapter 31 · can’t reach them: your VA Regional Office’s VR&amp;E Supervisor (<a href="https://www.va.gov/find-locations/">find the office</a>)'},
     vso:{r:"An accredited Veterans Service Officer (VSO)",c:'Disability claims, ratings, appeals · always free · <a href="https://www.va.gov/get-help-from-accredited-representative/">find one</a>'},
-    mcc:{r:"Military Connection Center (MCC)",c:'ODU · orientation, general support, VA work-study · does not certify'}
+    mcc:{r:"ODU Military Connection Center",c:'<a href="tel:+17576837113">757-683-7113</a> · <a href="mailto:militaryconnectioncenter@odu.edu">militaryconnectioncenter@odu.edu</a> · ODU: “an information and resource center for our on-campus military-affiliated students” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>)'}
   };
   var T={
     planner:{t:"Open the Semester Pay Planner",h:KIT+"planner/",p:1},
@@ -419,12 +443,12 @@ ul.plain li+li{margin-top:4px}
     // ---- find yours
     F1:{q:"Has a VR&amp;E counselor approved a plan for your degree?",sub:"That’s Veteran Readiness and Employment. A VetSuccess on Campus counselor or Chapter 36 career counseling doesn’t count.",o:[{v:"y",t:"Yes",n:"A_isVre"},{v:"n",t:"No",n:"F2"},{v:"u",t:"Not sure",n:"A_vreUnsure"}]},
     A_isVre:{a:1,t:"You’re on VR&amp;E · Chapter 31",steps:[["Your counselor sends ODU the authorization","You don’t file the clearance form."],["Plan, books, monthly money → your counselor",""],["Your months left → your counselor","Chapter 31 isn’t on VA’s online check."]],who:["vrc"],tools:["planner"],why:"ODU: Chapter 31 students “will coordinate with their assigned VA Educational Counselor” ("+SRC.faqs+"); "+SRC.remaining+"."},
-    A_vreUnsure:{a:1,t:"Your VA Regional Office can tell you",steps:[["Ask for the VR&amp;E Supervisor","They can say whether you have a Chapter 31 case."],["No case? Come back and pick “No”",""]],who:["vrc"],tools:[],why:"VA’s handbook for schools: “call or visit your VA Regional Office and ask to speak to the VR&amp;E Supervisor” ("+SRC.vreHb+" § M)."},
+    A_vreUnsure:{a:1,t:"Your VA Regional Office can tell you",steps:[["Ask for the VR&amp;E Supervisor","They can say whether you have a Chapter 31 case."],["Or ask VA’s Education Call Center which benefit is on file","They can see a GI Bill or DEA award too."],["No case? Come back and pick “No”",""]],who:["vrc","va"],tools:[],why:"VA’s handbook for schools: “call or visit your VA Regional Office and ask to speak to the VR&amp;E Supervisor” ("+SRC.vreHb+" § M)."},
     F2:{q:"Do you have a Certificate of Eligibility (COE) or award letter?",o:[{v:"y",t:"Yes",n:"A_letter"},{v:"n",t:"No, or can’t find it",n:"F3"}]},
     A_letter:{a:1,t:"The letter names your chapter",steps:[["Look for “Chapter” and a number","33 Post-9/11 · 30 or 1606 Montgomery · 35 DEA. Fry says Fry."],["GI Bill letters also show months left",""],["Then see what it pays","Pick “What does my benefit pay?”"]],who:[],tools:["planner"],why:"VA issues a COE or award letter when it approves a claim ("+SRC.remaining+")."},
     F3:{q:"Check online, or by phone?",o:[{v:"o",t:"Online",s:"Sign in to va.gov",n:"A_online"},{v:"p",t:"By phone",n:"A_phone"}]},
     A_online:{a:1,t:"Your award letter names it. VA’s check shows months left.",steps:[["Sign in on your own device to check what’s left","It shows whether you have benefits left and how many months; it doesn’t promise to name the benefit. To be sure which one, call VA."],["Applied for Post-9/11 on VA.gov, decided on or after Aug 20, 2022?","You can also download the decision letter. Family members request a copy through Ask VA."]],who:["va","sco"],tools:["left","letters"],why:"VA: “If we awarded you VA education benefits, you can check online to find out how much of your benefits you've used and how much you have remaining” ("+SRC.remaining+"). Letters: “applied for Post-9/11 GI Bill benefits on VA.gov” and a decision “on or after August 20, 2022”; family members request a copy through Ask VA ("+cite("https://www.va.gov/education/download-letters/","va.gov, download your education letters, read 2026-10-14")+")."},
-    A_phone:{a:1,t:"Call VA, or ask the SCO",steps:[["VA’s call center tells you your chapter","Have your Social Security number ready."],["Or ask ODU’s SCO what’s been certified for you",""]],who:["va","sco"],tools:[],why:SRC.payFaq+" · "+SRC.faqs+"."},
+    A_phone:{a:1,t:"Call VA, or ask the benefits office",steps:[["VA’s call center tells you your chapter","Have your Social Security number ready."],["Or ask the benefits office what’s been certified for you",""]],who:["va","sco"],tools:[],why:SRC.payFaq+" · "+SRC.faqs+"."},
 
     // ---- another benefit
     E1:{q:"Which sounds most like you?",o:[
@@ -449,45 +473,45 @@ ul.plain li+li{margin-top:4px}
       {v:"1606",t:"Montgomery, Selected Reserve",s:"Chapter 1606",n:"A_p1606"},
       {v:"35",t:"DEA",s:"Chapter 35",n:"A_p35"},
       {v:"x",t:"Yellow Ribbon or the STEM Scholarship",s:"Add-ons to Chapter 33",n:"PX"}]},
-    A_p33:{a:1,t:"Tuition to ODU, housing and books to you",eyebrow:"Post-9/11 · Aug 1, 2026 to Jul 31, 2027",steps:[["Tuition and fees → ODU, at the in-state rate","Your tier sets the share."],["Housing: about $2,430 a month at ODU’s main campus","At 100%, full time, with an in-person class that runs the whole term; first used on or after Jan 1, 2018 (earlier users can get a slightly higher rate). A shorter in-person session can change it: use the planner. All online: up to $1,198. None on active duty, or for a spouse on transferred benefits while the Veteran serves."],["Books: up to $1,000 a year at 100%","$41.67 a credit, times your tier."]],who:["sco"],tools:["planner","r33"],why:"VA: “We'll pay you up to $1,198” for online learning; books “up to $1,000 each academic year”, “prorated by the percentage of benefits you’re eligible for” ("+SRC.rates+"). $2,430 is the Comparison Tool’s 100% full-time estimate for ODU-Norfolk ("+SRC.gids+"). No housing “if you’re on active duty” or “a spouse using transferred benefits while the Veteran is on active duty” ("+SRC.rates+"). Your own term: the planner."},
-    A_p31:{a:1,t:"Your plan’s costs, plus a monthly allowance",eyebrow:"VR&amp;E · Oct 1, 2026 to Sep 30, 2027",steps:[["Tuition, fees, books, supplies → paid for you","Under the plan your counselor approves."],["Full time: $837.23 no dependents · $1,038.49 one dependent · $1,223.79 two","+$89.18 each more. Half time pays too."],["Or the Post-9/11 housing rate, if you’re eligible and elect it",""]],who:["vrc"],tools:["planner","r31"],why:"FY2027 institutional table: ¾ time $629.08 / $780.00 / $914.97 / +$68.60; ½ time $420.92 / $521.51 / $613.01 / +$45.75 ("+SRC.r31+"). Below half time: VA’s table says “The quarter-time rate may be paid only during Extended Evaluation” ("+SRC.r31+"); otherwise subsistence “is not payable” ("+SRC.below+"). Your counselor says which applies."},
+    A_p33:{a:1,starts:"2026-08-01",ends:"2027-07-31",t:"Tuition to ODU, housing and books to you",eyebrow:"Post-9/11 · Aug 1, 2026 to Jul 31, 2027",steps:[["Tuition and fees → ODU, at the in-state rate","Your tier sets the share."],["Housing: about $2,430 a month at ODU’s main campus","At 100%, full time, with an in-person class that runs the whole term; first used on or after Jan 1, 2018 (earlier users can get a slightly higher rate). A shorter in-person session can change it: use the planner. All online: up to $1,198. None on active duty, or for a spouse on transferred benefits while the Veteran serves."],["Books: up to $1,000 a year at 100%","$41.67 a credit, times your tier."]],who:["sco"],tools:["planner","r33"],why:"VA: “We'll pay you up to $1,198” for online learning; books “up to $1,000 each academic year”, “prorated by the percentage of benefits you’re eligible for” ("+SRC.rates+"). $2,430 is the Comparison Tool’s 100% full-time estimate for ODU-Norfolk ("+SRC.gids+"). No housing “if you’re on active duty” or “a spouse using transferred benefits while the Veteran is on active duty” ("+SRC.rates+"). Your own term: the planner."},
+    A_p31:{a:1,starts:"2026-10-01",ends:"2027-09-30",t:"Your plan’s costs, plus a monthly allowance",eyebrow:"VR&amp;E · Oct 1, 2026 to Sep 30, 2027",steps:[["Tuition, fees, books, supplies → paid for you","Under the plan your counselor approves."],["Full time: $837.23 no dependents · $1,038.49 one dependent · $1,223.79 two","+$89.18 each more. Half time pays too."],["Or the Post-9/11 housing rate, if you’re eligible and elect it",""]],who:["vrc"],tools:["planner","r31"],why:"FY2027 institutional table: ¾ time $629.08 / $780.00 / $914.97 / +$68.60; ½ time $420.92 / $521.51 / $613.01 / +$45.75 ("+SRC.r31+"). Below half time: VA’s table says “The quarter-time rate may be paid only during Extended Evaluation” ("+SRC.r31+"); otherwise subsistence “is not payable” ("+SRC.below+"). Your counselor says which applies."},
     P30:{q:"Did you serve at least 3 continuous years on active duty?",o:[{v:"3",t:"Yes, 3 years or more without a break",n:"A_p30_3"},{v:"2",t:"Between 2 and 3 years",n:"A_p30_2"},{v:"u",t:"Neither, or I’m not sure",n:"A_p30_u"}]},
-    A_p30_u:{a:1,t:"VA decides which Montgomery table, if any, is yours",steps:[["Check your award letter, or call VA","It names your table and your monthly rate."],["The certifying office can tell you what it reports",""]],who:["va","sco"],tools:["r30","letters"],why:"VA publishes two Montgomery Active Duty tables: “at least 3 continuous years (without a break)” and “between 2 and 3 years” ("+SRC.r30+")."},
-    A_p30_3:{a:1,t:"$2,601.00 a month, full time",eyebrow:"Montgomery Active Duty · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time","The SCO certifies your band."],["On active duty: this rate or your tuition and fees, whichever is less",""]],who:["sco"],tools:["r30"],why:"VA’s table for “at least 3 continuous years (without a break)”: “Full-time enrollment: $2,601.00 for each full month”; VA decides which table is yours; “If you’re on active duty, you’ll get the rate listed here or the cost of your tuition and fees, whichever is less” ("+SRC.r30+")."},
-    A_p30_2:{a:1,t:"$2,110.00 a month, full time",eyebrow:"Montgomery Active Duty · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time","The SCO certifies your band."],["On active duty: this rate or your tuition and fees, whichever is less",""]],who:["sco"],tools:["r30"],why:"VA: “Full-time enrollment: $2,110.00 for each full month” (2-year rate); “If you’re on active duty, you’ll get the rate listed here or the cost of your tuition and fees, whichever is less” ("+SRC.r30+"). VA decides which table is yours."},
-    A_p1606:{a:1,t:"$508.00 a month, full time",eyebrow:"Montgomery Selected Reserve · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time; $127.00 below half","The SCO certifies your band."]],who:["sco"],tools:["r1606"],why:"VA: “Less than 50% enrollment: $127.00 for each full month” ("+SRC.r1606+")."},
-    A_p35:{a:1,t:"$1,621.00 a month, full time",eyebrow:"DEA · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time","The SCO certifies your band."]],who:["sco"],tools:["r35"],why:"VA: “Full-time enrollment: $1,621.00 for each full month” ("+SRC.r35+")."},
+    A_p30_u:{a:1,t:"VA decides which Montgomery table, if any, is yours",steps:[["Check your award letter, or call VA","It names your table and your monthly rate."],["The benefits office can find out what ODU reports",""]],who:["va","sco"],tools:["r30","letters"],why:"VA publishes two Montgomery Active Duty tables: “at least 3 continuous years (without a break)” and “between 2 and 3 years” ("+SRC.r30+")."},
+    A_p30_3:{a:1,starts:"2026-10-01",ends:"2027-09-30",t:"$2,601.00 a month, full time",eyebrow:"Montgomery Active Duty · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time","ODU’s certifying officials certify your band."],["On active duty: this rate or your tuition and fees, whichever is less",""]],who:["sco"],tools:["r30"],why:"VA’s table for “at least 3 continuous years (without a break)”: “Full-time enrollment: $2,601.00 for each full month”; VA decides which table is yours; “If you’re on active duty, you’ll get the rate listed here or the cost of your tuition and fees, whichever is less” ("+SRC.r30+")."},
+    A_p30_2:{a:1,starts:"2026-10-01",ends:"2027-09-30",t:"$2,110.00 a month, full time",eyebrow:"Montgomery Active Duty · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time","ODU’s certifying officials certify your band."],["On active duty: this rate or your tuition and fees, whichever is less",""]],who:["sco"],tools:["r30"],why:"VA: “Full-time enrollment: $2,110.00 for each full month” (2-year rate); “If you’re on active duty, you’ll get the rate listed here or the cost of your tuition and fees, whichever is less” ("+SRC.r30+"). VA decides which table is yours."},
+    A_p1606:{a:1,starts:"2026-10-01",ends:"2027-09-30",t:"$508.00 a month, full time",eyebrow:"Montgomery Selected Reserve · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time; $127.00 below half","ODU’s certifying officials certify your band."]],who:["sco"],tools:["r1606"],why:"VA: “Less than 50% enrollment: $127.00 for each full month” ("+SRC.r1606+")."},
+    A_p35:{a:1,starts:"2026-10-01",ends:"2027-09-30",t:"$1,621.00 a month, full time",eyebrow:"DEA · Oct 1, 2026 to Sep 30, 2027",steps:[["Paid to you; you pay ODU",""],["Less at ¾ or ½ time","ODU’s certifying officials certify your band."]],who:["sco"],tools:["r35"],why:"VA: “Full-time enrollment: $1,621.00 for each full month” ("+SRC.r35+")."},
     PX:{q:"Which add-on?",o:[{v:"y",t:"Yellow Ribbon",n:"A_yr"},{v:"s",t:"Rogers STEM Scholarship",n:"A_stem"}]},
-    A_yr:{a:1,t:"Can cover some or all of the tuition above the Post-9/11 cap",steps:[["For Post-9/11 at 100%, or Fry",""],["ODU takes part, but only for some programs and degree levels","ODU sets which ones, how much, and how many students. Ask the SCO before counting on it."]],who:["sco"],tools:["yr"],why:"VA Comparison Tool, ODU-Norfolk: “Yellow Ribbon Program: Yes” ("+SRC.gids+"); VA: the school’s contribution and VA’s match make up “all or part of the difference”, and a school may contribute “only toward degrees at certain colleges or professional schools, or only for certain degree levels” ("+SRC.yr+")."},
+    A_yr:{a:1,t:"Can cover some or all of the tuition above the Post-9/11 cap",steps:[["For Post-9/11 at 100%, or Fry",""],["ODU takes part, but only for some programs and degree levels","ODU sets which ones, how much, and how many students. Ask the benefits office before counting on it."]],who:["sco"],tools:["yr"],why:"VA Comparison Tool, ODU-Norfolk: “Yellow Ribbon Program: Yes” ("+SRC.gids+"); VA: the school’s contribution and VA’s match make up “all or part of the difference”, and a school may contribute “only toward degrees at certain colleges or professional schools, or only for certain degree levels” ("+SRC.yr+")."},
     A_stem:{a:1,t:"Up to 9 more months or $30,000",steps:[["For Post-9/11 or Fry students near the end of entitlement","In a qualifying STEM program."],["Tuition to ODU first, then books and housing",""]],who:["sco"],tools:["stem"],why:"VA: “We'll pay 9 months, or $30,000, of total benefits through the STEM Scholarship, whichever comes first” ("+SRC.stem+")."},
 
     // ---- housing (Chapter 33)
     H1:{q:"Are you on active duty, or a spouse using transferred benefits while the Veteran is on active duty?",o:[{v:"y",t:"Yes",n:"A_hNoAd"},{v:"n",t:"No",n:"H2"}]},
-    A_hNoAd:{a:1,t:"No housing while you, or the Veteran whose benefits you use, serve on active duty",steps:[["Tuition and fees are still paid",""],["It can start once that service ends","Yours, or for a spouse on transferred benefits, the Veteran’s. Tell the SCO; a change in duty status needs a new clearance form."]],who:["sco"],tools:["r33"],why:"VA: not paid if “You're on active duty” or “a spouse using transferred benefits while the Veteran is on active duty” ("+SRC.rates+"); "+SRC.faqs+"."},
+    A_hNoAd:{a:1,t:"No housing while you, or the Veteran whose benefits you use, serve on active duty",steps:[["Tuition and fees are still paid",""],["It can start once that service ends","Yours, or for a spouse on transferred benefits, the Veteran’s. Tell the benefits office; a change in duty status needs a new clearance form."]],who:["sco"],tools:["r33"],why:"VA: not paid if “You're on active duty” or “a spouse using transferred benefits while the Veteran is on active duty” ("+SRC.rates+"); "+SRC.faqs+"."},
     H2:{q:"More than half time?",sub:"Full-term classes only: more than 6 undergraduate credits or more than 4.5 graduate at ODU. Any 8-week or shorter session? Choose that option instead: for undergraduates VA converts those credits first, and graduates are measured differently.",o:[{v:"y",t:"Yes, in full-term classes",n:"H3"},{v:"s",t:"I have 8-week sessions, or I’m not sure",n:"A_hShort"},{v:"n",t:"Half time or less, full-term classes only",n:"A_hHalf"}]},
-    A_hShort:{a:1,t:"Shorter sessions: let the planner measure it",steps:[["Enter your sessions and credits in the planner","It converts each session and checks “more than half time”."],["The SCO certifies which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: undergraduates “enrolled in 6 or more credit hours” in an eight-week term are full time ("+SRC.ugCat+"); ODUGlobal master’s: “a minimum of 4.5 credit hours during an eight-week term”; other graduate students: 9 credits for the term ("+SRC.gradCat+"). VA stopped converting graduate credits in nonstandard terms on Aug 1, 2021 ("+cite("https://www.benefits.va.gov/GIBILL/docs/presentations/Grad_Reporting_Proc_Advisory.pdf","VA, graduate reporting procedure advisory, 2021")+"). VA: “more than 50%” ("+SRC.rates+"). ODU: for undergraduates, “Credits × 18 ÷ Weeks = Credit Hour Equivalent”; “at least one on-campus class must run the entire term” for the full MHA, and “The VA calculates each term independently” ("+SRC.oduMha+")."},
-    A_hHalf:{a:1,t:"No housing at half time or less",steps:[["Exactly half is not “more than half”",""],["You need more than half: one more credit past half time can do it","At 12 for full time, 7 credits clears it and 6 doesn’t. Check with the SCO first."]],who:["sco"],tools:["planner"],why:"VA: “To be eligible for MHA, your rate of pursuit must be more than 50%” ("+SRC.rates+")."},
+    A_hShort:{a:1,t:"Shorter sessions: let the planner measure it",steps:[["Enter your sessions and credits in the planner","It converts each session and checks “more than half time”."],["ODU’s certifying officials certify which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: undergraduates “enrolled in 6 or more credit hours” in an eight-week term are full time ("+SRC.ugCat+"); ODUGlobal master’s: “a minimum of 4.5 credit hours during an eight-week term”; other graduate students: 9 credits for the term ("+SRC.gradCat+"). VA stopped converting graduate credits in nonstandard terms on Aug 1, 2021 ("+cite("https://www.benefits.va.gov/GIBILL/docs/presentations/Grad_Reporting_Proc_Advisory.pdf","VA, graduate reporting procedure advisory, 2021")+"). VA: “more than 50%” ("+SRC.rates+"). ODU: for undergraduates, “Credits × 18 ÷ Weeks = Credit Hour Equivalent”; “at least one on-campus class must run the entire term” for the full MHA, and “The VA calculates each term independently” ("+SRC.oduMha+")."},
+    A_hHalf:{a:1,t:"No housing at half time or less",steps:[["Exactly half is not “more than half”",""],["You need more than half: one more credit past half time can do it","At 12 for full time, 7 credits clears it and 6 doesn’t. Check with the benefits office first."]],who:["sco"],tools:["planner"],why:"VA: “To be eligible for MHA, your rate of pursuit must be more than 50%” ("+SRC.rates+")."},
     H3:{q:"Is at least one class in person?",sub:"A hybrid class, or one with a required on-campus exam, counts as in person. For the full rate, ODU says it must run the whole term.",o:[{v:"y",t:"Yes, and it runs the whole term",n:"A_hFull"},{v:"s",t:"Yes, but only a shorter session",n:"A_hShort"},{v:"n",t:"All online",n:"A_hOnline"}]},
-    A_hFull:{a:1,t:"Yes, at the ZIP rate for where you attend",steps:[["About $2,430 a month at ODU’s main campus","At 100%, full time; first used on or after Jan 1, 2018 (earlier users can get a slightly higher rate)."],["Scaled by your credits and your tier","The planner works out your term, including short in-person sessions."]],who:["sco"],tools:["planner"],why:"VA: “If you take at least 1 in-person course, we'll pay the standard housing allowance” ("+SRC.online+"); ODU: “at least one on-campus class must run the entire term” for the full MHA ("+SRC.oduMha+"); "+SRC.gids+"; "+SRC.hybrid+"."},
-    A_hOnline:{a:1,t:"Yes, at the online rate: up to $1,198",steps:[["Half the national average","Aug 1, 2026 to Jul 31, 2027."],["An in-person class that runs the whole term can lift it to the campus rate","ODU’s rule. The planner works out your own term."]],who:["sco"],tools:["planner"],why:"VA: “We base your monthly housing allowance on half the national average for MHA. We'll pay you up to $1,198” ("+SRC.rates+"). ODU: “at least one on-campus class must run the entire term” for the full rate ("+SRC.oduMha+")."},
+    A_hFull:{a:1,starts:"2026-08-01",ends:"2027-07-31",t:"Yes, at the ZIP rate for where you attend",steps:[["About $2,430 a month at ODU’s main campus","At 100%, full time; first used on or after Jan 1, 2018 (earlier users can get a slightly higher rate)."],["Scaled by your credits and your tier","The planner works out your term, including short in-person sessions."]],who:["sco"],tools:["planner"],why:"VA: “If you take at least 1 in-person course, we'll pay the standard housing allowance” ("+SRC.online+"); ODU: “at least one on-campus class must run the entire term” for the full MHA ("+SRC.oduMha+"); "+SRC.gids+"; "+SRC.hybrid+"."},
+    A_hOnline:{a:1,starts:"2026-08-01",ends:"2027-07-31",t:"Yes, at the online rate: up to $1,198",steps:[["Half the national average","Aug 1, 2026 to Jul 31, 2027."],["An in-person class that runs the whole term can lift it to the campus rate","ODU’s rule. The planner works out your own term."]],who:["sco"],tools:["planner"],why:"VA: “We base your monthly housing allowance on half the national average for MHA. We'll pay you up to $1,198” ("+SRC.rates+"). ODU: “at least one on-campus class must run the entire term” for the full rate ("+SRC.oduMha+")."},
 
     // ---- full time at ODU
     FT1:{q:"Which are you?",o:[{v:"u",t:"Undergraduate",n:"A_ftU"},{v:"g",t:"Graduate on campus, or doctoral or EdS",n:"A_ftG"},{v:"o",t:"ODUGlobal master’s",n:"A_ftO"}]},
-    A_ftU:{a:1,t:"12 credits in fall, spring or summer",steps:[["Shorter sessions are converted by VA","The planner does that arithmetic."],["The SCO certifies which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: undergraduates “enrolled in 12 or more credit hours during a fall, spring, or summer term” are full time ("+SRC.ugCat+")."},
-    A_ftG:{a:1,t:"9 credits across the full term",steps:[["16-week and 8-week classes add together",""],["The SCO certifies which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: “Enrollment in a minimum of 9 credit hours during a fall, spring, or summer term is considered full-time status for graduate students” ("+SRC.gradCat+")."},
-    A_ftO:{a:1,t:"4.5 credits in one eight-week term",steps:[["Counted per eight-week term, not the semester",""],["The SCO certifies which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: “Enrollment in a minimum of 4.5 credit hours during an eight-week term is considered full-time status” ("+SRC.gradCat+")."},
+    A_ftU:{a:1,t:"12 credits in fall, spring or summer",steps:[["Shorter sessions are converted by VA","The planner does that arithmetic."],["ODU’s certifying officials certify which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: undergraduates “enrolled in 12 or more credit hours during a fall, spring, or summer term” are full time ("+SRC.ugCat+")."},
+    A_ftG:{a:1,t:"9 credits across the full term",steps:[["16-week and 8-week classes add together",""],["ODU’s certifying officials certify which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: “Enrollment in a minimum of 9 credit hours during a fall, spring, or summer term is considered full-time status for graduate students” ("+SRC.gradCat+")."},
+    A_ftO:{a:1,t:"4.5 credits in one eight-week term",steps:[["Counted per eight-week term, not the semester",""],["ODU’s certifying officials certify which standard applies",""]],who:["sco"],tools:["planner"],why:"ODU: “Enrollment in a minimum of 4.5 credit hours during an eight-week term is considered full-time status” ("+SRC.gradCat+")."},
 
     // ---- VR&E vs GI Bill
     V1:{q:"What do you want to compare?",o:[{v:"in",t:"Getting in",n:"A_vIn"},{v:"pay",t:"What each pays",n:"A_vPay"},{v:"both",t:"Using both",n:"A_vBoth"}]},
     A_vIn:{a:1,t:"A rating and a counselor, versus service time",steps:[["VR&amp;E: a 10%+ rating lets you apply","A VA counselor decides, and approves your plan."],["GI Bill: your service sets it","You pick an approved program; no counselor."]],who:["vrc","sco"],tools:["vreElig","elig"],why:SRC.vreElig+" · "+SRC.elig+"."},
-    A_vPay:{a:1,t:"VR&amp;E can cover more of your approved costs",steps:[["VR&amp;E: tuition, fees, books, supplies, equipment","Plus a monthly allowance that grows with dependents, or the Post-9/11 rate if you choose it, have at least 1 day of Post-9/11 entitlement left and are within your GI Bill eligibility period: VA says “In most cases, the GI Bill rate is higher.” Half time is paid."],["Post-9/11: tuition to the in-state cap, books up to $1,000","Housing only above half time."]],who:["vrc","sco"],tools:["planner"],why:SRC.r31+" · "+SRC.rates+" · the Post-9/11 rate election, which needs “at least 1 day of entitlement remaining under the Post-9/11 GI Bill” and “You’re within your GI Bill eligibility period”: "+SRC.vreElig+"."},
+    A_vPay:{a:1,t:"VR&amp;E can cover more of your approved costs",steps:[["VR&amp;E: tuition, fees, books, supplies, equipment","Plus a monthly allowance that grows with dependents, or the Post-9/11 rate if you choose it, have at least 1 day of Post-9/11 entitlement left and are within your GI Bill eligibility period: VA says “In most cases, the GI Bill rate is higher.” Half time is paid."],["Post-9/11: tuition to the in-state cap, plus a books stipend","Housing only above half time. Current amounts: VA’s rates page."]],who:["vrc","sco"],tools:["planner"],why:SRC.r31+" · "+SRC.rates+" · the Post-9/11 rate election, which needs “at least 1 day of entitlement remaining under the Post-9/11 GI Bill” and “You’re within your GI Bill eligibility period”: "+SRC.vreElig+"."},
     A_vBoth:{a:1,t:"Use VR&amp;E first if you can",steps:[["VR&amp;E doesn’t take months from your GI Bill","But months used first under another VA education program can come off VR&amp;E, unless VA grants retroactive induction."],["GI Bill benefits cap at 48 months combined","VR&amp;E isn’t counted."]],who:["vrc"],tools:["vreElig"],why:"VA: “If you use VR&amp;E benefits, we won't deduct entitlement from your other VA education benefits” ("+SRC.vreElig+"); 48 months “doesn't include Veteran Readiness and Employment (VR&amp;E) benefits” ("+SRC.elig+"). Order of use is your call with your counselor."},
 
     // ---- switching
     S1:{q:"What are you thinking of?",o:[{v:"r",t:"Montgomery and Post-9/11 both",n:"A_sRud"},{v:"v",t:"Moving to VR&amp;E",n:"A_sVre"},{v:"o",t:"Leaving VR&amp;E for the GI Bill",n:"A_sOut"},{v:"g",t:"Another GI Bill chapter",n:"A_sGi"}]},
-    A_sOut:{a:1,t:"Next term, and the counselor first",steps:[["Talk to your VR&amp;E counselor before the term starts","A mid-term change isn’t allowed. Ask them about retroactive induction too."],["VR&amp;E time doesn’t come off your GI Bill",""],["Then the SCO certifies the GI Bill","Apply first if you never have."]],who:["vrc","sco"],tools:["apply"],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+" § G.3); “If you use VR&amp;E benefits, we won't deduct entitlement from your other VA education benefits” ("+SRC.vreElig+")."},
+    A_sOut:{a:1,t:"Next term, and the counselor first",steps:[["Talk to your VR&amp;E counselor before the term starts","A mid-term change isn’t allowed. Ask them about retroactive induction too."],["VR&amp;E time doesn’t come off your GI Bill",""],["Then ODU’s certifying officials certify the GI Bill","Apply first if you never have."]],who:["vrc","sco"],tools:["apply"],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+" § G.3); “If you use VR&amp;E benefits, we won't deduct entitlement from your other VA education benefits” ("+SRC.vreElig+")."},
     A_sRud:{a:1,t:"Your earlier choice may not be final",steps:[["VA reviews files itself","You don’t have to ask."],["Ask VA before revoking","Revoking can cost a kicker: extra money from your service on top of Montgomery, sometimes called a college fund."],["Combined limit: 48 months, not at the same time",""]],who:["va","vso"],tools:["rudisill"],why:"VA: “VA will automatically evaluate your file and inform you if additional action is required”; you “will lose your MGIB or MGIB-SR kicker payments under PGIB” ("+SRC.rudisill+")."},
-    A_sVre:{a:1,t:"Next term, not mid-term",steps:[["Talk to your counselor before the term starts",""],["Tell the SCO too",""]],who:["vrc","sco"],tools:[],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+" § G.3)."},
+    A_sVre:{a:1,t:"Next term, not mid-term",steps:[["Talk to your counselor before the term starts",""],["Tell the benefits office too",""]],who:["vrc","sco"],tools:[],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+" § G.3)."},
     A_sGi:{a:1,t:"Often a one-time choice. Ask before you choose.",steps:[["One service period starting on or after Aug 1, 2011: often one choice, for good","VA: choose MGIB-AD and “you can't switch at some later date to use the Post-9/11 GI Bill.” Perkins: a single period of sufficient length can qualify for both."],["Two or more periods: Rudisill may apply","VA reviews files itself."],["A change of chapter needs a new ODU clearance form",""]],who:["va","sco"],tools:["rudisill","apply"],why:SRC.elig+" · VA: Veterans “who served for a single obligated period of sufficient length could also be eligible for two different education programs” ("+SRC.rudisill+") · "+SRC.faqs+"."},
 
     // ---- who
@@ -514,13 +538,31 @@ ul.plain li+li{margin-top:4px}
     $("qFold").hidden=!n.fold; if(n.fold){ $("qFoldT").textContent=n.fold[0]; $("qFoldB").innerHTML=n.fold[1]; }
   }
   function tool(x){ var t=typeof x==="string"?T[x]:x; return '<a class="btn'+(t.p?' btn--primary':'')+'" href="'+t.h+'">'+t.t+'</a>'; }
+  // A rate past its own dates reads as UNKNOWN, never as current (Gate A items A3/A4). The page checks the clock itself,
+  // so an open tab or an old copy can't keep showing last year's figure. A rate before its start reads UNKNOWN too. The clock is
+  // read at every render, so a tab left open past a date catches up. #gate-walk&now=YYYY-MM-DD fakes the clock for the gate.
+  // The viewer's own calendar date, not UTC, so a rate doesn't lapse hours early in Virginia. The #now= override works only
+  // inside Gate A's #gate-walk, so a shared link can't change what the page shows.
+  function today(){ var m=/^#gate-walk&now=(\d{4}-\d{2}-\d{2})$/.exec(location.hash); if(m) return m[1];
+    var d=new Date(); return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+  function fmtEnd(d){ var M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], p=d.split("-"); return M[+p[1]-1]+" "+(+p[2])+", "+p[0]; }
+  var RATES_SRC='VA publishes each year’s rates at <a class="cite" href="https://www.va.gov/education/benefit-rates/">va.gov/education/benefit-rates</a>. Not a VA decision; VA’s award governs your case.';
+  function view(n){
+    var t=today(), early=n.starts&&t<n.starts, late=n.ends&&t>n.ends;
+    if(!early&&!late) return n;
+    return {a:1,stale:1,ends:n.ends,eyebrow:n.eyebrow,t:"UNKNOWN: "+(late?"this rate’s dates have passed":"this rate isn’t in force yet"),
+      sub:late?"The figure the kit had ran to "+fmtEnd(n.ends)+". VA publishes new rates each year, and this page hasn’t been updated yet.":"The figure the kit has starts "+fmtEnd(n.starts)+". Until then an earlier rate applies.",
+      steps:[["Check VA’s current rates",'<a class="cite" href="https://www.va.gov/education/benefit-rates/">va.gov/education/benefit-rates</a>'],["Or ask VA what you’ll be paid","VA’s award letter governs your case."]],
+      who:["va"],tools:n.tools,why:RATES_SRC};
+  }
   function renderA(n){
+    n=view(n);
     $("aEyebrow").innerHTML=n.eyebrow||TOPICS[S.topic].t; $("aTitle").innerHTML=n.t; $("aSub").innerHTML=n.sub||"";
     $("aSteps").innerHTML=n.steps.map(function(s){ return '<li><b>'+s[0]+'</b>'+(s[1]?'<span class="d">'+s[1]+'</span>':'')+'</li>'; }).join("");
     $("aWho").hidden=!n.who.length;
     $("aWho").innerHTML='<h3>'+'Who to contact'+'</h3><ul>'+n.who.map(function(k){ return '<li><span class="r">'+C[k].r+'</span><span class="c">'+C[k].c+'</span></li>'; }).join("")+'</ul>';
     $("aTools").innerHTML=n.tools.map(tool).join(""); $("aTools").hidden=!n.tools.length;
-    $("aWhy").innerHTML='<p>'+n.why+'</p><p>Not a VA decision. VA’s award governs your case; a rate past its dates is one to re-check.</p>';
+    $("aWhy").innerHTML='<p>'+n.why+'</p>'+(n.stale?'':'<p>Not a VA decision. VA’s award governs your case; a rate past its dates is one to re-check.</p>');
     $("aFold").open=false;
   }
   function chips(){
@@ -573,12 +615,14 @@ ul.plain li+li{margin-top:4px}
 
   // Gate A's walk: with #gate-walk in the address, the page walks every topic and every
   // answer itself and writes what it found into the DOM, so a plain headless --dump-dom can read it on any machine.
-  if(location.hash==="#gate-walk"){
-    var rep={topics:0,answers:0,bad:[]};
+  if(/^#gate-walk(&|$)/.test(location.hash)){
+    var rep={topics:0,answers:0,stale:0,bad:[]};
     Object.keys(TOPICS).forEach(function(k){ rep.topics++; (function walk(id,trail,seen){
       var n=N[id]; if(!n){ rep.bad.push(trail+" → missing "+id); return; }
       if(seen.indexOf(id)>=0){ rep.bad.push(trail+" loops at "+id); return; }
-      if(n.a){ rep.answers++; S.topic=k; S.path=[]; renderA(n);
+      if(n.a){ rep.answers++; S.topic=k; S.path=[]; renderA(n); if(view(n).stale) rep.stale++;
+        if(view(n).stale&&/\$\d/.test($("aTitle").textContent+$("aSub").textContent+$("aSteps").textContent+$("aWhy").textContent)) rep.bad.push(trail+": a past-dated rate still shows a dollar figure");
+        if(view(n).stale&&/\$\d/.test(tree(id))) rep.bad.push(trail+": the printed digest still shows a past-dated dollar figure");
         if(!n.steps.length) rep.bad.push(trail+": no steps");
         if(!n.who.length&&!n.tools.length) rep.bad.push(trail+": no one to contact and nothing to open");
         if(!n.why) rep.bad.push(trail+": no source");
@@ -595,7 +639,7 @@ ul.plain li+li{margin-top:4px}
 
   // Printing from the first screen prints every situation and its answers, compact (an office keeps a paper copy);
   // printing from an answer prints that answer with its sources.
-  function tree(id){ var n=N[id];
+  function tree(id){ var n=N[id]; if(n.a) n=view(n);
     if(n.a) return '<p><b>'+n.t+(/[.?!]$/.test(n.t)?'':'.')+'</b> '+n.steps.map(function(s){ return s[0]+(s[1]?" ("+s[1].replace(/<[^>]+>/g,"")+")":""); }).join(" · ")+(n.who.length?' <i>→ '+n.who.map(function(w){ return C[w].r; }).join(", ")+'</i>':'')+'</p>';
     return '<p>'+n.q+'</p><ul>'+n.o.map(function(o){ return '<li><span class="pa-o">'+o.t+':</span> '+tree(o.n)+'</li>'; }).join("")+'</ul>'; }
   function digest(){ return GROUPS.map(function(g){ return '<h3>'+g.h+'</h3>'+g.items.map(function(k){ var t=TOPICS[k];
