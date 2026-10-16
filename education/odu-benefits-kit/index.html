@@ -11,85 +11,99 @@
 /* Theme bootstrap, before anything paints: light unless this browser saved dark. data-theme is always set explicitly, so the device never decides. */
 (function(){ var t="light"; try{ if(localStorage.getItem("bw07.theme")==="dark") t="dark"; }catch(e){} document.documentElement.setAttribute("data-theme",t); document.documentElement.style.colorScheme=t; })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap">
 <style>
-/* ── House style tokens (premium system, house-style/tokens.css), inlined: the review copy and the Pages site serve one file. ── */
+/* ── Kit site shell: U.S. Web Design System (USWDS) 3 default theme, read 2026-10-15 at designsystem.digital.gov/design-tokens.
+   Byte-identical on every kit page except the planner, which keeps its own style until its rev 44 lands. Gate A checks both.
+   Type: Public Sans first (the USWDS face, used when installed; no font is downloaded, so nothing leaves the browser), then the
+   system face. Sizes: USWDS theme sizes only (3xs 13 · 2xs 14 · md 17 · lg 22 · xl 32 · 2xl 40). Spacing: USWDS units (8px).
+   Radius: 2 · 4 · 8. Color: USWDS theme and state tokens. Dark mode is this kit's own mapping (USWDS ships none). ── */
 :root{
-  --font-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --font-display:var(--font-body);
-  --font-mono:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace;
-  --step--1:0.875rem;
-  --step-0:clamp(1.0625rem,1.0380rem + 0.1087vw,1.1250rem);
-  --step-1:clamp(1.2750rem,1.1871rem + 0.3907vw,1.4996rem);
-  --step-2:clamp(1.5300rem,1.3465rem + 0.8157vw,1.9990rem);
-  --step-3:clamp(1.8360rem,1.5117rem + 1.4412vw,2.6647rem);
-  --step-4:clamp(2.2032rem,1.6754rem + 2.3457vw,3.5520rem);
-  --leading-body:1.55;--leading-heading:1.12;--leading-display:0.98;
-  --tracking-display:-0.03em;--tracking-heading:-0.015em;--tracking-caps:0.08em;
-  --weight-body:400;--weight-strong:560;--weight-display:640;--measure:66ch;
+  --font-mono:ui-monospace,"Roboto Mono",Consolas,monospace;
+  --step--2:0.8125rem;--step--1:0.875rem;--step-0:1.0625rem;--step-1:1.375rem;--step-2:1.375rem;--step-3:2rem;--step-4:2.5rem;
+  --leading-body:1.5;--leading-heading:1.2;--leading-display:1.2;
+  --tracking-display:0;--tracking-heading:0;--tracking-caps:0.06em;
+  --weight-body:400;--weight-strong:600;--weight-display:700;--measure:68ch;
   --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-5:1.5rem;--space-6:2rem;--space-7:3rem;--space-8:4rem;--space-9:6rem;
-  --gutter:clamp(1rem,0.6rem + 1.8vw,2rem);
-  --radius-sm:6px;--radius:10px;--radius-lg:16px;--radius-pill:999px;
-  --paper:#fafaf8;--surface:#ffffff;--surface-sunk:#f2f2ef;
-  --ink:#0e0e10;--ink-2:#4a4a50;--ink-3:#6b6b72;
-  --line:rgba(14,14,16,0.10);--line-strong:rgba(14,14,16,0.22);
-  --primary:#0e0e10;--on-primary:#fafaf8;--accent:#2748d8;--on-accent:#ffffff;
-  --focus-ring:0 0 0 2px var(--paper),0 0 0 4px var(--accent);
-  --shadow-1:0 1px 2px rgba(14,14,16,0.06),0 4px 16px rgba(14,14,16,0.06);
-  --shadow-2:0 2px 4px rgba(14,14,16,0.06),0 16px 48px rgba(14,14,16,0.12);
+  --gutter:1rem;
+  --radius-sm:2px;--radius:4px;--radius-lg:8px;--radius-pill:999px;
+  --paper:#ffffff;--surface:#ffffff;--surface-sunk:#f0f0f0;
+  --ink:#1b1b1b;--ink-2:#3d4551;--ink-3:#565c65;
+  --line:#dfe1e2;--line-strong:#a9aeb1;
+  --primary:#005ea2;--on-primary:#ffffff;--accent:#005ea2;--on-accent:#ffffff;
+  --accent-soft:#d9e8f6;--accent-line:#73b3e7;--link-hover:#1a4480;
+  --danger:#b50909;--danger-soft:#f4e3db;--warn:#936f38;--warn-soft:#faf3d1;
+  --tl-pay:#005ea2;--tl-none:#a9aeb1;--tl-unk:#e5a000;
+  --staff-bar:#162e51;--on-staff:#ffffff;--staff-2:#d9e8f6;
+  --alert-bg:#f4e3db;--alert-edge:#d83933;
+  --focus:#2491ff;--focus-ring:0 0 0 4px #2491ff;
+  --shadow-1:0 1px 4px rgba(0,0,0,0.1);--shadow-2:0 4px 8px rgba(0,0,0,0.1);
   color-scheme:light;
   --dur-press:160ms;--dur-hover:180ms;--dur-tip:150ms;--dur-menu:200ms;--dur-enter:300ms;--dur-exit:200ms;--dur-page:400ms;--stagger:60ms;
   --ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1);--ease-in:cubic-bezier(0.3,0,0.8,0.15);--ease-hover:ease;
   --rise:24px;--rise-sm:8px;--press-scale:0.97;
 }
+@media (min-width:40em){ :root{ --step-3:2.5rem;--gutter:2rem; } }
 [data-theme="dark"]{
-  --paper:#0c0c0e;--surface:#151518;--surface-sunk:#08080a;--ink:#f2f2ee;--ink-2:#b4b4bb;--ink-3:#8c8c94;
-  --line:rgba(242,242,238,0.10);--line-strong:rgba(242,242,238,0.22);--primary:#f2f2ee;--on-primary:#0c0c0e;--accent:#8ea2ff;--on-accent:#0c0c0e;
-  --shadow-1:0 1px 2px rgba(0,0,0,0.4),0 4px 16px rgba(0,0,0,0.3);--shadow-2:0 2px 4px rgba(0,0,0,0.4),0 16px 48px rgba(0,0,0,0.5);
+  --paper:#111418;--surface:#1a1f26;--surface-sunk:#0d1014;
+  --ink:#f0f0f0;--ink-2:#dfe1e2;--ink-3:#a9aeb1;
+  --line:#2c333c;--line-strong:#565c65;
+  --primary:#73b3e7;--on-primary:#162e51;--accent:#73b3e7;--on-accent:#162e51;
+  --accent-soft:#162e51;--accent-line:#2378c3;--link-hover:#d9e8f6;
+  --danger:#f39268;--danger-soft:#3a1714;--warn:#ffbe2e;--warn-soft:#332a10;
+  --tl-pay:#73b3e7;--tl-none:#71767a;--tl-unk:#ffbe2e;
+  --staff-bar:#0b1626;--on-staff:#f0f0f0;--staff-2:#d9e8f6;
+  --alert-bg:#3a1714;--alert-edge:#e8726d;
+  --shadow-1:0 1px 4px rgba(0,0,0,0.5);--shadow-2:0 4px 8px rgba(0,0,0,0.5);
   color-scheme:dark;
 }
 @media (prefers-reduced-motion: reduce){ :root{ --rise:0px;--rise-sm:0px;--press-scale:1;--dur-enter:200ms;--dur-page:200ms;--stagger:0ms; } }
 
-/* ── House style base (house-style/base.css). Only transform and opacity ever animate. ── */
+/* base. Only transform and opacity ever animate. */
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--paper)}
-body{min-height:100svh;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--step-0);font-weight:var(--weight-body);line-height:var(--leading-body);font-optical-sizing:auto;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{min-height:100svh;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--step-0);font-weight:var(--weight-body);line-height:var(--leading-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 button,input,select,textarea{font:inherit;color:inherit}
 p,li{max-width:var(--measure);text-wrap:pretty}
 h1,h2,h3{font-family:var(--font-display);font-weight:var(--weight-display);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);text-wrap:balance}
-a{color:inherit;text-decoration-color:var(--line-strong);text-underline-offset:0.2em;text-decoration-thickness:1px}
-a:hover{text-decoration-color:currentColor}
-:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-sm)}
+a{color:var(--accent);text-underline-offset:0.2em;text-decoration-thickness:1px}
+a:hover{color:var(--link-hover)}
+:focus-visible{outline:4px solid var(--focus);outline-offset:0}
 ::selection{background:var(--accent);color:var(--on-accent)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:0 var(--space-5);border:1px solid var(--line-strong);border-radius:var(--radius-pill);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:var(--weight-strong);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out),opacity var(--dur-hover) var(--ease-hover)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:0 var(--space-5);border:2px solid var(--primary);border-radius:var(--radius);background:var(--surface);color:var(--primary);text-decoration:none;font-weight:var(--weight-display);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out),opacity var(--dur-hover) var(--ease-hover)}
 .btn:hover{opacity:0.86}
 .btn:active{transform:scale(var(--press-scale))}
 .btn--primary{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
 .btn[disabled]{opacity:.45;cursor:not-allowed}
 
-/* ── BW-07 taste layer: the kit's blue (#2B5CA8), cool calm paper, generous space. Tokens only, plus the planner's own parts. ── */
-:root{
-  --paper:#f6f7f9;--surface:#ffffff;--surface-sunk:#eef1f5;
-  --ink:#0f1722;--ink-2:#3f4b5c;--ink-3:#5b6676;
-  --line:rgba(15,23,34,0.10);--line-strong:rgba(15,23,34,0.24);
-  --primary:#2B5CA8;--on-primary:#ffffff;--accent:#2B5CA8;--on-accent:#ffffff;
-  --accent-soft:#e9f0fa;--accent-line:rgba(43,92,168,0.40);
-  --danger:#a3302a;--danger-soft:#fbeceb;--warn:#7a4b05;--warn-soft:#fbf2e1;
-  --tl-pay:#2B5CA8;--tl-none:#98a3b1;--tl-unk:#c58a1e;
-}
-[data-theme="dark"]{
-  --paper:#0d1117;--surface:#161c26;--surface-sunk:#0a0e14;
-  --ink:#eef2f7;--ink-2:#bac4d1;--ink-3:#93a0b1;
-  --line:rgba(238,242,247,0.10);--line-strong:rgba(238,242,247,0.24);
-  --primary:#8fb2ec;--on-primary:#0b1220;--accent:#8fb2ec;--on-accent:#0b1220;
-  --accent-soft:rgba(143,178,236,0.13);--accent-line:rgba(143,178,236,0.50);
-  --danger:#ff9e95;--danger-soft:rgba(255,120,110,0.12);--warn:#f0c470;--warn-soft:rgba(240,196,112,0.11);
-  --tl-pay:#8fb2ec;--tl-none:#5b6676;--tl-unk:#d9a440;
-}
+/* site shell: crisis site alert, extended header (title row, then the only nav), related links */
+.site-in{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto}
+.site-alert{background:var(--alert-bg);border-left:8px solid var(--alert-edge);color:var(--ink);font-size:var(--step--1);padding:var(--space-2) 0}
+.site-alert b{font-weight:var(--weight-display)}
+.site-alert a{color:inherit}
+.site-hdr{background:var(--surface);border-bottom:1px solid var(--line)}
+.site-row{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4) 0 var(--space-2)}
+.site-title{font-size:var(--step-1);font-weight:var(--weight-display);line-height:var(--leading-heading);color:inherit;text-decoration:none;margin-right:auto}
+.site-title small{display:block;font-size:var(--step--1);font-weight:var(--weight-body);color:var(--ink-3)}
+.site-tag{font-size:var(--step--2);font-weight:var(--weight-display);letter-spacing:var(--tracking-caps);text-transform:uppercase;padding:2px var(--space-2);border-radius:var(--radius-sm);background:var(--on-staff);color:var(--staff-bar)}
+.site-nav{display:flex;flex-wrap:wrap;column-gap:var(--space-5)}
+.site-nav a{display:block;min-height:44px;padding:var(--space-2) 0 var(--space-3);color:var(--ink);text-decoration:none;font-weight:var(--weight-strong);font-size:1rem;border-bottom:4px solid transparent}
+.site-nav a:hover{color:var(--accent)}
+.site-nav a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+.site-hdr.staff{background:var(--staff-bar);color:var(--on-staff);border-bottom:0}
+.staff .site-title small{color:var(--staff-2)}
+.staff .site-nav a{color:var(--staff-2)}
+.staff .site-nav a:hover,.staff .site-nav a[aria-current="page"]{color:var(--on-staff);border-bottom-color:var(--on-staff)}
+.related{margin-top:var(--space-7);border-top:4px solid var(--primary);padding-top:var(--space-4)}
+.related h2{font-size:1rem}
+.related ul{list-style:none;padding:0;margin-top:var(--space-2);display:grid;gap:var(--space-3)}
+.related a{font-weight:var(--weight-strong)}
+.related span{display:block;font-size:var(--step--1);color:var(--ink-3)}
+@media print{ .site-hdr{background:none!important;color:#000!important;border-bottom:1px solid #999} .site-nav,.related{display:none!important} .site-alert{background:none;border:1px solid #999;border-left-width:8px} }
+/* ── end kit site shell ── */
 .app{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto;padding:var(--space-5) 0 var(--space-8)}
 .top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4)}
 .eyebrow{font-size:var(--step--1);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--ink-3);font-weight:var(--weight-strong)}
@@ -134,7 +148,7 @@ legend{padding:0;display:block;width:100%}
 .card:active{transform:scale(var(--press-scale))}
 .card input{position:absolute;top:12px;left:12px;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
 .card .dot{flex:0 0 22px;height:22px;margin-top:1px;border-radius:50%;border:2px solid var(--line-strong);background:var(--surface)}
-.card.box .dot{border-radius:6px}
+.card.box .dot{border-radius:4px}
 .card:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
 .card:has(input:checked) .dot{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 0 5px,transparent 5.5px)}
 .card.box:has(input:checked) .dot{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
@@ -146,7 +160,7 @@ legend{padding:0;display:block;width:100%}
 .qrow:first-of-type{margin-top:var(--space-4)}
 .qrow .qlabel{font-weight:var(--weight-strong);font-size:var(--step-0)}
 .seg{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:6px;margin-top:var(--space-3)}
-.seg label{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);cursor:pointer;font-size:var(--step--1);font-weight:500;line-height:1.25;transition:transform var(--dur-press) var(--ease-out)}
+.seg label{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--surface);cursor:pointer;font-size:var(--step--1);font-weight:600;line-height:1.25;transition:transform var(--dur-press) var(--ease-out)}
 .seg label:active{transform:scale(var(--press-scale))}
 .seg input{position:absolute;top:50%;left:50%;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
 .seg label:has(input:checked){background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
@@ -190,7 +204,7 @@ html{scroll-padding-bottom:96px}
 }
 footer{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--line);font-size:var(--step--1);color:var(--ink-3);line-height:1.6}
 footer p+p{margin-top:var(--space-3)}
-footer .stamp{font-size:12px}
+footer .stamp{font-size:13px}
 .pubaddr .cite,footer .cite{overflow-wrap:anywhere}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion: reduce){ .step.enter,details.fold[open]>.fold-body{animation-duration:var(--dur-exit)} }
@@ -258,25 +272,28 @@ ul.plain li+li{margin-top:4px}
 </head>
 <body>
 
-<div class="app" id="app">
-<header class="top">
-  <div>
-    <div class="eyebrow">VA benefits at ODU · for veteran students and their families</div>
-    <h1>Veteran Benefits Kit</h1>
+<div class="site-alert" role="region" aria-label="Veterans Crisis Line"><div class="site-in">In crisis, or worried about a Veteran? <b>Dial 988, then press 1</b>, or text 838255 — the Veterans Crisis Line, free and confidential, 24/7 (<a class="cite" href="https://www.veteranscrisisline.net/">veteranscrisisline.net</a>).</div></div>
+<header class="site-hdr">
+  <div class="site-in site-row">
+    <a class="site-title" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">Veteran Benefits Kit<small>VA education benefits at ODU</small></a>
+    <button type="button" class="iconbtn noprint" id="theme" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="tlabel">Dark</span></button>
   </div>
-  <button type="button" class="iconbtn noprint" id="theme" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="tlabel">Dark</span></button>
+  <nav class="site-in site-nav noprint" aria-label="Kit pages"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/" aria-current="page">Start here</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Pay planner</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">Which benefit</a></nav>
 </header>
+<div class="app" id="app">
+<div class="top">
+  <h1>Start here</h1>
+</div>
 <p class="lede">Tell us what is going on. A few quick questions, then the next step to take and exactly who to contact.</p>
 <p class="nosave noprint">Nothing you pick here is saved or sent anywhere.</p>
 
 <noscript><div class="stop">
-  <p><b>Scripting is off, so the guided steps cannot run.</b> The three kit pages work on their own:</p>
+  <p><b>Scripting is off, so the guided steps cannot run.</b> The kit’s two tools work on their own:</p>
   <ul class="plain">
     <li><a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Semester Pay Planner</a> — what VA would pay each month this term</li>
     <li><a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">Which Benefit Am I On</a> — find your benefit, the programs side by side</li>
-    <li><a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Front-Desk Map</a> — fourteen common situations and who handles each</li>
   </ul>
-  <p>School certification: ODU Military Benefits &amp; Certification Services, 757-683-7153, military@odu.edu. Payments and remaining benefits: VA Education Call Center, 888-442-4551 (TTY 711).</p>
+  <p>VA benefit and certification questions: ODU Military Benefits &amp; Certification Services, 757-683-7153, military@odu.edu. Campus support: ODU Military Connection Center, 757-683-7113, militaryconnectioncenter@odu.edu. Payments and remaining benefits: VA Education Call Center, 888-442-4551 (TTY 711).</p>
 </div></noscript>
 
 <div class="progress noprint" id="progress" hidden>
@@ -320,13 +337,19 @@ ul.plain li+li{margin-top:4px}
   <span class="spacer"></span>
 </div>
 
-<p class="crisis">In crisis, or worried about a Veteran? <b>Dial 988, then press 1</b>, or text 838255 — the Veterans Crisis Line, free and confidential, 24/7 (<a class="cite" href="https://www.veteranscrisisline.net/">veteranscrisisline.net</a>).</p>
+
+<aside class="related noprint" aria-labelledby="relH"><h2 id="relH">Learn more</h2>
+  <ul>
+    <li><a href="https://www.va.gov/education/verify-school-enrollment/">Verify your enrollment</a><span>va.gov, every month</span></li>
+    <li><a href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">When VA pays, and how</a><span>va.gov payments FAQ</span></li>
+    <li><a href="https://www.odu.edu/military-connection/veteran-student-checklist">ODU veteran student checklist</a><span>Each term’s to-do list</span></li>
+    <li><a href="https://www.va.gov/education/check-remaining-benefits/">Check remaining benefits</a><span>Sign in with your own account</span></li>
+  </ul></aside>
 
 <footer>
-  <p><strong>Not an official VA document and not a VA decision.</strong> It points you to the right step and the right person. The School Certifying Official's certification and VA's award govern your case; your VR&amp;E counselor governs anything Chapter 31. Rates and dates carry their own dates on the pages they come from.</p>
-  <p>The kit's three pages: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">Semester Pay Planner</a> · <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/">Which Benefit Am I On</a> · <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Front-Desk Map</a> (for the office). Every page prints.</p>
+  <p><strong>Not an official VA document and not a VA decision.</strong> It points you to the right step and the right person. ODU’s certifying officials’ certification and VA’s award govern your case; your VR&amp;E counselor governs anything Chapter 31. Rates and dates carry their own dates on the pages they come from.</p>
     <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/</a></p>
-  <p class="stamp">BW-07 Veteran Benefits Kit · front door · revision 20 · prepared 2026-10-14 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+  <p class="stamp">BW-07 Veteran Benefits Kit · front door · revision 25 · prepared 2026-10-15 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 <div class="sr-only" id="live" aria-live="polite"></div>
@@ -340,7 +363,7 @@ ul.plain li+li{margin-top:4px}
   // ---- who to contact, by role, never by name (the institutions' own published routes)
   var KIT="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/";
   var C={
-    sco:{r:"ODU certifying office (SCO)",c:'Military Benefits &amp; Certification Services · <a href="tel:+17576837153">757-683-7153</a> · <a href="mailto:military@odu.edu">military@odu.edu</a>'},
+    sco:{r:"ODU’s benefits office: Military Benefits &amp; Certification Services",c:'<a href="tel:+17576837153">757-683-7153</a> · <a href="mailto:military@odu.edu">military@odu.edu</a> · ODU: the office “is here to help our military-affiliated students learn more about utilizing VA education benefits at ODU” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>), and its School Certifying Officials certify enrollment to VA (<a class="cite" href="https://www.odu.edu/military-benefits/va-certifying-official">ODU</a>). ODU: “Veterans Clearance Forms (VCF) are processed in the order they are received” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>).'},
     va:{r:"VA Education Call Center",c:'<a href="tel:+18884424551">888-442-4551</a> (TTY 711) · Mon–Fri 8 a.m.–7 p.m. ET'},
     askva:{r:"Ask VA, in writing",c:'<a href="https://www.va.gov/contact-us/ask-va/">va.gov/contact-us/ask-va</a> · sign in; name the school and the term dates'},
     vrc:{r:"Your VR&amp;E counselor",c:'Can’t reach them? Call your VA Regional Office and ask for the VR&amp;E Supervisor · <a href="https://www.va.gov/find-locations/">find your office</a>'},
@@ -350,7 +373,6 @@ ul.plain li+li{margin-top:4px}
   var T={
     planner:{t:"Open the Semester Pay Planner",h:KIT+"planner/",p:1},
     benefit:{t:"Open Which Benefit Am I On",h:KIT+"benefit/",p:1},
-    desk:{t:"Open the Front-Desk Map",h:KIT+"desk/",p:1},
     verify:{t:"Verify your enrollment",h:"https://www.va.gov/education/verify-school-enrollment/",p:1},
     left:{t:"Check remaining benefits",h:"https://www.va.gov/education/check-remaining-benefits/"},
     checklist:{t:"ODU veteran student checklist",h:"https://www.odu.edu/military-connection/veteran-student-checklist"},
@@ -384,14 +406,21 @@ ul.plain li+li{margin-top:4px}
     vreHb:cite("https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000260798/VRE-School-Certifying-Official-Handbook","VR&amp;E SCO Handbook, updated 2025-07-30"),
     elig:cite("https://www.va.gov/education/eligibility/","va.gov education eligibility, 2026-04-03"),
     rudisill:cite("https://benefits.va.gov/gibill/rudisill.asp","VA, Rudisill and Perkins, updated 2026-02-27"),
-    desk:cite(KIT+"desk/","Front-Desk Map")
+    certBasics:cite("https://benefits.va.gov/GIBILL/SCO/new-sco/certification-basics.asp","VA, Certification Basics for new SCOs, updated 2026-06-02"),
+    ugCat:cite("https://catalog.odu.edu/undergraduate/registrationrequirementsandprocedures/","ODU undergraduate catalog, read 2026-10-14"),
+    gradCat:cite("https://catalog.odu.edu/graduate/policies/graduatepolicies/","ODU graduate policies, read 2026-10-14"),
+    bands:cite("https://www.ecfr.gov/current/title-38/section-21.4270","38 CFR 21.4270(c), current eCFR text"),
+    remedialReg:cite("https://www.ecfr.gov/current/title-38/section-21.4267","38 CFR 21.4267(g), current eCFR text"),
+    mgibad:cite("https://www.va.gov/education/benefit-rates/montgomery-active-duty-rates/","va.gov MGIB-AD rates, FY2027"),
+    mgibsr:cite("https://www.va.gov/education/benefit-rates/montgomery-selected-reserve-rates/","va.gov MGIB-SR rates, FY2027"),
+    dea:cite("https://www.va.gov/family-and-caregiver-benefits/education-and-careers/dependents-education-assistance/rates/","va.gov DEA rates, FY2027"),
+    oh2108:cite("https://benefits.va.gov/GIBILL/docs/presentations/August2021_Office_Hours_Presentation.pdf","VA office hours, August 2021, slide 35")
   };
 
   // ---- the topics. Each answer is a short plan; the full rule, quoted, lives in the Front-Desk Map row it names.
   var GROUPS=[
     {h:"School and the GI Bill",items:["which","paid","howmuch","registered","drop","inperson","left","switch","vre"]},
-    {h:"Beyond school",items:["claim","health","home","leaving","job"]},
-    {h:"Working the benefits desk",items:["desk"]}
+    {h:"Beyond school",items:["claim","health","home","leaving","job"]}
   ];
   var BEN=[{v:"gi",t:"GI Bill or DEA",s:"Post-9/11, Montgomery (30 or 1606), Fry, or Chapter 35"},{v:"vre",t:"VR&amp;E",s:"Chapter 31 · you have a VR&amp;E counselor"},{v:"unsure",t:"Not sure"}];
   var YNU=function(y,n,u){ return [{v:"yes",t:y||"Yes"},{v:"no",t:n||"No"},{v:"unsure",t:u||"Not sure"}]; };
@@ -410,8 +439,7 @@ ul.plain li+li{margin-top:4px}
     health:{t:"VA health care, including mental health",start:"A_health"},
     home:{t:"A VA home loan",start:"A_home"},
     leaving:{t:"I’m leaving the military, or just got out",start:"A_leaving"},
-    job:{t:"Finding work",start:"A_job"},
-    desk:{t:"I work at the desk and a student needs help",s:"Work-study, SCO assistants, anyone covering the inbox",start:"A_desk"}
+    job:{t:"Finding work",start:"A_job"}
   };
 
   var N={
@@ -421,28 +449,28 @@ ul.plain li+li{margin-top:4px}
              ["Or check online with your own sign-in","va.gov’s remaining-benefits page works for the GI Bill, DEA (Chapter 35) and transferred Post-9/11."],
              ["Have a VR&amp;E counselor (a Vocational Rehabilitation Counselor)? You are on VR&amp;E (Chapter 31)","Everything about your plan and your monthly money goes to that counselor."]],
       who:["va","sco"],tools:["benefit","left"],
-      why:"How to tell which lane you are in, and why the desk never guesses the chapter: "+SRC.desk+" line 1. Self-service check by form (22-1990 GI Bill · 22-5490 DEA · 22-1990e transferred): "+SRC.remaining+". Call center: "+SRC.payFaq+"."},
+      why:"ODU: “Chapter 31 students DO NOT need to complete the Veterans Clearance Form” ("+SRC.faqs+"). Self-service check by form (22-1990 GI Bill · 22-5490 DEA · 22-1990e transferred): "+SRC.remaining+". Call center: "+SRC.payFaq+"."},
 
     // ---------- not paid
     Q_paidBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_paidVre":(b.v==="unsure"?"A_which":"Q_paidCert")}; })},
     A_paidVre:{a:1,t:"Ask your VR&amp;E counselor",sub:"Chapter 31 is not on VA’s monthly verification list, so your counselor answers payment questions.",
-      steps:[["Ask the certifying office one question","“Has my enrollment been certified this term, and did my counselor’s authorization arrive?”"],
+      steps:[["Ask the benefits office one question","“Has my enrollment been certified this term, and did my counselor’s authorization arrive?”"],
              ["Then contact your counselor","Ask whether your award is processed and your subsistence is set up."]],
       who:["sco","vrc"],tools:[],
-      why:"Chapter 31 is not on VA’s verification list ("+SRC.verify+"); the counselor answers a Chapter 31 payment question ("+SRC.desk+" line 4). The counselor’s authorization goes to the school (line 3)."},
-    Q_paidCert:{q:"Has the certifying office certified your classes for this term?",sub:"Not sure is fine. The certifying office can tell you in one call.",
+      why:"Chapter 31 is not on VA’s verification list ("+SRC.verify+"); ODU: “Chapter 31 students will coordinate with their assigned VA Educational Counselor,” who “will submit an e-authorization to ODU in lieu of the Veteran’s Clearance Form” ("+SRC.faqs+")."},
+    Q_paidCert:{q:"Has ODU certified your classes for this term?",sub:"Not sure is fine. The benefits office can find out for you.",
       o:[{v:"yes",t:"Yes, and it matches my schedule",n:"Q_paidVerify"},{v:"wrong",t:"Yes, but something is wrong",s:"Wrong credits, dates, or in person versus online",n:"A_paidWrong"},{v:"no",t:"No, or I’m not sure",n:"A_paidCert"}]},
-    A_paidCert:{a:1,t:"Start with the certifying office",sub:"Nothing reaches VA until the school certifies you. This is the most common hold-up.",
-      steps:[["Contact the certifying office","Ask: “Has my enrollment been certified for this term?”"],
+    A_paidCert:{a:1,t:"Start with the benefits office",sub:"Nothing reaches VA until the school certifies you. This is the most common hold-up.",
+      steps:[["Contact the benefits office","Ask: “Has my enrollment been certified for this term?”"],
              ["If not, ask what is missing","Usually the Veterans Clearance Form with your Certificate of Eligibility attached."],
              ["Expect a wait on a first certification","ODU says allow 30 to 45 business days."]],
       who:["sco"],tools:["checklist"],
-      why:"Check certification first, then match, then verification ("+SRC.desk+" line 4). Clearance form and timing: "+SRC.checklist+"."},
+      why:"Clearance form and timing: "+SRC.checklist+". Payments: "+SRC.payFaq+". Monthly verification: "+SRC.verify+"."},
     A_paidWrong:{a:1,t:"Get the certification fixed first",sub:"If the certification does not match your real schedule, the money will be wrong too.",
-      steps:[["Tell the certifying office exactly what is wrong","Credits, dates, or which classes are in person or online."],
+      steps:[["Tell the benefits office exactly what is wrong","Credits, dates, or which classes are in person or online."],
              ["They amend it with VA","Nothing else moves until this does."]],
       who:["sco"],tools:[],
-      why:"VA’s guidance to students with incorrect enrollment information is to ask the School Certifying Official to update it ("+SRC.desk+" line 4)."},
+      why:"Correcting a certification is the School Certifying Official’s job ("+SRC.certBasics+")."},
     Q_paidVerify:{q:"Have you verified your enrollment for the month that just ended?",sub:"You verify at the end of each month, on or after its last day: online, by text, by email or by phone. Since January 2026 every GI Bill and DEA student does.",
       o:[{v:"yes",t:"Yes",n:"Q_paidFirst"},{v:"no",t:"No, or I’m not sure",n:"A_paidVerify"}]},
     A_paidVerify:{a:1,t:"Verify your enrollment now",sub:"Montgomery: VA won’t send the payment until you verify. Post-9/11: payments pause after 2 months in a row without it.",
@@ -469,25 +497,25 @@ ul.plain li+li{margin-top:4px}
     A_howVre:{a:1,t:"Your VR&amp;E counselor sets it. The planner shows it.",sub:"VR&amp;E pays a monthly allowance by your training time and dependents, or the Post-9/11 rate if you choose it.",
       steps:[["Ask your counselor which rate you’re on","VA says “In most cases, the GI Bill rate is higher.” Choosing it is official, through the counselor."],
              ["Then the planner, with that rate picked","It shows the allowance for each stretch of your term."],
-             ["The certifying office gives your full-time standard",""]],
+             ["ODU’s certifying officials enter your enrollment “based on ODU guidelines for full-time status”",'<a class="cite" href="https://www.odu.edu/military-benefits/va-certifying-official">ODU</a>']],
       who:["vrc","sco"],tools:["planner"],
       why:"VA: “You'll need to officially choose the GI Bill subsistence rate”; it needs “at least 1 day of entitlement remaining under the Post-9/11 GI Bill” ("+SRC.vreElig+")."},
     A_howPlanner:{a:1,t:"Use the Semester Pay Planner",sub:"It asks one thing at a time, then shows the monthly rate for each stretch of your term with the rule behind it.",
       steps:[["Have your term and classes handy","Credits, and whether each class is in person or online."],
              ["Post-9/11: two things decide housing","More than half time, and at least one in-person course for the campus rate (ODU says it must run the whole term for the full rate). None while you serve on active duty, or for a spouse on transferred benefits while the Veteran serves."],
-             ["Confirm with the certifying office","They certify what counts as full time for you."]],
+             ["Confirm with the benefits office","ODU’s guidelines set full time; its certifying officials enter your enrollment by them."]],
       who:["sco"],tools:["planner"],
-      why:"VA: housing needs a rate of pursuit “more than 50%”; an all-online term pays “50% of the national average” ("+SRC.rates+"; "+SRC.online+"). ODU: “at least one on-campus class must run the entire term” for the full MHA ("+SRC.oduMha+"). Full time at ODU and the rest: "+SRC.desk+" line 5."},
-    A_howOther:{a:1,t:"Your rate is set by your training time",sub:"Chapters 30, 1606 and 35 pay a monthly rate by band: full, three-quarter or half time.",
-      steps:[["Ask the certifying office which band they certify","That is the school’s answer, not a guess from your credits."],
+      why:"VA: housing needs a rate of pursuit “more than 50%”; an all-online term pays “50% of the national average” ("+SRC.rates+"; "+SRC.online+"). ODU: “at least one on-campus class must run the entire term” for the full MHA ("+SRC.oduMha+"). Full time at ODU: "+SRC.ugCat+"; "+SRC.gradCat+"."},
+    A_howOther:{a:1,t:"Your rate is set by your training time",sub:"Chapters 30, 1606 and 35 pay a monthly rate by training time: full, three-quarter, half, and lower rates below half time.",
+      steps:[["Ask the benefits office which band you’re certified at","That is the school’s answer, not a guess from your credits."],
              ["Look up that band’s rate","Which Benefit Am I On lists the rates with their dates."]],
       who:["sco"],tools:["benefit"],
-      why:"Rates by training-time band; below half time the chapters differ ("+SRC.desk+" lines 5 and 7)."},
+      why:"Training-time bands: "+SRC.bands+". Rates, including below half time: "+SRC.mgibad+"; "+SRC.mgibsr+"; "+SRC.dea+"."},
 
     // ---------- registered
     Q_regBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_regVre":(b.v==="unsure"?"A_which":"Q_regNew")}; })},
     A_regVre:{a:1,t:"Nothing for you to send",sub:"Chapter 31 students don’t file the Veterans Clearance Form. Your counselor sends the school an authorization.",
-      steps:[["Ask the certifying office if it arrived","If it hasn’t, contact your counselor."]],
+      steps:[["Ask the benefits office if it arrived","If it hasn’t, contact your counselor."]],
       who:["sco","vrc"],tools:[],
       why:"ODU: “Chapter 31 students DO NOT need to complete the Veterans Clearance Form. Chapter 31 students will coordinate with their assigned VA Educational Counselor” ("+SRC.faqs+")."},
     Q_regNew:{q:"Is this your first term at ODU, or did something change?",sub:"A change means your major, your benefit, active duty or veteran status, a break in enrollment, or a term you asked not to be certified.",
@@ -497,7 +525,7 @@ ul.plain li+li{margin-top:4px}
              ["Submit the Veterans Clearance Form with your COE","At least 30 days before the semester starts, if you can."],
              ["Allow 30 to 45 business days","That is ODU’s window for a first certification."]],
       who:["sco"],tools:["checklist"],
-      why:"Who files and when: "+SRC.faqs+"; "+SRC.checklist+". DEA (Chapter 35) students: ODU’s pages disagree on whether the form is needed, so ask the certifying office ("+SRC.desk+" line 3)."},
+      why:"Who files and when: "+SRC.faqs+"; "+SRC.checklist+". DEA (Chapter 35) students: ODU’s pages disagree on whether the form is needed, so ask the benefits office."},
     A_regCont:{a:1,t:"Usually automatic. Three groups file every term.",sub:"If nothing changed and you were certified last semester, ODU recertifies you.",
       steps:[["Nothing changed? No new form","You should get a confirmation email when you’re certified."],
              ["Active duty, MEM Ashore, or a certificate program?","Then a clearance form every semester, after you register."]],
@@ -507,66 +535,66 @@ ul.plain li+li{margin-top:4px}
     // ---------- drop
     Q_dropBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_dropVre":(b.v==="unsure"?"A_which":"Q_dropStart")}; })},
     A_dropVre:{a:1,t:"Talk to your counselor before you drop",sub:"Changes to a VR&amp;E plan go through your counselor.",
-      steps:[["Contact your VR&amp;E counselor first",""],["Tell the certifying office the same day you drop","So the certification changes before VA pays on the old number."]],
-      who:["vrc","sco"],tools:[],why:"Chapter 31 changes are the counselor’s ("+SRC.desk+" line 8)."},
+      steps:[["Contact your VR&amp;E counselor first",""],["Tell the benefits office the same day you drop","So the certification changes before VA pays on the old number."]],
+      who:["vrc","sco"],tools:[],why:"ODU: “Chapter 31 students will coordinate with their assigned VA Educational Counselor” ("+SRC.faqs+")."},
     Q_dropStart:{q:"Has the class started yet?",
       o:[{v:"no",t:"Not yet",n:"A_dropNot"},{v:"yes",t:"Yes, it has started",n:"Q_dropWindow"}]},
-    A_dropNot:{a:1,t:"Tell the certifying office the same day",sub:"A class dropped before its first day is treated as never attended.",
-      steps:[["Drop it, then tell the certifying office that day","If it was already certified, they fix the certification."],
+    A_dropNot:{a:1,t:"Tell the benefits office the same day",sub:"A class dropped before its first day is treated as never attended.",
+      steps:[["Drop it, then tell the benefits office that day","If it was already certified, the certifying officials fix it."],
              ["Ask whether any money was already paid on it","Books or housing paid on that class can become a debt."]],
       who:["sco"],tools:[],
-      why:"VA lists “Student withdrew on or before the first day of term” among school-debt causes ("+SRC.debt+"); full row: "+SRC.desk+" line 8."},
+      why:"VA lists “Student withdrew on or before the first day of term” among school-debt causes ("+SRC.debt+")."},
     Q_dropWindow:{q:"Is it still inside the add/drop period?",sub:"Fall 2026 full term: by Sep 2, 2026. Spring 2027 full term: by Jan 20, 2027. Eight-week sessions have their own dates.",
       o:[{v:"yes",t:"Yes, still inside add/drop",n:"A_dropInside"},{v:"no",t:"No, it’s past add/drop",n:"A_dropAfter"},{v:"unsure",t:"Not sure",n:"A_dropAfter"}]},
-    A_dropInside:{a:1,t:"Drop it, and tell the certifying office that day",sub:"Your pay is reduced from a date VA sets. A debt is possible: on Post-9/11, housing already paid; on Montgomery or DEA, money VA paid you.",
-      steps:[["Tell the certifying office the day you drop","Before VA pays on the old number."],
+    A_dropInside:{a:1,t:"Drop it, and tell the benefits office that day",sub:"Your pay is reduced from a date VA sets. A debt is possible: on Post-9/11, housing already paid; on Montgomery or DEA, money VA paid you.",
+      steps:[["Tell the benefits office the day you drop","Before VA pays on the old number."],
              ["Don’t plan money on it yet","Wait until the office tells you the new credits and the date."]],
       who:["sco"],tools:["planner"],
-      why:"VA: “A drop that occurs after the 1st day of the term doesn't create any books and supplies debt, but there may be housing debt” (VA office hours, August 2021, quoted at "+SRC.desk+" line 8). Montgomery and DEA: “you may need to pay us back the benefits we've paid directly to you” ("+SRC.debtWd+")."},
-    A_dropAfter:{a:1,t:"Stop. Talk to the certifying office before you drop.",sub:"Your first drop ever: up to 6 credits are excused once, and you keep benefits up to the day you withdrew. Past that, VA can take back benefits to the first day of the term unless it accepts your reasons.",
-      steps:[["Contact the certifying office first","Before you drop, not after."],
+      why:"VA: “A drop that occurs after the 1st day of the term doesn't create any books and supplies debt, but there may be housing debt” ("+SRC.oh2108+"). Montgomery and DEA: “you may need to pay us back the benefits we've paid directly to you” ("+SRC.debtWd+")."},
+    A_dropAfter:{a:1,t:"Stop. Talk to the benefits office before you drop.",sub:"Your first drop ever: up to 6 credits are excused once, and you keep benefits up to the day you withdrew. Past that, VA can take back benefits to the first day of the term unless it accepts your reasons.",
+      steps:[["Contact the benefits office first","Before you drop, not after."],
              ["Not your first drop, or more than 6 credits? Give your reasons in writing","That is how you ask VA for “mitigating circumstances”."],
              ["Know the deadline","Last day to withdraw: Nov 13, 2026 (Fall) · Apr 9, 2027 (Spring), full term."]],
       who:["sco"],tools:["calendar"],
-      why:"VA: the easiest way to submit mitigating circumstances “is to tell your School Certifying Official (SCO)”; VA: “The 6-credit-hour exclusion is a 1-time exception that VA grants the first time you withdraw from a class or from your school. This exclusion lets you drop up to 6 credit hours without needing to show mitigating circumstances. You can keep the benefits you received up to the day you withdrew”; otherwise “you'll owe us the full amount we paid starting from the first day of the term” ("+SRC.debtWd+"). Dates: "+SRC.calendar+". Full row: "+SRC.desk+" line 8."},
+      why:"VA: the easiest way to submit mitigating circumstances “is to tell your School Certifying Official (SCO)”; VA: “The 6-credit-hour exclusion is a 1-time exception that VA grants the first time you withdraw from a class or from your school. This exclusion lets you drop up to 6 credit hours without needing to show mitigating circumstances. You can keep the benefits you received up to the day you withdrew”; otherwise “you'll owe us the full amount we paid starting from the first day of the term” ("+SRC.debtWd+"). Dates: "+SRC.calendar+"."},
 
     // ---------- in person
     Q_remedial:{q:"Is it a remedial or developmental class?",sub:"A below-college-level class the school requires before the degree-level one.",
       o:[{v:"yes",t:"Yes",n:"A_ipRemedial"},{v:"no",t:"No",n:"Q_ipCampus"},{v:"unsure",t:"Not sure",n:"A_ipAsk"}]},
-    A_ipRemedial:{a:1,t:"Ask the certifying office",sub:"The hybrid rule doesn’t apply to remedial classes. Whether it can be certified is their call.",
-      steps:[["Write down the course number","Send it to the certifying office with your question."]],
-      who:["sco"],tools:[],why:"VA: hybrid changes “do not apply to Remedial/Deficiency courses” ("+SRC.hybrid+"; "+SRC.desk+" line 6)."},
+    A_ipRemedial:{a:1,t:"Ask the benefits office",sub:"The hybrid rule doesn’t apply to remedial classes. Whether it can be certified is the certifying officials’ call.",
+      steps:[["Write down the course number","Send it to the benefits office with your question."]],
+      who:["sco"],tools:[],why:"VA: hybrid changes “do not apply to Remedial/Deficiency courses” ("+SRC.hybrid+"; "+SRC.remedialReg+")."},
     Q_ipCampus:{q:"Does the class require you on campus at any point during the term?",sub:"Class meetings, an in-person midterm or final, or an exam proctored on campus. A meeting before the term starts doesn’t count.",
       o:[{v:"yes",t:"Yes",n:"A_ipYes"},{v:"no",t:"No, never",n:"A_ipNo"},{v:"unsure",t:"Not sure",n:"A_ipAsk"}]},
     A_ipYes:{a:1,t:"It counts as in person",sub:"VA treats a class with any required on-campus part as in residence.",
-      steps:[["The certifying office certifies it","If anything about the class is unusual, confirm with them."]],
+      steps:[["ODU’s certifying officials certify it","If anything about the class is unusual, confirm through the benefits office."]],
       who:["sco"],tools:["planner"],why:"VA: “SCOs will certify all courses which combine Classroom Instruction and Distance Learning (Hybrid) as In-Residence training” ("+SRC.hybrid+")."},
     A_ipNo:{a:1,t:"It counts as online",sub:"Watching live from home is online. Post-9/11 only: an online class beside an in-person one that runs the whole term changes nothing, but an all-online term pays the lower online housing rate.",
       steps:[["Want at least one in-person class?","For Post-9/11, VA pays the campus housing rate with at least one in-person course; ODU says one must run the whole term for the full rate."],
              ["Check the money in the planner",""]],
       who:["sco"],tools:["planner"],why:"VA: all online courses pay housing “based on 50% of the national average” ("+SRC.online+"). Other chapters pay by training time and have no online rate."},
-    A_ipAsk:{a:1,t:"Write it down and ask the certifying office",sub:"How a class is certified is their decision, not yours or the desk’s.",
+    A_ipAsk:{a:1,t:"Write it down and ask the benefits office",sub:"How a class is certified is the certifying officials’ decision, not yours or the desk’s.",
       steps:[["Send the course number and how it meets",""]],
-      who:["sco"],tools:[],why:SRC.desk+" line 6."},
+      who:["sco"],tools:[],why:"VA: “SCOs will certify all courses which combine Classroom Instruction and Distance Learning (Hybrid) as In-Residence training” ("+SRC.hybrid+")."},
 
     // ---------- left
     Q_leftBen:{q:"Which benefit are you using?",o:BEN.map(function(b){ return {v:b.v,t:b.t,s:b.s,n:b.v==="vre"?"A_leftVre":(b.v==="unsure"?"A_which":"A_leftGi")}; })},
     A_leftGi:{a:1,t:"Check it yourself on va.gov",sub:"If VA awarded you benefits, the remaining months and days are online. Sign in on your own device.",
       steps:[["Open VA’s remaining-benefits page","It works for the GI Bill, DEA, and transferred Post-9/11."],
-             ["Won’t show, or the number looks wrong?","The certifying office can read it in VA’s system; VA settles a dispute."]],
+             ["Won’t show, or the number looks wrong?","The certifying officials can read it in VA’s system; VA settles a dispute."]],
       who:["sco","va"],tools:["left"],why:"VA: “If we awarded you VA education benefits, you can check online to find out how much of your benefits you've used and how much you have remaining” ("+SRC.remaining+")."},
     A_leftVre:{a:1,t:"Ask your VR&amp;E counselor",sub:"VR&amp;E months aren’t on VA’s online check. Your counselor has them.",
-      steps:[["Contact your counselor",""]],who:["vrc"],tools:[],why:SRC.desk+" line 10."},
+      steps:[["Contact your counselor",""]],who:["vrc"],tools:[],why:"VA’s online check covers GI Bill benefits ("+SRC.remaining+"). ODU: “Chapter 31 students will coordinate with their assigned VA Educational Counselor” ("+SRC.faqs+")."},
 
     // ---------- switch
     Q_switchTerm:{q:"Is your term already under way?",o:[{v:"yes",t:"Yes",n:"A_switchMid"},{v:"no",t:"No, I’m between terms",n:"A_switchBetween"}]},
     A_switchMid:{a:1,t:"Not in the middle of a term",sub:"A switch takes effect at the start of your next term.",
-      steps:[["Into VR&amp;E: start with a VR&amp;E counselor",""],["Between GI Bill chapters: ask the certifying office","They know when your next enrollment period starts."]],
-      who:["vrc","sco"],tools:["change"],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+"); full row: "+SRC.desk+" line 9."},
+      steps:[["Into VR&amp;E: start with a VR&amp;E counselor",""],["Between GI Bill chapters: ask the benefits office","They know when your next enrollment period starts."]],
+      who:["vrc","sco"],tools:["change"],why:"VA: “A change in the election of VA benefits in the middle of a semester or term is not allowed” ("+SRC.vreHb+")."},
     A_switchBetween:{a:1,t:"Talk it through before you switch",sub:"Using VR&amp;E doesn’t use up your GI Bill. Most GI Bill benefits together cap at 48 months.",
       steps:[["For VR&amp;E, talk to a VR&amp;E counselor","They explain your own months."],
              ["Have both Montgomery and Post-9/11?","You may get both (Rudisill). VA reviews files itself; don’t assume an old choice is final."],
-             ["Tell the certifying office","Certification changes with the benefit."]],
+             ["Tell the benefits office","Certification changes with the benefit."]],
       who:["vrc","sco"],tools:["rudisill"],why:"VA: “If you use VR&amp;E benefits, we won't deduct entitlement from your other VA education benefits” ("+SRC.vreElig+"); 48 months, not counting VR&amp;E ("+SRC.elig+"); "+SRC.rudisill+"."},
 
     // ---------- VR&E eligibility
@@ -583,7 +611,7 @@ ul.plain li+li{margin-top:4px}
       steps:[["Already have a VA disability rating: VA Form 28-1900","A VR&amp;E counselor decides entitlement."],
              ["No rating yet: VA Form 28-0588","If you’re in the PEB process, in IDES, or expecting an other than dishonorable discharge with a VA memorandum rating of 20% or more."],
              ["Unsure which fits? Ask a VR&amp;E counselor","Don’t assume either way. The counselor decides."]],
-      who:["vrc","vso"],tools:["vreApply"],why:"VA’s active-duty routes and forms: "+SRC.vreApply+"; "+SRC.vreElig+". Full row: "+SRC.desk+" line 2."},
+      who:["vrc","vso"],tools:["vreApply"],why:"VA’s active-duty routes and forms: "+SRC.vreApply+"; "+SRC.vreElig+"."},
 
     // ---------- beyond school
     A_claim:{a:1,t:"Get a free accredited representative",eyebrow:"Disability claims and ratings",sub:"Claims, ratings and appeals aren’t the school’s lane. An accredited VSO helps for free.",
@@ -606,11 +634,7 @@ ul.plain li+li{margin-top:4px}
     A_job:{a:1,t:"Two places to start",eyebrow:"Careers",sub:"With a disability rating, VR&amp;E can pay for training toward a job. Everyone can use VA’s employment programs.",
       steps:[["Rated 10% or more? Look at VR&amp;E","See “Do I qualify for VR&amp;E?” in this kit."],["Everyone: VA careers and employment",""]],
       who:[],tools:[{t:"VA careers and employment",h:"https://www.va.gov/careers-employment/",p:1},{t:"VR&amp;E (Chapter 31)",h:"https://www.va.gov/careers-employment/vocational-rehabilitation/"}],
-      why:cite("https://www.va.gov/careers-employment/","va.gov careers and employment")+"."},
-    A_desk:{a:1,t:"Use the Front-Desk Map",eyebrow:"For the office",sub:"Fourteen situations a student brings up: a check or two, then who to hand it to. Say the line number out loud when you hand off.",
-      steps:[["Find the situation, answer its checks, follow the branch",""],
-             ["The one rule: you may assist. You never certify to VA.","Certification is the designated School Certifying Official’s act alone."]],
-      who:["sco"],tools:["desk"],why:"VA: work-study students “may assist with the certification process; however… they cannot certify information to VA” ("+cite("https://www.benefits.va.gov/GIBILL/resources/education_resources/school_certifying_officials/SCO_Training_FAQS.asp","VA SCO Training FAQs, updated 2026-09-23")+")."}
+      why:cite("https://www.va.gov/careers-employment/","va.gov careers and employment")+"."}
   };
 
   // ---- state: the topic, then each answer in order. Back pops one; a rail chip jumps to that question.
@@ -635,7 +659,7 @@ ul.plain li+li{margin-top:4px}
     $("aWho").hidden=!n.who.length;
     $("aWho").innerHTML='<h3>'+'Who to contact'+'</h3><ul>'+n.who.map(function(k){ return '<li><span class="r">'+C[k].r+'</span><span class="c">'+C[k].c+'</span></li>'; }).join("")+'</ul>';
     $("aTools").innerHTML=n.tools.map(tool).join(""); $("aTools").hidden=!n.tools.length;
-    $("aWhy").innerHTML='<p>'+n.why+'</p><p>Not a VA decision. The certifying office’s certification and VA’s award govern your case.</p>';
+    $("aWhy").innerHTML='<p>'+n.why+'</p><p>Not a VA decision. ODU’s certifying officials’ certification and VA’s award govern your case.</p>';
     $("aFold").open=false;
   }
   function chips(){
