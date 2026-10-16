@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" data-view="vet">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Benefits office</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="For ODU benefits staff: who does what, in ODU’s words, how certification moves, what to collect, and who to contact.">
+<script>
+/* Theme bootstrap, before anything paints: light unless this browser saved dark. data-theme is always set explicitly, so the device never decides. */
+(function(){ var t="light"; try{ if(localStorage.getItem("bw07.theme")==="dark") t="dark"; }catch(e){} document.documentElement.setAttribute("data-theme",t); document.documentElement.style.colorScheme=t; })();
+</script>
+<style>
+/* ── Kit site shell: U.S. Web Design System (USWDS) 3 default theme, read 2026-10-15 at designsystem.digital.gov/design-tokens.
+   Byte-identical on every kit page except the planner, which keeps its own style until its rev 44 lands. Gate A checks both.
+   Type: Public Sans first (the USWDS face, used when installed; no font is downloaded, so nothing leaves the browser), then the
+   system face. Sizes: USWDS theme sizes only (3xs 13 · 2xs 14 · md 17 · lg 22 · xl 32 · 2xl 40). Spacing: USWDS units (8px).
+   Radius: 2 · 4 · 8. Color: USWDS theme and state tokens. Dark mode is this kit's own mapping (USWDS ships none). ── */
+:root{
+  --font-body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-display:var(--font-body);
+  --font-mono:ui-monospace,"Roboto Mono",Consolas,monospace;
+  --step--2:0.8125rem;--step--1:0.875rem;--step-0:1.0625rem;--step-1:1.375rem;--step-2:1.375rem;--step-3:2rem;--step-4:2.5rem;
+  --leading-body:1.5;--leading-heading:1.2;--leading-display:1.2;
+  --tracking-display:0;--tracking-heading:0;--tracking-caps:0.06em;
+  --weight-body:400;--weight-strong:600;--weight-display:700;--measure:68ch;
+  --space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-5:1.5rem;--space-6:2rem;--space-7:3rem;--space-8:4rem;--space-9:6rem;
+  --gutter:1rem;
+  --radius-sm:2px;--radius:4px;--radius-lg:8px;--radius-pill:999px;
+  --paper:#ffffff;--surface:#ffffff;--surface-sunk:#f0f0f0;
+  --ink:#1b1b1b;--ink-2:#3d4551;--ink-3:#565c65;
+  --line:#dfe1e2;--line-strong:#a9aeb1;
+  --primary:#005ea2;--on-primary:#ffffff;--accent:#005ea2;--on-accent:#ffffff;
+  --accent-soft:#d9e8f6;--accent-line:#73b3e7;--link-hover:#1a4480;
+  --danger:#b50909;--danger-soft:#f4e3db;--warn:#936f38;--warn-soft:#faf3d1;
+  --tl-pay:#005ea2;--tl-none:#a9aeb1;--tl-unk:#e5a000;
+  --staff-bar:#162e51;--on-staff:#ffffff;--staff-2:#d9e8f6;
+  --alert-bg:#f4e3db;--alert-edge:#d83933;
+  --focus:#2491ff;--focus-ring:0 0 0 4px #2491ff;
+  --shadow-1:0 1px 4px rgba(0,0,0,0.1);--shadow-2:0 4px 8px rgba(0,0,0,0.1);
+  color-scheme:light;
+  --dur-press:160ms;--dur-hover:180ms;--dur-tip:150ms;--dur-menu:200ms;--dur-enter:300ms;--dur-exit:200ms;--dur-page:400ms;--stagger:60ms;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);--ease-in-out:cubic-bezier(0.77,0,0.175,1);--ease-in:cubic-bezier(0.3,0,0.8,0.15);--ease-hover:ease;
+  --rise:24px;--rise-sm:8px;--press-scale:0.97;
+}
+@media (min-width:40em){ :root{ --step-3:2.5rem;--gutter:2rem; } }
+[data-theme="dark"]{
+  --paper:#111418;--surface:#1a1f26;--surface-sunk:#0d1014;
+  --ink:#f0f0f0;--ink-2:#dfe1e2;--ink-3:#a9aeb1;
+  --line:#2c333c;--line-strong:#565c65;
+  --primary:#73b3e7;--on-primary:#162e51;--accent:#73b3e7;--on-accent:#162e51;
+  --accent-soft:#162e51;--accent-line:#2378c3;--link-hover:#d9e8f6;
+  --danger:#f39268;--danger-soft:#3a1714;--warn:#ffbe2e;--warn-soft:#332a10;
+  --tl-pay:#73b3e7;--tl-none:#71767a;--tl-unk:#ffbe2e;
+  --staff-bar:#0b1626;--on-staff:#f0f0f0;--staff-2:#d9e8f6;
+  --alert-bg:#3a1714;--alert-edge:#e8726d;
+  --shadow-1:0 1px 4px rgba(0,0,0,0.5);--shadow-2:0 4px 8px rgba(0,0,0,0.5);
+  color-scheme:dark;
+}
+@media (prefers-reduced-motion: reduce){ :root{ --rise:0px;--rise-sm:0px;--press-scale:1;--dur-enter:200ms;--dur-page:200ms;--stagger:0ms; } }
+
+/* base. Only transform and opacity ever animate. */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--paper)}
+body{min-height:100svh;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--step-0);font-weight:var(--weight-body);line-height:var(--leading-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,select,textarea{font:inherit;color:inherit}
+p,li{max-width:var(--measure);text-wrap:pretty}
+h1,h2,h3{font-family:var(--font-display);font-weight:var(--weight-display);line-height:var(--leading-heading);letter-spacing:var(--tracking-heading);text-wrap:balance}
+a{color:var(--accent);text-underline-offset:0.2em;text-decoration-thickness:1px}
+a:hover{color:var(--link-hover)}
+:focus-visible{outline:4px solid var(--focus);outline-offset:0}
+::selection{background:var(--accent);color:var(--on-accent)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:0 var(--space-5);border:2px solid var(--primary);border-radius:var(--radius);background:var(--surface);color:var(--primary);text-decoration:none;font-weight:var(--weight-display);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform var(--dur-press) var(--ease-out),opacity var(--dur-hover) var(--ease-hover)}
+.btn:hover{opacity:0.86}
+.btn:active{transform:scale(var(--press-scale))}
+.btn--primary{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* site shell: crisis site alert, extended header (title row, then the only nav), related links */
+.site-in{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto}
+.site-alert{background:var(--alert-bg);border-left:8px solid var(--alert-edge);color:var(--ink);font-size:var(--step--1);padding:var(--space-2) 0}
+.site-alert b{font-weight:var(--weight-display)}
+.site-alert a{color:inherit}
+.site-hdr{background:var(--surface);border-bottom:1px solid var(--line)}
+.site-row{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4) 0 var(--space-2)}
+.site-title{font-size:var(--step-1);font-weight:var(--weight-display);line-height:var(--leading-heading);color:inherit;text-decoration:none;margin-right:auto}
+.site-title small{display:block;font-size:var(--step--1);font-weight:var(--weight-body);color:var(--ink-3)}
+.site-tag{font-size:var(--step--2);font-weight:var(--weight-display);letter-spacing:var(--tracking-caps);text-transform:uppercase;padding:2px var(--space-2);border-radius:var(--radius-sm);background:var(--on-staff);color:var(--staff-bar)}
+.site-nav{display:flex;flex-wrap:wrap;column-gap:var(--space-5)}
+.site-nav a{display:block;min-height:44px;padding:var(--space-2) 0 var(--space-3);color:var(--ink);text-decoration:none;font-weight:var(--weight-strong);font-size:1rem;border-bottom:4px solid transparent}
+.site-nav a:hover{color:var(--accent)}
+.site-nav a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+.site-hdr.staff{background:var(--staff-bar);color:var(--on-staff);border-bottom:0}
+.staff .site-title small{color:var(--staff-2)}
+.staff .site-nav a{color:var(--staff-2)}
+.staff .site-nav a:hover,.staff .site-nav a[aria-current="page"]{color:var(--on-staff);border-bottom-color:var(--on-staff)}
+.related{margin-top:var(--space-7);border-top:4px solid var(--primary);padding-top:var(--space-4)}
+.related h2{font-size:1rem}
+.related ul{list-style:none;padding:0;margin-top:var(--space-2);display:grid;gap:var(--space-3)}
+.related a{font-weight:var(--weight-strong)}
+.related span{display:block;font-size:var(--step--1);color:var(--ink-3)}
+@media print{ .site-hdr{background:none!important;color:#000!important;border-bottom:1px solid #999} .site-nav,.related{display:none!important} .site-alert{background:none;border:1px solid #999;border-left-width:8px} }
+/* ── end kit site shell ── */
+
+/* ── page ── */
+.app{width:min(100% - 2 * var(--gutter),46rem);margin-inline:auto;padding:var(--space-5) 0 var(--space-8)}
+.top h1{font-size:var(--step-3);margin-top:var(--space-2)}
+.eyebrow{font-size:var(--step--1);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--ink-3);font-weight:var(--weight-strong)}
+.lede{color:var(--ink-2);margin-top:var(--space-3)}
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);cursor:pointer;font-size:var(--step--1);font-weight:var(--weight-strong);flex:0 0 auto;transition:transform var(--dur-press) var(--ease-out)}
+.iconbtn:active{transform:scale(var(--press-scale))}
+.iconbtn svg{width:18px;height:18px}
+.cite{color:var(--accent);text-decoration-color:var(--accent-line);overflow-wrap:anywhere}
+b,strong{font-weight:var(--weight-strong)}
+.sec{margin-top:var(--space-7)}
+.sec>h2{font-size:var(--step-1);margin-bottom:var(--space-4)}
+.sec>p{color:var(--ink-2)}
+.sec>p+*{margin-top:var(--space-4)}
+/* USWDS summary box */
+.summary{background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:var(--radius);padding:var(--space-5);margin-top:var(--space-6)}
+.summary h2{font-size:var(--step-0)}
+.summary p{margin-top:var(--space-2)}
+/* USWDS process list: high-level sequential steps */
+.process{list-style:none;margin:0;padding:0 0 0 28px;counter-reset:p}
+.process li{counter-increment:p;position:relative;border-left:8px solid var(--line);padding:0 0 var(--space-5) var(--space-6)}
+.process li:last-child{border-left-color:transparent;padding-bottom:0}
+.process li::before{content:counter(p);position:absolute;left:-28px;top:-8px;width:48px;height:48px;border-radius:50%;border:4px solid var(--ink);background:var(--paper);display:grid;place-items:center;font-weight:var(--weight-display);font-size:var(--step-1)}
+.process b{display:block;font-size:var(--step-1);line-height:var(--leading-heading);font-weight:var(--weight-display)}
+.process p{color:var(--ink-2);margin-top:var(--space-1)}
+.checklist{padding-left:1.25em;display:grid;gap:var(--space-2)}
+/* contact cards */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:var(--space-4)}
+.contact>div{border:2px solid var(--line);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);display:grid;gap:var(--space-1);align-content:start}
+.contact h3{font-size:var(--step-0)}
+.contact p{font-size:var(--step--1);color:var(--ink-2)}
+.contact .val{font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.contact .src{font-size:var(--step--1);color:var(--ink-3)}
+.contact .pending{border-style:dashed}
+.badge{justify-self:start;font-size:var(--step--2);font-weight:var(--weight-display);padding:2px var(--space-2);border-radius:var(--radius-sm);background:var(--surface-sunk);color:var(--ink-2)}
+/* USWDS card group */
+.cards{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));gap:var(--space-4)}
+.cards li{max-width:none}
+.card{display:flex;flex-direction:column;gap:var(--space-1);height:100%;min-height:44px;padding:var(--space-4) var(--space-5);border:2px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);color:var(--ink);text-decoration:none}
+.card:hover{border-color:var(--accent);color:var(--ink)}
+.card b{color:var(--accent)}
+.card span{font-size:var(--step--1);color:var(--ink-3)}
+.card .n{display:inline-block;min-width:1.75em;font-variant-numeric:tabular-nums;color:var(--ink-3)}
+footer{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--line);font-size:var(--step--1);color:var(--ink-3);line-height:1.6}
+footer p+p{margin-top:var(--space-3)}
+footer .stamp{font-size:13px}
+.pubaddr .cite,footer .cite{overflow-wrap:anywhere}
+@media print{
+  html,body{background:#fff;color:#000}
+  .noprint{display:none!important}
+  .card,.contact>div{border-color:#999;break-inside:avoid}
+  a{color:#000}
+}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<div class="site-alert" role="region" aria-label="Veterans Crisis Line"><div class="site-in">A student in crisis, or worried about a Veteran? <b>Dial 988, then press 1</b>, or text 838255 — the Veterans Crisis Line, free and confidential, 24/7 (<a class="cite" href="https://www.veteranscrisisline.net/">veteranscrisisline.net</a>).</div></div>
+<header class="site-hdr staff">
+  <div class="site-in site-row">
+    <a class="site-title" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Veteran Benefits Kit<small>ODU benefits staff</small></a>
+    <span class="site-tag">Staff</span>
+    <button type="button" class="iconbtn noprint" id="theme" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="tlabel">Dark</span></button>
+  </div>
+  <nav class="site-in site-nav noprint" aria-label="Staff pages"><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/">Desk Map</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/staff/" aria-current="page">Benefits office</a><a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/staff/certifying/">Certifying officials</a></nav>
+</header>
+<div class="app" id="app">
+<div class="top">
+  <div class="eyebrow">Staff</div>
+  <h1>Benefits office</h1>
+</div>
+<p class="lede">Who does what at ODU, in ODU’s own words, how certification moves, and who to contact.</p>
+
+<main>
+<div class="summary"><h2>Who does what, in ODU’s words</h2><p>Military Benefits &amp; Certification Services is “here to help our military-affiliated students learn more about utilizing VA education benefits at ODU” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>). Its School Certifying Officials certify each student’s enrollment to VA (<a class="cite" href="https://www.odu.edu/military-benefits/va-certifying-official">ODU’s certifying official page</a>). The Military Connection Center is “an information and resource center for our on-campus military-affiliated students” (<a class="cite" href="https://www.odu.edu/military-connection/faqs">ODU FAQ</a>).</p></div>
+
+<section class="sec" aria-labelledby="h-move"><h2 id="h-move">How certification moves, per ODU’s FAQ</h2>
+<ol class="process">
+  <li><b>First time using Chapter 30, 33, 35 or 1606</b><p>ODU’s FAQ: students on Chapters 1606, 30, 33 or 35 “need to submit a Veteran Clearance Form with their Certificate of Eligibility from the VA attached to it.” First-time users: “you’ll need to complete your benefit’s application to activate them with the VA.” Then “the VA will mail you a Certificate of Eligibility (COE),” and the student submits “a virtual copy of it with your Veteran’s Clearance Form after you have successfully registered for courses to complete the certification process at ODU.” Chapter 31 is different: see the next step.</p></li>
+  <li><b>Chapter 31 (VR&amp;E), first time or not</b><p>ODU’s FAQ: “Chapter 31: Veteran Readiness and Employment students need to complete the VRE application process with the VA.” Then: “If approved, you will need to contact your VA assigned VR&amp;E counselor who will submit an e-authorization to ODU in lieu of the Veteran’s Clearance Form.” “Chapter 31 students DO NOT need to complete the Veterans Clearance Form,” and “Chapter 31 students will coordinate with their assigned VA Educational Counselor.”</p></li>
+  <li><b>Continuing students on Chapter 30, 33, 35 or 1606</b><p>No changes and certified last semester: “you DO NOT need to submit a Veterans Clearance Form. You will be certified automatically.” A new form is required “when there is a change in major, duty status (Active Duty/Veteran), selected Chapter benefit, a break in enrollment, or after a student has requested not to be certified for a term and would like to be re-initiate benefits.” Active duty, MEM Ashore and certificate students file one “EACH semester AFTER registering for ODU classes.”</p></li>
+  <li><b>Engineering Management Portable Media students</b><p>ODU’s certification page: “Engineering Management students in the Portable Media Program do not need to complete the Veterans Clearance Form” and “will coordinate with the Engineering Management department.” ODU’s FAQ does not mention this group.</p></li>
+  <li><b>Forms are processed in order</b><p>“Veterans Clearance Forms (VCF) are processed in the order they are received.”</p></li>
+  <li><b>ODU’s School Certifying Officials certify</b><p>They report the enrollment to VA.</p></li>
+  <li><b>The student gets confirmation emails</b><p>With a clearance form: “a confirmation email once you have submitted the form,” then “another confirmation email from the Military Benefits and Certification Services team” after certification. Certified automatically: “a confirmation email from the ODU’s VA Services.”</p></li>
+</ol></section>
+
+<section class="sec" aria-labelledby="h-collect"><h2 id="h-collect">What to collect before passing it on</h2>
+<p>The kit’s own advice for the desk, not an ODU rule.</p>
+<ul class="checklist">
+  <li>The student’s name, University Identification Number (UIN) and the term. Read the UIN back to the student; one wrong digit can point to another student’s record or to none.</li>
+  <li>The benefit, if they know it. If not, the Front-Desk Map’s line 1 finds it.</li>
+  <li>The Front-Desk Map line number, so “it’s a 4” means the same thing at every step.</li>
+  <li>For Chapter 31, whether the counselor’s e-authorization has reached ODU (<a href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/#line-11">Front-Desk Map line 11</a>).</li>
+</ul></section>
+
+<section class="sec" aria-labelledby="h-contacts"><h2 id="h-contacts">Contacts</h2>
+<div class="contact"><div><h3>Military Benefits &amp; Certification Services</h3><p>The benefits office. ODU: “here to help our military-affiliated students learn more about utilizing VA education benefits at ODU.” Its School Certifying Officials (SCOs) certify enrollment to VA.</p><a class="val" href="tel:+17576837153">757-683-7153</a><a class="val" href="mailto:military@odu.edu">military@odu.edu</a><span class="src">Phone and email as ODU lists them for the Military Benefits &amp; Certification Services team on <a class="cite" href="https://www.odu.edu/military">odu.edu/military</a>; who certifies: <a class="cite" href="https://www.odu.edu/military-benefits/va-certifying-official">odu.edu/military-benefits/va-certifying-official</a>. Read 2026-10-15; re-read by 2027-08-01.</span></div><div><h3>Military Connection Center</h3><p>ODU: “an information and resource center for our on-campus military-affiliated students.” In person Mon–Fri 8 a.m.–5 p.m.</p><a class="val" href="tel:+17576837113">757-683-7113</a><a class="val" href="mailto:militaryconnectioncenter@odu.edu">militaryconnectioncenter@odu.edu</a><span class="src">Read 2026-10-15 on <a class="cite" href="https://www.odu.edu/military-connection">odu.edu/military-connection</a>; re-read by 2027-08-01.</span></div><div><h3>VA Education Call Center</h3><p>Questions about VA education payments. Mon–Fri 8 a.m.–7 p.m. ET.</p><span class="val"><a href="tel:+18884424551">888-442-4551</a> (TTY 711)</span><span class="src">From the <a class="cite" href="https://www.va.gov/resources/gi-bill-and-other-va-education-benefit-payments-faqs/">va.gov payments FAQ</a>; re-read by 2027-08-01.</span></div></div></section>
+
+<section class="sec" aria-labelledby="h-tools"><h2 id="h-tools">Tools</h2>
+<ul class="cards">
+  <li><a class="card" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/"><b>Front-Desk Map</b><span>What the student said, the checks, and who gets it next</span></a></li>
+  <li><a class="card" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/"><b>The student pages</b><span>What students see: their next step and who to contact</span></a></li>
+  <li><a class="card" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/"><b>Semester Pay Planner</b><span>What VA would pay each month this term</span></a></li>
+  <li><a class="card" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/"><b>Which Benefit Am I On</b><span>Each benefit’s rates, with VA’s dates</span></a></li>
+  <li><a class="card" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/qr/"><b>QR cards and scan sheet</b><span>For the counter and the lounge</span></a></li>
+</ul></section>
+</main>
+
+<aside class="related noprint" aria-labelledby="relH"><h2 id="relH">Passing it on</h2>
+  <ul>
+    <li><a href="https://www.odu.edu/military-connection/faqs">ODU military FAQs</a><span>What students are told</span></li>
+    <li><a href="https://www.va.gov/contact-us/ask-va/">Ask VA, in writing</a><span>For questions only VA can answer</span></li>
+    <li><a href="https://www.va.gov/education/verify-school-enrollment/">Monthly verification, for students</a><span>va.gov</span></li>
+  </ul></aside>
+
+<footer>
+  <p><strong>Not an official VA or ODU document and not a VA decision.</strong> It shows how a question moves at ODU and where each rule lives. ODU’s certifying officials’ certification and VA’s award govern each case.</p>
+  <p>This page is written for ODU benefits staff, not for students.</p>
+    <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/staff/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/staff/</a></p>
+  <p class="stamp">BW-07 Benefits office · revision 8 · prepared 2026-10-16 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  // theme: light by default, a visible toggle, the choice saved in this browser only (the planner's key, so the kit agrees)
+  var b=document.getElementById("theme");
+  function sync(){ var dk=document.documentElement.getAttribute("data-theme")==="dark"; b.setAttribute("aria-pressed",dk?"true":"false"); b.querySelector(".tlabel").textContent=dk?"Light":"Dark"; b.setAttribute("aria-label",dk?"Light mode":"Dark mode"); }
+  b.addEventListener("click",function(){ var t=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme",t); document.documentElement.style.colorScheme=t; sync(); try{ localStorage.setItem("bw07.theme",t); }catch(e){} });
+  sync();
+})();
+</script>
+
+</body>
+</html>
