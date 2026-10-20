@@ -30,7 +30,10 @@ jobs:
             --index-files index.html
             --exclude-path .git
             '**/*.html'
-          fail: ${{ github.event_name != 'schedule' }}
+          fail: false
+      - name: List each dead link as an annotation
+        if: steps.lychee.outputs.exit_code != 0
+        run: grep -E '^\s*\* \[' lychee/out.md | head -50 | while IFS= read -r l; do echo "::error title=dead link::$l"; done
       - name: Open an issue when the weekly run finds a dead link
         if: github.event_name == 'schedule' && steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v5
@@ -38,3 +41,6 @@ jobs:
           title: "Dead link found by the weekly check"
           content-filepath: ./lychee/out.md
           labels: links
+      - name: Fail the run on a dead link (pull requests and pushes)
+        if: steps.lychee.outputs.exit_code != 0 && github.event_name != 'schedule'
+        run: exit 1
