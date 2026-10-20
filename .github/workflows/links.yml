@@ -1,0 +1,40 @@
+# Link check: every link on the published site, internal and external.
+# Runs on each pull request and push to main, and weekly, because the VA and ODU pages
+# the kit cites move without notice. Bot-blocking answers (403, 429) count as reachable.
+name: links
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 11 * * 1"   # Mondays 7:17 AM ET (11:17 UTC, EDT)
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --accept '200..=299,403,429'
+            --max-retries 3
+            --timeout 30
+            --remap 'https://ferrelldevin.github.io/veteran-resources/(.*) file://${{ github.workspace }}/$1'
+            --index-files index.html
+            --exclude-path .git
+            '**/*.html'
+          fail: ${{ github.event_name != 'schedule' }}
+      - name: Open an issue when the weekly run finds a dead link
+        if: github.event_name == 'schedule' && steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Dead link found by the weekly check"
+          content-filepath: ./lychee/out.md
+          labels: links
