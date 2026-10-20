@@ -2,16 +2,16 @@
 
 Organized, cited pages and links for veteran students and the people who help them. Every link here goes to the issuer — VA, the statute, or the school — or to a page built from those sources with the source beside each line. Nothing here is a VA decision.
 
-The site root is the campus office's hub: every page with a printout beside it. A veteran is handed a printed sheet, a QR code, or one page's address.
+The site root is the campus office's hub: every page in one place. A veteran finds the kit from the poster, its QR code, or one page's address.
 
 ## Education benefits
 
 Which VA education benefit you are on, what a semester pays, and what the school's certifying office does with each question.
 
-- [Veteran Benefits Kit · ODU](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/) — The front door to four pages: Semester Pay Planner, Which Benefit Am I On, Front-Desk Map, and the scan sheets. Every figure quoted from VA or ODU with the source beside it; each page passed an independent judge.
+- [Veteran Benefits Kit · ODU](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/) — Start here. Pick what is going on (an unpaid month, a class to drop, which benefit you have) and answer one or two questions: you get the next step and exactly who to contact. It leads to the Semester Pay Planner, Which Benefit Am I On and the Front-Desk Map.
 - [Semester Pay Planner](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/) — Sessions, classes, credits → the monthly housing or subsistence figure per stretch of the term.
-- [Which Benefit Am I On](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/) — Find what you have; the programs side by side; who to ask.
-- [Front-Desk Map](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/) — For the office: fourteen situations, one check, the branch, the hand-over, the source.
+- [Which Benefit Am I On](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/benefit/) — Answer a question or two: which benefit you have, what it pays this year with VA's dates, and who to ask.
+- [Front-Desk Map](https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/desk/) — For the office: pick what the student said, answer one check, and get the steps, who to hand it to, and when it is done.
 - [Chapter 31 training-time worksheet (case study)](https://github.com/ferrelldevin/va-chapter31-worksheet) — The kit's ancestor: turning certified credit hours into VA training time and what it pays, cited to 38 CFR — including the review that failed it. Repository.
 - [Post-9/11 GI Bill rates](https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/) — Housing, tiers, the more-than-50% rule, exclusions. Rate year 2026-08-01 → 2027-07-31.
 - [Education benefit rates — Chapters 30, 1606, 35, STEM](https://www.va.gov/education/benefit-rates/) — The other chapters' tables; the FY tables change 2026-10-01.
@@ -81,7 +81,7 @@ Not veteran-specific, but built for the same students: printable study sheets, o
 
 ## Printouts
 
-https://ferrelldevin.github.io/veteran-resources/print/ — every page as a PDF, plus the QR scan sheets.
+https://ferrelldevin.github.io/veteran-resources/print/ — the poster for students walking by.
 
 Built from a catalog and the source of record by scripts in a private workshop repository; every page that computes a figure passed an independent judge before it was published here. The ODU Veteran Benefits Kit was first published at https://ferrelldevin.github.io/vetkit/, which now redirects here.
 
