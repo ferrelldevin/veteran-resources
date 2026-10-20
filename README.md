@@ -2,7 +2,7 @@
 
 Organized, cited pages and links for veteran students and the people who help them. Every link here goes to the issuer — VA, the statute, or the school — or to a page built from those sources with the source beside each line. Nothing here is a VA decision.
 
-The site root is the campus office's hub: every page with a printout beside it. A veteran is handed a printed sheet, a QR code, or one page's address.
+The site root is the campus office's hub: every page in one place. A veteran finds the kit from the poster, its QR code, or one page's address.
 
 ## Education benefits
 
@@ -81,7 +81,7 @@ Not veteran-specific, but built for the same students: printable study sheets, o
 
 ## Printouts
 
-https://ferrelldevin.github.io/veteran-resources/print/ — every page as a PDF, plus the QR scan sheets.
+https://ferrelldevin.github.io/veteran-resources/print/ — the poster for students walking by.
 
 Built from a catalog and the source of record by scripts in a private workshop repository; every page that computes a figure passed an independent judge before it was published here. The ODU Veteran Benefits Kit was first published at https://ferrelldevin.github.io/vetkit/, which now redirects here.
 
