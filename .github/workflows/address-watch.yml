@@ -34,11 +34,17 @@ jobs:
           $KIT/benefit/|$KIT/benefit/
           https://ferrelldevin.github.io/veteran-resources/print/poster-students.pdf|https://ferrelldevin.github.io/veteran-resources/print/poster-students.pdf
           EOF
+          UA="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"
           fail=0; : > report.md
           while IFS='|' read -r from want; do
             from=$(echo "$from" | xargs); [ -z "$from" ] && continue
-            out=$(curl -sSL -o /dev/null --max-time 30 --retry 2 --retry-all-errors -w '%{http_code} %{url_effective}' "$from" 2>&1) || true
+            out=$(curl -sSL -o /dev/null --max-time 30 --retry 2 --retry-all-errors -A "$UA" -w '%{http_code} %{url_effective}' "$from" 2>&1) || true
             code=${out%% *}; end=${out#* }
+            # devinferrell.com sits behind Cloudflare's bot screen, which answers a cloud runner with 403 before any redirect.
+            # That says nothing about what a student's phone gets, so it is reported as unverified, never as a pass.
+            if [ "$code" = "403" ] && [ "$end" = "$from" ] && [ "${from#https://devinferrell.com/}" != "$from" ]; then
+              echo "::warning title=unverified::$from answered this runner with 403 (bot screen); check it from a phone"; echo "skip $from (403 from the bot screen)"; continue
+            fi
             # GitHub Pages serves a folder at its trailing-slash URL; a client-side redirect page (old /vetkit/) ends on 200 itself
             if [ "$code" = "200" ] && { [ "$end" = "$want" ] || [ "$end" = "${want%/}" ] || { [ "$from" = "https://ferrelldevin.github.io/vetkit/" ] && curl -s --max-time 30 "$end" | grep -q "odu-benefits-kit"; }; }; then
               echo "ok   $from -> $end"
