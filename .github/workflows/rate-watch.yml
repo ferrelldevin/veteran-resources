@@ -13,6 +13,9 @@ on:
 permissions:
   contents: read
   issues: write
+concurrency:
+  group: rate-watch
+  cancel-in-progress: false
 jobs:
   watch:
     runs-on: ubuntu-latest
@@ -24,7 +27,7 @@ jobs:
         run: |
           UA="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"
           changed=0; : > report.md
-          while IFS=$'\t' read -r url want; do
+          while IFS=$'\t' read -r url want || [ -n "$url" ]; do
             case "$url" in ''|'#'*) continue;; esac
             html=$(curl -sSL --max-time 30 --retry 2 -A "$UA" -w '\nHTTPCODE=%{http_code}' "$url" || true)
             code=$(printf '%s' "$html" | sed -n 's/^HTTPCODE=//p' | tail -1)
@@ -47,7 +50,9 @@ jobs:
           # benefits.va.gov answers a missing page with HTTP 200 and a "404 - Page Not Found" page, so the title decides
           next=$(curl -sSL --max-time 30 -A "$UA" -w '\nHTTPCODE=%{http_code}' https://www.benefits.va.gov/vocrehab/vrerates28.asp || true)
           code=$(printf '%s' "$next" | sed -n 's/^HTTPCODE=//p' | tail -1)
-          if [ "$code" = "200" ] && ! grep -qi 'Page Not Found' <<<"$next"; then echo "NEW   vrerates28.asp is published"; changed=1
+          if [ "$code" != "200" ] && [ "$code" != "404" ]; then echo "?     vrerates28.asp unreadable (HTTP $code)"; changed=1
+            echo "- Could not check https://www.benefits.va.gov/vocrehab/vrerates28.asp (HTTP $code)." >> report.md
+          elif [ "$code" = "200" ] && ! grep -qi 'Page Not Found' <<<"$next"; then echo "NEW   vrerates28.asp is published"; changed=1
             echo "- VA published the FY2028 Chapter 31 table: https://www.benefits.va.gov/vocrehab/vrerates28.asp" >> report.md
           else echo "ok    vrerates28.asp not published ($code)"; fi
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
@@ -56,11 +61,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          n=$(gh issue list -R "$GITHUB_REPOSITORY" --label rate-watch --state open --json number --jq '.[0].number')
+          n=$(gh issue list -R "$GITHUB_REPOSITORY" --label rate-watch --state open --json number --jq '.[0].number // empty')
           body="$(printf 'A VA rate page the kit quotes changed (run %s):\n\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"; cat report.md)"
           if [ -n "$n" ]; then gh issue comment "$n" -R "$GITHUB_REPOSITORY" --body "$body"
           else gh label create rate-watch -R "$GITHUB_REPOSITORY" --color FBCA04 2>/dev/null || true
                gh issue create -R "$GITHUB_REPOSITORY" --title "A VA rate page the kit quotes changed" --label rate-watch --body "$body"; fi
-      - name: Fail a pull request run unless every page reads and matches
-        if: steps.run.outputs.changed == '1' && github.event_name == 'pull_request'
+      - name: Fail a pull request or manual run unless every page reads and matches
+        if: steps.run.outputs.changed == '1' && github.event_name != 'schedule'
         run: exit 1
