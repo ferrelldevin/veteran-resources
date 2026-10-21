@@ -28,7 +28,7 @@ jobs:
             case "$url" in ''|'#'*) continue;; esac
             html=$(curl -sSL --max-time 30 --retry 2 -A "$UA" "$url" || true)
             # va.gov: "Last updated: October 13, 2026"; benefits.va.gov: "Last updated August 27, 2026"
-            got=$(printf '%s' "$html" | sed 's/<[^>]*>/ /g' | tr -s ' \n' ' ' | grep -oE 'Last updated:? *[A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}' | head -1 | sed -E 's/Last updated:? *//')
+            got=$(printf '%s' "$html" | sed 's/<[^>]*>/ /g' | tr -s ' \n' ' ' | grep -oE 'Last updated:? *[A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}' | head -1 | sed -E 's/Last updated:? *//' || true)
             if [ -z "$got" ]; then
               echo "::warning title=unread::$url gave no last-updated date"; echo "?     $url (no date read)"
               echo "- Could not read a last-updated date from $url; check it by hand." >> report.md; changed=1; continue
