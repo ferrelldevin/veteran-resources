@@ -26,11 +26,13 @@ jobs:
           changed=0; : > report.md
           while IFS=$'\t' read -r url want; do
             case "$url" in ''|'#'*) continue;; esac
-            html=$(curl -sSL --max-time 30 --retry 2 -A "$UA" "$url" || true)
+            html=$(curl -sSL --max-time 30 --retry 2 -A "$UA" -w '\nHTTPCODE=%{http_code}' "$url" || true)
+            code=$(printf '%s' "$html" | sed -n 's/^HTTPCODE=//p' | tail -1)
+            title=$(printf '%s' "$html" | tr '\n' ' ' | grep -oiE '<title[^>]*>[^<]*' | head -1 | sed 's/<title[^>]*>//I' || true)
             # va.gov: "Last updated: October 13, 2026"; benefits.va.gov: "Last updated August 27, 2026"
             got=$(printf '%s' "$html" | sed 's/<[^>]*>/ /g' | tr -s ' \n' ' ' | grep -oE 'Last updated:? *[A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}' | head -1 | sed -E 's/Last updated:? *//' || true)
             if [ -z "$got" ]; then
-              echo "::warning title=unread::$url gave no last-updated date"; echo "?     $url (no date read)"
+              echo "::warning title=unread::$url gave no last-updated date (HTTP $code, title: $title)"; echo "?     $url (no date read; HTTP $code; $title)"
               echo "- Could not read a last-updated date from $url; check it by hand." >> report.md; changed=1; continue
             fi
             if [ -z "$want" ]; then echo "new   $url	$got (record this in rate-watch.tsv)"
@@ -38,8 +40,10 @@ jobs:
             else echo "MOVED $url	$want -> $got"; changed=1
               echo "- $url now says **Last updated $got** (the kit was built against $want). Re-read its figures before the kit quotes them again." >> report.md; fi
           done < .github/rate-watch.tsv
-          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 -A "$UA" https://www.benefits.va.gov/vocrehab/vrerates28.asp || true)
-          if [ "$code" = "200" ]; then echo "NEW   vrerates28.asp is published"; changed=1
+          # benefits.va.gov answers a missing page with HTTP 200 and a "404 - Page Not Found" page, so the title decides
+          next=$(curl -sSL --max-time 30 -A "$UA" -w '\nHTTPCODE=%{http_code}' https://www.benefits.va.gov/vocrehab/vrerates28.asp || true)
+          code=$(printf '%s' "$next" | sed -n 's/^HTTPCODE=//p' | tail -1)
+          if [ "$code" = "200" ] && ! printf '%s' "$next" | grep -qi 'Page Not Found'; then echo "NEW   vrerates28.asp is published"; changed=1
             echo "- VA published the FY2028 Chapter 31 table: https://www.benefits.va.gov/vocrehab/vrerates28.asp" >> report.md
           else echo "ok    vrerates28.asp not published ($code)"; fi
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
