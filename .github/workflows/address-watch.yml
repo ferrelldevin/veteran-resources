@@ -1,0 +1,75 @@
+# Address watch: every address a student can type or scan must land on the kit.
+# The poster prints vets.devinferrell.com; old QR codes point at /vetkit/; the personal site has /veterans.
+# Each one is followed to its end and must finish on the kit page it names with HTTP 200.
+# Runs every six hours and on demand. A failure opens one issue (or comments on the open one),
+# so a broken redirect is found before a student finds it.
+name: address-watch
+on:
+  schedule:
+    - cron: "41 */6 * * *"
+  workflow_dispatch:
+  pull_request:
+    paths: [".github/workflows/address-watch.yml"]
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: address-watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Follow every printed or published address
+        id: run
+        shell: bash
+        run: |
+          KIT=https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit
+          # address | where it must end
+          cat > addrs.txt <<EOF
+          https://vets.devinferrell.com/|$KIT/
+          https://vets.devinferrell.com/planner|$KIT/planner/
+          https://vets.devinferrell.com/benefit|$KIT/benefit/
+          https://devinferrell.com/veterans|$KIT/
+          https://ferrelldevin.github.io/vetkit/|$KIT/
+          $KIT/|$KIT/
+          $KIT/planner/|$KIT/planner/
+          $KIT/benefit/|$KIT/benefit/
+          https://ferrelldevin.github.io/veteran-resources/print/poster-students.pdf|https://ferrelldevin.github.io/veteran-resources/print/poster-students.pdf
+          EOF
+          UA="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"
+          fail=0; : > report.md
+          while IFS='|' read -r from want; do
+            from=$(echo "$from" | xargs); [ -z "$from" ] && continue
+            out=$(curl -sSL -o /dev/null -D hdrs.txt --max-time 30 --retry 2 --retry-all-errors -A "$UA" -w '%{http_code} %{url_effective}' "$from" 2>&1) || true
+            code=${out%% *}; end=${out#* }
+            # devinferrell.com sits behind Cloudflare's bot screen, which answers a cloud runner with 403 before any redirect.
+            # That says nothing about what a student's phone gets, so it is reported as unverified, never as a pass.
+            if [ "$code" = "403" ] && [ "$end" = "$from" ] && [ "${from#https://devinferrell.com/}" != "$from" ] && grep -qi '^cf-mitigated: *challenge' hdrs.txt; then
+              echo "::warning title=unverified::$from answered this runner with 403 (bot screen); check it from a phone"; echo "skip $from (403 from the bot screen)"; continue
+            fi
+            # GitHub Pages serves a folder at its trailing-slash URL; a client-side redirect page (old /vetkit/) ends on 200 itself
+            if [ "$code" = "200" ] && { [ "$end" = "$want" ] || [ "$end" = "${want%/}" ] || { [ "$from" = "https://ferrelldevin.github.io/vetkit/" ] && body=$(curl -sS --max-time 30 --retry 2 "$end") && grep -q "$want" <<<"$body"; }; }; then
+              echo "ok   $from -> $end"
+            else
+              echo "FAIL $from -> $code $end (want $want)"; fail=1
+              echo "- \`$from\` ended at \`$end\` with HTTP $code; it should end at \`$want\`." >> report.md
+            fi
+          done < addrs.txt
+          echo "fail=$fail" >> "$GITHUB_OUTPUT"
+      - name: Open or update the issue on a failure
+        if: steps.run.outputs.fail == '1' && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh issue list -R "$GITHUB_REPOSITORY" --label address-watch --state open --json number --jq '.[0].number // empty')
+          body="$(printf 'A student-facing address is broken (run %s):\n\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"; cat report.md)"
+          # one comment a day at most while the same break persists
+          last=$( [ -n "$n" ] && gh api "repos/$GITHUB_REPOSITORY/issues/$n/comments" --jq 'last | .created_at // empty' || true)
+          if [ -n "$n" ] && [ -n "$last" ] && [ $(( $(date +%s) - $(date -d "$last" +%s) )) -lt 72000 ]; then echo "issue #$n already commented within 20 hours"
+          elif [ -n "$n" ]; then gh issue comment "$n" -R "$GITHUB_REPOSITORY" --body "$body"
+          else gh label create address-watch -R "$GITHUB_REPOSITORY" --color B60205 2>/dev/null || true
+               gh issue create -R "$GITHUB_REPOSITORY" --title "A student-facing kit address is broken" --label address-watch --body "$body"; fi
+      - name: Fail the run on a broken address
+        if: steps.run.outputs.fail == '1'
+        run: exit 1
