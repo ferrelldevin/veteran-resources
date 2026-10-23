@@ -1,0 +1,71 @@
+# Rate watch: the kit quotes VA rate pages, and a correct page goes stale the day VA updates one.
+# Weekly, read each page's "Last updated" date and compare it with the date in .github/rate-watch.tsv.
+# A changed date, an unreadable page, or a new fiscal-year VR&E table (vrerates28.asp) opens one issue
+# labelled rate-watch. Known next changes: housing (BAH) about mid-December, Chapter 33 rates in
+# March 2027 for August 2027, the FY2028 Chapter 31 table in late September 2027.
+name: rate-watch
+on:
+  schedule:
+    - cron: "23 12 * * 3"   # Wednesdays 8:23 AM ET (12:23 UTC, EDT)
+  workflow_dispatch:
+  pull_request:
+    paths: [".github/workflows/rate-watch.yml", ".github/rate-watch.tsv"]
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: rate-watch
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read each page's last-updated date
+        id: run
+        shell: bash
+        run: |
+          UA="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"
+          changed=0; : > report.md
+          while IFS=$'\t' read -r url want || [ -n "$url" ]; do
+            case "$url" in ''|'#'*) continue;; esac
+            html=$(curl -sSL --max-time 30 --retry 2 -A "$UA" -w '\nHTTPCODE=%{http_code}' "$url" || true)
+            code=$(printf '%s' "$html" | sed -n 's/^HTTPCODE=//p' | tail -1)
+            title=$(printf '%s' "$html" | tr '\n' ' ' | grep -oiE '<title[^>]*>[^<]*' | head -1 | sed 's/<title[^>]*>//I' || true)
+            # benefits.va.gov: "Last updated August 27, 2026"
+            # va.gov carries the date in its page data ("lastUpdated":"2026-10-13T21:18:05+00:00") and draws the
+            # visible "Last updated" line in the browser, so the page data is read first, as YYYY-MM-DD
+            got=$(grep -oE '"lastUpdated":"[0-9]{4}-[0-9]{2}-[0-9]{2}' <<<"$html" | head -1 | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' || true)
+            [ -n "$got" ] || got=$(printf '%s' "$html" | sed 's/<[^>]*>/ /g; s/&nbsp;/ /g; s/&#160;/ /g' | tr -s ' \n' ' ' | grep -oE 'Last updated:? *[A-Z][a-z]+ [0-9]{1,2}, [0-9]{4}' | head -1 | sed -E 's/Last updated:? *//' || true)
+            if [ -z "$got" ]; then
+              echo "::warning title=unread::$url gave no last-updated date (HTTP $code, title: $title)"; echo "?     $url (no date read; HTTP $code; $title)"
+              grep -oiE '.{0,80}updated.{0,160}' <<<"$html" | head -3 | sed 's/^/      near "updated": /' || true
+              echo "- Could not read a last-updated date from $url; check it by hand." >> report.md; changed=1; continue
+            fi
+            if [ -z "$want" ]; then echo "new   $url	$got (record this in rate-watch.tsv)"
+            elif [ "$got" = "$want" ]; then echo "ok    $url	$got"
+            else echo "MOVED $url	$want -> $got"; changed=1
+              echo "- $url now says **Last updated $got** (the kit was built against $want). Re-read its figures before the kit quotes them again." >> report.md; fi
+          done < .github/rate-watch.tsv
+          # benefits.va.gov answers a missing page with HTTP 200 and a "404 - Page Not Found" page, so the title decides
+          next=$(curl -sSL --max-time 30 -A "$UA" -w '\nHTTPCODE=%{http_code}' https://www.benefits.va.gov/vocrehab/vrerates28.asp || true)
+          code=$(printf '%s' "$next" | sed -n 's/^HTTPCODE=//p' | tail -1)
+          if [ "$code" != "200" ] && [ "$code" != "404" ]; then echo "?     vrerates28.asp unreadable (HTTP $code)"; changed=1
+            echo "- Could not check https://www.benefits.va.gov/vocrehab/vrerates28.asp (HTTP $code)." >> report.md
+          elif [ "$code" = "200" ] && ! grep -qi 'Page Not Found' <<<"$next"; then echo "NEW   vrerates28.asp is published"; changed=1
+            echo "- VA published the FY2028 Chapter 31 table: https://www.benefits.va.gov/vocrehab/vrerates28.asp" >> report.md
+          else echo "ok    vrerates28.asp not published ($code)"; fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+      - name: Open or update the issue
+        if: steps.run.outputs.changed == '1' && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh issue list -R "$GITHUB_REPOSITORY" --label rate-watch --state open --json number --jq '.[0].number // empty')
+          body="$(printf 'A VA rate page the kit quotes changed (run %s):\n\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"; cat report.md)"
+          if [ -n "$n" ]; then gh issue comment "$n" -R "$GITHUB_REPOSITORY" --body "$body"
+          else gh label create rate-watch -R "$GITHUB_REPOSITORY" --color FBCA04 2>/dev/null || true
+               gh issue create -R "$GITHUB_REPOSITORY" --title "A VA rate page the kit quotes changed" --label rate-watch --body "$body"; fi
+      - name: Fail a pull request or manual run unless every page reads and matches
+        if: steps.run.outputs.changed == '1' && github.event_name != 'schedule'
+        run: exit 1
