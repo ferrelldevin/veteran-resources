@@ -299,6 +299,10 @@ details.cmore[open]>summary::after{content:"−"}
 .fig{display:block;font-size:var(--step-4);font-weight:var(--weight-display);letter-spacing:var(--tracking-display);line-height:1.05;font-variant-numeric:tabular-nums}
 .st-none .fig,.st-unknown .fig,.st-expired .fig{font-size:var(--step-3);color:var(--danger)}
 .st-none .fig{color:var(--ink-2)}
+.st-unknown.st-pending .fig{font-size:var(--step-2);color:var(--ink)}
+.st-pending .assume{margin-top:var(--space-3);border-color:var(--line-strong);background:var(--surface-sunk)}
+.pendnote{margin-top:var(--space-5);padding:var(--space-4);border-radius:var(--radius);background:var(--warn-soft);font-size:var(--step--1);color:var(--ink)}
+.pendnote p+p{margin-top:var(--space-2)}
 .figlab{display:block;margin-top:var(--space-2);color:var(--ink-2);font-size:var(--step--1);max-width:46ch}
 .why{margin-top:var(--space-3);font-size:var(--step--1);color:var(--ink-2)}
 .odu-chip{display:inline-flex;align-items:center;gap:6px;margin-top:var(--space-4);min-height:36px;padding:0 12px;border-radius:var(--radius-pill);border:1px solid var(--line);background:var(--surface-sunk);color:var(--ink-2);font-size:13px;font-weight:var(--weight-strong);cursor:pointer;transition:transform var(--dur-press) var(--ease-out)}
@@ -321,6 +325,9 @@ details.cmore[open]>summary::after{content:"−"}
 .asof{margin-top:var(--space-3)}
 .asof.expired{color:var(--danger)}
 #printSummary{display:none}
+#printSummary .ps-row{display:grid;grid-template-columns:9em minmax(0,1fr);gap:0 12px;padding:3px 0;border-bottom:1px solid var(--line)}
+#printSummary .ps-row b{font-weight:var(--weight-strong)}
+#printSummary .ps-foot{padding-top:6px;color:var(--ink-2)}
 .rules-sec{margin-top:var(--space-7)}
 details#rulesD{border-top:1px solid var(--line-strong)}
 details#rulesD>summary{font-size:var(--step-1);color:var(--ink);font-weight:var(--weight-display);min-height:56px}
@@ -375,11 +382,29 @@ footer .stamp{font-size:13px}
   .app{width:auto;padding:0}
   .noprint,.nav,.rail,.progress,#theme,.odu-chip,.result-actions,.step:not(#step-result),.todo .btn,.grip,.menu{display:none!important}
   #step-result{display:block!important}
-  #printSummary{display:block;white-space:pre-wrap;font-family:var(--font-mono);font-size:9pt;line-height:1.5;border:1px solid #999;padding:6pt;margin:6pt 0 10pt}
-  .stretch{box-shadow:none;border-color:#999;break-inside:avoid}
+  #printSummary{display:block;font-size:9.5pt;line-height:1.4;border:1px solid #999;border-radius:4pt;padding:4pt 8pt;margin:6pt 0 10pt}
+  #printSummary .ps-row{border-bottom-color:#ddd}
   details.fold>summary{display:none}
+  details.fold{border-top:0;margin-top:6pt}
   details.fold:not([open])>.fold-body{display:block}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .updated,#statesFold{display:none!important}
+  .lede{margin-top:4pt}
+  .stretch{box-shadow:none;border-color:#999;padding:10pt 12pt;break-inside:auto}
+  .st-when,.answer{break-after:avoid}
+  .answer,.assume,.facts li,.tiles,.odu-used,.parts>div,.pendnote,.tl-wrap,#todo li{break-inside:avoid}
+  .pendnote{background:none;border:1px solid #999}
+  .st-pending .assume{background:none}
+  .fig{font-size:20pt}
+  .st-none .fig,.st-unknown .fig,.st-expired .fig{font-size:16pt}
+  .st-unknown.st-pending .fig{font-size:14pt}
+  .stretches{display:block}
+  .stretch+.stretch{margin-top:10pt}
+  .tiles,.odu-used.dup{display:none}
+  .tl-seg,.tl-legend i{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
   details#rulesD:not([open])>*:not(summary){display:none}
+  #secC details:not([open]){display:none}
   a{color:inherit}
 }
 </style>
@@ -547,6 +572,7 @@ footer .stamp{font-size:13px}
   <p class="updated" id="updated" role="status" hidden></p>
   <ul class="bullets" id="bullets"></ul>
   <div class="tl-wrap" id="timeline"></div>
+  <div id="pendNote"></div>
   <div class="stretches" id="results"></div>
   <details class="fold" id="moreFold" hidden><summary>More about these figures</summary><div class="fold-body"><p class="note" id="resultNote"></p></div></details>
   <div class="flag warn" id="whatif" hidden></div>
@@ -595,7 +621,7 @@ footer .stamp{font-size:13px}
   <p><strong>Not an official VA document and not a VA determination.</strong> It applies published rules to what you type. ODU’s certifying officials’ certification and VA’s award govern; where this page and they disagree, they win. Chapter 31 students work with their VR&amp;E counselor. Nothing you enter is stored or sent anywhere.</p>
   <p>VA benefit and certification questions: ODU Military Benefits &amp; Certification Services, 757-683-7153, military@odu.edu. Campus support: ODU Military Connection Center, 757-683-7113, militaryconnectioncenter@odu.edu (both as ODU lists them at <a class="cite" href="https://www.odu.edu/military">odu.edu/military</a>). Payments and months left: VA Education Call Center, 888-442-4551 (TTY 711).</p>
   <p class="pubaddr">Public address of this page: <a class="cite" href="https://ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/">ferrelldevin.github.io/veteran-resources/education/odu-benefits-kit/planner/</a>.</p>
-<p class="stamp">BW-07 Semester Pay Planner · revision 49 · prepared 2026-10-22 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
+<p class="stamp">BW-07 Semester Pay Planner · revision 50 · prepared 2026-11-04 · Selection, arrangement and editorial content &copy; 2026 Devin Ferrell, produced with AI assistance. Use and share freely within a veterans or military benefits office; not for resale.</p>
 </footer>
 </div>
 
@@ -1504,7 +1530,7 @@ footer .stamp{font-size:13px}
     var chName={"33":"Post-9/11 GI Bill","31s":"VR&E, standard rate","31p":"VR&E, Post-9/11 rate"}[chapter]||"";
     $("resultSub").textContent=[S.term?TERMS[S.term].label:"",chName,levelRaw?(level==="grad"?"graduate":"undergraduate"):"",chapter==="33"&&S.tier?pct(tier)+" benefit level":""].filter(Boolean).join(" · ");
 
-    var box=$("results"); box.innerHTML=""; $("timeline").innerHTML=""; $("todo").innerHTML=""; $("bullets").innerHTML=""; $("moreFold").hidden=true; $("updated").hidden=true;
+    var box=$("results"); box.innerHTML=""; $("timeline").innerHTML=""; $("pendNote").innerHTML=""; $("todo").innerHTML=""; $("bullets").innerHTML=""; $("moreFold").hidden=true; $("updated").hidden=true;
     var note=$("resultNote"); note.textContent="";
     var block=function(t){ box.innerHTML='<div class="stblock" data-fig="BLOCKED">'+t+'</div>'; };
     if(chapter===""){ block('UNKNOWN — choose your benefit (Step 1). Nothing is assumed.'); return; }
@@ -1584,7 +1610,7 @@ footer .stamp{font-size:13px}
         } else {
           state=res.state; fig=(res.state==="expired"?'EXPIRED':(res.state==="none"?'$0':'UNKNOWN'));
           figlab=(res.state==="none"?'housing allowance — not payable at this enrollment':(res.state==="expired"?'housing allowance — table expired':'housing allowance — not shown'));
-          summ.push({n:nd,pay:null,state:res.state,rop:r,reason:res.reason,start:p.start,end:p.end});
+          summ.push({n:nd,pay:null,state:res.state,rop:r,reason:res.reason,start:p.start,end:p.end,pend:!!o.assumed});
           html.push(card(p,when,head,state,fig,figlab,plain(res.reason),facts,assumeNote(o,chapter,finalTerm,deps),regTiles+oduUsed(p,false,gradModUsed)+parts,"Where this comes from"));
         }
       } else {
@@ -1606,18 +1632,21 @@ footer .stamp{font-size:13px}
           summ.push({n:nd,pay:res31.pay,state:"pay",start:p.start,end:p.end,fy:tbl?tbl.fy:null});
           html.push(card(p,when,head,state,fig,figlab,"",facts,extra,regTiles+derive+oduUsed(p,res31.basis==="ZIP",false)+parts,"Where this number comes from"));
         } else {
-          summ.push({n:nd,pay:null,state:res31.state,reason:res31.reason,start:p.start,end:p.end});
+          summ.push({n:nd,pay:null,state:res31.state,reason:res31.reason,start:p.start,end:p.end,pend:!!o.assumed});
           state=res31.state; fig=(res31.state==="expired"?'EXPIRED':(res31.state==="none"?'NOT PAYABLE':'UNKNOWN'));
           figlab=(res31.state==="none"?'subsistence allowance — not payable at this enrollment':(res31.state==="expired"?'subsistence allowance — table expired':'subsistence allowance — not shown'));
           html.push(card(p,when,head,state,fig,figlab,plain(res31.reason),facts,assumeNote(o,chapter,finalTerm,deps),regTiles+oduUsed(p,false,false)+parts,"Where this comes from"));
         }
       }
       p._fig=state==="pay"?fig:(state==="none"?"$0":"no figure");
-      segs.push({p:p,k:state,pay:state==="pay"?(summ[summ.length-1].pay):null});
+      segs.push({p:p,k:(state==="unknown"&&o.assumed)?"pending":state,pay:state==="pay"?(summ[summ.length-1].pay):null});
       sig.push(fig);
     });
     box.innerHTML=html.join("");
     $("timeline").innerHTML=timeline(segs);
+    var oduBoxes=[].slice.call(box.querySelectorAll(".odu-used")); oduBoxes.forEach(function(x,i){ if(i>0&&x.innerHTML===oduBoxes[0].innerHTML) x.classList.add("dup"); });
+    var whys=[]; run.out.forEach(function(o){ if(o&&o.assumedWhy&&whys.indexOf(o.assumedWhy)<0) whys.push(o.assumedWhy); });
+    $("pendNote").innerHTML=whys.length?'<div class="pendnote" role="note"><p><b>VA has not published the rates for '+(segs.every(function(x){ return x.k==="pending"||x.k==="gap"; })?'your dates':'some of your dates')+' yet.</b> '+whys.join(" ")+'</p><p>Each card marked “Not published yet” shows what today’s rates would pay: an assumption, not a confirmed rate.</p></div>':"";
     // The summary reads the long stretches (a week or more) as the plan, and names any short stretch between
     // sessions separately: VA prorates those days, so a two-day dip to 50% is real but small.
     // Calendar months that straddle two stretches: VA prorates "for a partial month" (21.9641(c)); the method is not
@@ -1625,7 +1654,7 @@ footer .stamp{font-size:13px}
     var straddle=[], straddleShort=[];
     ps.filter(function(p){return !p.gap;}).forEach(function(p,i,arr){
       if(i===0) return; var prev=arr[i-1]; var pe=new Date(prev.end), cs=new Date(p.start);
-      if(pe.getUTCFullYear()===cs.getUTCFullYear() && pe.getUTCMonth()===cs.getUTCMonth()){
+      if(pe.getUTCFullYear()===cs.getUTCFullYear() && pe.getUTCMonth()===cs.getUTCMonth() && !(prev._fig==="no figure"&&p._fig==="no figure")){
         var mStart=Date.UTC(cs.getUTCFullYear(),cs.getUTCMonth(),1), mEnd=Date.UTC(cs.getUTCFullYear(),cs.getUTCMonth()+1,0);
         var dPrev=days(Math.max(mStart,prev.start),prev.end), dCur=days(p.start,Math.min(mEnd,p.end));
         var gapDays=days(prev.end,p.start)-2;
@@ -1654,6 +1683,8 @@ footer .stamp{font-size:13px}
         if(paid.length) bits.push((paid.length===1?"one stretch has a full-month rate of "+money(paid[0]):paid.length+" stretches have full-month rates between "+money(Math.min.apply(null,paid))+" and "+money(Math.max.apply(null,paid))));
         if(tablesUsed.length>1) bits.push((tablesUsed.length===2?"two":tablesUsed.length)+" Chapter 31 tables apply — "+byTable);
         if(none) bits.push(none+" stretch"+(none>1?"es pay":" pays")+" nothing under the rule (at or below half time)");
+        var pend=longS.filter(function(x){return x.state==="unknown"&&x.pend;}).length; unk-=pend;
+        if(pend) bits.push(pend+" stretch"+(pend>1?"es have":" has")+" no figure yet — VA has not published the rates for those dates; each card shows what today’s rates would pay, as an assumption");
         if(unk) bits.push(unk+" stretch"+(unk>1?"es are":" is")+" UNKNOWN — an input is missing or a table has expired or is not yet published, so no figure is shown");
         txt = bits.join("; ")+". Read each stretch above.";
         txt = txt.charAt(0).toUpperCase()+txt.slice(1);
@@ -1674,13 +1705,16 @@ footer .stamp{font-size:13px}
     var bl=[], live=ps.map(function(p,i){ return {p:p,o:run.out[i]}; }).filter(function(x){ return !x.p.gap; });
     var payVals=live.filter(function(x){ return x.o.res&&x.o.res.pay!==null; }).map(function(x){ return x.o.res.pay; });
     if(live.length&&payVals.length===live.length&&payVals.every(function(v){ return v===payVals[0]; })) bl.push("<b>"+money(payVals[0])+" a month</b> for every whole month a session runs, "+shortSpan(live[0].p.start,live[live.length-1].p.end)+".");
+    else if(live.length<=3&&live.every(function(x){ return !x.o.noclass&&x.o.res&&x.o.res.pay===null&&x.o.assumed; })){
+      bl.push("<b>No confirmed figure yet</b>: VA has not published the rates for these dates.");
+      live.forEach(function(x){ bl.push(shortSpan(x.p.start,x.p.end)+": about "+money(x.o.assumed.pay)+" a month if today’s rates stay the same (an assumption, not a confirmed rate)."); }); }
     else if(live.length<=3) live.forEach(function(x){ var s=shortSpan(x.p.start,x.p.end), st=stOf(x.o);
       if(x.o.noclass) bl.push(s+": $0 — no counted class."); else if(x.o.res.pay!==null) bl.push(s+": <b>"+money(x.o.res.pay)+" a month</b>.");
       else if(x.o.res.state==="none") bl.push(s+": <b>"+(chapter==="33"?"$0":"not payable")+"</b> — "+(/active duty/.test(x.o.res.reason)?"on active duty":"at or below half time")+".");
       else if(x.o.res.state==="expired") bl.push(s+": no figure — a table this page carries has expired.");
       else bl.push(s+": no figure yet — "+(/not on this page|publish|rate year|carries the/.test(x.o.res.reason)?"VA has not published the rates for these dates."+(x.o.assumed?" If today’s rates stay the same, about "+money(x.o.assumed.pay)+" a month (an assumption, not a confirmed rate).":""):"waiting on an answer (see “Still to settle”).")); });
     else { var nn=live.filter(function(x){ return x.o.res&&x.o.res.state==="none"; }).length, nu=live.length-payVals.length-nn; bl.push(live.length+" stretches: "+(payVals.length?"rates from "+money(Math.min.apply(null,payVals))+" to "+money(Math.max.apply(null,payVals)):"no rate")+(nn?"; $0 in "+nn:"")+(nu?"; no figure yet in "+nu:"")+" — each card below has its own."); }
-    straddleShort.slice(0,1).forEach(function(s){ bl.push(s); });
+    straddleShort.slice(0,1).forEach(function(s){ if(!/ at no figure, \d+ at no figure /.test(s)) bl.push(s); });
     $("bullets").innerHTML=bl.slice(0,4).map(function(b){ return "<li>"+b+"</li>"; }).join("");
     // after a change, say what it did — even when it did not move the figure
     var sg=sig.join("|");
@@ -1692,12 +1726,12 @@ footer .stamp{font-size:13px}
     if(chapter==="33") lines.push("Benefit level: "+(S.tier?pct(tier):"—")+" · active duty: "+(S.activeDuty||"—")+" · first used before 2018: "+({after:"no",before:"yes",unsure:"not sure"}[S.firstUse]||"—")+" · last term: "+(finalTerm||"—"));
     if(chapter==="31s") lines.push("Dependents: "+(deps===null?(I.depsUnsure?"not sure":"—"):deps)+" · active duty: "+(S.activeDuty||"—"));
     if(chapter==="31p") lines.push("Active duty: "+(S.activeDuty||"—"));
-    if(chapter==="33"||chapter==="31p") lines.push("Housing figure: $"+bah+" read "+bahAsOf+" ("+(bahSrc==="tool"?"VA Comparison Tool":"non-VA source")+")"+(mine.bah?" (changed)":" (ODU standard, main campus)")+" · campus: "+E.campus+(mine.campus!==null?" (changed)":" (ODU standard)"));
+    if(chapter==="33"||chapter==="31p") lines.push("Housing figure: $"+Number(bah).toLocaleString("en-US")+" read "+bahAsOf+" ("+(bahSrc==="tool"?"VA Comparison Tool":"non-VA source")+")"+(mine.bah?" (changed)":" (ODU standard, main campus)")+" · campus: "+E.campus+(mine.campus!==null?" (changed)":" (ODU standard)"));
     var badP=scopeBad();
     lines.push("Sessions: "+sessions.map(function(s){return dispName(s)+" "+s.start+" to "+s.end+(badP[s.id]?" (not priced: outside the chosen term or incomplete)":"")+(modFor(s,E)&&level==="grad"?" (modifier "+modFor(s,E)+")":(s.modUnsure?" (modifier: not sure)":""));}).join("; "));
     lines.push("Classes: "+classes.map(function(c){var s=sesById(c.ses); return (c.name||"class")+" "+(c.credits||"?")+" cr, "+(s?dispName(s):"?")+", "+(c.resident===null?"how taken?":(c.resident?"in person at "+(c.campus||E.campus):"online"))+(c.count?"":" (excluded)");}).join("; "));
     lines.push("Printed "+etDate(Date.now())+" — a rate, not a deposit; the SCO's certification and VA's award govern.");
-    $("printSummary").textContent=lines.join("\n");
+    $("printSummary").innerHTML=lines.map(function(l){ var k=l.indexOf(": "); return (k>0&&k<16)?'<div class="ps-row"><b>'+esc(l.slice(0,k))+'</b><span>'+esc(l.slice(k+2))+'</span></div>':'<div class="ps-foot">'+esc(l)+'</div>'; }).join("");
   }
   // Rev 42: what today's rates would pay for a stretch whose rates are not published yet. An assumption, said as one.
   function assumeNote(o,chapter,finalTerm,deps){
@@ -1708,14 +1742,21 @@ footer .stamp{font-size:13px}
       why="VA has not published Post-9/11 rates for dates from "+fmtD(d(RATES.nat.nextChange))+". Its future-rates page says: “Check back in March 2027” (<a class=\"cite\" href=\"https://www.va.gov/education/benefit-rates/post-9-11-gi-bill-rates/future-rates\">va.gov, last updated 2026-07-31, read 2026-10-15</a>).";
     } else if(chapter==="31p"){
       how=money(a.base)+" (the housing figure in use now) × "+pct(a.mult)+" (your training time)";
-      why="The elected Post-9/11 rate for dates from "+fmtD(d(RATES.p911ch31.nextChange))+" follows the next year’s military housing table, which was not published when this page was checked on 2026-10-15.";
+      why="The elected Post-9/11 rate follows a rate year VA adjusts each January 1 (VR&amp;E SCO Handbook § F.2), and this page carries the 2026 rate year only. For dates from "+fmtD(d(RATES.p911ch31.nextChange))+" it follows the next year’s military housing table, which was not published when this page was checked on 2026-10-15. Your counselor has the figure, or re-check after that date.";
     } else {
       how="the FY"+a.table.fy+" table, "+(deps===1?"1 dependent":deps+" dependents");
       why="VA has not published the Chapter 31 table for dates from "+fmtD(d(CH31_TABLES[CH31_TABLES.length-1].nextChange))+"; it publishes each fiscal year’s table shortly before October 1.";
     }
-    return '<div class="assume" data-assume="1"><p><b>If today’s rates stay the same: about '+money(a.pay)+' a month.</b> This is an assumption, not a confirmed rate. '+why+' Worked as '+how+'. It is not counted in any figure on this page, and the figure above stays UNKNOWN until the new rates are published and this page carries them.</p></div>';
+    o.assumedWhy=why;
+    return '<div class="assume" data-assume="1"><p><b>If today’s rates stay the same: about '+money(a.pay)+' a month.</b> This is an assumption, not a confirmed rate. Worked as '+how+'. It is not counted in any figure on this page; the figure above stays “Not published yet” until VA publishes the new rates and this page carries them.</p></div>';
   }
   function card(p,when,head,state,fig,figlab,reason,facts,extra,foldBody,foldTitle){
+    if(fig==="UNKNOWN"&&/data-assume="1"/.test(extra)){
+      return '<article class="stretch st-'+state+' st-pending" data-when="'+when+'" data-fig="'+fig+'" data-state="'+state+'">'+head+
+        '<div class="answer"><span class="fig">Not published yet</span><span class="figlab">'+figlab.replace(/ — not shown$/," — VA has not published the rate for these dates")+'</span></div>'+extra+
+        (facts.length?'<ul class="facts">'+facts.map(function(f){ return '<li>'+f+'</li>'; }).join("")+'</ul>':'')+oduChip()+
+        '<details class="fold"><summary>'+foldTitle+'</summary><div class="fold-body">'+foldBody+'</div></details></article>';
+    }
     return '<article class="stretch st-'+state+'" data-when="'+when+'" data-fig="'+fig+'" data-state="'+state+'">'+head+
       '<div class="answer"><span class="fig">'+fig+'</span><span class="figlab">'+figlab+'</span></div>'+
       (reason?'<p class="why">'+esc(reason)+'</p>':'')+
@@ -1726,7 +1767,7 @@ footer .stamp{font-size:13px}
     if(!segs.length) return "";
     var a=segs[0].p.start, b=segs[segs.length-1].p.end, tot=days(a,b), maxPay=0, pays=[];
     segs.forEach(function(s){ if(s.pay>maxPay) maxPay=s.pay; if(s.pay&&pays.indexOf(s.pay)<0) pays.push(s.pay); });
-    var cls={pay:"tl-pay",none:"tl-none",unknown:"tl-unk",expired:"tl-unk",gap:"tl-gap"};
+    var cls={pay:"tl-pay",none:"tl-none",unknown:"tl-unk",expired:"tl-unk",pending:"tl-unk",gap:"tl-gap"};
     var bar=segs.map(function(s){ var n=days(s.p.start,s.p.end); var op=(s.k==="pay"&&maxPay>0)?(0.45+0.55*s.pay/maxPay).toFixed(2):"1"; return '<span class="tl-seg '+cls[s.k]+'" style="flex:'+n+' 1 0%;opacity:'+op+'"></span>'; }).join("");
     // every month the term spans is labelled, centred on its own part of the bar, so a few days of one month never crowd the next
     var ticks=[], x=new Date(a), m=Date.UTC(x.getUTCFullYear(),x.getUTCMonth(),1);
@@ -1734,7 +1775,7 @@ footer .stamp{font-size:13px}
       var mid=((days(a,lo)-1)+(days(lo,hi))/2)/tot*100, cl=mid<4?' class="first"':(mid>96?' class="last"':'');
       ticks.push('<span'+cl+' style="left:'+(mid<4?0:(mid>96?100:mid)).toFixed(1)+'%">'+MON[nx.getUTCMonth()]+'</span>'); m=m2; }
     var has={}; segs.forEach(function(s){ has[s.k==="expired"?"unknown":s.k]=1; });
-    var leg=[]; if(has.pay) leg.push('<span><i class="tl-pay"></i>a monthly rate'+(pays.length>1?' (darker = higher)':'')+'</span>'); if(has.none) leg.push('<span><i class="tl-none"></i>$0 / not payable</span>'); if(has.unknown) leg.push('<span><i class="tl-unk"></i>no figure yet</span>'); if(has.gap) leg.push('<span><i class="tl-gap"></i>no session running</span>');
+    var leg=[]; if(has.pay) leg.push('<span><i class="tl-pay"></i>a monthly rate'+(pays.length>1?' (darker = higher)':'')+'</span>'); if(has.none) leg.push('<span><i class="tl-none"></i>$0 / not payable</span>'); if(has.pending) leg.push('<span><i class="tl-unk"></i>rate not published yet</span>'); if(has.unknown) leg.push('<span><i class="tl-unk"></i>no figure yet</span>'); if(has.gap) leg.push('<span><i class="tl-gap"></i>no session running</span>');
     return '<div class="tl" aria-hidden="true">'+bar+'</div><div class="tl-ticks" aria-hidden="true">'+ticks.join("")+'</div><div class="tl-legend" aria-hidden="true">'+leg.join("")+'</div>';
   }
 
@@ -1951,7 +1992,7 @@ footer .stamp{font-size:13px}
   syncThemeBtn();
   // A printed or saved copy carries every derivation, whatever was folded on screen; the screen is put back afterwards.
   var printOpened=[];
-  window.addEventListener("beforeprint",function(){ printOpened=[].slice.call(document.querySelectorAll("#results details.fold:not([open])")); printOpened.forEach(function(x){ x.open=true; }); });
+  window.addEventListener("beforeprint",function(){ printOpened=[].slice.call(document.querySelectorAll("#step-result details.fold:not([open]):not(#statesFold)")); printOpened.forEach(function(x){ x.open=true; }); });
   window.addEventListener("afterprint",function(){ printOpened.forEach(function(x){ x.open=false; }); printOpened=[]; });
 
   // The page opens on Step 1 with nothing answered, no session and no class: a session nobody chose must never answer a schedule,
